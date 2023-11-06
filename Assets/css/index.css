@@ -21,7 +21,11 @@
 }
 
 .hrm-title{
-    
+    display: flex;
+}
+
+.icon-nav{
+    margin-left: 12px;
 }
 
 .title{
@@ -32,6 +36,7 @@
 
 .account{
     display: flex;
+    margin: 0 24px;
 }
 
 .account-title{
