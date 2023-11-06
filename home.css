@@ -1,60 +1,31 @@
 /* style.css */
 
 /* Thiết lập font chữ mặc định cho trang */
-body {
+*{
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4 !important;
     margin: 0;
     padding: 0;
-    
+    box-sizing: border-box;
 }
 
 /* Định dạng header */
-header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
+
+.header {
+    wi
 }
 
-/* Định dạng tiêu đề */
-h1 {
-    margin: 0;
+.hrm-title{
+
 }
 
-/* Định dạng navigation menu */
-nav ul {
-    list-style: none;
-    padding: 0;
+.account-title{
+
 }
 
-nav li {
-    display: inline;
-    margin-right: 20px;
+.title{
+
 }
 
-nav a {
-    text-decoration: none;
-    color: #fff;
-}
+.icon{
 
-/* Định dạng nội dung chính */
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Định dạng footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Định dạng các liên kết trong footer */
-footer a {
-    color: #fff;
-    text-decoration: none;
 }
