@@ -16,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ccc;
-    box-shadow: 1px 3px 2px rgb(0, 0, 0, 0.3);
+    box-shadow: 1px 3px 7px rgba(115, 115, 115, 0.3);
     background-color: #fff !important; 
 }
 
@@ -24,14 +24,24 @@
     
 }
 
-.account-title{
-    margin: 0 12px;
-}
-
 .title{
-    margin: 0 12px;
+    margin: 0 24px;
 }
 
-.icon{
+
+
+.account{
+    display: flex;
+}
+
+.account-title{
+    margin: 0 24px;
+}
+
+.image-account{
+
+}
+
+.icon-account{
 
 }
