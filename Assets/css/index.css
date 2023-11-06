@@ -37,14 +37,21 @@
 .account{
     display: flex;
     margin: 0 24px;
+    align-items: center;
+    justify-content: center;
 }
 
 .account-title{
-    margin: 0 24px;
+    margin: 0 12px;
 }
 
 .image-account{
 
+}
+.avatar-account{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 .icon-account{
