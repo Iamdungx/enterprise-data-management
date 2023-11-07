@@ -1,0 +1,26 @@
+:root{
+    --primary-color: #fff;
+    --black-color:#000;
+    --text-color:#000;
+    --background-navbar: #f6f6f6;
+}
+
+
+/* reset css */
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+.grid_system{
+    display: grid;
+    grid-template-columns: 18% 80%;
+}
+
