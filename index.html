@@ -41,7 +41,7 @@
 
     </header>
 
-    <div class="grid_system container">
+    <div class="grid_system_column container">
         <!-- 20% -->
         <div class="container-nav_bar">
             <div class="nav_bar-function">
@@ -51,6 +51,9 @@
                     <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                 </div>
                 <ul class="nav_bar-function_child">
+                    <li class="nav_bar-list-item">
+                        <a href="maMau.html">Mã màu</a>
+                    </li>
                     <li class="nav_bar-list-item">Danh sách phòng ban</li>
                     <li class="nav_bar-list-item">Danh sách nhân viên</li>
                     <li class="nav_bar-list-item">Quản lí hợp đồng</li>
@@ -90,12 +93,62 @@
 
         
         <!-- 80% -->
-        <div class="container-content">
+        <div class="grid_system_row container-content">
+            <!-- search data  -->
             <div class="container-search"> 
-                
-            </div> 
-            <div class="form-data_manager">
+                <div class ="search-box">
+                    <label for="department">Bộ phận</label>
+                    <input type="text" placeholder="">
+                    <label for="identification">Mã nhân viên</label>
+                    <input type="number" placeholder="">
+                    <label for="name">Tên</label>
+                    <input type="text" placeholder="">
+                </div>
+                <div class="search-button">
+                    <form action="">
+                        <input type="submit" value="Tìm kiếm">
+                    </form>
+                </div>
 
+            </div> 
+
+
+            <!-- render data  -->
+            <div class="form-data_manager">
+                <div class="form-data_manager_report">
+                    <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
+                    <button class="data_manager_report-btn">import</button>
+                </div>  
+
+                <div class="form-data_manager-table">
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Bộ phận</th>
+                            <th>Mã nhân viên</th>
+                            <th>Họ và tên</th>
+                            <th>Thứ 2</th>
+                            <th>Thứ 3</th>
+                            <th>Thứ 4</th>
+                            <th>Thứ 5</th>
+                            <th>Thứ 6</th>
+                            <th>Thứ 7</th>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Buồng phòng</td>
+                            <td>1234</td>
+                            <td>Sơn</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

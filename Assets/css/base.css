@@ -19,8 +19,14 @@ html{
 }
 
 
-.grid_system{
+.grid_system_column{
     display: grid;
     grid-template-columns: 18% 80%;
+}
+
+.grid_system_row{
+    display: grid;
+    grid-template-rows: 25% 75%;
+    grid-row-gap: 24px;
 }
 
