@@ -63,10 +63,9 @@
     background-color: var(--background-navbar);
 }
 .nav_bar-function{
-
 }
 
-.nav_bar-function-content{
+.nav_bar-function-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,14 +95,14 @@
 }
 
 
-
 .nav_bar-list-item:hover{
     opacity: .6;
+    color: darkblue;
     cursor: pointer;
 }
 
-.nav_bar-list-item{
-
+.nav_bar-function ul{
+    display: none;
 }
 
 .nav_bar-list-item{
