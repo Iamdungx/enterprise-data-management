@@ -183,22 +183,26 @@ tr:hover{
     color: black;
 }
 
-.container-search {
+.container-search div{
     float: left;
-    padding: 16px;
+    padding-right: 10px;
     border: none;
     margin-top: 10px;
     margin-right: 16px;
     margin-left: 16px;
   }
 
+.department-box .identification-box .fullname-box {
+    
+}
+
 .container-search label {
     margin-left: 16px;
+    display: inline-block;
 }
 
 .container_search input {
-    width: 300px;
-    height: 60px;
+   
 }
 
 .search-button {
