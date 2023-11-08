@@ -122,7 +122,7 @@
 
 .container-search{
     background: #fff;
-
+    padding: 12px;
 }
 
 
@@ -152,6 +152,7 @@
     background-color: #27A4F2;
     border: none;
     border-radius: 3px;
+    padding: 7px;
 }
 
 .data_manager_report-btn:hover{
@@ -182,15 +183,31 @@ tr:hover{
     background-color: rgb(245, 245, 245);
     color: black;
 }
+.container-search{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
 
-.container-search div{
-    float: left;
-    padding-right: 10px;
-    border: none;
-    margin-top: 10px;
-    margin-right: 16px;
-    margin-left: 16px;
-  }
+.search-box{
+    display: flex;
+    position: absolute;
+    top: 0;
+    
+}
+
+.search-button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 12px;
+}
+
+.search-box_item{
+    margin: 12px;
+
+}
 
 .department-box .identification-box .fullname-box {
     
@@ -205,6 +222,82 @@ tr:hover{
    
 }
 
-.search-button {
-    
+.search-button button {
+    background-color: #27A4F2;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
 }
+  
+  
+.search-button button:hover {
+    background-color: #27A4F2;
+    transition: 0.4s;
+}
+
+.search-box_item input {
+    margin-top: 16px;
+    width: 250px;
+    height: 30px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.search-box_item input::placeholder{
+    padding-left: 8px;
+    color: #ccc;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Dropdown button */
+  .dropdown {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+  }
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 65px;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Show the dropdown menu on hover */
+  #dropdown:hover .dropdown-content {
+    display: block;
+  }
