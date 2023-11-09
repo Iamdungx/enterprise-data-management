@@ -1,8 +1,11 @@
   <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8 vi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>HRM</title>
+
     <link rel="stylesheet" type="text/css" href="./Assets/css/index.css">
     <link rel="stylesheet" href="./Assets/css/base.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -11,6 +14,7 @@
     <!-- Js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./Assets/js/index.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <!-- header -->
@@ -20,7 +24,7 @@
                 <h4>HRM Admin</h4>
             </div>
             <div class="icon-nav">
-                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-bars fa-lg"></i>
             </div>
         </div>
 
@@ -53,7 +57,7 @@
         <div class="container-nav_bar">
             <div class="nav_bar-function">
                  <div class="nav_bar-function-content"> <!-- Quản lí nhân viên -->
-                    <i class="nav_bar-function-icon fa-solid fa-sitemap"></i>
+                    <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
                     <a href="employee-manager.html">Quản lí nhân viên</a>
                     <div class="function-icon_arrow">
                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
@@ -72,9 +76,11 @@
 
             <div class="nav_bar-function">
                 <div class="nav_bar-function-content">
-                    <i class="nav_bar-function-icon fa-solid fa-calendar-days"></i>
+                    <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
                     <a href="#timekeeping-report.html">Báo cáo chấm công</a>
-                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                    <div class="function-icon_arrow">
+                        <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                    </div>
                 </div>
                 <ul class="nav_bar-function_child">
                     <li class="nav_bar-list-item">Báo cáo theo tuần</li>
@@ -86,9 +92,11 @@
 
             <div class="nav_bar-function">
                 <div class="nav_bar-function-content">
-                    <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk"></i>
+                    <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
                     <a href="#form-explaination.html">Đơn & giải trình</a>
-                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                    <div class="function-icon_arrow">
+                        <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                    </div>
                 </div>
                 <ul class="nav_bar-function_child">
                     <li class="nav_bar-list-item">Quản lí đơn</li>
@@ -129,37 +137,111 @@
             <div class="form-data_manager">
                 <div class="form-data_manager_report">
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
-                    <button class="data_manager_report-btn">Import</button>
+                    <!-- Chuyển dữ liệu bảng thành file  -->
+                    <script src="./Assets/js/convert2Excel.js"></script>
+                    <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
                 <div class="form-data_manager-table">
-                    <table>
-                        <tr>
-                            <th>#</th>
-                            <th>Bộ phận</th>
-                            <th>Mã nhân viên</th>
-                            <th>Họ và tên</th>
-                            <th>Thứ 2</th>
-                            <th>Thứ 3</th>
-                            <th>Thứ 4</th>
-                            <th>Thứ 5</th>
-                            <th>Thứ 6</th>
-                            <th>Thứ 7</th>
-                        </tr>
-
-                        <tr>
-                            <td>1</td>
-                            <td>Buồng phòng</td>
-                            <td>1234</td>
-                            <td>Sơn</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
+                        <table id="information-table">
+                            <tr>
+                                <th>#</th>
+                                <th>Bộ phận</th>
+                                <th>Mã nhân viên</th>
+                                <th>Họ và tên</th>
+                                <th>Thứ 2</th>
+                                <th>Thứ 3</th>
+                                <th>Thứ 4</th>
+                                <th>Thứ 5</th>
+                                <th>Thứ 6</th>
+                                <th>Thứ 7</th>
+                            </tr>
+    
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lễ Tân</td>
+                                <td>LT0901</td>
+                                <td>Nguyễn Thị B</td>
+                                <td>7:32</td>
+                                <td>6:59</td>
+                                <td>6:45</td>
+                                <td>7:23</td>
+                                <td>7:12</td>
+                                <td>7:08</td>
+                            </tr>
+                        </table>
                 </div>
             </div>
         </div>
