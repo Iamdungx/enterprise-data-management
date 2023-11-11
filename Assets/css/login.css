@@ -1,0 +1,102 @@
+body {
+    background-image: url('../image/login-background1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+} 
+.login-container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 500px;
+    margin: 200px auto;
+    background-color: #BDCBF444;
+    box-shadow: rgb(60, 60, 150) 0px 13px 27px -5px;
+} 
+label {
+    padding-bottom: 5px;
+}
+.input {
+    padding: 12px;
+}
+.username-input{
+    width: 93.5%;
+    margin: 20px 10px 20px 10px;
+    
+}
+
+.password-input{
+    width: 93.5%;
+    margin: 20px 10px 20px 10px;
+}
+
+span {
+    color: red;
+    margin-right: 4px;
+}
+
+.username-box input,
+.password-box input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 25px;
+    padding: 5px;
+    position: relative;
+}
+
+.password-container{
+    position: relative;
+}
+.fa-eye {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #6586E6;
+    cursor: pointer;
+    
+}
+/* Chuyển màu icon khi hiện và ẩn mật khẩu như đang hover */
+.fa-eye-slash {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #3EAEF4;
+}
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.login-button button {
+    width: 95.9%;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #3EAEF4;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: 10px 15px 20px 10px;
+    font-size: 15px;
+ 
+}
+button:hover {
+    background-color: #6586E6;
+}
+.toggle-password fas fa-eye {
+    
+}
+
+.login-button a {
+    text-decoration: none;
+}
+
+.login-title {
+    font-size: 20px;
+    height: 30px;
+    margin-top: 10px;
+}

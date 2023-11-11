@@ -1,4 +1,4 @@
-function downloadExcel() {
+function downloadExcel(){
     // Lấy dữ liệu từ bảng HTML
     var table = document.getElementById("information-table");
     var sheet = XLSX.utils.table_to_sheet(table);
