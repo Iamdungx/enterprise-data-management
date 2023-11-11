@@ -1,22 +1,29 @@
-.body {
-    background-image: url(../Assets/image/blue-background.jpeg);
-    background-size: auto;
-}
-
+/* body {
+    background-image: url('../image/blue-background.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+} */
 .content {
-    border: 1px solid #ccc; /* Thêm đường viền để phân biệt trực quan */
-    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
-    padding: 10px; /* Thêm một số lề để trông đẹp hơn */
-    width: 400px; /* Đặt chiều rộng mong muốn */
-    margin: 200px auto; /* Đặt lề tự động theo chiều ngang, giúp nằm giữa trang */
-    
-
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 500px;
+    margin: 200px auto;
+    background-color: rgba(192, 192, 192, 0.6);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px;
 } 
+label {
+    padding-bottom: 5px;
+}
+.input {
+    padding: 12px;
+}
 .inputaccount,
 .intputpassword {
-    border-radius: 50px; /* Bo góc */
-    padding: 15px; /* Khoảng cách bên trong */
-    margin: 1%; /* Khoảng cách giữa các div */
+    border-radius: 50px;
+    padding: 15px;
+    margin: 1%;
 }
 
 .required {
@@ -27,18 +34,19 @@
 .inputaccount input,
 .intputpassword input {
     border: 1px solid #ccc;
-    border-radius: 5px; /* Đặt bán kính cho các góc bo tròn */
+    border-radius: 5px;
     height: 25px;
-    padding: 5px; /* Thêm lề để tăng độ dày của viền và padding */
+    padding: 5px;
 }
-
 .buttonlogin button {
-    width: 97%;
-    border-radius: 5px; /* Đặt bán kính cho các góc bo tròn */
+    width: 100%;
+    border-radius: 5px;
     padding: 12px;
     border: 1px solid #ccc;
-    background-color: #3EAEF4; /* Màu nền cho nút */
-    color: white; /* Màu chữ cho nút */
+    background-color: #3EAEF4;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
 }
 button:hover {
     background-color: #6586E6;
@@ -47,3 +55,7 @@ button:hover {
     
 }
 
+#password-input {
+    width: 100%;
+    
+}
