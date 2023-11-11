@@ -1,9 +1,9 @@
-/* body {
-    background-image: url('../image/blue-background.jpeg');
+body {
+    background-image: url('../image/login-background.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center; 
-} */
+} 
 .content {
     border: 1px solid #ccc;
     border-radius: 10px;
