@@ -1,10 +1,15 @@
+.body {
+    background-image: url(../Assets/image/blue-background.jpeg);
+    background-size: auto;
+}
+
 .content {
     border: 1px solid #ccc; /* Thêm đường viền để phân biệt trực quan */
     border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
     padding: 10px; /* Thêm một số lề để trông đẹp hơn */
     width: 400px; /* Đặt chiều rộng mong muốn */
     margin: 200px auto; /* Đặt lề tự động theo chiều ngang, giúp nằm giữa trang */
-    background-color: #CFEBFC;
+    
 
 } 
 .inputaccount,
