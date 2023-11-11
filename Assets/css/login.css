@@ -27,18 +27,21 @@
 .inputaccount input,
 .intputpassword input {
     border: 1px solid #ccc;
-    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
+    border-radius: 5px; /* Đặt bán kính cho các góc bo tròn */
     height: 25px;
     padding: 5px; /* Thêm lề để tăng độ dày của viền và padding */
 }
 
 .buttonlogin button {
     width: 97%;
-    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
+    border-radius: 5px; /* Đặt bán kính cho các góc bo tròn */
+    padding: 12px;
     border: 1px solid #ccc;
     background-color: #3EAEF4; /* Màu nền cho nút */
     color: white; /* Màu chữ cho nút */
-    font-size: 12px;
+}
+button:hover {
+    background-color: #6586E6;
 }
 .toggle-password fas fa-eye {
     

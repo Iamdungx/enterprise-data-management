@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang đăng nhập</title>
-    <link href="login.css" rel="stylesheet" type="text/css" />
+    <title>HRM LOGIN</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="../Assets/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -14,23 +16,21 @@
         <div class="content">
 
             <div class="contenhead" style="font-size: 20px; height: 30px;">
-                <center><h4>ĐĂNG NHẬP</h4></center>
+                <center><h4>HRM LOGIN PAGE</h4></center>
             </div>
 
             <div class ="inputaccount">
-                <label for="username"><span class="required">*</span>Tên đăng nhập</label><br>
-                <input placeholder="Vui lòng nhập Tên đăng nhập" type="text" style="width: 98%; height: 25px;"/>
+                <label for="username"><span class="required"></span>Username</label><br>
+                <input type="text" style="width: 98%; height: 25px;"/>
             </div>
 
             <div class="intputpassword">
-                <label for="username"><span class="required">*</span>Mật khẩu</label>
+                <label for="username"><span class="required"></span>Password</label>
                 <div style="position: relative;">
-                    <input  id="password-input" placeholder="Vui lòng nhập Mật khẩu " type="password" />
+                    <input  id="password-input" type="password" />
                     <i class="toggle-password fas fa-eye" onclick="togglePassword()"></i>
                 </div>
             </div>
-            
-        
             <script>
                 function togglePassword() {
                     var passwordInput = document.getElementById("password-input");
@@ -45,7 +45,7 @@
 
             <div class="buttonlogin" style="margin-left: 1rem; margin-top: 1rem;">
                 <button type="submit">
-                    <h4>Đăng nhập</h4>
+                    Đăng nhập
                 </button>
             </div>
         </div>
