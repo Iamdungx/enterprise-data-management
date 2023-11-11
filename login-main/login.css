@@ -1,0 +1,41 @@
+.content {
+    border: 1px solid #ccc; /* Thêm đường viền để phân biệt trực quan */
+    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
+    padding: 10px; /* Thêm một số lề để trông đẹp hơn */
+    width: 400px; /* Đặt chiều rộng mong muốn */
+    margin: 200px auto; /* Đặt lề tự động theo chiều ngang, giúp nằm giữa trang */
+    background-color: #CFEBFC;
+
+} 
+.inputaccount,
+.intputpassword {
+    border-radius: 50px; /* Bo góc */
+    padding: 15px; /* Khoảng cách bên trong */
+    margin: 1%; /* Khoảng cách giữa các div */
+}
+
+.required {
+    color: red;
+    margin-right: 4px;
+}
+
+.inputaccount input,
+.intputpassword input {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
+    height: 25px;
+    padding: 5px; /* Thêm lề để tăng độ dày của viền và padding */
+}
+
+.buttonlogin button {
+    width: 97%;
+    border-radius: 10px; /* Đặt bán kính cho các góc bo tròn */
+    border: 1px solid #ccc;
+    background-color: #3EAEF4; /* Màu nền cho nút */
+    color: white; /* Màu chữ cho nút */
+    font-size: 12px;
+}
+.toggle-password fas fa-eye {
+    
+}
+
