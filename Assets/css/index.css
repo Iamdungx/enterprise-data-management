@@ -157,7 +157,7 @@
 .data_manager_report-btn{
     width: 60px;
     height: 30px;
-    color: var(--white-color);
+    color: white;
     background-color: #27A4F2;
     border: none;
     border-radius: 3px;
@@ -176,8 +176,8 @@
 #information-table{
     display: block;
     border-collapse: collapse;
-    margin: 12px 12px 12px 0px;
-    width: 100%;
+    margin: 12px;
+    width: 1100px;
     height: 343px;
     overflow: scroll;
 }
@@ -243,7 +243,7 @@ tr:hover{
 
 .search-button button {
     background-color: #27A4F2;
-    color: black;
+    color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;

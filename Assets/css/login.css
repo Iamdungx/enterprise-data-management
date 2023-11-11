@@ -1,17 +1,17 @@
 body {
-    background-image: url('../image/login-background.png');
+    background-image: url('../image/login-background1.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center; 
+    background-position: center center;
 } 
-.content {
+.login-container {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
     width: 500px;
     margin: 200px auto;
-    background-color: rgba(192, 192, 192, 0.6);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px;
+    background-color: #BDCBF444;
+    box-shadow: rgb(60, 60, 150) 0px 13px 27px -5px;
 } 
 label {
     padding-bottom: 5px;
@@ -19,34 +19,70 @@ label {
 .input {
     padding: 12px;
 }
-.inputaccount,
-.intputpassword {
-    border-radius: 50px;
-    padding: 15px;
-    margin: 1%;
+.username-input{
+    width: 93.5%;
+    margin: 20px 10px 20px 10px;
+    
 }
 
-.required {
+.password-input{
+    width: 93.5%;
+    margin: 20px 10px 20px 10px;
+}
+
+span {
     color: red;
     margin-right: 4px;
 }
 
-.inputaccount input,
-.intputpassword input {
+.username-box input,
+.password-box input {
     border: 1px solid #ccc;
     border-radius: 5px;
     height: 25px;
     padding: 5px;
+    position: relative;
 }
-.buttonlogin button {
-    width: 100%;
+
+.password-container{
+    position: relative;
+}
+.fa-eye {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #6586E6;
+    cursor: pointer;
+    
+}
+/* Chuyển màu icon khi hiện và ẩn mật khẩu như đang hover */
+.fa-eye-slash {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #3EAEF4;
+}
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.login-button button {
+    width: 95.9%;
     border-radius: 5px;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     background-color: #3EAEF4;
     color: white;
     cursor: pointer;
     transition: 0.5s;
+    margin: 10px 15px 20px 10px;
+    font-size: 15px;
+ 
 }
 button:hover {
     background-color: #6586E6;
@@ -55,7 +91,12 @@ button:hover {
     
 }
 
-#password-input {
-    width: 100%;
-    
+.login-button a {
+    text-decoration: none;
+}
+
+.login-title {
+    font-size: 20px;
+    height: 30px;
+    margin-top: 10px;
 }
