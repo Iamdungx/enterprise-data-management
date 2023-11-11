@@ -19,7 +19,10 @@ label {
 .input {
     padding: 12px;
 }
-.inputaccount,
+.input_acc {
+    outline: none;
+}
+
 .intputpassword {
     border-radius: 50px;
     padding: 15px;
@@ -35,11 +38,10 @@ label {
 .intputpassword input {
     border: 1px solid #ccc;
     border-radius: 5px;
-    height: 25px;
     padding: 5px;
 }
 .buttonlogin button {
-    width: 100%;
+    width: 90%;
     border-radius: 5px;
     padding: 12px;
     border: 1px solid #ccc;
@@ -55,7 +57,3 @@ button:hover {
     
 }
 
-#password-input {
-    width: 100%;
-    
-}
