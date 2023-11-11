@@ -8,7 +8,9 @@
     align-items: center;
     border-bottom: 1px solid #ccc;
     box-shadow: 1px 3px 7px rgba(115, 115, 115, 0.3);
-    background-color: var(--white-color); 
+    /* background-color: var(--white-color); */
+    background-image: url(../image/header-background.png);
+    background-size: cover;
     position: relative;
     z-index: 1;
 }
@@ -132,7 +134,6 @@
 .container-search{
     background: #fff;
     padding: 12px;
-
 }
 
 
@@ -226,6 +227,7 @@ tr:hover{
 
 .search-box_item input{
     padding-left: 12px;
+    border-radius: 5px;
 }
 
 .department-box .identification-box .fullname-box {
