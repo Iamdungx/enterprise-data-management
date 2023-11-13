@@ -4,15 +4,14 @@ Front-end:
     JavaSript;
 
 Back-end:
-    PHP;
+    FLASK[lib]
 
 Database: 
-    MySQL; 
-    MongoDB;
+    POSTGreSQL;
 
 Tool: 
-    Bootstrap;
-    ReactJS;
+    [!]Bootstrap;
+    [!]ReactJS;
 
 
 #Yêu cầu về phần mềm:
