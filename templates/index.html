@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>HRM LOGIN</title>
+
+    <link rel="icon" href="./Assets/image/icon-image.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="./Assets/css/login.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./Assets/css/base.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <form action="" method="post">
+            <div class="login-title">
+                <center><h4>ĐĂNG NHẬP</h4></center>
+            </div>
+    
+            <div class ="username-box">
+                <label><span>*</span>Tên đăng nhập:</label><br>
+                <input name="name" type="text" class="username-input" required/>
+            </div>
+    
+            <div class="password-container">
+                <label><span>*</span>Mật khẩu:</label>
+                <div class="password-box">
+                    <input name="password" id="password" type="password" class="password-input" required/>
+                    <i id='eye-icon' class="fa-solid fa-eye-slash" onclick="togglePasswordVisibility()"></i>
+                </div>
+                    <script>
+                        function togglePasswordVisibility() {
+                            
+                            var passwordField = document.getElementById("password");
+                            var eyeIcon = document.getElementById("eye-icon");
+                
+                            // Kiểm tra trạng thái hiện tại của trường mật khẩu
+                            var isPasswordFieldVisible = passwordField.type === "text";
+                
+                            // Đặt lại kiểu trường mật khẩu
+                            passwordField.type = isPasswordFieldVisible ? "password" : "text";
+                
+                            // Thay đổi class của biểu tượng mắt
+                            eyeIcon.classList.toggle("fa-eye", !isPasswordFieldVisible);
+                            eyeIcon.classList.toggle("fa-eye-slash", isPasswordFieldVisible);
+                        }
+                    </script>
+            </div>
+            <div class="login-button">
+                 <a href="./templates/employee-manager.html">
+                    <button type="submit">
+                        Đăng nhập
+                    </button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
