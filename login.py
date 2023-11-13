@@ -1,29 +1,49 @@
-from create import *
+from flask import Flask, session, render_template, request, redirect
+import pyrebase
 
-@app.route("/home")
-def renderLogin():
-    return render_template("employee-manager.html")
+app = Flask(__name__)
 
-# login
-# @app.route("/login", methods=["POST", "GET"])
-# def login():
-#     if request.method == "POST":
-#         user_name = request.form["name"]
-#         user_password = request.form["password"]
-#         user = Admin(username = user_name, password = user_password)
-#         db.session.add(user)
-#         db.session.commit()
+config = {
+    'apiKey': "AIzaSyCiM3nEkc0Eh3rpyOTELTtZnxz8rn2fafc",
+    'authDomain': "enterprise-data-manager.firebaseapp.com",
+    'projectId': "enterprise-data-manager",
+    'storageBucket': "enterprise-data-manager.appspot.com",
+    'messagingSenderId': "798644344070",
+    'appId': "1:798644344070:web:53485cefdb56d98624fa87",
+    'measurementId': "G-4QKL3S5TER",
+    'databaseURL': ''
+}
 
-#         if user_name and user_password:
-#             return render_template("templates/employee-manager.html")
-#     return render_template("index.html")
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
+app.secret_key = 'secret'
+
+
+@app.route('/', methods=['POST', 'GET'])
+def authenticate():
+    if 'user' in session:
+        return login()
     if request.method == 'POST':
-        if request.form['name'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('employee-manager.html'))
-    return render_template('index.html', error=error)
+        username = request.form.get('username')
+        password = request.form.get('password')
+        try:
+            user = auth.sign_in_with_email_and_password(username, password)
+            session['user'] = username
+            return render_template('employee-manager.html')
+        except:
+            return 'Đăng nhập thất bại !'
+    return render_template('index.html')
+
+def login():
+    return render_template('employee-manager.html')
+
+@app.route('/logout')
+def logout():
+    # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
+    session.pop('user', None)
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(port=1111)
+    app.run(debug=True)
