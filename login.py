@@ -22,6 +22,7 @@ app.secret_key = 'secret'
 
 @app.route('/', methods=['POST', 'GET'])
 def authenticate():
+    login_failed_message = None  # Initialize the variable
     if 'user' in session:
         return login()
     if request.method == 'POST':
@@ -32,8 +33,8 @@ def authenticate():
             session['user'] = username
             return render_template('employee-manager.html')
         except:
-            return 'Đăng nhập thất bại !'
-    return render_template('index.html')
+            login_failed_message = 'Đăng nhập thất bại !'
+    return render_template('index.html', login_failed_message=login_failed_message)
 
 def login():
     return render_template('employee-manager.html')
@@ -43,6 +44,7 @@ def login():
 #     # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
 #     session.pop('user', None)
 #     return render_template('index.html')
+
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.pop('user', None)

@@ -8,26 +8,26 @@
     
     <title>HRM LOGIN</title>
 
-    <link rel="icon" href="./Assets/image/icon-image.png">
+    <!--<link rel="icon" href="./Assets/image/icon-image.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="./Assets/css/login.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./Assets/css/base.css">
+    <link rel="stylesheet" href="./Assets/css/base.css">-->
 
-    <!-- <link rel="icon" href="{{ url_for('static', filename='Assets/image/icon-image.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='Assets/image/icon-image.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='Assets/css/login.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='Assets/css/base.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Assets/css/base.css') }}"> 
 
 </head>
 
 <body>
     <div class="login-container">
         <div class="login-title">
-            <center><h4>ĐĂNG NHẬP</h4></center>
+            <center><h4>Đăng Nhập</h4></center>
         </div>
-            <form action="/" method="POST">
+            <form action="{{ url_for('authenticate') }}" method="POST">
                 <div class ="username-box">
                     <label><span>*</span>Tên đăng nhập:</label><br>
                     <input name="username" type="text" class="username-input" required/>
@@ -63,16 +63,11 @@
                         </button>
                 </div>
             </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            // Kiểm tra nếu người dùng đã đăng nhập, thực hiện chuyển trang
-            {% if 'user' in session %}
-                window.location.href = '/employee-manager';
+            {% if login_failed_message %}
+            <p>{{ login_failed_message }}</p>
             {% endif %}
-        });
-    </script>
+
+    </div>
 </body>
 
 </html>
