@@ -38,12 +38,11 @@ def authenticate():
 def login():
     return render_template('employee-manager.html')
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
     session.pop('user', None)
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(port=1111)
     app.run(debug=True)
