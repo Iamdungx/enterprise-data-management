@@ -6,14 +6,14 @@
 
     <title>HRM</title>
 
-    <link rel="stylesheet" type="text/css" href="./Assets/css/index.css">
-    <link rel="stylesheet" href="./Assets/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../Assets/css/index.css">
+    <link rel="stylesheet" href="../Assets/css/base.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./Assets/icons/fontawesome-free-6.1.1-web/css/all.css">
-
+    <link rel="stylesheet" href="../Assets/icons/fontawesome-free-6.1.1-web/css/all.css">
+    <link rel="icon" href="/Assets/image/icon-image.png">
     <!-- Js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./Assets/js/index.js"></script>
+    <script src="../Assets/js/index.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
 <body>
@@ -31,7 +31,7 @@
         <!--header account-->
         <div class="account" id="dropdown">
             <div class="image-account">
-                <img class="avatar-account" src="/Assets/image/icon-image.png" alt="hrm-icon">
+                <img class="avatar-account" src="../Assets/image/icon-image.png" alt="hrm-icon">
             </div>
 
             <div class="account-title">
@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <div class="dropdown-content">
-                <a href="login-main/index.html">
+                <a href="../index.html">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
@@ -65,7 +65,7 @@
                 </div>
                 <ul class="nav_bar-function_child">
                     <li class="nav_bar-list-item">
-                        <a href="html/maMau.html">Mã màu</a>
+                        <a href="/html/maMau.html">Mã màu</a>
                     </li>
                     <li class="nav_bar-list-item">Danh sách phòng ban</li>
                     <li class="nav_bar-list-item">Danh sách nhân viên</li>
@@ -138,7 +138,7 @@
                 <div class="form-data_manager_report">
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
-                    <script src="./Assets/js/convert2Excel.js"></script>
+                    <script src="../Assets/js/convert2Excel.js"></script>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
