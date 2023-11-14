@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request, redirect
+from flask import Flask, session, render_template, request, redirect, jsonify
 import pyrebase
 
 app = Flask(__name__)
@@ -38,11 +38,16 @@ def authenticate():
 def login():
     return render_template('employee-manager.html')
 
-@app.route('/logout')
+# @app.route('/logout')
+# def logout():
+#     # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
+#     session.pop('user', None)
+#     return render_template('index.html')
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
-    # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
     session.pop('user', None)
-    return render_template('index.html')
+    # You can return a JSON response if needed
+    return jsonify({'status': 'success'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=1111, debug=True)

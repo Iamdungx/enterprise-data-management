@@ -42,10 +42,33 @@
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <div class="dropdown-content">
-                <a href="{{ url_for('logout') }}">
+                <!-- <a href="{{ url_for('logout') }}">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
-                </a>                
+                </a>                 -->
+                <a href="#" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Đăng xuất
+                </a>
+                
+                <script>
+                    function logout() {
+                        // Use JavaScript to make a POST request to the /logout route
+                        fetch('/logout', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({}),
+                        })
+                        .then(response => response.json())
+                        .then(() => {
+                            // Redirect the user to the root URL after logout
+                            window.location.href = '/';
+                        })
+                        .catch(error => console.error('Logout failed:', error));
+                    }
+                </script>
                 
             </div>
         </div>
