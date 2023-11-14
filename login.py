@@ -38,7 +38,7 @@ def authenticate():
 def login():
     return render_template('employee-manager.html')
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout')
 def logout():
     # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
     session.pop('user', None)
