@@ -1,23 +1,5 @@
-Front-end:
-    HTML;
-    CSS;
-    JavaSript;
+##### Su dung Flask de code back-end #####
+flask
 
-Back-end:
-    FLASK[lib]
-
-Database: 
-    POSTGreSQL;
-
-Tool: 
-    [!]Bootstrap;
-    [!]ReactJS;
-
-
-#Yêu cầu về phần mềm:
-    PostMan;
-    Github-Desktop;
-
-#Yêu cầu về sử dụng phần mềm
-    PostMan: Biết sử dụng để testAPI, xử lí dữ liệu từ API.
-    Github-Desktop: Biết sử dụng 'Cơ bản' về Git, hiểu về Branch, commit, pull, push.
+##### Sử dụng Firebase để dùng Database #####
+pyrebase4

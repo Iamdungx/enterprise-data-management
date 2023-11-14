@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request, redirect, url_for
+from flask import Flask, session, render_template, request, redirect
 import pyrebase
 
 app = Flask(__name__)
@@ -38,15 +38,11 @@ def authenticate():
 def login():
     return render_template('employee-manager.html')
 
-@app.route('/index.html')
-def index():
-    # Your index route logic
+@app.route('/logout')
+def logout():
+    # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
+    session.pop('user', None)
     return render_template('index.html')
 
-@app.route('/logout', methods=['POST', 'GET'])
-def logout():
-    session.pop('user', None)
-    return redirect(url_for('index'))
-
 if __name__ == '__main__':
-    app.run(port=1111, debug=True)
+    app.run(debug=True)
