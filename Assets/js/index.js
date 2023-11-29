@@ -1,8 +1,26 @@
-  $(document).ready(function() {
-    // Xử lý sự kiện click trên thẻ div
-    $(".nav_bar-function-icon").click(function() {
-        // Sử dụng toggle() để ẩn/hiện danh sách ul
-        $(".nav_bar-function ul").toggle();
-  });
-});
+const $ = document.querySelector.bind(document)
+const $$ = document.querySelectorAll.bind(document)
 
+const iconManager = $('.function-icon_arrow')
+const listManagerNav = $('.nav_bar-function_child')
+
+
+const navBar = {
+  handleToggleManager: function(){
+    iconManager.onclick = function(){
+      listManagerNav.classList.toggle('none')
+    }
+  },
+
+  
+
+  start: function(){
+    this.handleToggleManager()
+  },
+}
+// khi phương thức .start được gọi -> tất cả các phương thức trong navBar sẽ được thực thi
+navBar.start()
+
+const body = {
+
+}
