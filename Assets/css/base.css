@@ -3,6 +3,13 @@
     --black-color:#000;
     --text-color:#000;
     --background-navbar: #f6f6f6;
+
+    --tran-01: all 0.3s ease;
+    --tran-02: all 0.3s ease-in-out;
+    --tran-03: all 0.4s ease;
+    --tran-04: all 0.4s ease-in-out;
+
+
 }
 
 
@@ -22,6 +29,8 @@ html{
 .grid_system_column{
     display: grid;
     grid-template-columns: 18% 80%;
+    transition: var(--tran-03);
+
 }
 
 .grid_system_row{
@@ -30,3 +39,9 @@ html{
     grid-row-gap: 24px;
 }
 
+.grid_system_column.close{
+    display: grid;
+    grid-template-columns: 6% 93%;
+    transition: var(--tran-03);
+
+}

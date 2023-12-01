@@ -8,28 +8,51 @@ const listReportNav = $('.nav_bar-function_child_Report')
 const iconAssignment = $('.function-icon_arrow_Assignment')
 const listAssignmentNav = $('.nav_bar-function_child_Assignment')
 
+const iconHeader = $('.icon-nav')
+const titleHeader = $('.title')
+const gridSystem = $('.grid_system_column')
+const contentNav = $$('.nav_bar-function-content')
+const iconHeaderNav = $('.icon-nav')
 
 const navBar = {
-  handleToggleManager: function(){
-    iconManager.onclick = function(){
-      listManagerNav.classList.toggle('none')
+  handleToggle: function() {
+    function handleToggleManager() {
+      iconManager.onclick = function(){
+        listManagerNav.classList.toggle('none')
+      }
     }
-  },
-  handleToggleReport: function(){
-    iconReport.onclick = function(){
-      listReportNav.classList.toggle('none')
+    handleToggleManager()
+
+    function handleToggleReport() {
+      iconReport.onclick = function(){
+        listReportNav.classList.toggle('none')
+      }
     }
-  },
-  handleToggleAssignment: function(){
-    iconAssignment.onclick = function(){
-      listAssignmentNav.classList.toggle('none')
+    handleToggleReport()
+
+    function handleToggleAssignment() {
+      iconAssignment.onclick = function(){
+        listAssignmentNav.classList.toggle('none')
+      }
     }
+    handleToggleAssignment()
+
+    function handleToggleNavBar() {
+      iconHeader.onclick = function(){
+        titleHeader.classList.toggle('close')
+        contentNav.forEach(element => {
+          element.classList.toggle('close')
+        });
+        gridSystem.classList.toggle('close')
+        iconHeaderNav.classList.toggle('close')
+      }
+    }
+    handleToggleNavBar()
+
   },
 
   start: function(){
-    this.handleToggleManager()
-    this.handleToggleReport()
-    this.handleToggleAssignment()
+    this.handleToggle()
   },
 }
 // khi phương thức .start được gọi -> tất cả các phương thức trong navBar sẽ được thực thi
