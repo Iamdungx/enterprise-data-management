@@ -45,6 +45,10 @@ const navBar = {
         });
         gridSystem.classList.toggle('close')
         iconHeaderNav.classList.toggle('close')
+        listManagerNav.classList.add('none')
+        listReportNav.classList.add('none')
+        listAssignmentNav.classList.add('none')
+
       }
     }
     handleToggleNavBar()

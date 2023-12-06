@@ -41,7 +41,7 @@ html{
 
 .grid_system_column.close{
     display: grid;
-    grid-template-columns: 6% 93%;
+    grid-template-columns: 6% 92%;
     transition: var(--tran-03);
 
 }
