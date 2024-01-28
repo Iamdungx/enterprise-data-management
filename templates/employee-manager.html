@@ -177,102 +177,30 @@
                 <div class="form-data_manager-table">
                         <table id="information-table">
                             <tr>
-                                <th>#</th>
-                                <th>Bộ phận</th>
-                                <th>Mã nhân viên</th>
-                                <th>Họ và tên</th>
-                                <th>Thứ 2</th>
-                                <th>Thứ 3</th>
-                                <th>Thứ 4</th>
-                                <th>Thứ 5</th>
-                                <th>Thứ 6</th>
-                                <th>Thứ 7</th>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Address</th>
+                                <th>Date Of Birth</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Hire Date</th>
+                                <th>Position</th>
                             </tr>
     
+                            {% for row in employees %}
                             <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
+                                <td>{{row.0}}</td>
+                                <td>{{row.1}}</td>
+                                <td>{{row.2}}</td>
+                                <td>{{row.3}}</td>
+                                <td>{{row.4}}</td>
+                                <td>{{row.5}}</td>
+                                <td>{{row.6}}</td>
+                                <td>{{row.7}}</td>
+                                <td>{{row.8}}</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lễ Tân</td>
-                                <td>LT0901</td>
-                                <td>Nguyễn Thị B</td>
-                                <td>7:32</td>
-                                <td>6:59</td>
-                                <td>6:45</td>
-                                <td>7:23</td>
-                                <td>7:12</td>
-                                <td>7:08</td>
-                            </tr>
+                            {% endfor  %}
                         </table>
                 </div>
             </div>
