@@ -175,8 +175,8 @@
     display: block;
     font-weight: 600;
 }
-.data_manager_report-btn{
-    width: 60px;
+.data_manager_report-btn, .add-btn, .delete-btn, .update-btn{
+    /* width: 60px; */
     height: 30px;
     color: white;
     background-color: #27A4F2;
@@ -185,7 +185,18 @@
     padding: 7px;
 }
 
+.add-btn{
+    position: relative;
+    left: 30%;
+}
+
 .data_manager_report-btn:hover{
+    background-color: #6586E6;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.add-btn:hover{
     background-color: #6586E6;
     cursor: pointer;
     transition: 0.5s;

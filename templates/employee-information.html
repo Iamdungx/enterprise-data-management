@@ -45,7 +45,7 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>                 -->
-                <a href="#" onclick="logout()">
+                <a href="{{ url_for('logout') }}">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
@@ -90,7 +90,7 @@
                         <li class="nav_bar-list-item">
                             <a href="/html/maMau.html">Mã màu</a>
                         </li>
-                        <li class="nav_bar-list-item">Danh sách phòng ban</li>
+                        <li class="nav_bar-list-item">Thông tin nhân viên</li>
                         <li class="nav_bar-list-item">Danh sách nhân viên</li>
                         <li class="nav_bar-list-item">Quản lí hợp đồng</li>
                         <li class="nav_bar-list-item">Điều chuyển nhân viên</li>
@@ -165,12 +165,78 @@
                 </div>
             </div> 
 
+            <!-- <div id="modalDialog" class="model fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&time;</button>
+                            <h4 class="modal-title">Add Data</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url_for('insert') }}" method="POST">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" name="first_name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="address" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Date Of Birth</label>
+                                    <input type="date" class="form-control" name="date_of_birth" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" name="phone" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" name="email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Hire Date</label>
+                                    <input type="date" class="form-control" name="hire_date" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <input type="text" class="form-control" name="department" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Position</label>
+                                    <input type="text" class="form-control" name="position" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Add Data</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
             <!-- render data  -->
             <div class="form-data_manager">
                 <div class="form-data_manager_report">
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="{{ url_for('static', filename='js/convert2Excel.js') }}"></script>
+                    <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">Add Student Data</button>
+                    <button class="delete-btn">Delete</button>
+                    <button class="update-btn">Update</button>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
@@ -185,6 +251,7 @@
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Hire Date</th>
+                                <th>Department</th>
                                 <th>Position</th>
                             </tr>
     
@@ -199,6 +266,7 @@
                                 <td>{{row.6}}</td>
                                 <td>{{row.7}}</td>
                                 <td>{{row.8}}</td>
+                                <td>{{row.9}}</td>
                             </tr>
                             {% endfor  %}
                         </table>
