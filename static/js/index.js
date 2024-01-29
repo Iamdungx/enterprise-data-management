@@ -14,6 +14,9 @@ const gridSystem = $('.grid_system_column')
 const contentNav = $$('.nav_bar-function-content')
 const iconHeaderNav = $('.icon-nav')
 
+const model = $('.model')
+const btnAdd = $('.add-btn')
+
 const navBar = {
   handleToggle: function() {
     function handleToggleManager() {
@@ -53,6 +56,13 @@ const navBar = {
     }
     handleToggleNavBar()
 
+    function toggleIconAdd(iconAdd) {
+      iconAdd.onclick = function () {
+          console.log(iconAdd)
+          model.classList.add('model-display')
+      }
+    }
+    toggleIconAdd(btnAdd)
   },
 
   start: function(){

@@ -165,11 +165,10 @@
                 </div>
             </div> 
 
-            <!-- <div id="modalDialog" class="model fade">
+            <div id="modalDialog" class="model">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&time;</button>
                             <h4 class="modal-title">Add Data</h4>
                         </div>
                         <div class="modal-body">
@@ -226,7 +225,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
             <!-- render data  -->
             <div class="form-data_manager">
@@ -234,7 +233,7 @@
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="{{ url_for('static', filename='js/convert2Excel.js') }}"></script>
-                    <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">Add Student Data</button>
+                    <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">Add Employee Data</button>
                     <button class="delete-btn">Delete</button>
                     <button class="update-btn">Update</button>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>

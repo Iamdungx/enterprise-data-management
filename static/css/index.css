@@ -157,6 +157,70 @@
 }
 
 
+/* model */
+.model{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 2;
+    animation: modalFaceIn ease .8s;    
+}
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px 0;
+}
+.modal-content{
+    background-color: #fff;
+}
+.modal-header{
+    margin: 8px 0 0 0;
+}
+
+.form-group{
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-group label{
+    margin: 0 32px 0 0;
+}
+.form-control{
+    height: 32px;
+    width: 240px;
+    outline: none;
+}
+
+.modal-header{
+    font-size: 24px;
+    text-align: center;
+}
+
+.model-display{
+    display: block;
+}
+.btn-primary{
+    background-color: #27A4F2;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+
+
 /* render data */
 
 .form-data_manager{
@@ -354,3 +418,14 @@ tr:hover{
   #dropdown:hover .dropdown-content {
     display: block;
   }
+
+@keyframes modalFaceIn {
+    from{
+        transform: translateY(-140px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
