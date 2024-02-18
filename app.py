@@ -39,7 +39,7 @@ def login():
         
         if user:
             session['user'] = username
-            return render_template('employee-information.html')
+            return redirect(url_for('employee_information'))
         else:
             login_failed_message = 'Đăng nhập thất bại !'
             return render_template('login.html', login_failed_message=login_failed_message)
@@ -108,8 +108,7 @@ def insert():
                     (id, first_name, last_name, address, date_of_birth, phone, email, hire_date, department, position))
         mySQL.connection.commit()
         
-        message_add_sucessfuly = 'Thêm thành công'
-        return render_template('employee-information.html', message_add_sucessfuly=message_add_sucessfuly)
+        return redirect(url_for('index'))
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
