@@ -4,7 +4,7 @@ import random
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'mrournnys-macbook-pro.local' # Đổi đoạn string trong '' thành domain của phpAdmin
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'enterprise_data_management'
@@ -52,6 +52,8 @@ def index():
     cursor.close()
 
     return render_template('employee-information.html', employees = data)
+
+
 # def index():
 #     cursor = mySQL.connection.cursor()
 #     try:
@@ -79,15 +81,6 @@ def index():
 #     # Xóa phiên đăng nhập và chuyển hướng về trang đăng nhập
 #     session.pop('user', None)
 #     return render_template('index.html')
-
-@app.route('/logout', methods=['POST', 'GET'])
-def logout():
-    session.pop('user', None)
-    # You can return a JSON response if needed
-    return redirect(url_for('login'))
-
-
-
 # ADD Data 
 @app.route('/insert', methods = ['POST'])
 def insert():
@@ -109,15 +102,50 @@ def insert():
         mySQL.connection.commit()
         
         return redirect(url_for('index'))
+    
+@app.route('/update', methods=['POST', 'GET'])
+def update():
+    if request.method == 'POST':
+        id_employee = request.form['id']
+        fisrt_name = request.form['fisrt_name']
+        last_name = request.form['last_name']
+        address = request.form['address']
+        date_of_birth = request.form['date_of_birth']
+        phone = request.form['phone']
+        email = request.form['email']
+        hire_date = request.form['hire_date']
+        department = request.form['department']
+        position = request.form['position']
 
-@app.route('/delete/<int:id>', methods=['POST'])
-def delete(id):
-    if request.method == "POST":
         cur = mySQL.connection.cursor()
-        cur.execute("DELETE * FROM employee WHERE id = %s", (id,))
+        cur.execute("""
+            UPDATE employee 
+            SET fisrt_name = %s, last_name = %s, address = %s, date_of_birth = %s, phone = %s, email = %s, hire_date = %s, department = %s, position = %s
+            WHERE id_employee = %s
+        """, (fisrt_name, last_name, address, date_of_birth, phone, email, hire_date, department, position, id_employee))
         mySQL.connection.commit()
+    return redirect(url_for('index'))
 
-        return redirect(url_for('manager'))
+
+@app.route('/delete/<string:id_data>', methods=['POST', 'GET'])
+def delete(id_data):
+    cur = mySQL.connection.cursor()
+    cur.execute("DELETE FROM employee WHERE id = %s", (id_data))
+    mySQL.connection.commit()
+    return redirect(url_for('index'))
+ 
+
+
+@app.route('/logout', methods=['POST', 'GET'])
+def logout():
+    session.pop('user', None)
+    # You can return a JSON response if needed
+    return redirect(url_for('login'))
+
+
+
+
+
     
 # @app.route('/delete', methods=['POST'])
 # def delete():
@@ -154,4 +182,5 @@ def createIDEmployee(): # Tạo mã số nhân viên
 
 
 
+# update data
 

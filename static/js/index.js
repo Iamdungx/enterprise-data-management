@@ -15,7 +15,10 @@ const contentNav = $$('.nav_bar-function-content')
 const iconHeaderNav = $('.icon-nav')
 
 const model = $('.model')
+const modelUpadted = $('.model-upadated')
 const btnAdd = $('.add-btn')
+const btnUpdate = $('.update-btn')
+
 
 const navBar = {
   handleToggle: function() {
@@ -58,11 +61,17 @@ const navBar = {
 
     function toggleIconAdd(iconAdd) {
       iconAdd.onclick = function () {
-          console.log(iconAdd)
           model.classList.add('model-display')
       }
     }
     toggleIconAdd(btnAdd)
+
+    function toggleIconUpdate(iconUpdate) {
+      iconUpdate.onclick = function () {
+        model.classList.add('model-display')
+      }
+    }
+    toggleIconUpdate(btnUpdate)
   },
 
   start: function(){

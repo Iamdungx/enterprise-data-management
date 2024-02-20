@@ -158,7 +158,7 @@
 
 
 /* model */
-.model{
+.model, .model-upadated{
     position: fixed;
     top: 0;
     right: 0;
