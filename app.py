@@ -34,11 +34,16 @@ def login():
         
         cursor = mySQL.connection.cursor()
         cursor.execute(''' SELECT username, password FROM login WHERE username = %s AND password = %s ''', (username, password))
+        user_role = cursor.execute(''' SELECT role FROM login WHERE username = %s AND password = %s ''')
+        user_role.fetchone()
         user = cursor.fetchone()
         cursor.close()
         
+        print(user_role)
         if user:
             session['user'] = username
+            session['user_role'] = user_role
+
             return redirect(url_for('employee_information'))
         else:
             login_failed_message = 'Đăng nhập thất bại !'
@@ -51,6 +56,9 @@ def index():
     data = cursor.fetchall()
     cursor.close()
 
+    user_role = session.get('user_role')
+    print (user_role)
+    # if user_role == 'admin_dev':
     return render_template('employee-information.html', employees = data)
 
 
@@ -103,11 +111,16 @@ def insert():
         
         return redirect(url_for('index'))
     
-@app.route('/update', methods=['POST', 'GET'])
-def update():
+@app.route('/update/<string:id_employee>', methods=['POST', 'GET'])
+def update(id_employee):
+    cur = mySQL.connection.cursor()
+    cur.execute("SELECT * FROM employee WHERE id = %s", (id_employee,))
+    employee = cur.fetchone()
+    cur.close()
+
     if request.method == 'POST':
-        id_employee = request.form['id']
-        fisrt_name = request.form['fisrt_name']
+        # Get form data
+        first_name = request.form['first_name']
         last_name = request.form['last_name']
         address = request.form['address']
         date_of_birth = request.form['date_of_birth']
@@ -117,35 +130,32 @@ def update():
         department = request.form['department']
         position = request.form['position']
 
+        # Update employee information in the database
         cur = mySQL.connection.cursor()
         cur.execute("""
             UPDATE employee 
-            SET fisrt_name = %s, last_name = %s, address = %s, date_of_birth = %s, phone = %s, email = %s, hire_date = %s, department = %s, position = %s
-            WHERE id_employee = %s
-        """, (fisrt_name, last_name, address, date_of_birth, phone, email, hire_date, department, position, id_employee))
+            SET first_name = %s, last_name = %s, address = %s, date_of_birth = %s, phone = %s, email = %s, hire_date = %s, department = %s, position = %s
+            WHERE id = %s
+        """, (first_name, last_name, address, date_of_birth, phone, email, hire_date, department, position, id_employee))
         mySQL.connection.commit()
+        cur.close()
     return redirect(url_for('index'))
 
-
-@app.route('/delete/<string:id_data>', methods=['POST', 'GET'])
-def delete(id_data):
+@app.route('/delete/<string:id_employee>', methods=['GET'])
+def delete(id_employee):
     cur = mySQL.connection.cursor()
-    cur.execute("DELETE FROM employee WHERE id = %s", (id_data))
+    # Xóa tất cả các hàng từ bảng login có liên kết với nhân viên được chỉ định
+    cur.execute("DELETE FROM login WHERE employee_id = %s", (id_employee,))
+    # Sau đó xóa nhân viên
+    cur.execute("DELETE FROM employee WHERE id = %s", (id_employee,))
     mySQL.connection.commit()
     return redirect(url_for('index'))
  
-
-
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.pop('user', None)
     # You can return a JSON response if needed
     return redirect(url_for('login'))
-
-
-
-
-
     
 # @app.route('/delete', methods=['POST'])
 # def delete():

@@ -80,7 +80,7 @@
             <div class="nav_bar-function">
                  <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
                     <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
-                    <a href="employee-manager.html">Quản lí nhân viên</a>
+                    <a>Quản lí nhân viên</a>
                     <div class="function-icon_arrow_Manager">
                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                     </div>
@@ -102,7 +102,7 @@
             <div class="nav_bar-function">
                 <div class="nav_bar-function-content close">
                     <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
-                    <a href="#timekeeping-report.html">Báo cáo chấm công</a>
+                    <a>Báo cáo chấm công</a>
                     <div class="function-icon_arrow_Report">
                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                     </div>
@@ -122,7 +122,7 @@
             <div class="nav_bar-function">
                 <div class="nav_bar-function-content close">
                     <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
-                    <a href="#form-explaination.html">Đơn & giải trình</a>
+                    <a>Đơn & giải trình</a>
                     <div class="function-icon_arrow_Assignment">
                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                     </div>
@@ -133,6 +133,21 @@
                         <li class="nav_bar-list-item">Đơn xin đổi ca</li>
                         <li class="nav_bar-list-item">Đơn giải trình</li>
                     </ul>
+                </div>
+
+                <div class="nav_bar-function">
+                    <div class="nav_bar-function-content close">
+                        <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
+                        <a>Admin Console</a>
+                        <div class="function-icon_arrow_AdminConsole">
+                            <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                        </div>
+                    </div>
+                    <div class="nav_bar-function_child">
+                        <ul class="nav_bar-function_child_AdminConsole none">
+                            <li class="nav_bar-list-item" href="">Cấp tài khoản</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -257,85 +272,95 @@
     
                             {% for row in employees %}
                             <tr>
-                                <td>{{row.0}}</td>
-                                <td>{{row.1}}</td>
-                                <td>{{row.2}}</td>
-                                <td>{{row.3}}</td>
-                                <td>{{row.4}}</td>
-                                <td>{{row.5}}</td>
-                                <td>{{row.6}}</td>
-                                <td>{{row.7}}</td>
-                                <td>{{row.8}}</td>
-                                <td>{{row.9}}</td>
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <td>{{ row.4 }}</td>
+                                <td>{{ row.5 }}</td>
+                                <td>{{ row.6 }}</td>
+                                <td>{{ row.7 }}</td>
+                                <td>{{ row.8 }}</td>
+                                <td>{{ row.9 }}</td>
                                 <td>
-                                    <a href="/update/{{row.0}}" class="">Update</a>
-                                    <a href="/detele/{{row.0}}" class="update-btn">Delete</a>
+                                    <form method="POST" action="{{ url_for('update_employee', id_employee=employee[0]) }}">
+                                        <label for="first_name">First Name:</label>
+                                        <input type="text" id="first_name" name="first_name" value="{{ employee[1] }}"><br>
+                                    
+                                        <!-- Add more input fields for other employee information -->
+                                        
+                                        <button type="submit">Update</button>
+                                    </form>
+                                    
+                                    <a href="{{ url_for('update', id_employee=row.0) }}" class="update-btn">Update</a>
+                                    <a href="{{ url_for('delete', id_employee=row.0) }}" class="delete-btn">Delete</a>
                                 </td>
                             </tr>
-                            <div id="modalDialog{{row.0}}" class="model-upadated">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
+                            
+                            <div class="model-updated">
+                                <div class="modal-dialog-update">
+                                    <div class="modal-content-update">
+                                        <div class="modal-header-update">
                                             <h4 class="modal-title">Update Data</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ url_for('update') }}" method="POST">
-                                                <div class="form-group">
+                                            <form action="{{ url_for('update', id_employee=row.0) }}" method="POST" id="updateForm-{{ row.0 }}">
+                                                <div class="form-group-update">
                                                     <label>First Name</label>
                                                     <input type="hidden" name="id" value="{{row.0}}">
-                                                    <input type="text" class="form-control" name="first_name" value="{{row.1}}" required>
+                                                    <input type="text" class="form-control-update" name="first_name" value="{{row.1}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Last Name</label>
-                                                    <input type="hidden" name="id" value="{row.0}">
-                                                    <input type="text" class="form-control" name="last_name" value="{{row.2}}" required>
+                                                    <input type="hidden" name="id" value="{{row.0}}">
+                                                    <input type="text" class="form-control-update" name="last_name" value="{{row.2}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Address</label>
-                                                    <input type="text" class="form-control" name="address" value="{{row.3}}" required>
+                                                    <input type="text" class="form-control-update" name="address" value="{{row.3}}" required>
                                                 </div>
                                                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Date Of Birth</label>
-                                                    <input type="date" class="form-control" name="date_of_birth" value="{{row.4}}" required>
+                                                    <input type="date" class="form-control-update" name="date_of_birth" value="{{row.4}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Phone</label>
-                                                    <input type="text" class="form-control" name="phone" value="{{row.5}}" required>
+                                                    <input type="text" class="form-control-update" name="phone" value="{{row.5}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Email</label>
-                                                    <input type="text" class="form-control" name="email" value="{{row.6}}" required>
+                                                    <input type="text" class="form-control-update" name="email" value="{{row.6}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Hire Date</label>
-                                                    <input type="date" class="form-control" name="hire_date" value="{{row.7}}" required>
+                                                    <input type="date" class="form-control-update" name="hire_date" value="{{row.7}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Department</label>
-                                                    <input type="text" class="form-control" name="department" value="{{row.8}}" required>
+                                                    <input type="text" class="form-control-update" name="department" value="{{row.8}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
+                                                <div class="form-group-update">
                                                     <label>Position</label>
-                                                    <input type="text" class="form-control" name="position" value="{{row.9}}" required>
+                                                    <input type="text" class="form-control-update" name="position" value="{{row.9}}" required>
                                                 </div>
                 
-                                                <div class="form-group">
-                                                    <button class="btn btn-primary" type="submit">Update Data</button>
-                                                </div>
+                                                <div class="form-group-update">
+                                                    <button class="btn btn-primary" type="button">Update Data</button>          
+                                                </div>    
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {% endfor  %}
+                            {% endfor %}
                         </table>
                 </div>
             </div>

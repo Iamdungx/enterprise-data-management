@@ -7,6 +7,8 @@ const iconReport = $('.function-icon_arrow_Report')
 const listReportNav = $('.nav_bar-function_child_Report')
 const iconAssignment = $('.function-icon_arrow_Assignment')
 const listAssignmentNav = $('.nav_bar-function_child_Assignment')
+const iconAdminConsole = $('.function-icon_arrow_AdminConsole')
+const listAdminConsoleNav = $('.nav_bar-function_child_AdminConsole')
 
 const iconHeader = $('.icon-nav')
 const titleHeader = $('.title')
@@ -15,7 +17,7 @@ const contentNav = $$('.nav_bar-function-content')
 const iconHeaderNav = $('.icon-nav')
 
 const model = $('.model')
-const modelUpadted = $('.model-upadated')
+const modelUpadted = $('.model-updated')
 const btnAdd = $('.add-btn')
 const btnUpdate = $('.update-btn')
 
@@ -43,6 +45,13 @@ const navBar = {
     }
     handleToggleAssignment()
 
+    function handleToggleAdminConsole() {
+      iconAdminConsole.onclick = function(){
+        listAdminConsoleNav.classList.toggle('none')
+      }
+    }
+    handleToggleAdminConsole()
+
     function handleToggleNavBar() {
       iconHeader.onclick = function(){
         titleHeader.classList.toggle('close')
@@ -54,7 +63,7 @@ const navBar = {
         listManagerNav.classList.add('none')
         listReportNav.classList.add('none')
         listAssignmentNav.classList.add('none')
-
+        listAdminConsoleNav.classList.add('none')
       }
     }
     handleToggleNavBar()
@@ -68,7 +77,7 @@ const navBar = {
 
     function toggleIconUpdate(iconUpdate) {
       iconUpdate.onclick = function () {
-        model.classList.add('model-display')
+        modelUpadted.classList.add('model-display')
       }
     }
     toggleIconUpdate(btnUpdate)

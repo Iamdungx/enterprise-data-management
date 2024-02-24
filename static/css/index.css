@@ -169,35 +169,35 @@
     z-index: 2;
     animation: modalFaceIn ease .8s;    
 }
-.modal-dialog{
+.modal-dialog, .modal-dialog-update{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 12px 0;
 }
-.modal-content{
+.modal-content, .modal-content-update{
     background-color: #fff;
 }
-.modal-header{
+.modal-header, .modal-header-update{
     margin: 8px 0 0 0;
 }
 
-.form-group{
+.form-group, .form-group-update{
     padding: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.form-group label{
+.form-group label, .form-group-update label{
     margin: 0 32px 0 0;
 }
-.form-control{
+.form-control, .form-control-update{
     height: 32px;
     width: 240px;
     outline: none;
 }
 
-.modal-header{
+.modal-header, .modal-header-update{
     font-size: 24px;
     text-align: center;
 }
