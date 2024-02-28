@@ -1,15 +1,14 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HRM</title>
-    <link rel="stylesheet" href="./css/base">
-    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='icons/fontawesome-free-6.1.1-web/css/all.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="{{ url_for('static', filename='image/icon-image.png') }}">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="./image/icon-image.png">
     <!-- Js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
@@ -29,7 +28,7 @@
         <!--header account-->
         <div class="account" id="dropdown">
             <div class="image-account">
-                <img class="avatar-account" src="{{ url_for('static', filename='image/icon-image.png') }}" alt="hrm-icon">
+                <img class="avatar-account" src="./image/icon-image.png" alt="hrm-icon">
             </div>
 
             <div class="account-title">
@@ -44,7 +43,7 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>                 -->
-                <a href="{{ url_for('logout') }}">
+                <a href="./login.php">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
@@ -178,69 +177,6 @@
                     </form>
                 </div>
             </div> 
-
-            <div id="modalDialog" class="model">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add Data</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ url_for('insert') }}" method="POST">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control" name="first_name" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control" name="last_name" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control" name="address" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Date Of Birth</label>
-                                    <input type="date" class="form-control" name="date_of_birth" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" class="form-control" name="phone" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" name="email" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Hire Date</label>
-                                    <input type="date" class="form-control" name="hire_date" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Department</label>
-                                    <input type="text" class="form-control" name="department" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Position</label>
-                                    <input type="text" class="form-control" name="position" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Add Data</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             
 
             <!-- render data  -->
@@ -248,7 +184,7 @@
                 <div class="form-data_manager_report">
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
-                    <script src="{{ url_for('static', filename='js/convert2Excel.js') }}"></script>
+                    <script src="./js/convert2Excel.js"></script>
                     <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">Add Employee Data</button>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
@@ -269,30 +205,20 @@
                                 <th>Acion</th>
                             </tr>
     
-                            {% for row in employees %}
                             <tr>
-                                <td>{{ row.0 }}</td>
-                                <td>{{ row.1 }}</td>
-                                <td>{{ row.2 }}</td>
-                                <td>{{ row.3 }}</td>
-                                <td>{{ row.4 }}</td>
-                                <td>{{ row.5 }}</td>
-                                <td>{{ row.6 }}</td>
-                                <td>{{ row.7 }}</td>
-                                <td>{{ row.8 }}</td>
-                                <td>{{ row.9 }}</td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
                                 <td>
-                                    <form method="POST" action="{{ url_for('update_employee', id_employee=employee[0]) }}">
-                                        <label for="first_name">First Name:</label>
-                                        <input type="text" id="first_name" name="first_name" value="{{ employee[1] }}"><br>
-                                    
-                                        <!-- Add more input fields for other employee information -->
-                                        
-                                        <button type="submit">Update</button>
-                                    </form>
-                                    
-                                    <a href="{{ url_for('update', id_employee=row.0) }}" class="update-btn">Update</a>
-                                    <a href="{{ url_for('delete', id_employee=row.0) }}" class="delete-btn">Delete</a>
+                                    <a href="" class="update-btn">Update</a>
+                                    <a href="" class="delete-btn">Delete</a>
                                 </td>
                             </tr>
                             
@@ -303,52 +229,52 @@
                                             <h4 class="modal-title">Update Data</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ url_for('update', id_employee=row.0) }}" method="POST" id="updateForm-{{ row.0 }}">
+                                            <form action="" method="POST">
                                                 <div class="form-group-update">
                                                     <label>First Name</label>
-                                                    <input type="hidden" name="id" value="{{row.0}}">
-                                                    <input type="text" class="form-control-update" name="first_name" value="{{row.1}}" required>
+                                                    <input type="hidden" name="id" value="">
+                                                    <input type="text" class="form-control-update" name="first_name" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Last Name</label>
-                                                    <input type="hidden" name="id" value="{{row.0}}">
-                                                    <input type="text" class="form-control-update" name="last_name" value="{{row.2}}" required>
+                                                    <input type="hidden" name="id" value="">
+                                                    <input type="text" class="form-control-update" name="last_name" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Address</label>
-                                                    <input type="text" class="form-control-update" name="address" value="{{row.3}}" required>
+                                                    <input type="text" class="form-control-update" name="address" value="" required>
                                                 </div>
                                                 
                                                 <div class="form-group-update">
                                                     <label>Date Of Birth</label>
-                                                    <input type="date" class="form-control-update" name="date_of_birth" value="{{row.4}}" required>
+                                                    <input type="date" class="form-control-update" name="date_of_birth" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Phone</label>
-                                                    <input type="text" class="form-control-update" name="phone" value="{{row.5}}" required>
+                                                    <input type="text" class="form-control-update" name="phone" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Email</label>
-                                                    <input type="text" class="form-control-update" name="email" value="{{row.6}}" required>
+                                                    <input type="text" class="form-control-update" name="email" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Hire Date</label>
-                                                    <input type="date" class="form-control-update" name="hire_date" value="{{row.7}}" required>
+                                                    <input type="date" class="form-control-update" name="hire_date" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Department</label>
-                                                    <input type="text" class="form-control-update" name="department" value="{{row.8}}" required>
+                                                    <input type="text" class="form-control-update" name="department" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
                                                     <label>Position</label>
-                                                    <input type="text" class="form-control-update" name="position" value="{{row.9}}" required>
+                                                    <input type="text" class="form-control-update" name="position" value="" required>
                                                 </div>
                 
                                                 <div class="form-group-update">
@@ -359,7 +285,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endfor %}
                         </table>
                 </div>
             </div>
@@ -369,5 +294,5 @@
 
     </nav>
 </body>
-<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="./js/index.js"></script>
 </html>

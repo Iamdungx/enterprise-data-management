@@ -73,14 +73,12 @@ const navBar = {
           model.classList.add('model-display')
       }
     }
-    toggleIconAdd(btnAdd)
 
     function toggleIconUpdate(iconUpdate) {
       iconUpdate.onclick = function () {
         modelUpadted.classList.add('model-display')
       }
     }
-    toggleIconUpdate(btnUpdate)
   },
 
   start: function(){
