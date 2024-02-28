@@ -186,6 +186,7 @@
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="./js/convert2Excel.js"></script>
                     <a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
+                    <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
@@ -228,70 +229,107 @@
                                         </tr>";
                                     }
                                 }
-                        ?>
-                            <div class="model-updated">
+                        $connect->close();
+                    ?>
+                            <!-- <div class="model-updated">
                                 <div class="modal-dialog-update">
                                     <div class="modal-content-update">
                                         <div class="modal-header-update">
                                             <h4 class="modal-title">Update Data</h4>
                                         </div>
-                                        <div class="modal-body">
-                                            <form action="" method="POST">
-                                                <div class="form-group-update">
-                                                    <label>First Name</label>
-                                                    <input type="hidden" name="id" value="">
-                                                    <input type="text" class="form-control-update" name="first_name" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Last Name</label>
-                                                    <input type="hidden" name="id" value="">
-                                                    <input type="text" class="form-control-update" name="last_name" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Address</label>
-                                                    <input type="text" class="form-control-update" name="address" value="" required>
-                                                </div>
-                                                
-                                                <div class="form-group-update">
-                                                    <label>Date Of Birth</label>
-                                                    <input type="date" class="form-control-update" name="date_of_birth" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Phone</label>
-                                                    <input type="text" class="form-control-update" name="phone" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Email</label>
-                                                    <input type="text" class="form-control-update" name="email" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Hire Date</label>
-                                                    <input type="date" class="form-control-update" name="hire_date" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Department</label>
-                                                    <input type="text" class="form-control-update" name="department" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <label>Position</label>
-                                                    <input type="text" class="form-control-update" name="position" value="" required>
-                                                </div>
-                
-                                                <div class="form-group-update">
-                                                    <button class="btn btn-primary" type="button">Update Data</button>          
-                                                </div>    
-                                            </form>
-                                        </div>
+                                        <div class="modal-body"> -->
+                                            <?php
+                                                require 'connect_database.php';
+                                                if (isset($_POST['choose'])) {
+                                                    echo '<form action="" method="POST">
+                                                        <div class="form-group-update">
+                                                            <label>ID</label>
+                                                            <input type="text" class="form-control-update" name="update_id" value="'.$_POST['choose'].'" readonly>
+                                                        </div>
+                                                        <div class="form-group-update">
+                                                            <label>First Name</label>
+                                                            <input type="text" class="form-control-update" name="first_name" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control-update" name="last_name" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Address</label>
+                                                            <input type="text" class="form-control-update" name="address" value="" required>
+                                                        </div>
+                                                        
+                                                        <div class="form-group-update">
+                                                            <label>Date Of Birth</label>
+                                                            <input type="date" class="form-control-update" name="date_of_birth" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Phone</label>
+                                                            <input type="text" class="form-control-update" name="phone" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Email</label>
+                                                            <input type="text" class="form-control-update" name="email" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Hire Date</label>
+                                                            <input type="date" class="form-control-update" name="hire_date" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Department</label>
+                                                            <input type="text" class="form-control-update" name="department" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <label>Position</label>
+                                                            <input type="text" class="form-control-update" name="position" value="" required>
+                                                        </div>
+                        
+                                                        <div class="form-group-update">
+                                                            <input class="btn btn-primary" type="submit" name="update">Update Data</input>          
+                                                        </div>    
+                                                    </form>';
+                                                }
+                                            ?>
+                                            <?php
+                                                if (isset($_POST['update']))
+                                                {
+                                                    $update_id = $_POST['update_id'];
+                                                    $first_name = $_POST['first_name'];
+                                                    $last_name = $_POST['last_name'];
+                                                    $address = $_POST['address'];
+                                                    $date_of_birth = $_POST['date_of_birth'];
+                                                    $phone = $_POST['phone'];
+                                                    $email = $_POST['email'];
+                                                    $hire_date = $_POST['hire_date'];
+                                                    $department = $_POST['department'];
+                                                    $position = $_POST['position'];
+
+                                                    $sql2 = "UPDATE employee 
+                                                    SET fisrt_name = '$first_name', last_name = '$last_name', address = '$address', date_of_birth = '$date_of_birth', phone = '$phone', email = '$email' , hire_date = '$hire_date', department = '$department', possition = '$position'
+                                                    WHERE employee.id = '$update_id' ";
+                                                    if ($connect->query($sql2)==True) {
+
+                                                        echo "Update succesfully <br>";
+                                                    }
+                                                    else{
+                                                        echo "Update fail";
+                                                    }
+                                                }
+
+
+                                                $connect->close();
+                                            ?>
+                                        <!-- </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </table>
                 </div>
             </div>
