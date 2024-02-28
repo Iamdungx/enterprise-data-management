@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HRM</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"> 
+    <link rel="stylesheet" href="./css/base">
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url_for('static', filename='icons/fontawesome-free-6.1.1-web/css/all.css') }}" rel="stylesheet" type="text/css" />
