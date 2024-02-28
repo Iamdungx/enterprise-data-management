@@ -185,44 +185,50 @@
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="./js/convert2Excel.js"></script>
-                    <a type="button" class="add-btn" href="add-employee.php">Add Employee</a>
+                    <a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
-
+                    
                 <div class="form-data_manager-table">
-                        <table id="information-table">
-                            <tr>
-                                <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Address</th>
-                                <th>Date Of Birth</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Hire Date</th>
-                                <th>Department</th>
-                                <th>Position</th>
-                                <th>Acion</th>
-                            </tr>
-    
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td>
-                                    <a href="" class="update-btn">Update</a>
-                                    <a href="" class="delete-btn">Delete</a>
-                                </td>
-                            </tr>
-                            
+                    <table id="information-table">
+                    <?php
+                        require 'connect_database.php';
+                        mysqli_set_charset($connect, 'UTF8');
+
+                        $sql = "SELECT * FROM employee";
+                        $result = $connect->query($sql);
+
+                                echo '<tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Address</th>
+                                    <th>Date Of Birth</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Hire Date</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
+                                    <th>Acion</th>
+                                </tr>';
+        
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>".
+                                            "<td>".$row["fisrt_name"]."</td>".
+                                            "<td>".$row["last_name"]."</td>".
+                                            "<td>".$row["address"]."</td>".
+                                            "<td>".$row["date_of_birth"]."</td>".
+                                            "<td>".$row["phone"]."</td>".
+                                            "<td>".$row["email"]."</td>".
+                                            "<td>".$row["hire_date"]."</td>".
+                                            "<td>".$row["department"]."</td>".
+                                            "<td>".$row["possition"]."</td>".
+                                            "<td><button class='update-btn' type='submit' name='choose' value='".$row["id"]."'>Update</button></td>
+                                        </tr>";
+                                    }
+                                }
+                        ?>
                             <div class="model-updated">
                                 <div class="modal-dialog-update">
                                     <div class="modal-content-update">
