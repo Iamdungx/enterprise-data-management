@@ -22,7 +22,8 @@
         $sql = "SELECT * FROM employee";
         $result = $connect->query($sql);
 
-        echo '<tr>
+        echo "<form method='post' action=''>
+        <tr> 
             <th>First Name</th>
             <th>Last Name</th>
             <th>Address</th>
@@ -33,7 +34,7 @@
             <th>Department</th>
             <th>Position</th>
             <th>Acion</th>
-        </tr>';
+        </tr>";
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -51,8 +52,12 @@
                                         </tr>";
             }
         }
+        else{
+            echo "<h1>No employee in database</h1>";
+        }
         $connect->close();
         ?>
+    </table>
         <?php
         require 'connect_database.php';
         if (isset($_POST['choose'])) {
