@@ -145,6 +145,7 @@
         $connect->close();
         ?>
     </table>
-    <script src="./js/index.js"></script>
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
+
 
 </html>

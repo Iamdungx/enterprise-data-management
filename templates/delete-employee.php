@@ -64,9 +64,9 @@
                 $delete = $_POST['checkbox'];
                 foreach ($delete as $id)
                 {
-                    $sql = "DELETE FROM films WHERE id = '$id'";
+                    $sql = "DELETE FROM employee WHERE id = '$id'";
                     $result = $connect->query($sql);
-                    header("location: deletefilm.php");
+                    header("location: delete-employee.php");
 
                 }
 
@@ -76,6 +76,6 @@
 
         $connect->close();
     ?>
-    <a class="link_home" href='Home.php'>Trang chủ</a>
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
 </body>
 </html>
