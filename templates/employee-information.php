@@ -185,9 +185,10 @@
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="./js/convert2Excel.js"></script>
-                    <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">Add Employee Data</button>
+                    <a type="button" class="add-btn" href="add-employee.php">Add Employee</a>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
+
 
                 <div class="form-data_manager-table">
                         <table id="information-table">

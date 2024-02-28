@@ -78,7 +78,7 @@
         $department = $_POST['department'];
         $position = $_POST['position'];
 
-        $sql = "INSERT INTO employee( `first_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`) 
+        $sql = "INSERT INTO employee( `fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `possition`) 
                                     VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position')";
 
         if ($connect->query($sql) === TRUE) {
