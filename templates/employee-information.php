@@ -187,6 +187,7 @@
                     <script src="./js/convert2Excel.js"></script>
                     <a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
                     <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
+                    <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
@@ -210,7 +211,6 @@
                                     <th>Hire Date</th>
                                     <th>Department</th>
                                     <th>Position</th>
-                                    <th>Acion</th>
                                 </tr>';
         
                                 if ($result->num_rows > 0) {
@@ -224,8 +224,7 @@
                                             "<td>".$row["email"]."</td>".
                                             "<td>".$row["hire_date"]."</td>".
                                             "<td>".$row["department"]."</td>".
-                                            "<td>".$row["possition"]."</td>".
-                                            "<td><button class='update-btn' type='submit' name='choose' value='".$row["id"]."'>Update</button></td>
+                                            "<td>".$row["possition"]."</td>
                                         </tr>";
                                     }
                                 }
