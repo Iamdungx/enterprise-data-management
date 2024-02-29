@@ -157,26 +157,26 @@
         <div class="grid_system_row container-content">
             <!-- search data  -->
             <div class="container-search"> 
-                <div class ="search-box">
-                    <div class="search-box_item">
-                        <div for="department">Bộ phận</div>
-                        <input type="text" placeholder="VD: Van Chuyen">
+                <form action="" method="post">
+                    <div class ="search-box">
+                        <div class="search-box_item">
+                            <div for="department">Bộ phận</div>
+                            <input type="text" placeholder="VD: Van Chuyen">
+                        </div>
+                        <div class="search-box_item">
+                            <div for="identification">Mã nhân viên</div>
+                            <input type="text" placeholder="VD: AB21210">
+                        </div>
+                        <div class="search-box_item">
+                            <div for="name">Tên</div>
+                            <input type="text" placeholder="VD: Nguyen Van A" name="name_employee">
+                            <input type="submit" name="search" value="Tìm kiếm"></inp>
+                        </div>
                     </div>
-                    <div class="search-box_item">
-                        <div for="identification">Mã nhân viên</div>
-                        <input type="text" placeholder="VD: AB21210">
-                    </div>
-                    <div class="search-box_item">
-                        <div for="name">Tên</div>
-                        <input type="text" placeholder="VD: Nguyen Van A">
-                    </div>
-                </div>
-                <div class="search-button">
-                    <form action="">
-                        <button type="submit" name="search">Tìm kiếm</button>
-                    </form>
-                </div>
+                </form>
             </div> 
+
+
             
 
             <!-- render data  -->
@@ -214,18 +214,41 @@
                                 </tr>';
         
                                 if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>".
-                                            "<td>".$row["fisrt_name"]."</td>".
-                                            "<td>".$row["last_name"]."</td>".
-                                            "<td>".$row["address"]."</td>".
-                                            "<td>".$row["date_of_birth"]."</td>".
-                                            "<td>".$row["phone"]."</td>".
-                                            "<td>".$row["email"]."</td>".
-                                            "<td>".$row["hire_date"]."</td>".
-                                            "<td>".$row["department"]."</td>".
-                                            "<td>".$row["possition"]."</td>
-                                        </tr>";
+                                    if (isset($_POST['search'])) {
+                                        $name = $_POST['name_employee'];
+                                        $sql1 = "SELECT * from employee where last_name='$name' ";
+                                        $result1 = $connect->query($sql1);
+                                        if ($result1->num_rows > 0) {
+                                            while($row = $result1->fetch_assoc()) {
+                                                echo 
+                                                    "<tr>".
+                                                        "<td>".$row["fisrt_name"]."</td>".
+                                                        "<td>".$row["last_name"]."</td>".
+                                                        "<td>".$row["address"]."</td>".
+                                                        "<td>".$row["date_of_birth"]."</td>".
+                                                        "<td>".$row["phone"]."</td>".
+                                                        "<td>".$row["email"]."</td>".
+                                                        "<td>".$row["hire_date"]."</td>".
+                                                        "<td>".$row["department"]."</td>".
+                                                        "<td>".$row["possition"]."</td>
+                                                    </tr>";
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>".
+                                                "<td>".$row["fisrt_name"]."</td>".
+                                                "<td>".$row["last_name"]."</td>".
+                                                "<td>".$row["address"]."</td>".
+                                                "<td>".$row["date_of_birth"]."</td>".
+                                                "<td>".$row["phone"]."</td>".
+                                                "<td>".$row["email"]."</td>".
+                                                "<td>".$row["hire_date"]."</td>".
+                                                "<td>".$row["department"]."</td>".
+                                                "<td>".$row["possition"]."</td>
+                                            </tr>";
+                                        }
                                     }
                                 }
                         $connect->close();
