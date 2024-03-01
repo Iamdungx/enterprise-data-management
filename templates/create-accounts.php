@@ -28,9 +28,9 @@
         <div class="form-group">
             <label>Role</label>
             <select name="role" id="">
-                <option value="admin"></option>
-                <option value="manager"></option>
-                <option value="employee"></option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="employee">Employee</option>
             </select>
         </div>
         <div class="form-group">
@@ -46,7 +46,7 @@
         $password = $_POST['password'];
         $role = $_POST['role'];
 
-        $sql = "INSERT INTO login( `user_name`, `password`, `role`) 
+        $sql = "INSERT INTO login( `username`, `password`, `role`) 
                                     VALUES ('$user_name' ,'$password', '$role')";
 
         if ($connect->query($sql) === TRUE) {

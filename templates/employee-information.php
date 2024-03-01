@@ -31,9 +31,16 @@
                 <img class="avatar-account" src="./image/icon-image.png" alt="hrm-icon">
             </div>
 
-            <div class="account-title">
-                <h4>CTy TNHH</h4>
-            </div>
+            <?php
+                session_start();
+                if (isset($_SESSION['nameaccount']))
+                {
+                    echo "<div class='account-title'>
+                        <h4>".$_SESSION['nameaccount']."</h4>
+                    </div>";
+                }
+            ?>
+
 
             <div class="icon-account">
                 <i class="fa-solid fa-angle-down"></i>

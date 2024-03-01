@@ -7,19 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>HRM LOGIN</title>
-
-    <!--<link rel="icon" href="./Assets/image/icon-image.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="./Assets/css/login.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./Assets/css/base.css">-->
-
-    <link rel="icon" href="{{ url_for('static', filename='image/icon-image.png') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}"> 
-
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="./image/icon-image.png">
 </head>
 
 <body>
@@ -27,7 +18,7 @@
         <div class="login-title">
             <center><h4>Đăng Nhập</h4></center>
         </div>
-            <form action="{{ url_for('index') }}" method="POST">
+            <form action="" method="POST">
                 <div class ="username-box">
                     <label><span>*</span>Tên đăng nhập:</label><br>
                     <input name="username" type="text" class="username-input" required/>
@@ -58,16 +49,32 @@
                         </script>
                 </div>
                 <div class="login-button">
-                        <button type="submit">
+                        <button type="submit" name="login">
                             Đăng nhập
                         </button>
                 </div>
             </form>
-            {% if login_failed_message %}
-            <p>{{ login_failed_message }}</p>
-            {% endif %}
-
-    </div>
+            <?php
+                if (isset($_POST['login'])) {
+                    require 'connect_database.php';
+                    $username_login = $_POST['username'];
+                    $password_login = $_POST['password'];
+                    
+                    $sql = "SELECT * FROM login WHERE username = '$username_login' and login.password = '$password_login'";
+                    $result = $connect->query($sql);
+                    if($result->num_rows == 0 ){
+                        echo "Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại";
+                    }
+                    else
+                    {
+    
+                        session_start();
+                        $_SESSION['nameaccount'] = $username_login;
+                        header("location: employee-information.php");
+                    }
+                }
+            ?>
+    </div>  
 </body>
 
 </html>
