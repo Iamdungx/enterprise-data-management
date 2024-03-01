@@ -143,7 +143,7 @@
                     </div>
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_AdminConsole none">
-                            <li class="nav_bar-list-item" href="">Cấp tài khoản</li>
+                            <a class="nav_bar-list-item" href="create-accounts.php">Cấp tài khoản</a>
                         </ul>
                     </div>
                 </div>

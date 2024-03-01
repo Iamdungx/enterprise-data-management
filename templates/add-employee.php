@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="base.css">
-    <title>Add Film</title>
+    <title>Add Employee</title>
     <script src="checkform.js"></script>
 
 </head>
 
 <body>
-    <h1>Add Film</h1><br>
+    <h1>Add Employee</h1><br>
     <form id="form" method="post">
         <div class="form-group">
             <label>First Name</label>
