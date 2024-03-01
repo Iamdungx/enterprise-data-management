@@ -68,8 +68,14 @@
                     else
                     {
     
+                        while ($row = $result->fetch_assoc()){
+                            $role = $row["role"]; 
+                        }
+
                         session_start();
                         $_SESSION['nameaccount'] = $username_login;
+                        $_SESSION['role'] = $role;
+
                         header("location: employee-information.php");
                     }
                 }

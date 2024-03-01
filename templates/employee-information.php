@@ -139,21 +139,29 @@
                         <li class="nav_bar-list-item">Đơn giải trình</li>
                     </ul>
                 </div>
+                
+                <?php
+                    if(isset($_SESSION['role'])){
+                        if($_SESSION['role'] == 'admin'){
+                            echo '<div class="nav_bar-function">
+                            <div class="nav_bar-function-content close">
+                                <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
+                                <a>Admin Console</a>
+                                <div class="function-icon_arrow_AdminConsole">
+                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                </div>
+                            </div>
+                            <div class="nav_bar-function_child">
+                                <ul class="nav_bar-function_child_AdminConsole none">
+                                    <a class="nav_bar-list-item" href="create-accounts.php">Cấp tài khoản</a>
+                                </ul>
+                            </div>
+                        </div>';
+                        }
+                    }
+                    
+                ?>
 
-                <div class="nav_bar-function">
-                    <div class="nav_bar-function-content close">
-                        <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
-                        <a>Admin Console</a>
-                        <div class="function-icon_arrow_AdminConsole">
-                            <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
-                        </div>
-                    </div>
-                    <div class="nav_bar-function_child">
-                        <ul class="nav_bar-function_child_AdminConsole none">
-                            <a class="nav_bar-list-item" href="create-accounts.php">Cấp tài khoản</a>
-                        </ul>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -192,9 +200,16 @@
                     <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
                     <!-- Chuyển dữ liệu bảng thành file  -->
                     <script src="./js/convert2Excel.js"></script>
-                    <a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
-                    <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
-                    <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
+                    <?php
+                        if(isset($_SESSION['role'])){
+                            if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
+                                <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
+                                <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>';
+                            }
+                        }
+                    ?>
+
                     <button class="data_manager_report-btn" onclick="downloadExcel()">Export</button>
                 </div>  
 
