@@ -176,7 +176,7 @@
                     <div class ="search-box">
                         <div class="search-box_item">
                             <div for="department">Bộ phận</div>
-                            <input type="text" placeholder="VD: Van Chuyen">
+                            <input type="text" placeholder="VD: Van Chuyen" name="position_employee">
                         </div>
                         <div class="search-box_item">
                             <div for="identification">Mã nhân viên</div>
@@ -238,10 +238,29 @@
                                 if ($result->num_rows > 0) {
                                     if (isset($_POST['search'])) {
                                         $name = $_POST['name_employee'];
+                                        $position = $_POST['position_employee'];
                                         $sql1 = "SELECT * from employee where last_name='$name' ";
+                                        $sql2 = "SELECT * FROM employee WHERE possition = '$position'";
                                         $result1 = $connect->query($sql1);
                                         if ($result1->num_rows > 0) {
                                             while($row = $result1->fetch_assoc()) {
+                                                echo 
+                                                    "<tr>".
+                                                        "<td>".$row["fisrt_name"]."</td>".
+                                                        "<td>".$row["last_name"]."</td>".
+                                                        "<td>".$row["address"]."</td>".
+                                                        "<td>".$row["date_of_birth"]."</td>".
+                                                        "<td>".$row["phone"]."</td>".
+                                                        "<td>".$row["email"]."</td>".
+                                                        "<td>".$row["hire_date"]."</td>".
+                                                        "<td>".$row["department"]."</td>".
+                                                        "<td>".$row["possition"]."</td>
+                                                    </tr>";
+                                            }
+                                        }
+                                        $result2 = $connect->query($sql2);
+                                        if ($result2->num_rows > 0) {
+                                            while($row = $result2->fetch_assoc()) {
                                                 echo 
                                                     "<tr>".
                                                         "<td>".$row["fisrt_name"]."</td>".

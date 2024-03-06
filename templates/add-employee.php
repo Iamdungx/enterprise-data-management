@@ -66,28 +66,49 @@
     </form>
 
     <?php
-    if (isset($_POST['add_employee'])) {
-        require 'connect_database.php';
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $address = $_POST['address'];
-        $date_of_birth = $_POST['date_of_birth'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $hire_date = $_POST['hire_date'];
-        $department = $_POST['department'];
-        $position = $_POST['position'];
+if (isset($_POST['add_employee'])) {
+    require 'connect_database.php';
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $address = $_POST['address'];
+    $date_of_birth = $_POST['date_of_birth'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $hire_date = $_POST['hire_date'];
+    $department = $_POST['department'];
+    $position = $_POST['position'];
 
-        $sql = "INSERT INTO employee( `fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `possition`) 
-                                    VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position')";
+    $sql = "INSERT INTO employee (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `possition`) 
+                                VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position')";
+    
+    session_start();
+    if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
+        $role = $_SESSION['role'];
+        $name = $_SESSION['nameaccount'];
+        $string_sql = (string) $sql;
 
-        if ($connect->query($sql) === TRUE) {
-            echo " Thêm nhân viên thành công!";
+        // Escape single quotes in the SQL string
+        $string_sql = mysqli_real_escape_string($connect, $string_sql);
+
+        $log = "INSERT INTO modification (`name`, `role`, `text_log`) VALUES ('$name','$role','$string_sql')";
+
+        // Execute the log query and check for errors
+        if ($connect->query($log) === TRUE) {
+            echo "Log entry added successfully!<br>";
         } else {
-            echo "Thêm không thành công. Nhập lại!";
+            echo "Error adding log entry: " . $connect->error . "<br>";
         }
     }
-    ?>
+
+    // Execute the employee query and check for errors
+    if ($connect->query($sql) === TRUE) {
+        echo "Thêm nhân viên thành công!";
+    } else {
+        echo "Thêm không thành công. Nhập lại!";
+        echo "Error: " . $connect->error . "<br>";
+    }
+}
+?>
     <a class="link_home" href="employee-information.php">Home</a>
 
 </body>
