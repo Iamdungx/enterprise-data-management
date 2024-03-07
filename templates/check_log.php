@@ -46,4 +46,5 @@
             ?>
         </table>
     </div>
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
 </body>
