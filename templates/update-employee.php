@@ -21,6 +21,7 @@
 
         $sql = "SELECT * FROM employee";
         $result = $connect->query($sql);
+        session_start();
 
         echo "<form method='post' action=''>
         <tr> 
@@ -133,6 +134,25 @@
             $sql2 = "UPDATE employee 
                 SET fisrt_name = '$first_name', last_name = '$last_name', address = '$address', date_of_birth = '$date_of_birth', phone = '$phone', email = '$email' , hire_date = '$hire_date', department = '$department', possition = '$position'
                 WHERE employee.id = '$update_id' ";
+
+            if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
+                $name = $_SESSION['nameaccount'];
+                $role = $_SESSION['role'];
+                $description = "Cập nhật thông tin nhân viên.";
+                $string_sql = (string) $sql2;
+
+                // Escape single quotes in the SQL string
+                $string_sql = mysqli_real_escape_string($connect, $string_sql);
+
+                $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sql', '$description')";
+
+                // Execute the log query and check for errors
+                if ($connect->query($log) === TRUE) {
+                    echo "Log entry added successfully!<br>";
+                } else {
+                    echo "Error adding log entry: " . $connect->error . "<br>";
+                }
+            }
             if ($connect->query($sql2) == True) {
 
                 echo "Update succesfully <br>";
@@ -141,11 +161,8 @@
             }
         }
 
-
         $connect->close();
         ?>
     </table>
     <a class="link_home" href='employee-information.php'>Trang chủ</a>
-
-
 </html>

@@ -68,8 +68,26 @@
                     $result = $connect->query($sql);
                     header("location: delete-employee.php");
 
+                    session_start();
+                    if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
+                        $name = $_SESSION['nameaccount'];
+                        $role = $_SESSION['role'];
+                        $description = "Xoá nhân viên";
+                        $string_sql = (string) $sql;
+                
+                        // Escape single quotes in the SQL string
+                        $string_sql = mysqli_real_escape_string($connect, $string_sql);
+                
+                        $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sql', '$description')";
+                
+                        // Execute the log query and check for errors
+                        if ($connect->query($log) === TRUE) {
+                            echo "Log entry added successfully!<br>";
+                        } else {
+                            echo "Error adding log entry: " . $connect->error . "<br>";
+                        }
+                    }
                 }
-
             }
         }
       
