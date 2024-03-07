@@ -95,8 +95,7 @@
                         <li class="nav_bar-list-item">
                             <a href="/html/maMau.html">Mã màu</a>
                         </li>
-                        <li class="nav_bar-list-item">Thông tin nhân viên</li>
-                        <li class="nav_bar-list-item">Danh sách nhân viên</li>
+                        <li class="nav_bar-list-item"><a href="">Bảng lương</a></li>
                         <li class="nav_bar-list-item">Quản lí hợp đồng</li>
                         <li class="nav_bar-list-item">Điều chuyển nhân viên</li>
                     </ul>
@@ -205,7 +204,8 @@
                             if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
                                 echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
                                 <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
-                                <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>';
+                                <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
+                                <a type="button" class="delete-btn" href="check_log.php">Check Log</a>';
                             }
                         }
                     ?>
