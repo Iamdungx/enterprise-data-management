@@ -105,7 +105,7 @@
                             <a href="/html/maMau.html">Mã màu</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
-                        <li class="nav_bar-list-item">Quản lí hợp đồng</li>
+                        <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                         <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
                     </ul>
                 </div>
