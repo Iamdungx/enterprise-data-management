@@ -152,7 +152,7 @@
                             </div>
                             <div class="nav_bar-function_child">
                                 <ul class="nav_bar-function_child_AdminConsole none">
-                                    <a class="nav_bar-list-item" href="create-accounts.php">Cấp tài khoản</a>
+                                    <a class="nav_bar-list-item" href="create-accounts.php">Hiệu suất</a>
                                 </ul>
                             </div>
                         </div>';
@@ -220,7 +220,7 @@
                         require 'connect_database.php';
                         mysqli_set_charset($connect, 'UTF8');
 
-                        $sql = "SELECT * FROM employee";
+                        $sql = "SELECT * FROM user_data";
                         $result = $connect->query($sql);
 
                                 echo '<tr>
@@ -239,8 +239,8 @@
                                     if (isset($_POST['search'])) {
                                         $name = $_POST['name_employee'];
                                         $position = $_POST['position_employee'];
-                                        $sql1 = "SELECT * from employee where last_name='$name' ";
-                                        $sql2 = "SELECT * FROM employee WHERE possition = '$position'";
+                                        $sql1 = "SELECT * from user_data where last_name='$name' ";
+                                        $sql2 = "SELECT * FROM user_data WHERE position = '$position'";
                                         $result1 = $connect->query($sql1);
                                         if ($result1->num_rows > 0) {
                                             while($row = $result1->fetch_assoc()) {
@@ -254,7 +254,7 @@
                                                         "<td>".$row["email"]."</td>".
                                                         "<td>".$row["hire_date"]."</td>".
                                                         "<td>".$row["department"]."</td>".
-                                                        "<td>".$row["possition"]."</td>
+                                                        "<td>".$row["position"]."</td>
                                                     </tr>";
                                             }
                                         }
@@ -271,7 +271,7 @@
                                                         "<td>".$row["email"]."</td>".
                                                         "<td>".$row["hire_date"]."</td>".
                                                         "<td>".$row["department"]."</td>".
-                                                        "<td>".$row["possition"]."</td>
+                                                        "<td>".$row["position"]."</td>
                                                     </tr>";
                                             }
                                         }
@@ -287,7 +287,7 @@
                                                 "<td>".$row["email"]."</td>".
                                                 "<td>".$row["hire_date"]."</td>".
                                                 "<td>".$row["department"]."</td>".
-                                                "<td>".$row["possition"]."</td>
+                                                "<td>".$row["position"]."</td>
                                             </tr>";
                                         }
                                     }

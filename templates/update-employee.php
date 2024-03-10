@@ -19,7 +19,7 @@
         require 'connect_database.php';
         mysqli_set_charset($connect, 'UTF8');
 
-        $sql = "SELECT * FROM employee";
+        $sql = "SELECT * FROM user_data";
         $result = $connect->query($sql);
         session_start();
 
@@ -48,7 +48,7 @@
                     "<td>" . $row["email"] . "</td>" .
                     "<td>" . $row["hire_date"] . "</td>" .
                     "<td>" . $row["department"] . "</td>" .
-                    "<td>" . $row["possition"] . "</td>" .
+                    "<td>" . $row["position"] . "</td>" .
                     "<td><button class='update-btn' type='submit' name='choose' value='" . $row["id"] . "'>Update</button></td>
                                         </tr>";
             }
@@ -131,9 +131,9 @@
             $department = $_POST['department'];
             $position = $_POST['position'];
 
-            $sql2 = "UPDATE employee 
-                SET fisrt_name = '$first_name', last_name = '$last_name', address = '$address', date_of_birth = '$date_of_birth', phone = '$phone', email = '$email' , hire_date = '$hire_date', department = '$department', possition = '$position'
-                WHERE employee.id = '$update_id' ";
+            $sql2 = "UPDATE user_data 
+                SET fisrt_name = '$first_name', last_name = '$last_name', address = '$address', date_of_birth = '$date_of_birth', phone = '$phone', email = '$email' , hire_date = '$hire_date', department = '$department', position = '$position'
+                WHERE user_data.id = '$update_id' ";
 
             if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
                 $name = $_SESSION['nameaccount'];

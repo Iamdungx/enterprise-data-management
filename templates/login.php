@@ -60,7 +60,7 @@
                     $username_login = $_POST['username'];
                     $password_login = $_POST['password'];
                     
-                    $sql = "SELECT * FROM login WHERE username = '$username_login' and login.password = '$password_login'";
+                    $sql = "SELECT * FROM employee WHERE user_id = '$username_login' and employee.password = '$password_login'";
                     $result = $connect->query($sql);
                     if($result->num_rows == 0 ){
                         echo "Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại";

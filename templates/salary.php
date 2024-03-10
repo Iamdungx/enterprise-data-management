@@ -20,19 +20,26 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT * FROM salary_and_bonus";
+                $sql = "SELECT employee.id, employee.fisrt_name, employee.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
+                FROM employee 
+                INNER JOIN salary_and_bonus 
+                ON employee.id = salary_and_bonus.employee_id;";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Salary</th>
                         <th>Bonus</th>
                         </tr>';
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["employee_id"]."</td>".
-                                    "<td>".$row["salary"]."</td>".
-                                    "<td>".$row["bonus"]."</td>
+                                    "<td>".$row["id"]." </td>".
+                                    "<td>".$row["fisrt_name"]."</td>".
+                                    "<td>".$row["last_name"]."</td>".
+                                    "<td>".$row["salary"]." VND </td>".
+                                    "<td>".$row["bonus"]." VND </td>
                                 </tr>";
                             }
                         }

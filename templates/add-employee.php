@@ -61,6 +61,25 @@
         </div>
 
         <div class="form-group">
+            <label>User ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Role</label>
+            <select name="role" id="role">
+                <option value="employee">Employee</option>
+                <option value="manager">Manager</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <input class="btn btn-primary" type="submit" value="ADD EMPLOYEE" name="add_employee">
         </div>
     </form>
@@ -77,9 +96,13 @@ if (isset($_POST['add_employee'])) {
     $hire_date = $_POST['hire_date'];
     $department = $_POST['department'];
     $position = $_POST['position'];
+    $user_id = $_POST['user_id'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
 
-    $sql = "INSERT INTO employee (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `possition`) 
-                                VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position')";
+
+    $sql = "INSERT INTO user_data (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
+                                VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position', '$user_id', '$password', '$role')";
     
     session_start();
     if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {

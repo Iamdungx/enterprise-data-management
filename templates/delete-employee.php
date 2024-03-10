@@ -15,7 +15,7 @@
 
         require 'connect_database.php';
 
-        $sql = "SELECT * FROM employee";
+        $sql = "SELECT * FROM user_data";
         $result = $connect->query($sql);
 
         if($result->num_rows > 0)
@@ -46,7 +46,7 @@
                     "<td>" . $row["email"] . "</td>" .
                     "<td>" . $row["hire_date"] . "</td>" .
                     "<td>" . $row["department"] . "</td>" .
-                    "<td>" . $row["possition"] . "</td></tr>" ;
+                    "<td>" . $row["position"] . "</td></tr>" ;
             }
         }
 
@@ -64,7 +64,7 @@
                 $delete = $_POST['checkbox'];
                 foreach ($delete as $id)
                 {
-                    $sql = "DELETE FROM employee WHERE id = '$id'";
+                    $sql = "DELETE FROM user_data WHERE id = '$id'";
                     $result = $connect->query($sql);
                     header("location: delete-employee.php");
 
