@@ -61,11 +61,6 @@
         </div>
 
         <div class="form-group">
-            <label>User ID</label>
-            <input type="text" class="form-control" id="user_id" name="user_id" required>
-        </div>
-
-        <div class="form-group">
             <label>Password</label>
             <input type="text" class="form-control" id="password" name="password" required>
         </div>
@@ -83,56 +78,73 @@
             <input class="btn btn-primary" type="submit" value="ADD EMPLOYEE" name="add_employee">
         </div>
     </form>
+<?php
+    session_start(); // Gọi session_start() trước khi sử dụng $_SESSION
 
-    <?php
-if (isset($_POST['add_employee'])) {
-    require 'connect_database.php';
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $address = $_POST['address'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $hire_date = $_POST['hire_date'];
-    $department = $_POST['department'];
-    $position = $_POST['position'];
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+    if (isset($_POST['add_employee'])) {
+        require 'connect_database.php'; // Kết nối đến cơ sở dữ liệu
 
+        // Lấy dữ liệu từ biểu mẫu HTML
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $address = $_POST['address'];
+        $date_of_birth = $_POST['date_of_birth'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $hire_date = $_POST['hire_date'];
+        $department = $_POST['department'];
+        $position = $_POST['position'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
 
-    $sql = "INSERT INTO user_data (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
-                                VALUES ('$first_name' ,'$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date','$department','$position', '$user_id', '$password', '$role')";
-    
-    session_start();
-    if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
-        $role = $_SESSION['role'];
-        $name = $_SESSION['nameaccount'];
-        $description = "Thêm nhân viên";
-        $string_sql = (string) $sql;
+        // Hàm tạo user_id ngẫu nhiên
+        function generateUserID() {
+            $prefix = "HUMG";
+            $random_number = sprintf('%06d', mt_rand(0, 999999)); // Sinh số ngẫu nhiên từ 000000 đến 999999
+            return $prefix . $random_number;
+        }
 
-        // Escape single quotes in the SQL string
-        $string_sql = mysqli_real_escape_string($connect, $string_sql);
+        // Tạo user_id mới và kiểm tra đến khi nào không trùng
+        do {
+            $user_id = generateUserID();
+            $check_query = "SELECT COUNT(*) as count FROM user_data WHERE user_id = '$user_id'";
+            $result = $connect->query($check_query);
+            $row = $result->fetch_assoc();
+            $user_id_exists = $row['count'] > 0;
+        } while ($user_id_exists);
 
-        $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sql', '$description')";
+        // Câu lệnh SQL để thêm nhân viên vào cơ sở dữ liệu
+        $sql = "INSERT INTO user_data (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
+                VALUES ('$first_name', '$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date', '$department', '$position', '$user_id', '$password', '$role')";
 
-        // Execute the log query and check for errors
-        if ($connect->query($log) === TRUE) {
-            echo "Log entry added successfully!<br>";
+        // Kiểm tra xem người dùng đã đăng nhập và có quyền ghi log hay không
+        if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
+            $role = $_SESSION['role'];
+            $name = $_SESSION['nameaccount'];
+            $description = "Thêm nhân viên";
+            $string_sql = mysqli_real_escape_string($connect, $sql); // Escape single quotes in the SQL string
+
+            // Câu lệnh SQL để ghi log
+            $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sql', '$description')";
+
+            // Thực thi câu lệnh ghi log và kiểm tra lỗi
+            if ($connect->query($log) === TRUE) {
+                echo "Log entry added successfully!<br>";
+            } else {
+                echo "Error adding log entry: " . $connect->error . "<br>";
+            }
+        }
+
+        // Thực thi câu lệnh để thêm nhân viên và kiểm tra lỗi
+        if ($connect->query($sql) === TRUE) {
+            echo "Thêm nhân viên thành công!";
         } else {
-            echo "Error adding log entry: " . $connect->error . "<br>";
+            echo "Thêm không thành công. Nhập lại!";
+            echo "Error: " . $connect->error . "<br>";
         }
     }
-
-    // Execute the employee query and check for errors
-    if ($connect->query($sql) === TRUE) {
-        echo "Thêm nhân viên thành công!";
-    } else {
-        echo "Thêm không thành công. Nhập lại!";
-        echo "Error: " . $connect->error . "<br>";
-    }
-}
 ?>
+
     <a class="link_home" href="employee-information.php">Home</a>
 
 </body>

@@ -24,7 +24,31 @@
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
+        <button class="attendance-button" onclick="markAttendance()">Chấm Công</button>
+        <script>
+            function markAttendance() {
+            // Lấy mã nhân viên từ session hoặc từ dữ liệu người dùng
+            session_start();
+            $employeeid = $_SESSION['user_id']; // Giả sử bạn lưu employeeid trong session
 
+            // Lấy thời gian hiện tại
+            $currentDate = date("Y-m-d");
+            $currentTime = date("H:i:s");
+
+            // Thực hiện thêm dữ liệu vào bảng attendance
+            require 'connect_database.php'; // Đảm bảo rằng bạn đã kết nối đến cơ sở dữ liệu
+
+            $sql = "INSERT INTO attendance (employee_id, date, check_in) VALUES ('$employeeid', '$currentDate', '$currentTime')";
+            
+            if ($connect->query($sql) === TRUE) {
+                echo "Chấm công thành công";
+            } else {
+                echo "Lỗi khi chấm công: " . $connect->error;
+            }
+
+            $connect->close();
+}
+        </script>
         <!--header account-->
         <div class="account" id="dropdown">
             <div class="image-account">
@@ -46,35 +70,20 @@
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <div class="dropdown-content">
-                <!-- <a href="{{ url_for('logout') }}">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Đăng xuất
-                </a>                 -->
-                <a href="./login.php">
+                <a href="javascript:void(0);" onclick="confirmLogout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
                 
-                <script>
-                    function logout() {
-                        // Use JavaScript to make a POST request to the /logout route
-                        fetch('/logout', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({}),
-                        })
-                        .then(response => response.json())
-                        .then(() => {
-                            // Redirect the user to the root URL after logout
-                            window.location.href = '/';
-                        })
-                        .catch(error => console.error('Logout failed:', error));
-                    }
-                </script>
-                
+
             </div>
+            <script>
+            function confirmLogout() {
+                if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+                window.location.href = "logout.php";
+                    }
+                }
+            </script>
         </div>
 
     </header>
@@ -97,7 +106,7 @@
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item">Quản lí hợp đồng</li>
-                        <li class="nav_bar-list-item">Điều chuyển nhân viên</li>
+                        <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
                     </ul>
                 </div>
 

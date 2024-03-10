@@ -20,10 +20,10 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT employee.id, employee.fisrt_name, employee.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
-                FROM employee 
+                $sql = "SELECT user_data.id, user_data.fisrt_name, user_data.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
+                FROM user_data 
                 INNER JOIN salary_and_bonus 
-                ON employee.id = salary_and_bonus.employee_id;";
+                ON user_data.id = salary_and_bonus.employee_id;";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>

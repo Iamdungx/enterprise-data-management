@@ -21,7 +21,7 @@
             <form action="" method="POST">
                 <div class ="username-box">
                     <label><span>*</span>Tên đăng nhập:</label><br>
-                    <input name="username" type="text" class="username-input" required/>
+                    <input name="user_id" id="user_id" type="text" class="username-input" required/>
                 </div>
         
                 <div class="password-container">
@@ -57,10 +57,10 @@
             <?php
                 if (isset($_POST['login'])) {
                     require 'connect_database.php';
-                    $username_login = $_POST['username'];
+                    $username_login = $_POST['user_id'];
                     $password_login = $_POST['password'];
                     
-                    $sql = "SELECT * FROM employee WHERE user_id = '$username_login' and employee.password = '$password_login'";
+                    $sql = "SELECT * FROM user_data WHERE user_id = '$username_login' and user_data.password = '$password_login'";
                     $result = $connect->query($sql);
                     if($result->num_rows == 0 ){
                         echo "Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại";
