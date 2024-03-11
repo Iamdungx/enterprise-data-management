@@ -24,31 +24,9 @@
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
-        <button class="attendance-button" onclick="markAttendance()">Chấm Công</button>
-        <script>
-            function markAttendance() {
-            // Lấy mã nhân viên từ session hoặc từ dữ liệu người dùng
-            session_start();
-            $employeeid = $_SESSION['user_id']; // Giả sử bạn lưu employeeid trong session
-
-            // Lấy thời gian hiện tại
-            $currentDate = date("Y-m-d");
-            $currentTime = date("H:i:s");
-
-            // Thực hiện thêm dữ liệu vào bảng attendance
-            require 'connect_database.php'; // Đảm bảo rằng bạn đã kết nối đến cơ sở dữ liệu
-
-            $sql = "INSERT INTO attendance (employee_id, date, check_in) VALUES ('$employeeid', '$currentDate', '$currentTime')";
-            
-            if ($connect->query($sql) === TRUE) {
-                echo "Chấm công thành công";
-            } else {
-                echo "Lỗi khi chấm công: " . $connect->error;
-            }
-
-            $connect->close();
-}
-        </script>
+        <form action="attendance.php">
+            <input type="submit" value="Chấm Công" name="attendance_button">
+        </form>       
         <!--header account-->
         <div class="account" id="dropdown">
             <div class="image-account">
