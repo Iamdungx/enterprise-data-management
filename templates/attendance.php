@@ -18,7 +18,8 @@
 
     <a class="link_home" href="employee-information.php">Home</a>
 
-    <?php
+<?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 require 'connect_database.php';
 session_start();
 
