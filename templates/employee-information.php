@@ -24,9 +24,6 @@
                 <i class="fa-solid fa-bars"></i>
             </div>
         </div>
-        <form action="attendance.php">
-            <input type="submit" value="Chấm Công" name="attendance_button">
-        </form>       
         <!--header account-->
         <div class="account" id="dropdown">
             <div class="image-account">
@@ -47,7 +44,12 @@
             <div class="icon-account">
                 <i class="fa-solid fa-angle-down"></i>
             </div>
+            
             <div class="dropdown-content">
+                <a href="attendance.php">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Chấm Công
+                </a>
                 <a href="javascript:void(0);" onclick="confirmLogout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
