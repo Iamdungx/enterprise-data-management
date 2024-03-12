@@ -8,12 +8,46 @@
     <title>HRM</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
-    <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="./icons/font-awesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="./image/icon-image.png">
+    <style>
+        .blue-box {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
+            border-radius: 5px; /* Bo tròn viền của ô */
+            text-align: center; /* Canh giữa nội dung */
+            margin: 20px 10px;
+        }
+        .blue-box h1 {
+            color: black; /* Màu chữ trắng */
+            margin: 0; /* Xóa khoảng cách lề */
+        }
+        .link_home {
+            margin-right: 10px;
+            background-color: #6586E6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        #information-table {
+            width: auto;
+            height: auto;
+        }
+
+        #information-table th,
+        #information-table td {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body>
-
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
+    <div class="blue-box">
+        <h1>Update Employee</h1>
+    </div>
     <table id="information-table">
         <?php
         require 'connect_database.php';
@@ -164,5 +198,4 @@
         $connect->close();
         ?>
     </table>
-    <a class="link_home" href='employee-information.php'>Trang chủ</a>
 </html>

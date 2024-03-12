@@ -7,9 +7,58 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <title>Delete employee</title>
+    <style>
+        .link_home {
+            margin-right: 10px;
+            background-color: #6586E6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .blue-box {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
+            border-radius: 5px; /* Bo tròn viền của ô */
+            text-align: center; /* Canh giữa nội dung */
+            margin: 20px 10px;
+        }
+        .blue-box h1 {
+            color: black; /* Màu chữ trắng */
+            margin: 0; /* Xóa khoảng cách lề */
+        }
+        #information-table {
+            width: auto;
+            height: auto;
+        }
+
+        #information-table th,
+        #information-table td {
+            white-space: nowrap;
+        }
+        .input_submit {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            border: 2px solid #9FD7F9; /* Viền bo tròn xanh dương */
+            border-radius: 5px; /* Bo tròn viền */
+            color: black; /* Màu chữ trắng */
+            padding: 10px 20px; /* Khoảng cách giữa nội dung và viền */
+            cursor: pointer; /* Hiển thị con trỏ khi di chuột qua */
+            margin: 0px 10px;
+            font-weight: bold;
+        }
+
+        .input_submit:hover {
+            background-color: #FF0000; /* Màu nền xanh dương sậm khi di chuột qua */
+            border-color: #FF0000; /* Màu viền xanh dương sậm khi di chuột qua */
+        }
+    </style>
 </head>
 <body>
-    <h1>Delete employee</h1>
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
+    <div class="blue-box">
+        <h1>Delete Employee</h1>
+    </div>
     <?php
         echo '<form action="" method="post" >';
 
@@ -21,7 +70,6 @@
         if($result->num_rows > 0)
         {
             echo "<table id='information-table'>
-                <caption>Delete Employee</caption>
                 <tr> 
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -94,6 +142,5 @@
 
         $connect->close();
     ?>
-    <a class="link_home" href='employee-information.php'>Trang chủ</a>
 </body>
 </html>

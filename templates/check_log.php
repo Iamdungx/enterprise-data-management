@@ -12,10 +12,41 @@
     <!-- Js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <style>
+        .blue-box {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
+            border-radius: 5px; /* Bo tròn viền của ô */
+            text-align: center; /* Canh giữa nội dung */
+            margin: 20px 10px;
+        }
+        .blue-box h1 {
+            color: black; /* Màu chữ trắng */
+            margin: 0; /* Xóa khoảng cách lề */
+        }
+        .link_home {
+            margin-right: 10px;
+            background-color: #6586E6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        #information-table {
+            width: auto; /* Thay đổi từ 1500px thành auto */
+            max-width: 100%; /* Đảm bảo bảng không vượt quá kích thước của phần tử cha */
+            height: 500px;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Check Log</h1>
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
+    <div class="blue-box">
+        <h1>Check Log</h1>
+    </div>
     <div class="form-data_manager-table">
         <table id="information-table">
             <?php
@@ -46,5 +77,4 @@
             ?>
         </table>
     </div>
-    <a class="link_home" href='employee-information.php'>Trang chủ</a>
 </body>

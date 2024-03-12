@@ -177,8 +177,48 @@
                 </form>
             </div> 
 
-
-            
+<style>
+    .add-btn, .update-btn, .delete-btn, .check-log-btn, .data_manager_report-btn {
+        display: inline-block;
+        padding: 4px 2px;
+        margin: 0px; /* Cách đều nhau giữa các nút */
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .update-btn {
+        background-color: #9FD7F9;
+        margin-right: 20px;
+        color: black;
+    }
+    .add-btn {
+        background-color: #9FD7F9;
+        margin-right: 30px;
+        color: black;
+    }
+    .delete-btn {
+        background-color: #9FD7F9;
+        margin-left: 80px;
+        color: black;
+    }
+    .check-log-btn {
+        background-color: #9FD7F9;
+        margin-right: 80px;
+        color: black;
+    }
+    .data_manager_report-btn {
+        background-color: #9FD7F9;
+        color: black;
+    }
+    .add-btn:hover, .update-btn:hover, .delete-btn:hover, .check-log-btn:hover {
+        background-color: #555; /* Dark grey */
+    }
+</style>
 
             <!-- render data  -->
             <div class="form-data_manager">
@@ -192,7 +232,7 @@
                                 echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
                                 <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
                                 <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
-                                <a type="button" class="delete-btn" href="check_log.php">Check Log</a>';
+                                <a type="button" class="check-log-btn" href="check_log.php">Check Log</a>';
                             }
                         }
                     ?>
