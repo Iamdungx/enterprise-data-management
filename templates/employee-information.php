@@ -105,7 +105,7 @@
                         <li class="nav_bar-list-item">Báo cáo theo tuần</li>
                         <li class="nav_bar-list-item">Danh sách ca</li>
                         <li class="nav_bar-list-item">Báo cáo theo tháng</li>
-                        <li class="nav_bar-list-item">Danh sách chấm công</li>
+                        <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
                     </ul>
 
                 </div>
