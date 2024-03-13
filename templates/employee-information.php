@@ -82,7 +82,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="/html/maMau.html">Mã màu</a>
+                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -130,7 +130,7 @@
                 
                 <?php
                     if(isset($_SESSION['role'])){
-                        if($_SESSION['role'] == 'admin'){
+                        if($_SESSION['role'] == 'admin' ){
                             echo '<div class="nav_bar-function">
                             <div class="nav_bar-function-content close">
                                 <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
