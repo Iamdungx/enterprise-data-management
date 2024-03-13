@@ -60,6 +60,7 @@
         <h1>Delete Employee</h1>
     </div>
     <?php
+        session_start();
         echo '<form action="" method="post" >';
 
         require 'connect_database.php';
@@ -113,10 +114,7 @@
                 foreach ($delete as $id)
                 {
                     $sql = "DELETE FROM user_data WHERE id = '$id'";
-                    $result = $connect->query($sql);
-                    header("location: delete-employee.php");
-
-                    session_start();
+                    $result = $connect->query($sql);                   
                     if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
                         $name = $_SESSION['nameaccount'];
                         $role = $_SESSION['role'];

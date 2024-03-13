@@ -68,6 +68,7 @@
     <div class="form-data_manager-table">
         <table id="information-table">
             <?php
+                session_start();
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
@@ -131,7 +132,7 @@
 
         $sql = "INSERT INTO salary_and_bonus (`employee_id`, `salary`, `bonus`) VALUES ('$employee_id' ,'$salary', '$bonus')";
         
-        session_start();
+        
         if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
             $role = $_SESSION['role'];
             $name = $_SESSION['nameaccount'];
