@@ -21,22 +21,17 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT user_data.id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
-                performance_employee.date, performance_detail.deadline, performance_detail.assignment_type, 
-                performance_detail.result, performance_detail.reason_fail 
+                $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
+                performance_employee.date, performance_employee.result, performance_employee.fail_reason 
                 FROM user_data 
                 INNER JOIN performance_employee 
-                ON user_data.id = performance_employee.employee_id 
-                    INNER JOIN performance_detail 
-                    ON performance_employee.id = performance_detail.performance_id";
+                ON user_data.id = performance_employee.user_id ";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Assignment type</th>
-                        <th>Deadline</th>
-                        <th>Result</th>
                         <th>Rating</th>
                         <th>Reason fail</th>
                         <th>Date</th>
@@ -44,14 +39,12 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["id"]." </td>".
+                                    "<td>".$row["user_id"]." </td>".
                                     "<td>".$row["fisrt_name"]."</td>".
                                     "<td>".$row["last_name"]."</td>".
-                                    "<td>".$row["assignment_type"]."</td>".
-                                    "<td>".$row["deadline"]."</td>".
                                     "<td>".$row["result"]."</td>".
                                     "<td>".$row["rating"]." </td>".
-                                    "<td>".$row["reason_fail"]." </td>".
+                                    "<td>".$row["fail_reason"]." </td>".
                                     "<td>".$row["date"]." </td>
                                 </tr>";
                             }

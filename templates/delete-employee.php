@@ -60,6 +60,7 @@
         <h1>Delete Employee</h1>
     </div>
     <?php
+        session_start();
         echo '<form action="" method="post" >';
 
         require 'connect_database.php';
@@ -85,7 +86,7 @@
 
             while ($row = $result->fetch_assoc())
             {
-                echo "<tr><td> <input type=checkbox name = 'checkbox[]' value='" .$row['id']."' >" . "</td>". 
+                echo "<tr><td> <input type=checkbox name = 'checkbox[]' value='" .$row['id']."'>" . "</td>". 
                     "<td>" . $row["fisrt_name"] . "</td>" .
                     "<td>" . $row["last_name"] . "</td>" .
                     "<td>" . $row["address"] . "</td>" .
@@ -94,16 +95,12 @@
                     "<td>" . $row["email"] . "</td>" .
                     "<td>" . $row["hire_date"] . "</td>" .
                     "<td>" . $row["department"] . "</td>" .
-                    "<td>" . $row["position"] . "</td></tr>" ;
+                    "<td>" . $row["position"] . "</td></tr>";
             }
         }
-
         echo '<input class="input_submit"  type="submit" name="delete" value="DELETE EMPLOYEE" />
         </form>';
-
     ?>
-
-
     <?php
         if(isset($_POST['delete']))
         {
@@ -114,9 +111,8 @@
                 {
                     $sql = "DELETE FROM user_data WHERE id = '$id'";
                     $result = $connect->query($sql);
-                    header("location: delete-employee.php");
+                    // header("location: delete-employee.php");
 
-                    session_start();
                     if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
                         $name = $_SESSION['nameaccount'];
                         $role = $_SESSION['role'];
@@ -138,8 +134,6 @@
                 }
             }
         }
-      
-
         $connect->close();
     ?>
 </body>

@@ -82,7 +82,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="/html/maMau.html">Mã màu</a>
+                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -130,7 +130,7 @@
                 
                 <?php
                     if(isset($_SESSION['role'])){
-                        if($_SESSION['role'] == 'admin'){
+                        if($_SESSION['role'] == 'admin' ){
                             echo '<div class="nav_bar-function">
                             <div class="nav_bar-function-content close">
                                 <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
@@ -142,6 +142,22 @@
                             <div class="nav_bar-function_child">
                                 <ul class="nav_bar-function_child_AdminConsole none">
                                     <a class="nav_bar-list-item" href="create-accounts.php">Hiệu suất</a>
+                                </ul>
+                            </div>
+                        </div>';
+                        }
+                        if($_SESSION['role'] == 'manager' ){
+                            echo '<div class="nav_bar-function">
+                            <div class="nav_bar-function-content close">
+                                <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
+                                <a>Manager Console</a>
+                                <div class="function-icon_arrow_AdminConsole">
+                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                </div>
+                            </div>
+                            <div class="nav_bar-function_child">
+                                <ul class="nav_bar-function_child_AdminConsole none">
+                                    <a class="nav_bar-list-item" href="performance_detail.php">Bàn giao công việc</a>
                                 </ul>
                             </div>
                         </div>';
@@ -235,6 +251,9 @@
                                 <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
                                 <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
                                 <a type="button" class="check-log-btn" href="check_log.php">Check Log</a>';
+                            }
+                            elseif ($_SESSION['role'] == 'employee'){
+                                echo '<a type="button" class="delete-btn" href="assignment.php">Công việc</a>';
                             }
                         }
                     ?>

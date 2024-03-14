@@ -23,7 +23,33 @@ const btnUpdate = $('.update-btn')
 
 
 const navBar = {
+
+  
   handleToggle: function() {
+    if(iconAdminConsole){
+      function handleToggleAdminConsole() {
+        iconAdminConsole.onclick = function(){
+          listAdminConsoleNav.classList.toggle('none')
+        }
+      }
+      handleToggleAdminConsole()
+    }
+    function handleToggleNavBar() {
+      iconHeader.onclick = function(){
+        titleHeader.classList.toggle('close')
+        contentNav.forEach(element => {
+          element.classList.toggle('close')
+        });
+        gridSystem.classList.toggle('close')
+        iconHeaderNav.classList.toggle('close')
+        listManagerNav.classList.add('none')
+        listReportNav.classList.add('none')
+        listAssignmentNav.classList.add('none')
+        listAdminConsoleNav.classList.add('none')
+      }
+    }
+    handleToggleNavBar()
+    
     function handleToggleManager() {
       iconManager.onclick = function(){
         listManagerNav.classList.toggle('none')
@@ -45,28 +71,6 @@ const navBar = {
     }
     handleToggleAssignment()
 
-    function handleToggleAdminConsole() {
-      iconAdminConsole.onclick = function(){
-        listAdminConsoleNav.classList.toggle('none')
-      }
-    }
-    handleToggleAdminConsole()
-
-    function handleToggleNavBar() {
-      iconHeader.onclick = function(){
-        titleHeader.classList.toggle('close')
-        contentNav.forEach(element => {
-          element.classList.toggle('close')
-        });
-        gridSystem.classList.toggle('close')
-        iconHeaderNav.classList.toggle('close')
-        listManagerNav.classList.add('none')
-        listReportNav.classList.add('none')
-        listAssignmentNav.classList.add('none')
-        listAdminConsoleNav.classList.add('none')
-      }
-    }
-    handleToggleNavBar()
 
     function toggleIconAdd(iconAdd) {
       iconAdd.onclick = function () {

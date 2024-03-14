@@ -75,6 +75,10 @@
 </head>
 
 <body>
+    <?php
+        session_start(); // Gọi session_start() trước khi sử dụng $_SESSION
+    
+    ?>
     <a class="link_home" href="employee-information.php">Trang chủ</a>
     <div class="blue-box">
         <h1>Add Employee</h1>
@@ -144,7 +148,6 @@
         </div>
     </form>
 <?php
-    session_start(); // Gọi session_start() trước khi sử dụng $_SESSION
 
     if (isset($_POST['add_employee'])) {
         require 'connect_database.php'; // Kết nối đến cơ sở dữ liệu

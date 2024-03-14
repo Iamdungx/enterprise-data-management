@@ -21,7 +21,7 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT user_data.id, user_data.fisrt_name, user_data.last_name, benefit.health_insurance, benefit.life_insurance , benefit.other
+                $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, benefit.health_insurance, benefit.life_insurance , benefit.other
                 FROM user_data 
                 INNER JOIN benefit 
                 ON user_data.id = benefit.employee_id;";
@@ -37,7 +37,7 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["id"]." </td>".
+                                    "<td>".$row["user_id"]." </td>".
                                     "<td>".$row["fisrt_name"]."</td>".
                                     "<td>".$row["last_name"]."</td>".
                                     "<td>".$row["health_insurance"]." </td>".

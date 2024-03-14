@@ -71,7 +71,7 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT user_data.id, user_data.fisrt_name, user_data.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
+                $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
                 FROM user_data 
                 INNER JOIN salary_and_bonus 
                 ON user_data.id = salary_and_bonus.employee_id;";
@@ -86,7 +86,7 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["id"]." </td>".
+                                    "<td>".$row["user_id"]." </td>".
                                     "<td>".$row["fisrt_name"]."</td>".
                                     "<td>".$row["last_name"]."</td>".
                                     "<td>".$row["salary"]." VND </td>".

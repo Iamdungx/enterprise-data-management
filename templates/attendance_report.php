@@ -21,8 +21,8 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT user_data.user_id user_data.fisrt_name, user_data.last_name, attendance.user_id, 
-                attendance.date, attendance.check_in, attendance.check_out
+                $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, attendance.user_id, 
+                attendance.date, attendance.check_in, attendance.check_out, attendance.total
                 FROM user_data 
                 INNER JOIN attendance 
                 ON user_data.user_id = attendance.user_id";
@@ -39,7 +39,7 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["id"]." </td>".
+                                    "<td>".$row["user_id"]." </td>".
                                     "<td>".$row["fisrt_name"]."</td>".
                                     "<td>".$row["last_name"]."</td>".
                                     "<td>".$row["date"]."</td>".
