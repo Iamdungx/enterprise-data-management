@@ -4,15 +4,16 @@ require 'connect_database.php';
 
 if(isset($_POST['completed'])) {
     if(isset($_POST['checkbox'])) {
+        $user_id =  $_SESSION['nameaccount'];
+
         $checkedCount = count($_POST['checkbox']);
         
-        $sql = "SELECT COUNT(*) AS total FROM assignment";
+        $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();
         $totalCount = $row['total'];
         
         if($checkedCount == $totalCount) {
-            $user_id =  $_SESSION['nameaccount'];
             $date = date("Y-m-d");
             $result = "Hoàn thành công việc";
             $rating = "Đạt";
@@ -73,12 +74,15 @@ if (isset($_POST['submit_reason'])) {
     <form action="" method="post">
         <?php
         require 'connect_database.php';
+        $user_id =  $_SESSION['nameaccount'];
         
         $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type 
         FROM user_data 
         INNER JOIN assignment 
-        ON user_data.user_id = assignment.user_id";
+        ON user_data.user_id = assignment.user_id
+        WHERE assignment.user_id = '$user_id'";
         $result = $connect->query($sql);
+
             if($result->num_rows > 0)
             {
                 echo "<table id='information-table'>
@@ -101,6 +105,9 @@ if (isset($_POST['submit_reason'])) {
                         "<td>" . $row["assignment_type"] . "</td>"; 
                 }
             }
+        else {
+                echo "Không có nhiệm vụ nào được giao";
+        }
         ?>
         <input class="input_submit"  type="submit" name="completed" value="COMPLETED ASSIGNMENT" />
     </form>
