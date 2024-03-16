@@ -122,9 +122,24 @@
                 </div>
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Assignment none">
-                        <li class="nav_bar-list-item">Quản lí đơn</li>
-                        <li class="nav_bar-list-item">Đơn xin đổi ca</li>
-                        <li class="nav_bar-list-item">Đơn giải trình</li>
+                        <?php
+                            if(isset($_SESSION['role'])){
+                                if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                    echo '<li class="nav_bar-list-item"><a href="form_take_off.php">Đơn xin nghỉ</a></li>
+                                    <li class="nav_bar-list-item"><a href="form_change_shift.php">Đơn xin đổi ca</a></li>
+                                    <li class="nav_bar-list-item"><a href="form_explanation.php">Đơn giải trình</a></li>';
+                                }
+                            }
+                        ?>
+
+                        <?php
+                            if(isset($_SESSION['role'])){
+                                if($_SESSION['role'] == 'employee'){
+                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                }
+                            }
+                        ?>
+                        
                     </ul>
                 </div>
                 
