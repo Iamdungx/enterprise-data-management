@@ -127,7 +127,8 @@
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
                                     echo '<li class="nav_bar-list-item"><a href="form_take_off.php">Đơn xin nghỉ</a></li>
                                     <li class="nav_bar-list-item"><a href="form_change_shift.php">Đơn xin đổi ca</a></li>
-                                    <li class="nav_bar-list-item"><a href="form_explanation.php">Đơn giải trình</a></li>';
+                                    <li class="nav_bar-list-item"><a href="form_explanation.php">Đơn giải trình</a></li>
+                                    <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
                         ?>
