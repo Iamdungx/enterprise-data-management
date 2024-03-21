@@ -250,7 +250,7 @@
         color: black;
     }
     .add-btn:hover, .update-btn:hover, .delete-btn:hover, .check-log-btn:hover {
-        background-color: #555; /* Dark grey */
+        background-color: #3EAEF4
     }
 </style>
 
