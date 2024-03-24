@@ -83,30 +83,10 @@
     <div class="blue-box">
         <h1>Add Employee</h1>
         <form action="" name="excel" require value="" enctype="multipart/form-data" method="POST">
-            <input type="
-            <button type="submit" name="import-excel">Import Excel Data</button>
+            <input type="file" name="import_file" class="form-control">
+            <button type="submit">Import Excel Data</button>
         </form>
     </div>
-
-    <?php
-    $count = 1;
-    if(isset($_POST["import-excel"])){
-        require "connect-database.php";
-        $fileName = $_FILES["excel"]["name"];
-        $fileExtension = explode('.', $fileName);
-        $fileExtension = strtolower(end($fileExtension));
-
-        $targetDirectory = "upload/" . $newFileName;
-        move_uploaded_file($_FILES["excel"]["tmp_name"], $targetDirectory);
-
-        error_reporting(0);
-        ini_set('display_errors', 0);
-
-        require "./"
-    }
-    
-    ?>
-
     <form class="form-container" id="form" method="post">
         <div class="form-group">
             <label>First Name</label>
@@ -173,7 +153,7 @@
     </form>
 <?php
 
-    if (isset($_POST['add_employ    .php'; // Kết nối đến cơ sở dữ liệuee'])) {
+    if (isset($_POST['add_employee.php'])) {
         require 'connect_database';
 
         // Lấy dữ liệu từ biểu mẫu HTML
