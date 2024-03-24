@@ -11,6 +11,8 @@
         <link rel="icon" href="./image/icon-image.png">
         <!-- Js -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>        
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     </head>
     <body>
@@ -187,30 +189,30 @@ use function PHPSTORM_META\sql_injection_subst;
                 </div>
             </div>
             
-            <div class="information-box">
+            <div class="dashboard-container">
                 <div class="flex-container">
                     <div class="total-employee">
                         <h4>TỔNG NHÂN VIÊN</h4>
 
                         <?php
-                                require "connect_database.php";
-                                mysqli_set_charset($connect, 'UTF8');
+                            require "connect_database.php";
+                            mysqli_set_charset($connect, 'UTF8');
 
-                                $sql_totalEmployee = ("SELECT COUNT(*) AS tongNhanVien FROM user_data");
-                                $result_totalEmployee = $connect->query($sql_totalEmployee);
+                            $sql_totalEmployee = ("SELECT COUNT(*) AS tongNhanVien FROM user_data");
+                            $result_totalEmployee = $connect->query($sql_totalEmployee);
 
-                                if ($result_totalEmployee->num_rows > 0) {
-                                    while($row_totalEmployee = $result_totalEmployee->fetch_assoc()) {
-                                        echo "<h2>" . $row_totalEmployee["tongNhanVien"] . "</h2>";
-                                        echo "<p>ĐANG LÀM VIỆC TẠI CÔNG TY</p>";
-                                    }
-                                } else {
-                                    echo "Không có dữ liệu";
+                            if ($result_totalEmployee->num_rows > 0) {
+                                while($row_totalEmployee = $result_totalEmployee->fetch_assoc()) {
+                                    echo "<h1 style='padding: 10px'>" . $row_totalEmployee["tongNhanVien"] . "</h1>";
+                                    echo "<div>Đang làm việc<br>tại công ty</div>";
                                 }
-                            ?>
+                            } else {
+                                echo "Không có dữ liệu";
+                            }
+                        ?>
 
                     </div>
-                    <div class="total-report-monthly">
+                    <div class="total-report-monthly" onclick="window.location.href='performance.php'">
                         <h4>Trạng Thái DEADLINE</h4>
                             <?php
                                 require "connect_database.php";
@@ -224,49 +226,125 @@ use function PHPSTORM_META\sql_injection_subst;
                                 if ($result_Dat->num_rows > 0) {
                                     while($row_Dat = $result_Dat->fetch_assoc()) {
                                         echo "<h1>" . $row_Dat["soLuongDat"] . "</h1>";
-                                        echo "<p>Hoàn thành</p>";
+                                        echo "<div>Hoàn thành</div>";
                                     }
                                 } 
                                 if ($result_Dat->num_rows > 0) {
                                     while($row_khongDat = $result_khongDat->fetch_assoc()) {
                                         echo "<h1>" . $row_khongDat["soLuongKhongDat"] . "</h1>";
-                                        echo "<p>Không hoàn thành deadline</p>";
+                                        echo "<div>Không hoàn thành</div>";
                                     }
                                 }else {
                                     echo "Không có dữ liệu";
                                 }
                             ?>
+                    </div>
+                
+                    <div class="total-form">
+                            <h4>Tổng số các đơn yêu cầu</h4>
+                            <?php
+                                require "connect_database.php";
+                                mysqli_set_charset($connect, 'UTF8');
 
+                                $sql_totalForm = ("SELECT COUNT(*) AS tongSoDon FROM form");
+                                $result_totalForm = $connect->query($sql_totalForm);
+
+                                if ($result_totalForm->num_rows > 0) {
+                                    while($row_totalForm = $result_totalForm->fetch_assoc()) {
+                                        echo "<h1 style='padding: 10px'>" . $row_totalForm["tongSoDon"] . "</h1>";
+                                        echo "<div>Chưa có dữ liệu<br>về trạng thái đơn</div>";
+                                    }
+                                } else {
+                                    echo "Không có dữ liệu";
+                                }
+                            ?>
+                    
                     </div>
                 </div>
-            </div>
-    <style>
-        .information-box {
-            text-align: center;
-        }
+                <div class="chart-container">
+                    <canvas id="myChart" style="max-width: 400px; width: 100%;"></canvas>
 
-        .flex-container {
-            display: flex; 
-            /* justify-content: space-around; */
-            margin-top: 50px;
-        }
-        .total-employee {
-            width: auto;
-            height: auto;
-        }
-        .total-report-monthly{
-            display: block;
-            width: auto;
-            height: auto;
-        }
-        .total-report-monthly,
-        .total-employee {
-            padding: 5px 10px 5px 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 0 10px;
-        }
-    </style>
+                    <?php
+                        require "connect_database.php";
+                        mysqli_set_charset($connect, 'UTF8');
+
+                        $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where rating ='Đạt'");
+                        $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE rating != 'Đạt'");
+                        $result_Dat = $connect->query($sql_Dat);
+                        $result_khongDat = $connect->query($sql_khongDat);
+
+                        if ($result_Dat->num_rows > 0) {
+                            $row_Dat = $result_Dat->fetch_assoc();
+                        } 
+                        if ($result_Dat->num_rows > 0) {
+                            $row_khongDat = $result_khongDat->fetch_assoc(); 
+                        }
+
+                        $yValues_ReportMonthly = array();
+
+                        $yValues_ReportMonthly[] = $row_Dat['soLuongDat'];
+                        $yValues_ReportMonthly[] = $row_khongDat['soLuongKhongDat'];
+                    ?>
+
+                    <script>
+                        var xValues_ReportMonthly = ['Đạt', 'Không Đạt'];
+                        var yValues_ReportMonthly = <?php echo json_encode($yValues_ReportMonthly); ?>;
+                        var barColors_ReportMonthly = ["#4EEE94", "#FF6A6A"];
+
+                        new Chart("myChart", {
+                            type: "doughnut",
+                            data: {
+                                labels: xValues_ReportMonthly,
+                                datasets: [{
+                                    backgroundColor: barColors_ReportMonthly,
+                                    data: yValues_ReportMonthly
+                                }]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: "Thống kê số lượng hoàn thành deadline"
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <style>
+                .dashboard-container {
+                    text-align: center;
+                    display: flex;
+                }
+
+                .flex-container {
+                    display: flex-inline;
+                    margin-top: 50px;
+                }
+                .chart-container {
+                    display: right;
+                }
+
+                .total-employee,
+                .total-report-monthly,
+                .total-form {
+                    display: inline-block;
+                    padding: 5px 10px 5px 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                    margin: 0 10px;
+                }
+
+                .total-employee {
+                    background-color: rgb(232, 240, 251);
+                }
+
+                .total-report-monthly {
+                    background-color: rgb(253, 235, 249);
+                }
+                .total-form {
+                    background-color: rgb(234, 255, 238);
+                }
+            </style>
     </body>
         <script src="./js/index.js"></script>
     </html>
