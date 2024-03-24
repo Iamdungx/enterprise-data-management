@@ -75,7 +75,7 @@
                 $user_id =  $_SESSION['nameaccount'];
 
                 
-                $sql = "SELECT COUNT(*) AS dateWork FROM `attendance` WHERE date like '$date' and user_id = '$user_id';";
+                $sql = "SELECT COUNT(*) AS dateWork FROM `attendance` WHERE date like '%$date%' AND user_id = '$user_id'";
                 $result = $connect->query($sql);
                 $row = $result->fetch_assoc();
                 $totalCountDateWork = $row['dateWork'];
@@ -93,6 +93,12 @@
 
                     $totalSalary = ($salary / 26) * $totalCountDateWork + $bonus;
                     
+                    echo " " . $salary;
+                    echo " " . $totalCountDateWork;
+                    echo " " . $bonus;
+                    echo " " . $user_id;
+                    echo " " . $date;
+
 
                     echo "Salary is: " . $totalSalary;
 
