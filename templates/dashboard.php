@@ -189,72 +189,82 @@ use function PHPSTORM_META\sql_injection_subst;
             
             <div class="information-box">
                 <div class="flex-container">
-                    <center>
-                        <div class="total-employee">
-                            <h4>TỔNG NHÂN VIÊN</h4>
+                    <div class="total-employee">
+                        <h4>TỔNG NHÂN VIÊN</h4>
 
+                        <?php
+                                require "connect_database.php";
+                                mysqli_set_charset($connect, 'UTF8');
+
+                                $sql_totalEmployee = ("SELECT COUNT(*) AS tongNhanVien FROM user_data");
+                                $result_totalEmployee = $connect->query($sql_totalEmployee);
+
+                                if ($result_totalEmployee->num_rows > 0) {
+                                    while($row_totalEmployee = $result_totalEmployee->fetch_assoc()) {
+                                        echo "<h2>" . $row_totalEmployee["tongNhanVien"] . "</h2>";
+                                        echo "<p>ĐANG LÀM VIỆC TẠI CÔNG TY</p>";
+                                    }
+                                } else {
+                                    echo "Không có dữ liệu";
+                                }
+                            ?>
+
+                    </div>
+                    <div class="total-report-monthly">
+                        <h4>Trạng Thái DEADLINE</h4>
                             <?php
-                                    require "connect_database.php";
+                                require "connect_database.php";
+                                mysqli_set_charset($connect, 'UTF8');
 
-                                    $sql_totalEmployee = ("SELECT COUNT(*) AS tongNhanVien FROM user_data");
-                                    $result_totalEmployee = $connect->query($sql_totalEmployee);
+                                $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where rating ='Đạt'");
+                                $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE rating != 'Đạt'");
+                                $result_Dat = $connect->query($sql_Dat);
+                                $result_khongDat = $connect->query($sql_khongDat);
 
-                                    if ($result_totalEmployee->num_rows > 0) {
-                                        while($row_totalEmployee = $result_totalEmployee->fetch_assoc()) {
-                                            echo "<h2>" . $row_totalEmployee["tongNhanVien"] . "</h2>";
-                                            echo "<p>ĐANG LÀM VIỆC TẠI CÔNG TY</p>";
-                                        }
-                                    } else {
-                                        echo "Không có dữ liệu";
+                                if ($result_Dat->num_rows > 0) {
+                                    while($row_Dat = $result_Dat->fetch_assoc()) {
+                                        echo "<h1>" . $row_Dat["soLuongDat"] . "</h1>";
+                                        echo "<p>Hoàn thành</p>";
                                     }
-                                ?>
-
-                        </div>
-                        <div class="total-report-monthly">
-                            <h4>Trạng thái deadline: </h4>
-                                <?php
-                                    require "connect_database.php";
-
-                                    $sql = ("SELECT COUNT(*) AS tongSoLuong FROM performance_employee");
-                                    $sql2 = ("SELECT COUNT(*) AS SoLuongKhongDat FROM performance_employee WHERE rating != 'Đạt'");
-                                    $result = $connect->query($sql);
-                                    $result2 = $connect->query($sql2);
-
-                                    if ($result->num_rows > 0 && $result2->num_rows > 0) {
-                                        while($row = $result->fetch_assoc() && $row2 = $result2->fetch_assoc()) {
-                                            echo "<p>ĐẠT" . $row["tongSoLuong"] . "</p>";
-                                            echo "<p>KHÔNG ĐẠT</p>";
-                                            echo "<h2>" . $row2["SoLuongKhongDat"] . "</h2>";
-                                        }
-                                    } else {
-                                        echo "Không có dữ liệu";
+                                } 
+                                if ($result_Dat->num_rows > 0) {
+                                    while($row_khongDat = $result_khongDat->fetch_assoc()) {
+                                        echo "<h1>" . $row_khongDat["soLuongKhongDat"] . "</h1>";
+                                        echo "<p>Không hoàn thành deadline</p>";
                                     }
-                                ?>
+                                }else {
+                                    echo "Không có dữ liệu";
+                                }
+                            ?>
 
-                        </div>
-                    </center>
+                    </div>
                 </div>
             </div>
     <style>
         .information-box {
-            text-align: center; /* Căn giữa nội dung trong information-box */
+            text-align: center;
         }
 
         .flex-container {
-            display: flex; /* Sử dụng flexbox */
-            justify-content: space-around; /* Các phần tử con sẽ được căn đều với khoảng cách giữa chúng */
+            display: flex; 
+            /* justify-content: space-around; */
             margin-top: 50px;
         }
-
+        .total-employee {
+            width: auto;
+            height: auto;
+        }
+        .total-report-monthly{
+            display: block;
+            width: auto;
+            height: auto;
+        }
         .total-report-monthly,
         .total-employee {
-            width: 150px;
-            height: 150px;
-            background-color: antiquewhite;
+            padding: 5px 10px 5px 10px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            flex: 1; /* Phần tử sẽ mở rộng để lấp đầy không gian còn trống trong container */
-            margin: 0 10px; /* Khoảng cách giữa các phần tử */
+            margin: 0 10px;
         }
     </style>
     </body>
