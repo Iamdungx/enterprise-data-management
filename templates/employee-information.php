@@ -297,6 +297,7 @@
                                     <th>Hire Date</th>
                                     <th>Department</th>
                                     <th>Position</th>
+                                    <th>Action</th>
                                 </tr>';
         
                                 if ($result->num_rows > 0) {
@@ -343,16 +344,20 @@
                                     else{
                                         while ($row = $result->fetch_assoc()) {
                                             echo "<tr>".
-                                                "<td>".$row["fisrt_name"]."</td>".
-                                                "<td>".$row["last_name"]."</td>".
-                                                "<td>".$row["address"]."</td>".
-                                                "<td>".$row["date_of_birth"]."</td>".
-                                                "<td>".$row["phone"]."</td>".
-                                                "<td>".$row["email"]."</td>".
-                                                "<td>".$row["hire_date"]."</td>".
-                                                "<td>".$row["department"]."</td>".
-                                                "<td>".$row["position"]."</td>
-                                            </tr>";
+                                            "<td>".$row["fisrt_name"]."</td>".
+                                            "<td>".$row["last_name"]."</td>".
+                                            "<td>".$row["address"]."</td>".
+                                            "<td>".$row["date_of_birth"]."</td>".
+                                            "<td>".$row["phone"]."</td>".
+                                            "<td>".$row["email"]."</td>".
+                                            "<td>".$row["hire_date"]."</td>".
+                                            "<td>".$row["department"]."</td>".
+                                            "<td>".$row["position"]."</td>".
+                                            "<td>
+                                                <button class='update-btn' onclick='updateEmployee(" . $row['id'] . ")'>Update</button>
+                                                <button class='delete-btn' onclick='deleteEmployee(" . $row['id'] . ")'>Delete</button>
+                                            </td>" .
+                                        "</tr>";
                                         }
                                     }
                                 }
