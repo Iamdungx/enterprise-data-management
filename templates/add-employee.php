@@ -153,8 +153,8 @@
     </form>
 <?php
 
-    if (isset($_POST['add_employee.php'])) {
-        require 'connect_database';
+    if (isset($_POST['add_employee'])) {
+        require 'connect_database.php';
 
         // Lấy dữ liệu từ biểu mẫu HTML
         $first_name = $_POST['first_name'];

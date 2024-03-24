@@ -92,13 +92,6 @@
                     $bonus = $row1["bonus"];
 
                     $totalSalary = ($salary / 26) * $totalCountDateWork + $bonus;
-                    
-                    echo " " . $salary;
-                    echo " " . $totalCountDateWork;
-                    echo " " . $bonus;
-                    echo " " . $user_id;
-                    echo " " . $date;
-
 
                     echo "Salary is: " . $totalSalary;
 

@@ -26,7 +26,7 @@
                 echo "<form action='process-update.php' method='post'>
                         <input type='hidden' name='employee_id' value='".$employee['id']."' />
                         <label for='first_name'>First Name:</label>
-                        <input type='text' id='first_name' name='first_name' value='".$employee['first_name']."' /><br>
+                        <input type='text' id='first_name' name='first_name' value='".$employee['fisrt_name']."' /><br>
                         <label for='last_name'>Last Name:</label>
                         <input type='text' id='last_name' name='last_name' value='".$employee['last_name']."' /><br>
                         <label for='address'>Address:</label>
