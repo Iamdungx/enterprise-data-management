@@ -26,7 +26,16 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
 <body>
-<style>
+    <style>
+        .link_home {
+            margin-right: 10px;
+            background-color: #6586E6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
         .blue-box {
             text-align: center; /* Canh giữa nội dung */
             margin: 20px 10px; /* Khoảng cách dưới để tạo khoảng cách với form */
@@ -233,6 +242,7 @@
             </div>
         </div>
     <div class="form-edit">
+    <a class="link_home" href='employee-information.php'>Trang chủ</a>
         <h1 class="blue-box">Edit Employee's Salary</h1>
         <form class="form-container" id="form" method="post" action="edit_salary_handle.php" >
             <div class="">
