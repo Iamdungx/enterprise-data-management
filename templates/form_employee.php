@@ -110,8 +110,9 @@
         $content_form = $_POST['content_form'];
         $user_id = $_SESSION['nameaccount'];
         $date = date("Y-m-d");
+        $status = 'Chưa duyệt';
 
-        $sql = "INSERT INTO form (`user_id`, `form_type`, `date`, `content`) VALUES ('$user_id', '$form_type', '$date', '$content_form')";
+        $sql = "INSERT INTO form (`user_id`, `form_type`, `date`, `content`, `status`) VALUES ('$user_id', '$form_type', '$date', '$content_form', '$status')";
 
 
         if ($connect->query($sql) === TRUE) {
