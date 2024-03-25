@@ -252,6 +252,16 @@
         .add-btn:hover, .update-btn:hover, .delete-btn:hover, .check-log-btn:hover {
             background-color: #3EAEF4
         }
+        #information-table {
+            border-collapse: collapse;
+            width: 100%;
+            height: auto;
+        }
+        #information-table th, #information-table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
     </style>
 
                 <!-- render data  -->
