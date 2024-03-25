@@ -1,36 +1,26 @@
 <?php
     session_start();
+    require 'connect_database.php';
 
     if(isset($_POST['delete'])) {
-        if(isset($_POST['checkbox'])) {
-            require 'connect_database.php';
+        if(isset($_POST['delete'])) {
+            $employee_id = $_POST['delete'];
 
-            foreach ($_POST['checkbox'] as $id) {
-                $sql = "DELETE FROM user_data WHERE id = '$id'";
-                $result = $connect->query($sql);
+            // Delete employee record from the database
+            $sql = "DELETE FROM user_data WHERE id = '$employee_id'";
+            $result = $connect->query($sql);
 
-                // Logging logic
-                if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
-                    $name = $_SESSION['nameaccount'];
-                    $role = $_SESSION['role'];
-                    $description = "Xoá nhân viên";
-                    $string_sql = (string) $sql;
-            
-                    $string_sql = mysqli_real_escape_string($connect, $string_sql);
-            
-                    $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sql', '$description')";
-            
-                    if ($connect->query($log) === TRUE) {
-                        echo "Log entry added successfully!<br>";
-                    } else {
-                        echo "Error adding log entry: " . $connect->error . "<br>";
-                    }
-                }
+            if ($result) {
+                // Redirect back to employee information page
+                header("Location: employee-information.php");
+                exit();
+            } else {
+                echo "Error deleting employee: " . $connect->error;
             }
-            $connect->close();
-            echo "Employees deleted successfully.";
+        } else {
+            echo "No employee ID provided.";
         }
-    } else {
-        echo "No employees selected for deletion.";
     }
+    
+    $connect->close();
 ?>

@@ -23,7 +23,7 @@
                 $employee = $result->fetch_assoc();
 
                 // Display update form
-                echo "<form action='process-update.php' method='post'>
+                echo "<form action='process_update.php' method='post'>
                         <input type='hidden' name='employee_id' value='".$employee['id']."' />
                         <label for='first_name'>First Name:</label>
                         <input type='text' id='first_name' name='first_name' value='".$employee['fisrt_name']."' /><br>
@@ -31,7 +31,17 @@
                         <input type='text' id='last_name' name='last_name' value='".$employee['last_name']."' /><br>
                         <label for='address'>Address:</label>
                         <input type='text' id='address' name='address' value='".$employee['address']."' /><br>
-                        <!-- Add other fields as needed -->
+                        <label for='phone'>Phone:</label>
+                        <input type='text' id='phone' name='phone' value='".$employee['phone']."' /><br>
+                        <label for='email'>Email:</label>
+                        <input type='text' id='email' name='email' value='".$employee['email']."' /><br>
+                        <label for='department'>Department:</label>
+                        <input type='text' id='department' name='department' value='".$employee['department']."' /><br>
+                        <label for='position'>Position:</label>
+                        <input type='text' id='position' name='position' value='".$employee['position']."' /><br>
+                        <label for='role'>Role:</label>
+                        <input type='text' id='role' name='role' value='".$employee['role']."' /><br>
+
                         <input type='submit' name='submit' value='Update Employee' />
                     </form>";
             } else {
