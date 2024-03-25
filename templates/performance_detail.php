@@ -111,9 +111,10 @@
         $user_id = $_POST['user_id'];
         $assignment = $_POST['assignment'];
         $deadline = $_POST['deadline'];
+        $status = "Chưa hoàn thành";
 
-        $sql = "INSERT INTO assignment (`user_id`, `assignment_type`, `deadline`) 
-                VALUES ('$user_id', '$assignment', '$deadline')";
+        $sql = "INSERT INTO assignment (`user_id`, `assignment_type`, `deadline`, `status`)  
+                VALUES ('$user_id', '$assignment', '$deadline', '$status')";
 
         if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
             $role = $_SESSION['role'];

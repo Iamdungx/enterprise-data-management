@@ -5,10 +5,10 @@ require 'connect_database.php';
 if(isset($_POST['completed'])) {
     if(isset($_POST['checkbox'])) {
         $user_id =  $_SESSION['nameaccount'];
-
+        $checkedIds = $_POST['checkbox'];
         $checkedCount = count($_POST['checkbox']);
         
-        $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id'";
+        $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Chưa hoàn thành'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();
         $totalCount = $row['total'];
@@ -18,8 +18,9 @@ if(isset($_POST['completed'])) {
             $result = "Hoàn thành công việc";
             $rating = "Đạt";
 
+           
             $performance_employeeAdd = "INSERT INTO performance_employee (`user_id`, `date`, `result`, `rating`) VALUES ('$user_id', '$date', '$result', '$rating')";
-            if ($connect->query($performance_employeeAdd) === TRUE) {
+            if ($connect->query($performance_employeeAdd) === TRUE){
                 echo "Đã hoàn thành tất cả công việc!<br>";
             } else {
                 echo "Error adding Performance: " . $connect->error . "<br>";
@@ -32,6 +33,14 @@ if(isset($_POST['completed'])) {
                     <input class="btn btn-primary" type="submit" value="Submit" name="submit_reason">
                 </form>';
         }
+
+        $checkedIdsString = implode(',', $checkedIds);
+        $sql1 = "UPDATE `assignment` SET `status`='Hoàn thành' WHERE assignment_id IN ($checkedIdsString)";
+        if ($connect->query($sql1) === TRUE){
+        } else {
+            echo "Error adding Performance: " . $connect->error . "<br>";
+        }
+
     } 
     else {
         echo "Chưa chọn công việc nào để hoàn thành!";
@@ -76,11 +85,12 @@ if (isset($_POST['submit_reason'])) {
         require 'connect_database.php';
         $user_id =  $_SESSION['nameaccount'];
         
-        $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type 
+        $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
+        assignment.status, assignment.assignment_id
         FROM user_data 
         INNER JOIN assignment 
         ON user_data.user_id = assignment.user_id
-        WHERE assignment.user_id = '$user_id'";
+        WHERE assignment.user_id = '$user_id' and assignment.status = 'Chưa hoàn thành'";
         $result = $connect->query($sql);
 
             if($result->num_rows > 0)
@@ -92,16 +102,18 @@ if (isset($_POST['submit_reason'])) {
                     <th>Last Name</th>
                     <th>ID</th>
                     <th>Deadline</th>
+                    <th>Status</th>
                     <th>Assignment</th>
                 </tr>";
         
                 while ($row = $result->fetch_assoc())
                 {
-                    echo "<tr><td> <input type=checkbox name = 'checkbox[]' value='" .$row['user_id']."'>" . "</td>". 
+                    echo "<tr><td> <input type=checkbox name = 'checkbox[]' value='" .$row['assignment_id']."'>" . "</td>". 
                         "<td>" . $row["fisrt_name"] . "</td>" .
                         "<td>" . $row["last_name"] . "</td>" .
                         "<td>" . $row["user_id"] . "</td>" .
                         "<td>" . $row["deadline"] . "</td>" .
+                        "<td>" . $row["status"] . "</td>" .
                         "<td>" . $row["assignment_type"] . "</td>"; 
                 }
             }
