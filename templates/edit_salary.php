@@ -15,8 +15,7 @@
 <head>
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>HRM</title>
+    <title>Edit Emloyee's Salary</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -30,41 +29,60 @@
         .link_home {
             margin-right: 10px;
             background-color: #6586E6;
-            color: white;
+            color: black;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            margin: 10px;
+            margin: 20px 10px;
         }
         .blue-box {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
+            border-radius: 5px; /* Bo tròn viền của ô */
             text-align: center; /* Canh giữa nội dung */
-            margin: 20px 10px; /* Khoảng cách dưới để tạo khoảng cách với form */
+            margin: 20px 10px;
         }
-
+        .blue-box h1 {
+            color: black; /* Màu chữ trắng */
+            margin: 0; /* Xóa khoảng cách lề */
+        }
         .form-container {
             background-color: #9FD7F9; /* Màu nền xanh dương */
-            padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
-            border-radius: 10px; /* Bo tròn viền của form */
-            width: 400px; /* Độ rộng của form */
-            margin: auto; /* Canh giữa form */
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px; /* Điều chỉnh kích thước form tùy ý */
+            margin: auto;
         }
-
-        .form-container h1 {
-            color: white; /* Màu chữ trắng */
-            text-align: center; /* Canh giữa tiêu đề */
-            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        /* CSS cho label */
+        label {
+            display: block;
+            margin-bottom: 5px;
         }
-
-        .form-group {
-            margin-bottom: 20px; /* Khoảng cách giữa các trường */
-        }
-
+        /* CSS cho input fields */
         .form-control {
-            width: 95%; /* Độ rộng của trường nhập liệu */
-            padding: 10px; /* Khoảng cách giữa nội dung và viền của trường */
-            border-radius: 5px; /* Bo tròn viền của trường */
-            border: none; /* Loại bỏ viền của trường */
-            background-color: #FFFFFF; /* Màu nền trắng cho trường nhập liệu */
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /* CSS cho button */
+        .btn {
+            background-color: #27A4F2; /* Màu xanh dương đậm */
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            margin: auto;
+        }
+        /* CSS cho button khi hover */
+        .btn:hover {
+            background-color: #6586E6; /* Màu xanh dương đậm khi hover */
         }
         .form-edit {
             background-color: #CFEBFC;
@@ -100,7 +118,7 @@
             <div class="icon-account">
                 <i class="fa-solid fa-angle-down"></i>
             </div>
-            
+
             <div class="dropdown-content">
                 <a href="attendance.php">
                     <i class="fa-solid fa-calendar-days"></i>
@@ -110,7 +128,7 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
-                
+
 
             </div>
             <script>
@@ -196,10 +214,10 @@
                                 }
                             }
                         ?>
-                        
+
                     </ul>
                 </div>
-                
+
                 <?php
                     if(isset($_SESSION['role'])){
                         if($_SESSION['role'] == 'admin' ){
@@ -235,15 +253,17 @@
                         </div>';
                         }
                     }
-                    
+
                 ?>
 
 
             </div>
         </div>
     <div class="form-edit">
-    <a class="link_home" href='employee-information.php'>Trang chủ</a>
-        <h1 class="blue-box">Edit Employee's Salary</h1>
+        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <div class="blue-box">
+            <h1>Edit Emloyee's Salary</h1>
+        </div>
         <form class="form-container" id="form" method="post" action="edit_salary_handle.php" >
             <div class="">
                 <label>ID Employee</label>

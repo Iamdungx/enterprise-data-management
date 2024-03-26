@@ -36,13 +36,22 @@
             margin: 20px 10px;
         }
         #information-table {
-            width: auto;
-            height: auto;
+            width: 100%; /* Chiều rộng của bảng là 100% */
+            height: 500px;
+            border-collapse: collapse; /* Gộp các đường viền của ô */
+            table-layout: fixed; /* Cố định chiều rộng cột */
+        }
+        #information-table tr:first-child th {
+            position: sticky; /* Giữ vị trí */
+            top: 0; /* Vị trí cố định ở trên */
+            background-color: #9FD7F9; /* Màu nền của hàng đầu tiên */
         }
         #information-table th,
         #information-table td {
-            white-space: auto;
-        }   
+            border: 1px solid #ddd; /* Đường viền của ô */
+            padding: 20px; /* Khoảng cách giữa nội dung và đường viền của ô */
+            text-align: left; /* Căn chỉnh văn bản sang trái */
+        }
     </style>
     <!-- header -->
     <header class="header">

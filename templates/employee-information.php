@@ -251,14 +251,21 @@
             background-color: #3EAEF4
         }
         #information-table {
-            border-collapse: collapse;
             width: 100%;
-            height: auto;
+            height: 500px;
+            border-collapse: collapse;
+            table-layout: fixed;
         }
-        #information-table th, #information-table td {
-            border: 1px solid #dddddd;
-            padding: 8px;
-            text-align: left;
+        #information-table tr:first-child th {
+            position: sticky; 
+            top: 0; 
+            background-color: #9FD7F9; 
+        }
+        #information-table th,
+        #information-table td {
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            text-align: left; 
         }
     </style>
 

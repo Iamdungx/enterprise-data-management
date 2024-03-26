@@ -18,7 +18,7 @@
         .link_home {
             margin-right: 10px;
             background-color: #6586E6;
-            color: white;
+            color: black;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
@@ -36,30 +36,41 @@
             margin: 20px 10px; /* Khoảng cách dưới để tạo khoảng cách với form */
         }
         .form-container {
-            flex: 1; /* Biểu mẫu sẽ mở rộng để lấp đầy phần còn lại của không gian */
-            max-width: 450px; /* Giới hạn chiều rộng tối đa của biểu mẫu */
             background-color: #9FD7F9; /* Màu nền xanh dương */
-            padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
-            border-radius: 10px; /* Bo tròn viền của form */
-            margin: auto; /* Canh giữa form */
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px; /* Điều chỉnh kích thước form tùy ý */
         }
-
-        .form-container h1 {
-            color: white; /* Màu chữ trắng */
-            text-align: center; /* Canh giữa tiêu đề */
-            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+        /* CSS cho label */
+        label {
+            display: block;
+            margin-bottom: 5px;
         }
-
-        .form-group {
-            margin-bottom: 20px; /* Khoảng cách giữa các trường */
-        }
-
+        /* CSS cho input fields */
         .form-control {
-            width: 95%; /* Độ rộng của trường nhập liệu */
-            padding: 10px; /* Khoảng cách giữa nội dung và viền của trường */
-            border-radius: 5px; /* Bo tròn viền của trường */
-            border: none; /* Loại bỏ viền của trường */
-            background-color: #FFFFFF; /* Màu nền trắng cho trường nhập liệu */
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /* CSS cho button */
+        .btn {
+            background-color: #27A4F2; /* Màu xanh dương đậm */
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            margin: auto;
+        }
+        /* CSS cho button khi hover */
+        .btn:hover {
+            background-color: #6586E6; /* Màu xanh dương đậm khi hover */
         }
         .edit-link {
             color: black;
@@ -85,6 +96,7 @@
         }
         .form-data_manager-table {
             display: flex; /* Sử dụng flexbox để chứa bảng và biểu mẫu cùng một hàng */
+            width: 99.3%;
         }
     </style>
     <!-- header -->

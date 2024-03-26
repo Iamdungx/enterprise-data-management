@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>HRM</title>
+    <title>Thông tin nhân sự</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -15,6 +14,15 @@
 </head>
 <body>
     <style>
+        .link_home {
+            margin-right: 10px;
+            background-color: #6586E6;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 10px;
+        }
         .blue-box {
             background-color: #9FD7F9; /* Màu nền xanh dương */
             padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
@@ -26,15 +34,6 @@
             color: black; /* Màu chữ trắng */
             margin: 0; /* Xóa khoảng cách lề */
         }
-        .link_home {
-            margin-right: 10px;
-            background-color: #6586E6;
-            color: black;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 20px 10px;
-        }
         #information-table {
             border-collapse: collapse;
             width: 100%;
@@ -44,6 +43,11 @@
             border: 1px solid #dddddd;
             padding: 8px;
             text-align: left;
+        }
+        #information-table tr:first-child th {
+            position: sticky; /* Giữ vị trí */
+            top: 0; /* Vị trí cố định ở trên */
+            background-color: #9FD7F9; /* Màu nền của hàng đầu tiên */
         }
     </style>
     <!-- header -->
