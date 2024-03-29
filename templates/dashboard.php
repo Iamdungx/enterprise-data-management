@@ -241,21 +241,38 @@ use function PHPSTORM_META\sql_injection_subst;
                     </div>
                 
                     <div class="total-form">
-                            <h4>Tổng số các đơn yêu cầu</h4>
+                        <h4>Thống kê số đơn yêu cầu</h4>
                             <?php
                                 require "connect_database.php";
                                 mysqli_set_charset($connect, 'UTF8');
 
                                 $sql_totalForm = ("SELECT COUNT(*) AS tongSoDon FROM form");
+                                $sql_duyet = ("SELECT COUNT(*) AS soLuongDuyet FROM form WHERE status ='Đã duyệt'");
+                                $sql_chuaDuyet = ("SELECT COUNT(*) AS soLuongChoDuyet FROM form WHERE status != 'Đã Duyệt'");
+                                $sql_choDuyet;
+
                                 $result_totalForm = $connect->query($sql_totalForm);
+                                $result_duyet = $connect->query($sql_duyet);
+                                $result_chuaDuyet = $connect->query($sql_chuaDuyet);
+
+                                $row_duyet = $result_duyet->fetch_assoc();
+                                $row_chuaDuyet = $result_chuaDuyet->fetch_assoc();
 
                                 if ($result_totalForm->num_rows > 0) {
                                     while($row_totalForm = $result_totalForm->fetch_assoc()) {
-                                        echo "<h1 style='padding: 10px'>" . $row_totalForm["tongSoDon"] . "</h1>";
-                                        echo "<div>Chưa có dữ liệu<br>về trạng thái đơn</div>";
+                                        echo "<div class='thongKeSoDon'>
+                                                <h1 style='padding: 10px'>" . $row_totalForm["tongSoDon"] . "</h1></div>";
+                                        echo "<div class='trangThaiDuyetDon'>
+                                                    <p  style='font-size: 14px; line-height: 18px; font-weight: 400; background-color: rgb(203 255 200); border-radius: 6px; padding: 4px 0px; text-align: center;'>"
+                                                        . $row_duyet['soLuongDuyet']. " duyệt
+                                                    </p>
+                                                    <br>
+                                                <p style='font-size: 14px; line-height: 18px; font-weight: 400; background-color: rgb(255 215 215); border-radius: 6px; padding: 4px 0px; text-align: center;'>" 
+                                                        . $row_chuaDuyet['soLuongChoDuyet'] . 
+                                            
+                                                " chờ duyệt</p>
+                                            </div>";
                                     }
-                                } else {
-                                    echo "Không có dữ liệu";
                                 }
                             ?>
                     
@@ -317,7 +334,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 }
 
                 .flex-container {
-                    display: flex-inline;
+                    /* display: flex-inline; */
                     margin-top: 50px;
                 }
                 .chart-container {
@@ -326,23 +343,27 @@ use function PHPSTORM_META\sql_injection_subst;
 
                 .total-employee,
                 .total-report-monthly,
-                .total-form {
+                .total-form,
+                .chart-container {
                     display: inline-block;
+                    justify-content: space-between;
                     padding: 5px 10px 5px 10px;
                     border-radius: 5px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                    box-shadow: -5px 5px 20px 0px rgba(0, 0, 0, 0.5);
                     margin: 0 10px;
                 }
 
                 .total-employee {
+                    text-align: center;
                     background-color: rgb(232, 240, 251);
                 }
 
                 .total-report-monthly {
+                    text-align: center;
                     background-color: rgb(253, 235, 249);
                 }
                 .total-form {
-                    background-color: rgb(234, 255, 238);
+                    justify-content: space-between;
                 }
             </style>
     </body>
