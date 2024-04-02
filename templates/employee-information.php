@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8 vi">
@@ -71,26 +71,51 @@
         <div class="grid_system_column close container">
             <!-- 20% -->
             <div class="container-nav_bar">
-                <div class="nav_bar-function">
-                    <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
-                        <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
-                        <a>Quản lí nhân viên</a>
-                        <div class="function-icon_arrow_Manager">
-                            <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
-                        </div>
-                    </div>
-                    <div class="nav_bar-function_child">
-                        <ul class="nav_bar-function_child_Manager none">
-                            <li class="nav_bar-list-item">
-                                <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
-                            </li>
-                            <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
-                            <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
-                            <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
-                        </ul>
-                    </div>
+            <?php
+                if(isset($_SESSION['role'])){
+                    if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                        echo '
+                        <div class="nav_bar-function">
+                            <div class="nav_bar-function-content close"> 
+                                <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
+                                <a>Quản lí nhân viên</a>
+                                <div class="function-icon_arrow_Manager">
+                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                </div>
+                            </div>
+                            <div class="nav_bar-function_child">
+                                <ul class="nav_bar-function_child_Manager none">
+                                    <li class="nav_bar-list-item">
+                                        <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                                    </li>
+                                    <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
+                                    <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
+                                    <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
+                                </ul>
+                            </div>
+                        </div>';
+                    }
+                    else{
+                        echo '
+                        <div class="nav_bar-function">
+                            <div class="nav_bar-function-content close"> 
+                                <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
+                                <a>Thông tin nhân viên</a>
+                                <div class="function-icon_arrow_Manager">
+                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                </div>
+                            </div>
+                            <div class="nav_bar-function_child">
+                                <ul class="nav_bar-function_child_Manager none">
+                                    <li class="nav_bar-list-item"><a href="">Thông tin chi tiết</a></li>
+                                    <li class="nav_bar-list-item"><a href="employee_salary.php">Bảng lương</a></li>
+                                </ul>
+                            </div>
+                        </div>';
+                    }
+                }
+                ?>
 
-                </div>
 
                 <div class="nav_bar-function">
                     <div class="nav_bar-function-content close">
@@ -155,7 +180,7 @@
                                 </div>
                                 <div class="nav_bar-function_child">
                                     <ul class="nav_bar-function_child_AdminConsole none">
-                                        <a class="nav_bar-list-item" href="create-accounts.php">Hiệu suất</a>
+                                        <a class="nav_bar-list-item" href="dashboard.php">Thông tin chi tiết</a>
                                     </ul>
                                 </div>
                             </div>';

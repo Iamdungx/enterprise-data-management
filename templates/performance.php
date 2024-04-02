@@ -229,16 +229,19 @@
                 mysqli_set_charset($connect, 'UTF8');
                 
                 $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
-                performance_employee.date, performance_employee.result, performance_employee.fail_reason 
+                performance_employee.date, performance_employee.result, performance_employee.fail_reason , assignment.assignment_type
                 FROM user_data 
+                INNER JOIN assignment 
+                ON user_data.user_id = assignment.user_id
                 INNER JOIN performance_employee 
-                ON user_data.id = performance_employee.user_id ";
+                ON user_data.user_id = performance_employee.user_id ";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Assignment type</th>
+                        <th>Assignment Type</th>
+                        <th>Result</th>
                         <th>Rating</th>
                         <th>Reason fail</th>
                         <th>Date</th>
@@ -249,6 +252,7 @@
                                     "<td>".$row["user_id"]." </td>".
                                     "<td>".$row["fisrt_name"]."</td>".
                                     "<td>".$row["last_name"]."</td>".
+                                    "<td>".$row["assignment_type"]."</td>".
                                     "<td>".$row["result"]."</td>".
                                     "<td>".$row["rating"]." </td>".
                                     "<td>".$row["fail_reason"]." </td>".
