@@ -75,7 +75,7 @@
 
 .container{
     z-index: 0;
-    height: 93vh;
+    height: 100%;
     width: 100%;
     background-color: var(--background-navbar);
 }
@@ -428,5 +428,97 @@ tr:hover{
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.dashboard-container{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-column-gap: 24px;
+    margin: 16px;
+}
+
+.dashboard-grid-info{
+    display: grid;
+    grid-row-gap: 24px;
+
+}
+
+
+.dashboard-information{
+    height: 400px;
+    background-color: #fff;
+}
+
+.dashboard-information_header{
+
+}
+
+.dashboard-information_containner, .dashboard-profile_containner, .dashboard-benefit_containner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.dashboard-information_containner_field{
+
+}
+
+.dashboard-information_containner_detail{
+
+}
+
+.dashboard-information_containner_image{
+
+}
+
+.dashboard-profile{
+    height: 200px;
+    background-color: #fff;
+}
+
+.dashboard-profile_header{
+    
+}
+
+
+.dashboard-benefit{
+    height: 200px;
+    background-color: #fff;
+}
+
+.dashboard-grid-active{
+
+}
+
+.dashboard-notice{
+    height: 300px;
+    margin-bottom: 24px;
+    background-color: #fff;
+}
+
+.quanlity-notice{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-assignment{
+    height: 150px;
+    width: 270px;
+    background-color: #fff;
+}
+
+.dashboard-salary{
+    height: 150px;
+    width: 270px;
+    background-color: #fff;
+    
 }
 

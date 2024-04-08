@@ -55,6 +55,7 @@
                 </div>
             </form>
             <?php
+                session_start();
                 if (isset($_POST['login'])) {
                     require 'connect_database.php';
                     $username_login = $_POST['user_id'];
@@ -72,11 +73,15 @@
                             $role = $row["role"]; 
                         }
 
-                        session_start();
                         $_SESSION['nameaccount'] = $username_login;
                         $_SESSION['role'] = $role;
 
-                        header("location: employee-information.php");
+                        if($role == 'admin' || $role == 'manager'){
+                            header("location: employee-information.php");
+                        }
+                        else{
+                            header("location: dashboard_employee.php");
+                        }
                     }
                 }
             ?>
