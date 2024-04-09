@@ -449,27 +449,43 @@ tr:hover{
     background-color: #fff;
 }
 
-.dashboard-information_header{
-
+.dashboard-information_header p, .dashboard-profile_header p, .dashboard-benefit_header p{
+    font-size: 20px;
+    color: #2ea2e4;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: #fbfbfb;
 }
 
-.dashboard-information_containner, .dashboard-profile_containner, .dashboard-benefit_containner{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+.dashboard-profile_containner, .dashboard-benefit_containner{
+    margin: 24px 32px;
 }
 
-.dashboard-information_containner_field{
+.dashboard-information_containner{
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    margin: 24px 32px;
+} 
 
+.dashboard-information_containner_field p, .dashboard-profile_containner_detail p,  
+.dashboard-benefit_containner_detail p, .dashboard-information_containner_detail p{
+    font-size: 20px;
+    opacity: .75;
+    margin-bottom: 8px;
 }
 
-.dashboard-information_containner_detail{
-
+.dashboard-profile_containner_detail, .dashboard-benefit_containner_detail{
+    display: grid;
+    grid-template-columns: 30% 70%;
 }
 
 .dashboard-information_containner_image{
 
+}
+.avatar-user{
+    height: 200px;
+    width: 100%;
 }
 
 .dashboard-profile{
@@ -495,30 +511,71 @@ tr:hover{
     height: 300px;
     margin-bottom: 24px;
     background-color: #fff;
+    padding: 24px 32px;
+}
+.dashboard-notice span ,.dashboard-salary_content span {
+    font-size: 20px;
+    opacity: .75;
+    margin-bottom: 24px;
+    display: block;
+}
+.dashboard-assignment_content span{
+    margin-bottom: 24px;
+    font-size: 20px;
+    display: block;
+    
+}
+
+.dashboard-assignment_content span, .dashboard-assignment_content .quanlity-notice span,
+.dashboard-assignment_content .quanlity-notice i{
+    color: #1c92e9;
+}
+
+.dashboard-notice a , .dashboard-assignment_content a, .dashboard-salary_content a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #2fa4e7;
 }
 
 .quanlity-notice{
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
+.quanlity-notice span, .quanlity-notice i{
+    font-size: 48px;
+}
+.dashboard-notice .quanlity-notice span, .dashboard-notice .quanlity-notice i{
+    font-size: 48px;
+    opacity: .6;
+} 
 
 .dashboard-list{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 48% 47.5%;
+    grid-column-gap: 24px;
 }
 
 .dashboard-assignment{
-    height: 150px;
-    width: 270px;
-    background-color: #fff;
+    height: 180px;
+    width: 100%;
+    background-color: #dffbff;
+}
+.dashboard-salary{
+    height: 180px;
+    width: 100%;
+    background-color: #fff1d4;
+}
+.dashboard-assignment_content, .dashboard-salary_content{
+    margin: 16px 20px;
+}
+.salary_employee{
+    font-size: 28px;
+    margin-bottom: 46px;
+    opacity: .65;
+    color: #fe9405;
+}
+.dashboard-salary_content span, .dashboard-salary_content a {
+    color: #fe9405;
 }
 
-.dashboard-salary{
-    height: 150px;
-    width: 270px;
-    background-color: #fff;
-    
-}
 

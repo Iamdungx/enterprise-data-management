@@ -218,7 +218,7 @@
                                 <p>Nhân viên</p>
                             </div>
                             <div class="dashboard-information_containner_image">
-                                <img class="avatar-account" src="./image/icon-image.png" alt="">
+                                <img class="avatar-user" src="./image/user.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -227,14 +227,16 @@
                             <p>Hồ sơ nhân viên</p>
                         </div>
                         <div class="dashboard-profile_containner">
-                            <div class="dashboard-profile_containner_field">
+                            <div class="dashboard-profile_containner_detail">
                                 <p>Trình độ học vấn</p>
-                                <p>Kinh nghiệm làm việc</p>
-                                <p>Chứng chỉ</p>
+                                <p>Công nghệ thông tin (chương trình chất lượng cao) Đại học Mỏ Địa Chất</p>
                             </div>
                             <div class="dashboard-profile_containner_detail">
-                                <p>Công nghệ thông tin (chương trình chất lượng cao) Đại học Mỏ Địa Chất</p>
+                                <p>Kinh nghiệm làm việc</p>
                                 <p>Chưa có</p>
+                            </div>
+                            <div class="dashboard-profile_containner_detail">
+                                <p>Chứng chỉ</p>
                                 <p>F8-Javascript Basic, HTML CSS</p>
                             </div>
                         </div>
@@ -244,14 +246,17 @@
                                 <p>Bảo hiểm nhân viên</p>
                             </div>
                             <div class="dashboard-benefit_containner">
-                                <div class="dashboard-benefit_containner_field">
-                                    <p>Bảo hiểm y tế</p>
-                                    <p>Bảo hiểm nhân thọ</p>
-                                    <p>Bảo hiểm khác</p>
-                                </div>
                                 <div class="dashboard-benefit_containner_detail">
                                     <p>Bảo hiểm y tế</p>
+                                    <p>Bảo hiểm y tế</p>
+
+                                </div>
+                                <div class="dashboard-benefit_containner_detail">
                                     <p>Bảo hiểm nhân thọ</p>
+                                    <p>Bảo hiểm nhân thọ</p>
+                                </div>
+                                <div class="dashboard-benefit_containner_detail">
+                                    <p>Bảo hiểm khác</p>
                                     <p>Bảo hiểm sinh kỳ</p>
                                 </div>
                             </div>
@@ -268,17 +273,22 @@
                     </div>
                     <div class="dashboard-list">
                         <div class="dashboard-assignment">
-                            <span>Công việc</span>
-                            <div class="quanlity-notice">
-                                <span>3</span>
-                                <i class="fa-solid fa-briefcase"></i>
+                            <div class="dashboard-assignment_content">
+                                <span>Công việc</span>
+                                <div class="quanlity-notice">
+                                    <span>3</span>
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                                <a href="assignment.php">Xem chi tiết</a>
                             </div>
-                            <a href="assignment.php">Xem chi tiết</a>
                         </div>
+
                         <div class="dashboard-salary">
-                            <span>Lương</span>
-                            <div><span>30000000 VND</span></div>
-                            <a href="employee_salary.php">Xem chi tiết</a>
+                            <div class="dashboard-salary_content">
+                                <span>Lương</span>
+                                <div><p class="salary_employee">30000000 VND</p></div>
+                                <a href="employee_salary.php">Xem chi tiết</a>
+                            </div>
                         </div>
                     </div>
                 </div>
