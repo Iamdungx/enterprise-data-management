@@ -447,6 +447,8 @@ tr:hover{
 .dashboard-information{
     height: 400px;
     background-color: #fff;
+    box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .dashboard-information_header p, .dashboard-profile_header p, .dashboard-benefit_header p{
@@ -491,6 +493,8 @@ tr:hover{
 .dashboard-profile{
     height: 200px;
     background-color: #fff;
+    box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .dashboard-profile_header{
@@ -501,6 +505,8 @@ tr:hover{
 .dashboard-benefit{
     height: 200px;
     background-color: #fff;
+    box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .dashboard-grid-active{
@@ -512,6 +518,8 @@ tr:hover{
     margin-bottom: 24px;
     background-color: #fff;
     padding: 24px 32px;
+    box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .dashboard-notice span ,.dashboard-salary_content span {
     font-size: 20px;
@@ -559,11 +567,15 @@ tr:hover{
     height: 180px;
     width: 100%;
     background-color: #dffbff;
+    box-shadow: 3px 5px 24px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .dashboard-salary{
     height: 180px;
     width: 100%;
     background-color: #fff1d4;
+    box-shadow: 3px 5px 24px rgba(115, 115, 115, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .dashboard-assignment_content, .dashboard-salary_content{
     margin: 16px 20px;
