@@ -308,7 +308,27 @@ use function PHPSTORM_META\sql_injection_subst;
                         <div class="dashboard-salary">
                             <div class="dashboard-salary_content">
                                 <span>Lương</span>
-                                <div><p class="salary_employee">30000000 VND</p></div>
+                                <div>
+                                    <?php
+                                    require 'connect_database.php';
+                                    mysqli_set_charset($connect, 'UTF8');
+
+                                    $user_id = $_SESSION['nameaccount']; 
+
+                                    $sql_id = "SELECT * FROM user_data WHERE user_id='$user_id'";
+                                    $result_id = $connect->query($sql_id);
+                                    $row_id = $result_id->fetch_assoc();
+                                    $check_id = $row_id['id'];
+
+                                    $sql_salary = "SELECT * FROM salary_and_bonus WHERE employee_id='$check_id'";
+                                    $result_salary = $connect->query($sql_salary);
+                                    $row_salary = $result_salary->fetch_assoc();
+                                    $check_salary = $row_salary['salary'];
+
+                                        echo'
+                                        <p class="salary_employee">'  . $check_salary . ' VNĐ</p>';
+                                    ?>
+                                </div>
                                 <a href="employee_salary.php">Xem chi tiết</a>
                             </div>
                         </div>
