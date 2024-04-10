@@ -46,10 +46,11 @@
                 </div>
                 
                 <div class="dropdown-content">
-                    <a href="attendance.php">
+                    <form action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
-                        Chấm Công
-                    </a>
+                        <input name = "attendance_button" type = "submit" value="Chấm công">
+                    </form>
+                    
                     <a href="javascript:void(0);" onclick="confirmLogout()">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất
@@ -328,6 +329,7 @@
                             $result = $connect->query($sql);
 
                                     echo '<tr>
+                                        <th>User ID</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Address</th>
@@ -350,7 +352,8 @@
                                             if ($result1->num_rows > 0) {
                                                 while($row = $result1->fetch_assoc()) {
                                                     echo "<tr>
-                                                <td>" . $row["fisrt_name"] . "</td>" .
+                                                <td>"  . $row["user_id"] . "</td>" .
+                                                "<td>" . $row["fisrt_name"] . "</td>" .
                                                 "<td>" . $row["last_name"] . "</td>" .
                                                 "<td>" . $row["address"] . "</td>" .
                                                 "<td>" . $row["date_of_birth"] . "</td>" .
@@ -374,7 +377,8 @@
                                             if ($result2->num_rows > 0) {
                                                 while($row = $result2->fetch_assoc()) {
                                                     echo "<tr>
-                                                <td>" . $row["fisrt_name"] . "</td>" .
+                                                <td>"  . $row["user_id"] . "</td>" .
+                                                "<td>" . $row["fisrt_name"] . "</td>" .
                                                 "<td>" . $row["last_name"] . "</td>" .
                                                 "<td>" . $row["address"] . "</td>" .
                                                 "<td>" . $row["date_of_birth"] . "</td>" .
@@ -398,7 +402,8 @@
                                         else{
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>
-                                                <td>" . $row["fisrt_name"] . "</td>" .
+                                                <td>"  . $row["user_id"] . "</td>" .
+                                                "<td>" . $row["fisrt_name"] . "</td>" .
                                                 "<td>" . $row["last_name"] . "</td>" .
                                                 "<td>" . $row["address"] . "</td>" .
                                                 "<td>" . $row["date_of_birth"] . "</td>" .

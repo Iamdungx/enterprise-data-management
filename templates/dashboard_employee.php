@@ -33,6 +33,9 @@
                 </div>
 
                 <?php
+
+use function PHPSTORM_META\sql_injection_subst;
+
                     session_start();
                     if (isset($_SESSION['nameaccount']))
                     {
@@ -192,35 +195,54 @@
                         <div class="dashboard-information_header">
                             <p>Thông tin nhân viên</p>
                         </div>
-                        <div class="dashboard-information_containner">
-                            <div class="dashboard-information_containner_field">
-                                <p>Mã NV</p>
-                                <p>Họ</p>
-                                <p>Tên</p>
-                                <p>Ngày sinh</p>
-                                <p>Giới tính</p>
-                                <p>Điện thoại</p>
-                                <p>Email</p>
-                                <p>Phòng ban</p>
-                                <p>Vị trí</p>
-                                <p>Chức vu</p>
-                            </div>
-                            <div class="dashboard-information_containner_detail">
-                                <p>HUMG175040</p>
-                                <p>Trịnh</p>
-                                <p>Sơn</p>
-                                <p>30/12/2003</p>
-                                <p>Nam</p>
-                                <p>0328510096</p>
-                                <p>trinhson301203@gmail.com</p>
-                                <p>IT</p>
-                                <p>Software Engineer</p>
-                                <p>Nhân viên</p>
-                            </div>
-                            <div class="dashboard-information_containner_image">
-                                <img class="avatar-user" src="./image/user.png" alt="">
-                            </div>
-                        </div>
+                        <?php
+                            echo '
+                            <div class="dashboard-information_containner">
+                                <div class="dashboard-information_containner_field">
+                                    <p>Mã Nhân Viên: </p>
+                                    <p>Họ: </p>
+                                    <p>Tên: </p>
+                                    <p>Ngày sinh:</p>
+                                    <p>Giới tính: </p>
+                                    <p>Điện thoại: </p>
+                                    <p>Email: </p>
+                                    <p>Phòng ban: </p>
+                                    <p>Vị trí: </p>
+                                    <p>Chức vụ: </p>
+                                </div>';
+
+                            require 'connect_database.php';
+                            mysqli_set_charset($connect, 'UTF8');
+                
+                            $user_id = $_SESSION['nameaccount']; 
+
+                            $sql = "SELECT * FROM user_data WHERE user_id='$user_id'";
+                            $result = $connect->query($sql);
+
+                            if($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo '
+                                    <div class="dashboard-information_containner_detail">
+                                    <p>' . $row["user_id"] . '</p>
+                                    <p>' . $row["fisrt_name"] . '</p>
+                                    <p>' . $row["last_name"] . '</p>
+                                    <p>' . $row["date_of_birth"] . '</p>
+                                    <p> Nam </p>
+                                    <p>' . $row["phone"] . '</p>
+                                    <p>' . $row["email"] . '</p>
+                                    <p>' . $row["department"] . '</p>
+                                    <p>' . $row["position"] . '</p>
+                                    <p> Nhân viên </p>
+                                </div>';
+                                }
+                            }
+
+                            echo '    
+                                <div class="dashboard-information_containner_image">
+                                    <img class="avatar-user" src="./image/user.png" alt="">
+                                </div>
+                            </div>';
+                        ?>
                     </div>
                     <div class="dashboard-profile">
                         <div class="dashboard-profile_header">
