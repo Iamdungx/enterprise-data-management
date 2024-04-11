@@ -248,40 +248,66 @@ use function PHPSTORM_META\sql_injection_subst;
                         <div class="dashboard-profile_header">
                             <p>Hồ sơ nhân viên</p>
                         </div>
-                        <div class="dashboard-profile_containner">
-                            <div class="dashboard-profile_containner_detail">
-                                <p>Trình độ học vấn</p>
-                                <p>Công nghệ thông tin (chương trình chất lượng cao) Đại học Mỏ Địa Chất</p>
-                            </div>
-                            <div class="dashboard-profile_containner_detail">
-                                <p>Kinh nghiệm làm việc</p>
-                                <p>Chưa có</p>
-                            </div>
-                            <div class="dashboard-profile_containner_detail">
-                                <p>Chứng chỉ</p>
-                                <p>F8-Javascript Basic, HTML CSS</p>
-                            </div>
-                        </div>
+                        <?php
+                        echo '<div class="dashboard-profile_containner">
+                        <div class="dashboard-profile_containner_field">
+                            <p>Trình độ học vấn: </p>
+                            <p>Kinh nghiệm làm việc: </p>
+                            <p>Chứng chỉ: </p>
+                        </div>';
+                        require 'connect_database.php';
+                            mysqli_set_charset($connect, 'UTF8');
+                
+                            $user_id = $_SESSION['nameaccount']; 
+
+                            $sql = "SELECT education, work_exp, certification FROM employee_profile WHERE user_id='$user_id'";
+                            $result = $connect->query($sql);
+                            
+                            if($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo '
+                                    <div class="dashboard-profile_containner_detail">
+                                    <p>' . $row["education"] . '</p>
+                                    <p>' . $row["work_exp"] . '</p>
+                                    <p>' . $row["certification"] . '</p>
+                                </div>';
+                                }
+                            }
+                        echo'    
+                        </div>';
+                        ?>
                     </div>
                     <div class="dashboard-benefit">
                         <div class="dashboard-benefit_header">
                                 <p>Bảo hiểm nhân viên</p>
                             </div>
-                            <div class="dashboard-benefit_containner">
+                            <?php
+                            echo '<div class="dashboard-benefit_containner">
                                 <div class="dashboard-benefit_containner_detail">
-                                    <p>Bảo hiểm y tế</p>
-                                    <p>Bảo hiểm y tế</p>
+                                    <p>Bảo hiểm y tế: </p>
+                                    <p>Bảo hiểm nhân thọ: </p>
+                                    <p>Khác: </p>
+                                </div>';
+                                require 'connect_database.php';
+                            mysqli_set_charset($connect, 'UTF8');
+                
+                            $user_id = $_SESSION['nameaccount']; 
 
-                                </div>
-                                <div class="dashboard-benefit_containner_detail">
-                                    <p>Bảo hiểm nhân thọ</p>
-                                    <p>Bảo hiểm nhân thọ</p>
-                                </div>
-                                <div class="dashboard-benefit_containner_detail">
-                                    <p>Bảo hiểm khác</p>
-                                    <p>Bảo hiểm sinh kỳ</p>
-                                </div>
-                            </div>
+                            $sql = "SELECT health_insurance, life_insurance, other FROM benefit WHERE user_id='$user_id'";
+                            $result = $connect->query($sql);
+                            
+                            if($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo '
+                                    <div class="dashboard-benefit_containner_detail">
+                                    <p>' . $row["health_insurance"] . '</p>
+                                    <p>' . $row["life_insurance"] . '</p>
+                                    <p>' . $row["other"] . '</p>
+                                </div>';
+                                }
+                            }
+                            echo '</div>';
+                            ?>
                         </div>
                     </div>
                 <div class="dashboard-grid-active">
