@@ -266,12 +266,15 @@ use function PHPSTORM_META\sql_injection_subst;
                             if($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     echo '
-                                    <div class="dashboard-profile_containner_detail">
-                                    <p>' . $row["education"] . '</p>
-                                    <p>' . $row["work_exp"] . '</p>
-                                    <p>' . $row["certification"] . '</p>
+                                    <div class="dashboard-benefit_containner_detail">
+                                    <p>' . ($row["education"] !== null && $row["education"] !== '' ? $row["education"] : 'Không có thông tin') . '</p>
+                                    <p>' . ($row["work_exp"] !== null && $row["work_exp"] !== '' ? $row["work_exp"] : 'Không có thông tin') . '</p>
+                                    <p>' . ($row["certification"] !== null && $row["certification"] !== '' ? $row["certification"] : 'Không có thông tin') . '</p>
                                 </div>';
                                 }
+                            }
+                            else {
+                                echo '<div class="dashboard-benefit_container_detail">Không có thông tin</div>';
                             }
                         echo'    
                         </div>';
@@ -300,11 +303,14 @@ use function PHPSTORM_META\sql_injection_subst;
                                 while($row = $result->fetch_assoc()) {
                                     echo '
                                     <div class="dashboard-benefit_containner_detail">
-                                    <p>' . $row["health_insurance"] . '</p>
-                                    <p>' . $row["life_insurance"] . '</p>
-                                    <p>' . $row["other"] . '</p>
+                                    <p>' . ($row["health_insurance"] !== null && $row["health_insurance"] !== '' ? $row["health_insurance"] : 'Không có thông tin') . '</p>
+                                    <p>' . ($row["life_insurance"] !== null && $row["life_insurance"] !== '' ? $row["life_insurance"] : 'Không có thông tin') . '</p>
+                                    <p>' . ($row["other"] !== null && $row["other"] !== '' ? $row["other"] : 'Không có thông tin') . '</p>
                                 </div>';
                                 }
+                            }
+                            else {
+                                echo '<div class="dashboard-benefit_container_detail">Không có thông tin</div>';
                             }
                             echo '</div>';
                             ?>
