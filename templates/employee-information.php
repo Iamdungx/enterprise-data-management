@@ -181,7 +181,8 @@
                                 </div>
                                 <div class="nav_bar-function_child">
                                     <ul class="nav_bar-function_child_AdminConsole none">
-                                        <a class="nav_bar-list-item" href="dashboard.php">Thông tin chi tiết</a>
+                                        <li class="nav_bar-list-item"><a href="dashboard.php">Thông tin chi tiết</a></li>
+                                        <li class="nav_bar-list-item"><a href="check_log.php">Check Log</a></li>
                                     </ul>
                                 </div>
                             </div>';
@@ -236,10 +237,10 @@
                 </div> 
 
     <style>
-        .add-btn, .update-btn, .delete-btn, .check-log-btn, .data_manager_report-btn {
+        .add-btn, .data_manager_report-btn {
             display: inline-block;
             padding: 4px 2px;
-            margin: 0px; /* Cách đều nhau giữa các nút */
+            margin: 0px;
             border: none;
             border-radius: 5px;
             text-decoration: none;
@@ -248,33 +249,32 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
-        }
-        .update-btn {
-            background-color: #9FD7F9;
-            margin-right: 20px;
-            color: black;
+            height: 20px;
         }
         .add-btn {
             background-color: #9FD7F9;
-            margin-right: 30px;
             color: black;
-        }
-        .delete-btn {
-            background-color: #9FD7F9;
-            margin-left: 80px;
-            color: black;
-        }
-        .check-log-btn {
-            background-color: #9FD7F9;
-            margin-right: 80px;
-            color: black;
+            margin-right: 0px;
         }
         .data_manager_report-btn {
             background-color: #9FD7F9;
             color: black;
+            margin-right: 35px;
         }
-        .add-btn:hover, .update-btn:hover, .delete-btn:hover, .check-log-btn:hover {
-            background-color: #3EAEF4
+        .add-btn:hover, .data_manager_report-btn:hover {
+            background-color: #3EAEF4;
+        }
+        button {
+            background-color: #9FD7F9;
+            color: black;
+            border: none;
+            padding: 2px 4px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 48px;
+        }
+        button:hover {
+            background-color: #3EAEF4;
         }
         #information-table {
             width: 100%;
@@ -304,10 +304,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>
-                                    <a type="button" class="update-btn" href="update-employee.php">Update Employee Data</a>
-                                    <a type="button" class="delete-btn" href="delete-employee.php">Delete Employee Data</a>
-                                    <a type="button" class="check-log-btn" href="check_log.php">Check Log</a>';
+                                    echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>';
                                 }
                                 elseif ($_SESSION['role'] == 'employee'){
                                     echo '<a type="button" class="delete-btn" href="assignment.php">Công việc</a>';
