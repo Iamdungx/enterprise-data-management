@@ -37,7 +37,6 @@
         .form-container {
             background-color: #9FD7F9; /* Màu nền xanh dương */
             padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
-            border-radius: 10px; /* Bo tròn viền của form */
             width: 600px; /* Độ rộng của form */
             margin: auto; /* Canh giữa form */
         }
@@ -53,7 +52,6 @@
             padding-left: 10px; /* Khoảng cách giữa nội dung và viền của trường */
             border-radius: 5px; /* Bo tròn viền của trường */
             border: none; /* Loại bỏ viền của trường */
-            background-color: #FFFFFF; /* Màu nền trắng cho trường nhập liệu */
         }
         .btn {
             width: 100%; /* Độ rộng của nút */
@@ -70,7 +68,29 @@
         #role {
             margin-right: auto;
         }
-        
+        .form-import {
+            background-color: #9FD7F9;
+            padding: 20px;
+            max-width: 600px; /* Chỉnh kích thước tối đa của form */
+            margin: 0 auto; /* Căn giữa form */
+        }
+        .form-import input[type="file"] {
+            display: block; /* Hiển thị dạng block để nằm dưới nhau */
+            margin-bottom: 1px; /* Khoảng cách dưới của ô nhập file */
+        }
+        .form-import button {
+            background-color: #3EAEF4;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .form-import button:hover {
+            background-color: #6586E6;
+        }
     </style>
     <!-- header -->
     <header class="header">
@@ -89,7 +109,6 @@
             </div>
 
             <?php
-                session_start();
                 if (isset($_SESSION['nameaccount']))
                 {
                     echo "<div class='account-title'>
@@ -240,6 +259,8 @@
         <a class="link_home" href="employee-information.php">Trang chủ</a>
         <div class="blue-box">
             <h1>Add Employee</h1>
+        </div>
+        <div class="form-import">
             <form action="" name="excel" require value="" enctype="multipart/form-data" method="POST">
                 <input type="file" name="import_file" class="form-control">
                 <button type="submit">Import Excel Data</button>
@@ -250,7 +271,6 @@
                 <label>First Name</label>
                 <input type="text" class="form-control" id="first_name" name="first_name" required>
             </div>
-
             <div class="form-group">
                 <label>Last Name</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" required>
