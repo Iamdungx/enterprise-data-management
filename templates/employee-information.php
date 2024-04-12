@@ -198,7 +198,7 @@
                                 </div>
                                 <div class="nav_bar-function_child">
                                     <ul class="nav_bar-function_child_AdminConsole none">
-                                        <a class="nav_bar-list-item" href="performance_detail.php">Bàn giao công việc</a>
+                                        <a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a>
                                     </ul>
                                 </div>
                             </div>';
