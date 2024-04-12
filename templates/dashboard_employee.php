@@ -248,13 +248,14 @@ use function PHPSTORM_META\sql_injection_subst;
                         <div class="dashboard-profile_header">
                             <p>Hồ sơ nhân viên</p>
                         </div>
-                        <?php
-                        echo '<div class="dashboard-profile_containner">
+                        <div class="dashboard-profile_containner">
                         <div class="dashboard-profile_containner_field">
                             <p>Trình độ học vấn: </p>
                             <p>Kinh nghiệm làm việc: </p>
                             <p>Chứng chỉ: </p>
-                        </div>';
+                        </div>
+                        <?php
+                    
                         require 'connect_database.php';
                             mysqli_set_charset($connect, 'UTF8');
                 
@@ -266,15 +267,12 @@ use function PHPSTORM_META\sql_injection_subst;
                             if($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     echo '
-                                    <div class="dashboard-benefit_containner_detail">
+                                    <div class="dashboard-profile_containner_detail">
                                     <p>' . ($row["education"] !== null && $row["education"] !== '' ? $row["education"] : 'Không có thông tin') . '</p>
                                     <p>' . ($row["work_exp"] !== null && $row["work_exp"] !== '' ? $row["work_exp"] : 'Không có thông tin') . '</p>
                                     <p>' . ($row["certification"] !== null && $row["certification"] !== '' ? $row["certification"] : 'Không có thông tin') . '</p>
                                 </div>';
                                 }
-                            }
-                            else {
-                                echo '<div class="dashboard-benefit_container_detail">Không có thông tin</div>';
                             }
                         echo'    
                         </div>';
@@ -308,9 +306,6 @@ use function PHPSTORM_META\sql_injection_subst;
                                     <p>' . ($row["other"] !== null && $row["other"] !== '' ? $row["other"] : 'Không có thông tin') . '</p>
                                 </div>';
                                 }
-                            }
-                            else {
-                                echo '<div class="dashboard-benefit_container_detail">Không có thông tin</div>';
                             }
                             echo '</div>';
                             ?>

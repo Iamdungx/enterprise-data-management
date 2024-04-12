@@ -462,6 +462,8 @@ tr:hover{
 
 .dashboard-profile_containner, .dashboard-benefit_containner{
     margin: 24px 32px;
+    display: grid;
+    grid-template-columns: 30% 70% ;
 }
 
 .dashboard-information_containner{
@@ -471,15 +473,15 @@ tr:hover{
 } 
 
 .dashboard-information_containner_field p, .dashboard-profile_containner_detail p,  
-.dashboard-benefit_containner_detail p, .dashboard-information_containner_detail p{
+.dashboard-benefit_containner_detail p, .dashboard-information_containner_detail p,
+.dashboard-profile_containner_field p, .dashboard-benefit_containner_detail p{
     font-size: 20px;
     opacity: .75;
     margin-bottom: 8px;
 }
 
 .dashboard-profile_containner_detail, .dashboard-benefit_containner_detail{
-    display: grid;
-    grid-template-columns: 30% 70%;
+
 }
 
 .dashboard-information_containner_image{
