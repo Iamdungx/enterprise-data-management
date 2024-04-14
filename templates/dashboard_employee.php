@@ -325,7 +325,20 @@ use function PHPSTORM_META\sql_injection_subst;
                             <div class="dashboard-assignment_content">
                                 <span>Công việc</span>
                                 <div class="quanlity-notice">
-                                    <span>3</span>
+                                    <span>
+                                        <?php
+                                            require 'connect_database.php';
+                                            mysqli_set_charset($connect, 'UTF8');   
+                                            $user_id =  $_SESSION['nameaccount'];
+
+                                            $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Chưa hoàn thành'";
+                                            $result = $connect->query($sql);
+                                            $row = $result->fetch_assoc();
+                                            $totalCount = $row['total'];
+
+                                            echo "$totalCount";
+                                        ?>
+                                    </span>
                                     <i class="fa-solid fa-briefcase"></i>
                                 </div>
                                 <a href="assignment.php">Xem chi tiết</a>
@@ -337,23 +350,37 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <span>Lương</span>
                                 <div>
                                     <?php
-                                    require 'connect_database.php';
-                                    mysqli_set_charset($connect, 'UTF8');
+                                        require 'connect_database.php';
+                                        mysqli_set_charset($connect, 'UTF8');   
+                                        $date = date("m");
+                                        $user_id =  $_SESSION['nameaccount'];
 
-                                    $user_id = $_SESSION['nameaccount']; 
+                                        
+                                        $sql = "SELECT COUNT(*) AS dateWork FROM `attendance` WHERE date like '%$date%' AND user_id = '$user_id'";
+                                        $result = $connect->query($sql);
+                                        $row = $result->fetch_assoc();
+                                        $totalCountDateWork = $row['dateWork'];
 
-                                    $sql_id = "SELECT * FROM user_data WHERE user_id='$user_id'";
-                                    $result_id = $connect->query($sql_id);
-                                    $row_id = $result_id->fetch_assoc();
-                                    $check_id = $row_id['id'];
+                                        $salaryEmployeeSql = "SELECT user_data.user_id, salary_and_bonus.salary, salary_and_bonus.bonus from attendance
+                                            INNER JOIN user_data ON user_data.user_id = attendance.user_id 
+                                            INNER JOIN salary_and_bonus ON user_data.id = salary_and_bonus.employee_id
+                                            WHERE user_data.user_id = '$user_id'
+                                            LIMIT 1;";
+                                        $resultSalaryEmployeeSql = $connect->query($salaryEmployeeSql);
+                                        if ($resultSalaryEmployeeSql->num_rows > 0) {
+                                            $row1 = $resultSalaryEmployeeSql->fetch_assoc();
+                                            $salary = $row1["salary"];
+                                            $bonus = $row1["bonus"];
 
-                                    $sql_salary = "SELECT * FROM salary_and_bonus WHERE employee_id='$check_id'";
-                                    $result_salary = $connect->query($sql_salary);
-                                    $row_salary = $result_salary->fetch_assoc();
-                                    $check_salary = $row_salary['salary'];
+                                            $totalSalary = ($salary / 26) * $totalCountDateWork + $bonus;
 
-                                        echo'
-                                        <p class="salary_employee">'  . $check_salary . ' VNĐ</p>';
+                                            echo'<p class="salary_employee">'  . floor($totalSalary) . ' VNĐ</p>';
+                                        }
+                                        else{
+                                            echo'<p class="salary_employee">0 VNĐ</p>';
+
+                                        }
+
                                     ?>
                                 </div>
                                 <a href="employee_salary.php">Xem chi tiết</a>

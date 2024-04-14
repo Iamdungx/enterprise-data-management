@@ -83,7 +83,7 @@
                 $salaryEmployeeSql = "SELECT user_data.user_id, salary_and_bonus.salary, salary_and_bonus.bonus from attendance
                     INNER JOIN user_data ON user_data.user_id = attendance.user_id 
                     INNER JOIN salary_and_bonus ON user_data.id = salary_and_bonus.employee_id
-                    WHERE user_data.user_id = 'HUMG175040'
+                    WHERE user_data.user_id = '$user_id'
                     LIMIT 1;";
                 $resultSalaryEmployeeSql = $connect->query($salaryEmployeeSql);
                 if ($resultSalaryEmployeeSql->num_rows > 0) {
@@ -95,6 +95,9 @@
 
                     echo "Salary is: " . $totalSalary. " VND";
 
+                }
+                else{
+                    echo "Salary is: 0";
                 }
 
 
