@@ -46,11 +46,14 @@
                 </div>
                 
                 <div class="dropdown-content">
-                    <form action="attendance.php" method="post">
+                    <!-- <form action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input name = "attendance_button" type = "submit" value="Chấm công">
-                    </form>
-                    
+                    </form> -->
+                    <a href="attendance.php">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Chấm Công
+                    </a>
                     <a href="javascript:void(0);" onclick="confirmLogout()">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất
@@ -183,6 +186,7 @@
                                     <ul class="nav_bar-function_child_AdminConsole none">
                                         <li class="nav_bar-list-item"><a href="dashboard.php">Thông tin chi tiết</a></li>
                                         <li class="nav_bar-list-item"><a href="check_log.php">Check Log</a></li>
+                                        <li class="nav_bar-list-item"><a href="add-employee.php">Add Employee Data</a></li>
                                     </ul>
                                 </div>
                             </div>';
@@ -304,7 +308,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>';
+                                    // echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>';
                                 }
                                 elseif ($_SESSION['role'] == 'employee'){
                                     echo '<a type="button" class="delete-btn" href="assignment.php">Công việc</a>';
