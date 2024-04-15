@@ -190,26 +190,25 @@ use function PHPSTORM_META\sql_injection_subst;
             <!-- 80%  -->
 
             <div class="dashboard-container">
-                <div class="dashboard-grid-info">
-                    <div class="dashboard-information">
-                        <div class="dashboard-information_header">
-                            <p>Thông tin nhân viên</p>
-                        </div>
-                        <?php
-                            echo '
-                            <div class="dashboard-information_containner">
-                                <div class="dashboard-information_containner_field">
-                                    <p>Mã Nhân Viên: </p>
-                                    <p>Họ: </p>
-                                    <p>Tên: </p>
-                                    <p>Ngày sinh:</p>
-                                    <p>Giới tính: </p>
-                                    <p>Điện thoại: </p>
-                                    <p>Email: </p>
-                                    <p>Phòng ban: </p>
-                                    <p>Vị trí: </p>
-                                    <p>Chức vụ: </p>
-                                </div>';
+            <div class="dashboard-grid-info">
+                <div class="dashboard-information">
+                    <div class="dashboard-information_header">
+                        <p>Thông tin nhân viên</p>
+                    </div>
+                    <?php
+                        echo '<div class="dashboard-information_containner">';
+                            echo '<div class="dashboard-information_containner_field">';
+                                echo '<p>Mã Nhân Viên: </p>';
+                                echo '<p>Họ: </p>';
+                                echo '<p>Tên: </p>';
+                                echo '<p>Ngày sinh:</p>';
+                                echo '<p>Giới tính: </p>';
+                                echo '<p>Điện thoại: </p>';
+                                echo '<p>Email: </p>';
+                                echo '<p>Phòng ban: </p>';
+                                echo '<p>Vị trí: </p>';
+                                echo '<p>Chức vụ: </p>';
+                            echo '</div>';
 
                             require 'connect_database.php';
                             mysqli_set_charset($connect, 'UTF8');
@@ -221,29 +220,38 @@ use function PHPSTORM_META\sql_injection_subst;
 
                             if($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
-                                    echo '
-                                    <div class="dashboard-information_containner_detail">
-                                    <p>' . $row["user_id"] . '</p>
-                                    <p>' . $row["fisrt_name"] . '</p>
-                                    <p>' . $row["last_name"] . '</p>
-                                    <p>' . $row["date_of_birth"] . '</p>
-                                    <p> Nam </p>
-                                    <p>' . $row["phone"] . '</p>
-                                    <p>' . $row["email"] . '</p>
-                                    <p>' . $row["department"] . '</p>
-                                    <p>' . $row["position"] . '</p>
-                                    <p> Nhân viên </p>
-                                </div>';
+                                    echo '<div class="dashboard-information_containner_detail">';
+                                        echo '<p>' . $row["user_id"] . '</p>';
+                                        echo '<p>' . $row["fisrt_name"] . '</p>';
+                                        echo '<p>' . $row["last_name"] . '</p>';
+                                        echo '<p>' . $row["date_of_birth"] . '</p>';
+                                        echo '<p>' . $row["gender"] . '</p>';
+                                        echo '<p>' . $row["phone"] . '</p>';
+                                        echo '<p>' . $row["email"] . '</p>';
+                                        echo '<p>' . $row["department"] . '</p>';
+                                        echo '<p>' . $row["position"] . '</p>';
+                                        echo '<p> Nhân viên </p>';
+                                    echo '</div>';
                                 }
                             }
+                            $sql = "SELECT user_image FROM user_data WHERE user_id='$user_id'";
+                            $result = $connect->query($sql);
 
-                            echo '    
-                                <div class="dashboard-information_containner_image">
-                                    <img class="avatar-user" src="./image/user.png" alt="">
-                                </div>
-                            </div>';
-                        ?>
-                    </div>
+                            if($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $user_image = $row["user_image"];
+                            }
+                            
+                            echo '<div class="dashboard-information_containner_image">';
+                            if(isset($user_image) && !empty($user_image)) {
+                                echo '<img class="avatar-user" src="data:image/jpeg;base64,'.base64_encode($user_image).'" alt="User Image">';
+                            } else {
+                                echo 'Không có ảnh';
+                            }
+                            echo '</div>';
+                        echo '</div>';                    
+                    ?>
+                </div>
                     <div class="dashboard-profile">
                         <div class="dashboard-profile_header">
                             <p>Hồ sơ nhân viên</p>

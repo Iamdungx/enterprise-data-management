@@ -277,6 +277,15 @@
             </div>
 
             <div class="form-group">
+                <label>Giới tính</label>
+                <select name="gender" id="gender">
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>Address</label>
                 <input type="text" class="form-control" id="address" name="address" required>
             </div>
@@ -336,6 +345,7 @@
                 // Lấy dữ liệu từ biểu mẫu HTML
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
+                $gender = $_POST['gender'];
                 $address = $_POST['address'];
                 $date_of_birth = $_POST['date_of_birth'];
                 $phone = $_POST['phone'];
@@ -363,8 +373,8 @@
                 } while ($user_id_exists);
 
                 // Câu lệnh SQL để thêm nhân viên vào cơ sở dữ liệu
-                $sql = "INSERT INTO user_data (`fisrt_name`, `last_name`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
-                        VALUES ('$first_name', '$last_name', '$address', '$date_of_birth', '$phone', '$email', '$hire_date', '$department', '$position', '$user_id', '$password', '$role')";
+                $sql = "INSERT INTO user_data (`fisrt_name`, `last_name`, `gender`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
+                        VALUES ('$first_name', '$last_name', '$gender', '$address', '$date_of_birth', '$phone', '$email', '$hire_date', '$department', '$position', '$user_id', '$password', '$role')";
 
                 // Kiểm tra xem người dùng đã đăng nhập và có quyền ghi log hay không
                 if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
