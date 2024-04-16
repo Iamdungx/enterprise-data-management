@@ -93,13 +93,52 @@
 
                     $totalSalary = ($salary / 26) * $totalCountDateWork + $bonus;
 
-                    echo "Salary is: " . $totalSalary. " VND";
+                    echo "Salary is: " . $totalSalary. " VND<br>";
 
                 }
                 else{
                     echo "Salary is: 0";
                 }
 
+                $totalWorkdaySql = "SELECT user_id,
+                    COUNT(*) AS total_records
+                    FROM attendance
+                    WHERE user_id = '$user_id' 
+                    AND MONTH(date) = MONTH(CURRENT_DATE())
+                    AND YEAR(date) = YEAR(CURRENT_DATE())
+                    AND check_in IS NOT NULL
+                    AND check_out IS NOT NULL
+                    GROUP BY user_id
+                    LIMIT 30;";
+
+                $resultTotalWorkdaySql = $connect->query($totalWorkdaySql);
+                if ($resultTotalWorkdaySql->num_rows > 0) {
+                    $row2 = $resultTotalWorkdaySql->fetch_assoc();
+                    echo "Số ngày đi làm: " . $row2['total_records'] . "/30<br>";
+
+                }
+                else{
+                    echo "Không có thông tin";
+                }
+
+                $totalPermittedLeave = "SELECT user_id,
+                        COUNT(*) AS total_records1
+                        FROM form
+                        WHERE user_id = '$user_id'
+                        AND MONTH(date) = MONTH(CURRENT_DATE())
+                        AND YEAR(date) = YEAR(CURRENT_DATE())
+                        AND form_type = 'Đơn xin nghỉ'
+                        AND status = 'Đã'
+                        GROUP BY user_id
+                        LIMIT 30;";
+
+                $resultTotalPermittedLeaveSql = $connect->query($totalPermittedLeave);
+                if ($resultTotalPermittedLeaveSql->num_rows > 0) {
+                    $row3 = $resultTotalPermittedLeaveSql->fetch_assoc();
+                    echo "Số ngày nghỉ có phép được duyệt: " . $row3['total_records1'] . "<br>";
+                } else {
+                    echo "Không có ngày nghỉ phép được duyệt";
+                }
 
                 $connect->close();
             ?>
