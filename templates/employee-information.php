@@ -46,14 +46,10 @@
                 </div>
                 
                 <div class="dropdown-content">
-                    <!-- <form action="attendance.php" method="post">
+                    <form action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input name = "attendance_button" type = "submit" value="Chấm công">
-                    </form> -->
-                    <a href="attendance.php">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        Chấm Công
-                    </a>
+                    </form>
                     <a href="javascript:void(0);" onclick="confirmLogout()">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất

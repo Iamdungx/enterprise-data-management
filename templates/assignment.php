@@ -163,10 +163,10 @@ if (isset($_POST['submit_reason'])) {
                 <i class="fa-solid fa-angle-down"></i>
             </div>
             <div class="dropdown-content">
-                <a href="attendance.php">
+                <form action="attendance.php" method="post">
                     <i class="fa-solid fa-calendar-days"></i>
-                    Chấm Công
-                </a>
+                    <input name = "attendance_button" type = "submit" value="Chấm công">
+                </form>
                 <a href="javascript:void(0);" onclick="confirmLogout()">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
