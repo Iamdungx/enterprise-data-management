@@ -20,7 +20,7 @@
         <header class="header">
             <div class="hrm-title">
                 <div class="title close">
-                    <h4>HRM Admin</h4>
+                    <a href="employee-information.php" style="text-decoration: none; font-weight: bold; color: black;">HRM Admin</a>
                 </div>
                 <div class="icon-nav close">
                     <i class="fa-solid fa-bars"></i>
