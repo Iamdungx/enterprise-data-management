@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="./css/base.css">
         <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
         <link rel="icon" href="./image/icon-image.png">
+        <!-- Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <!-- Js -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
@@ -220,15 +222,15 @@
                     <form action="" method="post">
                         <div class ="search-box">
                             <div class="search-box_item">
-                                <div for="department">Bộ phận</div>
-                                <input type="text" placeholder="VD: Van Chuyen" name="position_employee">
+                                <div for="department">Position</div>
+                                <input type="text" placeholder="VD: Sale" name="position_employee">
                             </div>
                             <div class="search-box_item">
-                                <div for="identification">Mã nhân viên</div>
-                                <input type="text" placeholder="VD: AB21210">
+                                <div for="identification">User ID</div>
+                                <input type="text" placeholder="VD: HUMG000000">
                             </div>
                             <div class="search-box_item">
-                                <div for="name">Tên</div>
+                                <div for="name">Name</div>
                                 <input type="text" placeholder="VD: Nguyen Van A" name="name_employee">
                                 <input type="submit" name="search" value="Tìm kiếm"></inp>
                             </div>
@@ -298,7 +300,7 @@
                 <!-- render data  -->
                 <div class="form-data_manager">
                     <div class="form-data_manager_report">
-                        <p class="data_manager_report-text">Báo cáo từ ngày ... đến ngày ...</p>
+                        <p class="data_manager_report-text">Thông tin nhân viên</p>
                         <!-- Chuyển dữ liệu bảng thành file  -->
                         <script src="./js/convert2Excel.js"></script>
                         <?php

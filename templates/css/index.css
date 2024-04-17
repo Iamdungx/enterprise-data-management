@@ -9,11 +9,14 @@
     border-bottom: 1px solid #ccc;
     box-shadow: 1px 3px 7px rgba(115, 115, 115, 0.3);
     /* background-color: var(--white-color); */
-    background-image: url(../image/header-background.png);
-    background-size: cover;
+    background: -webkit-linear-gradient(to left, #cfebfc, #27A4F2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #CFEBFC, #27A4F2);
     position: relative;
     z-index: 1;
+}
 
+body {
+    font-family: 'Open Sans', sans-serif;
 }
 
 .hrm-title{
@@ -276,6 +279,7 @@
     width: 1100px;
     height: 343px;
     overflow: scroll;
+    overflow-x: auto;
 }
 
 
@@ -283,11 +287,12 @@ th, td{
     border: 1px solid rgb(245, 245, 245);
     padding: 20px;
     text-align: center;
+
 }
 
 th{
-    background-color:#9FD7F9;
-    color: #000;
+    background: -webkit-linear-gradient(to bottom,#9fd7f9, #CFEBFC);  /* For Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom,#9fd7f9,#CFEBFC);
 }
 
 tr:hover{

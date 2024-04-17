@@ -74,6 +74,8 @@ if (isset($_POST['submit_reason'])) {
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="./image/icon-image.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <!-- Js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>

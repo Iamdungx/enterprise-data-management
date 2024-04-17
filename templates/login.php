@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="icon" href="./image/icon-image.png">
 </head>
 
