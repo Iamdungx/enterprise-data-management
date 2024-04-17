@@ -80,7 +80,7 @@
                         $_SESSION['role'] = $role;
 
                         if($role == 'admin' || $role == 'manager'){
-                            header("location: employee-information.php");
+                            header("location: admin-dashboard.php");
                         }
                         else{
                             header("location: dashboard_employee.php");

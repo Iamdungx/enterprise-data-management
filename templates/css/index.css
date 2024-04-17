@@ -279,7 +279,6 @@ body {
     width: 1100px;
     height: 343px;
     overflow: scroll;
-    overflow-x: auto;
 }
 
 
@@ -434,6 +433,45 @@ tr:hover{
         opacity: 1;
     }
 }
+/*---------------------admin-dashboard.php---------------------*/
+.admin-dashboard-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-column-gap: 24px;
+    margin: 16px;
+}
+
+.flex-container {
+    /* display: flex-inline; */
+    margin-top: 50px;
+}
+
+.total-employee,
+.total-report-monthly,
+.total-form,
+.chart-container {
+    display: inline-block;
+    justify-content: space-between;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    box-shadow: -5px 5px 20px 0px rgba(0, 0, 0, 0.5);
+    margin: 0 10px;
+}
+
+.total-employee {
+    text-align: center;
+    background: linear-gradient(to bottom, #d4f2f0, white);
+}
+
+.total-report-monthly {
+    text-align: center;
+    background: linear-gradient(to bottom, #F6D5F7, white);
+}
+.total-form {
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #ccffcc, #ffcccc);
+}
+/* ---------------------end-------------------- */
 
 .dashboard-container{
     display: grid;
@@ -454,6 +492,7 @@ tr:hover{
     background-color: #fff;
     box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 5px;
 }
 
 .dashboard-information_header p, .dashboard-profile_header p, .dashboard-benefit_header p{

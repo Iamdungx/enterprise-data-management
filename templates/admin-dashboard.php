@@ -47,16 +47,15 @@ use function PHPSTORM_META\sql_injection_subst;
                     }
                 ?>
 
-
                 <div class="icon-account">
                     <i class="fa-solid fa-angle-down"></i>
                 </div>
                 
                 <div class="dropdown-content">
-                    <a href="attendance.php">
+                    <form action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
-                        Chấm Công
-                    </a>
+                        <input name = "attendance_button" type = "submit" value="Chấm công">
+                    </form>
                     <a href="javascript:void(0);" onclick="confirmLogout()">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất
@@ -190,8 +189,10 @@ use function PHPSTORM_META\sql_injection_subst;
                     ?>
                 </div>
             </div>
-            
+            <!-- 80%  -->
+
             <div class="dashboard-container">
+            <div class="admin-dashboard-container">
                 <div class="flex-container">
                     <div class="total-employee">
                         <h4>TỔNG NHÂN VIÊN</h4>
@@ -281,8 +282,8 @@ use function PHPSTORM_META\sql_injection_subst;
                     </div>
                 </div>
                 <div class="chart-container">
-                    <canvas id="myChart" style="max-width: 400px; width: 100%;"></canvas>
-
+                    <canvas id="completed-quantity" style="max-width: 280px; width: 100%;"></canvas>
+                </div>
                     <?php
                         require "connect_database.php";
                         mysqli_set_charset($connect, 'UTF8');
@@ -305,12 +306,16 @@ use function PHPSTORM_META\sql_injection_subst;
                         $yValues_ReportMonthly[] = $row_khongDat['soLuongKhongDat'];
                     ?>
 
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
                     <script>
                         var xValues_ReportMonthly = ['Đạt', 'Không Đạt'];
                         var yValues_ReportMonthly = <?php echo json_encode($yValues_ReportMonthly); ?>;
                         var barColors_ReportMonthly = ["#4EEE94", "#FF6A6A"];
 
-                        new Chart("myChart", {
+                        const ctx = document.getElementById('completed-quantity');
+
+                        new Chart(ctx, {
                             type: "doughnut",
                             data: {
                                 labels: xValues_ReportMonthly,
@@ -320,54 +325,22 @@ use function PHPSTORM_META\sql_injection_subst;
                                 }]
                             },
                             options: {
-                                title: {
-                                    display: true,
-                                    text: "Thống kê số lượng hoàn thành deadline"
+                                plugins: { 
+                                    subtitle: {
+                                        display: true,
+                                        text: "Thống kê số lượng hoàn thành chỉ tiêu."
+                                    }
                                 }
                             }
                         });
                     </script>
-                </div>
             </div>
-            <style>
-                .dashboard-container {
-                    text-align: center;
-                    display: flex;
-                }
+        </div>
+        
 
-                .flex-container {
-                    /* display: flex-inline; */
-                    margin-top: 50px;
-                }
-                .chart-container {
-                    display: right;
-                }
 
-                .total-employee,
-                .total-report-monthly,
-                .total-form,
-                .chart-container {
-                    display: inline-block;
-                    justify-content: space-between;
-                    padding: 5px 10px 5px 10px;
-                    border-radius: 5px;
-                    box-shadow: -5px 5px 20px 0px rgba(0, 0, 0, 0.5);
-                    margin: 0 10px;
-                }
-
-                .total-employee {
-                    text-align: center;
-                    background-color: rgb(232, 240, 251);
-                }
-
-                .total-report-monthly {
-                    text-align: center;
-                    background-color: rgb(253, 235, 249);
-                }
-                .total-form {
-                    justify-content: space-between;
-                }
-            </style>
+            
+           
     </body>
         <script src="./js/index.js"></script>
     </html>
