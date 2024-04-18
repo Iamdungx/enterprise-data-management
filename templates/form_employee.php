@@ -12,8 +12,16 @@
     <title>Gửi đơn</title>
     <script src="checkform.js"></script>
     <style>
+        .link_home {
+            margin-right: 10px;
+            background-color: #9FD7F9;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 10px;
+        }
         .blue-box {
-            background-color: #9FD7F9; /* Màu nền xanh dương */
             padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
             border-radius: 5px; /* Bo tròn viền của ô */
             text-align: center; /* Canh giữa nội dung */
@@ -23,16 +31,6 @@
             color: black; /* Màu chữ trắng */
             margin: 0; /* Xóa khoảng cách lề */
         }
-
-        .link_home {
-            margin-right: 10px;
-            background-color: #6586E6;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 10px;
-        }
         .form-container {
             background-color: #9FD7F9; /* Màu nền xanh dương */
             padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
@@ -40,16 +38,13 @@
             width: 400px; /* Độ rộng của form */
             margin: auto; /* Canh giữa form */
         }
-
         .form-container h1 {
             color: white; /* Màu chữ trắng */
             text-align: center; /* Canh giữa tiêu đề */
         }
-
         .form-group {
             margin-bottom: 20px; /* Khoảng cách giữa các trường */
         }
-
         .form-control {
             width: 95%; /* Độ rộng của trường nhập liệu */
             padding: 10px; /* Khoảng cách giữa nội dung và viền của trường */
@@ -57,7 +52,6 @@
             border: none; /* Loại bỏ viền của trường */
             background-color: #FFFFFF; /* Màu nền trắng cho trường nhập liệu */
         }
-
         .btn {
             width: 100%; /* Độ rộng của nút */
             padding: 10px; /* Khoảng cách giữa nội dung và viền của nút */
@@ -67,11 +61,9 @@
             color: white; /* Màu chữ trắng cho nút */
             cursor: pointer; /* Hiển thị con trỏ khi di chuột qua nút */
         }
-
         .btn:hover {
             background-color: #04408c; /* Màu nền xanh dương sậm khi di chuột qua nút */
         }
-
     </style>
 
 </head>

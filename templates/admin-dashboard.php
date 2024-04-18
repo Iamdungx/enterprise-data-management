@@ -335,12 +335,7 @@ use function PHPSTORM_META\sql_injection_subst;
                         });
                     </script>
             </div>
-        </div>
-        
-
-
-            
-           
+        </div>  
     </body>
         <script src="./js/index.js"></script>
     </html>

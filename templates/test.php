@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>HRM</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
@@ -14,46 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
-
 <body>
-    <style>
-        .link_home {
-            margin-right: 10px;
-            background-color: #9FD7F9;
-            color: black;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 20px 10px;
-        }
-        .blue-box {
-            padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
-            border-radius: 5px; /* Bo tròn viền của ô */
-            text-align: center; /* Canh giữa nội dung */
-            margin: 20px 10px;
-        }
-        .blue-box h1 {
-            color: black; /* Màu chữ trắng */
-            margin: 0; /* Xóa khoảng cách lề */
-        }
-        #information-table {
-            width: 100%; /* Chiều rộng của bảng là 100% */
-            height: 500px;
-            border-collapse: collapse; /* Gộp các đường viền của ô */
-            table-layout: fixed; /* Cố định chiều rộng cột */
-        }
-        #information-table tr:first-child th {
-            position: sticky; /* Giữ vị trí */
-            top: 0; /* Vị trí cố định ở trên */
-            background-color: #9FD7F9; /* Màu nền của hàng đầu tiên */
-        }
-        #information-table th,
-        #information-table td {
-            border: 1px solid #ddd; /* Đường viền của ô */
-            padding: 20px; /* Khoảng cách giữa nội dung và đường viền của ô */
-            text-align: left; /* Căn chỉnh văn bản sang trái */
-        }
-    </style>
     <!-- header -->
     <header class="header">
         <div class="hrm-title">
@@ -71,7 +33,6 @@
             </div>
 
             <?php
-                session_start();
                 if (isset($_SESSION['nameaccount']))
                 {
                     echo "<div class='account-title'>
@@ -79,9 +40,12 @@
                     </div>";
                 }
             ?>
+
+
             <div class="icon-account">
                 <i class="fa-solid fa-angle-down"></i>
             </div>
+            
             <div class="dropdown-content">
                 <a href="attendance.php">
                     <i class="fa-solid fa-calendar-days"></i>
@@ -91,6 +55,8 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Đăng xuất
                 </a>
+                
+
             </div>
             <script>
             function confirmLogout() {
@@ -100,7 +66,9 @@
                 }
             </script>
         </div>
+
     </header>
+
     <div class="grid_system_column close container">
         <!-- 20% -->
         <div class="container-nav_bar">
@@ -214,45 +182,8 @@
                     }
                     
                 ?>
-
-
             </div>
         </div>
-    <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
-        <div class="blue-box">
-            <h1>Check Log</h1>
-        </div>
-        <div class="form-data_manager-table">
-            <table id="information-table">
-                <?php
-                    require 'connect_database.php';
-                    mysqli_set_charset($connect, 'UTF8');
-                    
-                    $sql = "SELECT * FROM modification";
-                    $result = $connect->query($sql);
-                        echo '<tr>
-                            <th>Name Account</th>
-                            <th>Role</th>
-                            <th>Text_log</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                            </tr>';
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>".
-                                        "<td>".$row["name"]."</td>".
-                                        "<td>".$row["role"]."</td>".
-                                        "<td>".$row["text_log"]."</td>".
-                                        "<td>".$row["timestamp"]."</td>".
-                                        "<td>".$row["description"]."</td>
-                                    </tr>";
-                                }
-                            }
-                    $connect->close();
-                ?>
-            </table>
-        </div>
-    </div>
-    <script src="./js/index.js"></script>
 </body>
+<script src="./js/index.js"></script>
+</html>

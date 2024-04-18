@@ -48,7 +48,7 @@
                 </div>
                 
                 <div class="dropdown-content">
-                    <form action="attendance.php" method="post">
+                    <form action="attendance.php" method="post" class="form-inline">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input name = "attendance_button" type = "submit" value="Chấm công">
                     </form>
@@ -56,8 +56,6 @@
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Đăng xuất
                     </a>
-                    
-
                 </div>
                 <script>
                 function confirmLogout() {
@@ -261,7 +259,8 @@
         .data_manager_report-btn {
             background-color: #9FD7F9;
             color: black;
-            margin-right: 35px;
+            margin-right: 13px;
+            height:auto;
         }
         .add-btn:hover, .data_manager_report-btn:hover {
             background-color: #3EAEF4;
@@ -288,6 +287,7 @@
             position: sticky; 
             top: 0; 
             background-color: #9FD7F9; 
+            border: 1px solid #ddd;
         }
         #information-table th,
         #information-table td {

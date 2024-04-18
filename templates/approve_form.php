@@ -18,15 +18,14 @@
 <style>
         .link_home {
             margin-right: 10px;
-            background-color: #6586E6;
+            background-color: #9FD7F9;
             color: black;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            margin: 10px;
+            margin: 20px 10px;
         }
         .blue-box {
-            background-color: #9FD7F9; /* Màu nền xanh dương */
             padding: 10px; /* Khoảng cách giữa nội dung và viền của ô */
             border-radius: 5px; /* Bo tròn viền của ô */
             text-align: center; /* Canh giữa nội dung */
