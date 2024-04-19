@@ -73,7 +73,7 @@
         session_start(); // Gọi session_start() trước khi sử dụng $_SESSION
     
     ?>
-    <a class="link_home" href="employee-information.php">Trang chủ</a>
+    <a class="link_home" href="dashboard_employee.php">Trang chủ</a>
     <div class="blue-box">
         <h1>Gửi đơn</h1>
     </div>

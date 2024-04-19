@@ -80,7 +80,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 <div class="nav_bar-function">
                     <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
                         <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
-                        <a>Quản lí nhân viên</a>
+                        <a>Thông tin chi tiết</a>
                         <div class="function-icon_arrow_Manager">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
@@ -90,7 +90,6 @@ use function PHPSTORM_META\sql_injection_subst;
                             <li class="nav_bar-list-item">
                                 <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
                             </li>
-                            <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                             <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                             <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
                         </ul>
@@ -108,9 +107,6 @@ use function PHPSTORM_META\sql_injection_subst;
                     </div>
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Report none">
-                            <li class="nav_bar-list-item">Báo cáo theo tuần</li>
-                            <li class="nav_bar-list-item">Danh sách ca</li>
-                            <li class="nav_bar-list-item">Báo cáo theo tháng</li>
                             <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
                         </ul>
 

@@ -114,7 +114,6 @@
                         <li class="nav_bar-list-item">
                             <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
-                        <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                         <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
                     </ul>
@@ -216,7 +215,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='dashboard_employee.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Thông tin nhân sự chi tiết</h1>
         </div>
@@ -230,7 +229,7 @@
                 employee_profile.education, employee_profile.work_exp , employee_profile.certification
                 FROM user_data 
                 INNER JOIN employee_profile 
-                ON user_data.id = employee_profile.employee_id;";
+                ON user_data.id = employee_profile.user_id;";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>

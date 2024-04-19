@@ -88,7 +88,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Manager none">
                             <li class="nav_bar-list-item">
-                                <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                                <a href="employee-information.php">Quản lý nhân viên</a>
                             </li>
                             <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                             <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -108,9 +108,6 @@ use function PHPSTORM_META\sql_injection_subst;
                     </div>
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Report none">
-                            <li class="nav_bar-list-item">Báo cáo theo tuần</li>
-                            <li class="nav_bar-list-item">Danh sách ca</li>
-                            <li class="nav_bar-list-item">Báo cáo theo tháng</li>
                             <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
                         </ul>
 
@@ -131,9 +128,7 @@ use function PHPSTORM_META\sql_injection_subst;
                             <?php
                                 if(isset($_SESSION['role'])){
                                     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                        echo '<li class="nav_bar-list-item"><a href="form_take_off.php">Đơn xin nghỉ</a></li>
-                                        <li class="nav_bar-list-item"><a href="form_change_shift.php">Đơn xin đổi ca</a></li>
-                                        <li class="nav_bar-list-item"><a href="form_explanation.php">Đơn giải trình</a></li>
+                                        echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
                                         <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                     }
                                 }
@@ -179,7 +174,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                 </div>
                                 <div class="nav_bar-function_child">
                                     <ul class="nav_bar-function_child_AdminConsole none">
-                                        <a class="nav_bar-list-item" href="performance_detail.php">Bàn giao công việc</a>
+                                        <a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a>
                                     </ul>
                                 </div>
                             </div>';

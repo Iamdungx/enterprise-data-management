@@ -219,7 +219,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='dashboard_employee.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Đãi ngộ/ Bảo hiểm</h1>
         </div>
@@ -228,16 +228,18 @@
                 <?php
                     require 'connect_database.php';
                     mysqli_set_charset($connect, 'UTF8');
+                    $user_id = $_SESSION['nameaccount'];
                     
                     $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, benefit.health_insurance, benefit.life_insurance , benefit.other
                     FROM user_data 
                     INNER JOIN benefit 
-                    ON user_data.id = benefit.employee_id;";
+                    ON user_data.id = benefit.user_id
+                    WHERE benefit.user_id = '$user_id'";
                     $result = $connect->query($sql);
                         echo '<tr>
-                            <th>ID Employee</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Mã nhân viên</th>
+                            <th>Họ</th>
+                            <th>Tên</th>
                             <th>Bảo hiểm y tế</th>
                             <th>Bảo hiểm nhân thọ</th>
                             <th>Bảo hiểm khác</th>
