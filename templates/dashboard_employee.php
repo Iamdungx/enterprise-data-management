@@ -244,7 +244,7 @@ use function PHPSTORM_META\sql_injection_subst;
                             if(isset($user_image) && !empty($user_image)) {
                                 echo '<img class="avatar-user" src="data:image/jpeg;base64,'.base64_encode($user_image).'" alt="User Image">';
                             } else {
-                                echo 'Không có ảnh';
+                                echo '<img class="no-image" src="./image/no-picture-available-icon.png" alt="NO IMAGE" style="width: 150px; height: 200px;">';
                             }
                             echo '</div>';
                         echo '</div>';                    
