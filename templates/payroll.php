@@ -48,7 +48,8 @@
         #information-table th, #information-table td {
             border: 1px solid #dddddd;
             padding: 8px;
-            text-align: left;
+            text-align: canter;
+            
         }
         #information-table tr:first-child th {
             position: sticky; /* Giữ vị trí */
@@ -236,6 +237,7 @@
                 <th>Ngày công</th>
                 <th>Ngày làm thiếu giờ</th>
                 <th>Tổng lương</th>
+                <th>Chi tiết</th>
             </tr>
             <?php
                 while ($row = $result->fetch_assoc()) {
@@ -250,6 +252,7 @@
                 <td><?php echo $row['tong_so_ngay_cong']. "/". $cong_thuc_te; ?></td>
                 <td><?php echo $row['so_ngay_thieu_gio']; ?></td>
                 <td><?php echo number_format($total_salary); ?></td>
+                <td><a href='payroll_details.php?id=<?php echo $row["employee_id"]; ?>'><i class="fa-solid fa-bars"></i></a></td>
             </tr>
             <?php
                 }
