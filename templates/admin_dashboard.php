@@ -20,7 +20,7 @@
     <body>
         <!-- header -->
         <header class="header">
-            <div class="hrm-title">
+            <div class="hrm-titles">
                 <div class="title close">
                     <h4>HRM Admin</h4>
                 </div>
