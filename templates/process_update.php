@@ -13,12 +13,12 @@ if(isset($_POST['submit'])) {
     $position = $_POST['position'];
     $role = $_POST['role'];
 
-    $sql = "UPDATE user_data
+    $sqlProcessUpdate = "UPDATE user_data
     SET fisrt_name = '$first_name', last_name = '$last_name', address = '$address', phone = '$phone', email = '$email', department = '$department', position = '$position', role = '$role'
     WHERE id = '$employee_id'";
-    if($connect->query($sql) === TRUE) {
-        // Redirect to employee-information.php after successful update
-        header("Location: employee-information.php");
+    if($connect->query($sqlProcessUpdate) === TRUE) {
+        // Redirect to employee_information.php after successful update
+        header("Location: employee_information.php");
         exit(); // Ensure script stops execution after redirection
     } else {
         echo "Error updating employee details: " . $connect->error;

@@ -46,6 +46,11 @@ const navBar = {
         listReportNav.classList.add('none')
         listAssignmentNav.classList.add('none')
         listAdminConsoleNav.classList.add('none')
+        iconManager.classList.toggle('none')
+        iconReport.classList.toggle('none')
+        iconAssignment.classList.toggle('none')
+        iconAdminConsole.classList.toggle('none')
+
       }
     }
     handleToggleNavBar()

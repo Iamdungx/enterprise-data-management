@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8 vi">
+<meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duyệt đơn</title>
+    <title>Sửa THông Tin</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
 <body>
-<style>
+    <style>
         .link_home {
             margin-right: 10px;
             background-color: #9FD7F9;
@@ -35,61 +35,45 @@
             color: black; /* Màu chữ trắng */
             margin: 0; /* Xóa khoảng cách lề */
         }
-        #information-table {
-            width: auto;
-            height: auto;
+        form {
+            background-color: #9FD7F9;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px; /* Điều chỉnh kích thước form tùy ý */
+            margin: auto;
         }
-        .form-container {
-            background-color: #9FD7F9; /* Màu nền xanh dương */
-            padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
-            border-radius: 10px; /* Bo tròn viền của form */
-            width: 400px; /* Độ rộng của form */
-            margin: auto; /* Canh giữa form */
+        /* CSS cho các label */
+        label {
+            display: block;
+            margin-bottom: 5px;
         }
-
-        .form-container h1 {
-            color: white; /* Màu chữ trắng */
-            text-align: center; /* Canh giữa tiêu đề */
-        }
-
-        .form-group {
-            margin-bottom: 20px; /* Khoảng cách giữa các trường */
-        }
-
-        .form-control {
-            width: 95%; /* Độ rộng của trường nhập liệu */
-            padding: 10px; /* Khoảng cách giữa nội dung và viền của trường */
-            border-radius: 5px; /* Bo tròn viền của trường */
-            border: none; /* Loại bỏ viền của trường */
-            background-color: #FFFFFF; /* Màu nền trắng cho trường nhập liệu */
-        }
-        select#search_form {
-            width: 200px; /* Điều chỉnh chiều rộng của select tùy ý */
+        /* CSS cho input fields */
+        input[type='text'] {
+            width: 100%;
             padding: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            margin-right: 10px;
         }
-        /* CSS cho nút tìm kiếm */
-        input[type="submit"] {
+        /* CSS cho button */
+        input[type='submit'] {
             background-color: #27A4F2;
             color: black;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
-        /* CSS cho nút tìm kiếm khi hover */
-        input[type="submit"]:hover {
-            background-color: #6586E6;
+        /* CSS cho button khi hover */
+        input[type='submit']:hover {
+            background-color: #6586E6; 
         }
-        .input_submit,
-        #search_form {
-            margin: 10px 10px; 
-        }
+        .form-edit {
+            background-color: #CFEBFC;
+        }   
     </style>
-        <!-- header -->
+    <!-- header -->
     <header class="header">
         <div class="hrm-title">
             <div class="title close">
@@ -150,7 +134,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                            <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -204,7 +188,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -254,115 +238,55 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
-            <h1>Duyệt đơn</h1>
+            <h1>Update Employee</h1>
         </div>
-        <div class="form-data_manager-table">
-            <form action="" method="post">
-                <?php
-                    require 'connect_database.php';
-                    if(isset($_POST['approve'])){
-                        if(isset($_POST['checkbox'])){
-                            $checkedIds = $_POST['checkbox'];
-                            $checkedIdsString = implode(',', $checkedIds);
-                            $sql = "UPDATE `form` SET `status`='Đã duyệt' WHERE form_id IN ($checkedIdsString)";
-                            if ($connect->query($sql) === TRUE){
-                            } 
-                            else {
-                                echo "Error adding Performance: " . $connect->error . "<br>";
-                            }
-                        }
-                    }
-                ?>
-                <select name="search_form" id="search_form">
-                    <option value="Tất cả">Tất cả</option>  
-                    <option value="Đơn xin nghỉ">Đơn xin nghỉ</option>
-                    <option value="Đơn xin đổi ca">Đơn xin đổi ca</option>
-                    <option value="Đơn giải trình">Đơn giải trình</option>
-                </select>
-                <input type="submit" name="search" value="Tìm kiếm"></input>
+        <?php
+            require 'connect_database.php';
 
-                <table id="information-table">
-                    <?php
-                        require 'connect_database.php';
-                        mysqli_set_charset($connect, 'UTF8');
-                        
-                        $sql = "SELECT form.user_id, form.form_type, form.date, form.content, user_data.fisrt_name, user_data.last_name, form.status, form.form_id
-                        from user_data
-                        inner join form on form.user_id = user_data.user_id
-                        where form.status = 'Chưa duyệt'";
-                        $result = $connect->query($sql);
-                            echo '<tr>
-                                <th>ID Employee</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Loại đơn</th>
-                                <th>Nội dung</th>
-                                <th>Trạng thái</th>
-                                <th>Thời gian</th>
-                                <th></th>
+            if(isset($_POST['update'])) {
+                $employee_id = $_POST['update'];
 
-                                </tr>';
-                                if ($result->num_rows > 0) {
-                                    if(isset($_POST['search'])){
-                                        $form_type = $_POST['search_form'];
-                                        $sql1 = "SELECT form.user_id, form.form_type, form.date, form.content, user_data.fisrt_name, user_data.last_name, form.status, form.form_id
-                                        from user_data
-                                        inner join form on form.user_id = user_data.user_id
-                                        where form.status = 'Chưa duyệt' and form.form_type = '$form_type'";
-                                        $result1  =$connect->query($sql1);
-                                        if($result1->num_rows > 0){
-                                            while ($row = $result1->fetch_assoc()) {
-                                                echo "<tr>".
-                                                    "<td>".$row["user_id"]." </td>".
-                                                    "<td>".$row["fisrt_name"]."</td>".
-                                                    "<td>".$row["last_name"]."</td>".
-                                                    "<td>".$row["form_type"]." </td>".
-                                                    "<td>".$row["content"]." </td>".
-                                                    "<td>".$row["status"]." </td>".
-                                                    "<td>".$row["date"]." </td>".
-                                                    "<td> <input type=checkbox name = 'checkbox[]' value='" .$row['form_id']."'></td>
-                                                </tr>";
-                                            }
-                                        }
-                                        else{
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>".
-                                                    "<td>".$row["user_id"]." </td>".
-                                                    "<td>".$row["fisrt_name"]."</td>".
-                                                    "<td>".$row["last_name"]."</td>".
-                                                    "<td>".$row["form_type"]." </td>".
-                                                    "<td>".$row["content"]." </td>".
-                                                    "<td>".$row["status"]." </td>".
-                                                    "<td>".$row["date"]." </td>".
-                                                    "<td> <input type=checkbox name = 'checkbox[]' value='" .$row['form_id']."'></td>
-                                                </tr>";
-                                            }
-                                        }
-                                    }
-                                    else{
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>".
-                                                "<td>".$row["user_id"]." </td>".
-                                                "<td>".$row["fisrt_name"]."</td>".
-                                                "<td>".$row["last_name"]."</td>".
-                                                "<td>".$row["form_type"]." </td>".
-                                                "<td>".$row["content"]." </td>".
-                                                "<td>".$row["status"]." </td>".
-                                                "<td>".$row["date"]." </td>".
-                                                "<td> <input type=checkbox name = 'checkbox[]' value='" .$row['form_id']."'></td>
-                                            </tr>";
-                                        }
-                                    }
-                                }
+                // Fetch employee details from database
+                $sql = "SELECT * FROM user_data WHERE id = '$employee_id'";
+                $result = $connect->query($sql);
 
-                        $connect->close();
-                    ?>
-                </table>
-            <input class="input_submit"  type="submit" name="approve" value="Approve Form" />
-            </form>
-        </div>
+                if($result->num_rows > 0) {
+                    $employee = $result->fetch_assoc();
+
+                    // Display update form
+                    echo "<form action='process_update.php' method='post'>
+                            <input type='hidden' name='employee_id' value='".$employee['id']."' />
+                            <label for='first_name'>First Name:</label>
+                            <input type='text' id='first_name' name='first_name' value='".$employee['fisrt_name']."' /><br>
+                            <label for='last_name'>Last Name:</label>
+                            <input type='text' id='last_name' name='last_name' value='".$employee['last_name']."' /><br>
+                            <label for='address'>Address:</label>
+                            <input type='text' id='address' name='address' value='".$employee['address']."' /><br>
+                            <label for='phone'>Phone:</label>
+                            <input type='text' id='phone' name='phone' value='".$employee['phone']."' /><br>
+                            <label for='email'>Email:</label>
+                            <input type='text' id='email' name='email' value='".$employee['email']."' /><br>
+                            <label for='department'>Department:</label>
+                            <input type='text' id='department' name='department' value='".$employee['department']."' /><br>
+                            <label for='position'>Position:</label>
+                            <input type='text' id='position' name='position' value='".$employee['position']."' /><br>
+                            <label for='role'>Role:</label>
+                            <input type='text' id='role' name='role' value='".$employee['role']."' /><br>
+
+                            <input type='submit' name='submit' value='Update Employee' />
+                        </form>";
+                } else {
+                    echo "Employee not found.";
+                }
+            } else {
+                echo "No employee ID provided.";
+            }
+
+            $connect->close();
+        ?>
     </div>
-    <script src="./js/index.js"></script>    
+    <script src="./js/index.js"></script>
 </body>
+</html>

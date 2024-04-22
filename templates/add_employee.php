@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Employee</title>
+    <title>Thêm nhân viên</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -35,43 +35,63 @@
             color: black; /* Màu chữ trắng */
             margin: 0; /* Xóa khoảng cách lề */
         }
-        form {
+        .form-container {
+            background-color: #9FD7F9; /* Màu nền xanh dương */
+            padding: 20px; /* Khoảng cách giữa nội dung và viền của form */
+            width: 600px; /* Độ rộng của form */
+            margin: auto; /* Canh giữa form */
+        }
+        .form-container h1 {
+            color: black; /* Màu chữ trắng */
+            text-align: center; /* Canh giữa tiêu đề */
+        }
+        .form-group {
+            margin-bottom: 0px; /* Khoảng cách giữa các trường */
+        }
+        .form-control {
+            width: 76%; /* Độ rộng của trường nhập liệu */
+            padding-left: 10px; /* Khoảng cách giữa nội dung và viền của trường */
+            border-radius: 5px; /* Bo tròn viền của trường */
+            border: none; /* Loại bỏ viền của trường */
+        }
+        .btn {
+            width: 100%; /* Độ rộng của nút */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền của nút */
+            border-radius: 5px; /* Bo tròn viền của nút */
+            border: none; /* Loại bỏ viền của nút */
+            background-color: #27A4F2; /* Màu nền xanh dương cho nút */
+            color: black; /* Màu chữ trắng cho nút */
+            cursor: pointer; /* Hiển thị con trỏ khi di chuột qua nút */
+        }
+        .btn:hover {
+            background-color: #6586E6; /* Màu nền xanh dương sậm khi di chuột qua nút */
+        }
+        #role {
+            margin-right: auto;
+        }
+        .form-import {
             background-color: #9FD7F9;
             padding: 20px;
-            border-radius: 5px;
-            width: 300px; /* Điều chỉnh kích thước form tùy ý */
-            margin: auto;
+            max-width: 600px; /* Chỉnh kích thước tối đa của form */
+            margin: 0 auto; /* Căn giữa form */
         }
-        /* CSS cho các label */
-        label {
-            display: block;
-            margin-bottom: 5px;
+        .form-import input[type="file"] {
+            display: block; /* Hiển thị dạng block để nằm dưới nhau */
+            margin-bottom: 1px; /* Khoảng cách dưới của ô nhập file */
         }
-        /* CSS cho input fields */
-        input[type='text'] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        /* CSS cho button */
-        input[type='submit'] {
-            background-color: #27A4F2;
+        .form-import button {
+            background-color: #3EAEF4;
             color: black;
-            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
         }
-        /* CSS cho button khi hover */
-        input[type='submit']:hover {
-            background-color: #6586E6; 
+        .form-import button:hover {
+            background-color: #6586E6;
         }
-        .form-edit {
-            background-color: #CFEBFC;
-        }   
     </style>
     <!-- header -->
     <header class="header">
@@ -90,7 +110,6 @@
             </div>
 
             <?php
-                session_start();
                 if (isset($_SESSION['nameaccount']))
                 {
                     echo "<div class='account-title'>
@@ -134,7 +153,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                            <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -188,7 +207,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -238,55 +257,155 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href="employee_information.php">Trang chủ</a>
         <div class="blue-box">
-            <h1>Update Employee</h1>
+            <h1>Thêm nhân viên</h1>
         </div>
+        <div class="form-import">
+            <form action="" name="excel" require value="" enctype="multipart/form-data" method="POST">
+                <input type="file" name="import_file" class="form-control">
+                <button type="submit">Import Excel Data</button>
+            </form>
+        </div>
+        <form class="form-container" id="form" method="post">
+            <div class="form-group">
+                <label>Họ</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label>Tên</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Giới tính</label>
+                <select name="gender" id="gender">
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Địa chỉ</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label>Ngày sinh</label>
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+            </div>
+
+            <div class="form-group">
+                <label>Số điện thoại</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Ngày vào làm</label>
+                <input type="date" class="form-control" id="hire_date" name="hire_date" required>
+            </div>
+
+            <div class="form-group">
+                <label>Bộ phận</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+            </div>
+
+            <div class="form-group">
+                <label>Vị trí</label>
+                <input type="text" class="form-control" id="position" name="position" required>
+            </div>
+
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="text" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Cấp bậc</label>
+                <select name="role" id="role">
+                    <option value="employee">Nhân viên</option>
+                    <option value="manager">Quản Lý</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Thêm nhân viên" name="add_employee">
+            </div>
+        </form>
         <?php
-            require 'connect_database.php';
+            if (isset($_POST['add_employee'])) {
+                require 'connect_database.php';
 
-            if(isset($_POST['update'])) {
-                $employee_id = $_POST['update'];
+                // Lấy dữ liệu từ biểu mẫu HTML
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
+                $gender = $_POST['gender'];
+                $address = $_POST['address'];
+                $date_of_birth = $_POST['date_of_birth'];
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                $hire_date = $_POST['hire_date'];
+                $department = $_POST['department'];
+                $position = $_POST['position'];
+                $password = $_POST['password'];
+                $role = $_POST['role'];
 
-                // Fetch employee details from database
-                $sql = "SELECT * FROM user_data WHERE id = '$employee_id'";
-                $result = $connect->query($sql);
-
-                if($result->num_rows > 0) {
-                    $employee = $result->fetch_assoc();
-
-                    // Display update form
-                    echo "<form action='process_update.php' method='post'>
-                            <input type='hidden' name='employee_id' value='".$employee['id']."' />
-                            <label for='first_name'>First Name:</label>
-                            <input type='text' id='first_name' name='first_name' value='".$employee['fisrt_name']."' /><br>
-                            <label for='last_name'>Last Name:</label>
-                            <input type='text' id='last_name' name='last_name' value='".$employee['last_name']."' /><br>
-                            <label for='address'>Address:</label>
-                            <input type='text' id='address' name='address' value='".$employee['address']."' /><br>
-                            <label for='phone'>Phone:</label>
-                            <input type='text' id='phone' name='phone' value='".$employee['phone']."' /><br>
-                            <label for='email'>Email:</label>
-                            <input type='text' id='email' name='email' value='".$employee['email']."' /><br>
-                            <label for='department'>Department:</label>
-                            <input type='text' id='department' name='department' value='".$employee['department']."' /><br>
-                            <label for='position'>Position:</label>
-                            <input type='text' id='position' name='position' value='".$employee['position']."' /><br>
-                            <label for='role'>Role:</label>
-                            <input type='text' id='role' name='role' value='".$employee['role']."' /><br>
-
-                            <input type='submit' name='submit' value='Update Employee' />
-                        </form>";
-                } else {
-                    echo "Employee not found.";
+                // Hàm tạo user_id ngẫu nhiên
+                function generateUserID() {
+                    $prefix = "HUMG";
+                    $random_number = sprintf('%06d', mt_rand(0, 999999)); // Sinh số ngẫu nhiên từ 000000 đến 999999
+                    return $prefix . $random_number;
                 }
-            } else {
-                echo "No employee ID provided.";
-            }
 
-            $connect->close();
+                // Tạo user_id mới và kiểm tra đến khi nào không trùng
+                do {
+                    $user_id = generateUserID();
+                    $check_query = "SELECT COUNT(*) as count FROM user_data WHERE user_id = '$user_id'";
+                    $result = $connect->query($check_query);
+                    $row = $result->fetch_assoc();
+                    $user_id_exists = $row['count'] > 0;
+                } while ($user_id_exists);
+
+                // Câu lệnh SQL để thêm nhân viên vào cơ sở dữ liệu
+                $sqlAddEmployee = "INSERT INTO user_data (`fisrt_name`, `last_name`, `gender`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
+                        VALUES ('$first_name', '$last_name', '$gender', '$address', '$date_of_birth', '$phone', '$email', '$hire_date', '$department', '$position', '$user_id', '$password', '$role')";
+
+                // Kiểm tra xem người dùng đã đăng nhập và có quyền ghi log hay không
+                if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
+                    $role = $_SESSION['role'];
+                    $name = $_SESSION['nameaccount'];
+                    $description = "Thêm nhân viên";
+                    $string_sqlAddEmployee = mysqli_real_escape_string($connect, $sqlAddEmployee); // Escape single quotes in the SQL string
+
+                    // Câu lệnh SQL để ghi log
+                    $logAddEmployee = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sql', '$description')";
+
+                    // Thực thi câu lệnh ghi log và kiểm tra lỗi
+                    if ($connect->query($logAddEmployee) === TRUE) {
+                        echo "Đã thêm vào check log<br>";
+                    } else {
+                        echo "Lỗi: " . $connect->error . "<br>";
+                    }
+                }
+
+                // Thực thi câu lệnh để thêm nhân viên và kiểm tra lỗi
+                if ($connect->query($sqlAddEmployee) === TRUE) {
+                    echo "Thêm nhân viên thành công!";
+                } else {
+                    echo "Thêm không thành công. Nhập lại!";
+                    echo "Lỗi: " . $connect->error . "<br>";
+                }
+            }
         ?>
     </div>
+
     <script src="./js/index.js"></script>
 </body>
 </html>

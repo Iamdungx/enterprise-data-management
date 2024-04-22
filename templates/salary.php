@@ -4,7 +4,7 @@
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HRM</title>
+    <title>Bảng Lương</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -167,7 +167,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="employee-information.php">Quản lý nhân viên</a>
+                            <a href="employee_information.php">Quản lý nhân viên</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -207,7 +207,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                     <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
@@ -216,7 +216,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -266,7 +266,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Add Employee's Salary</h1>
         </div>
@@ -276,11 +276,11 @@
                     require 'connect_database.php';
                     mysqli_set_charset($connect, 'UTF8');
                     
-                    $sql = "SELECT user_data.id, user_data.user_id, user_data.fisrt_name, user_data.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
+                    $sqlSeclectInfo = "SELECT user_data.id, user_data.user_id, user_data.fisrt_name, user_data.last_name, salary_and_bonus.salary, salary_and_bonus.bonus 
                     FROM user_data 
                     INNER JOIN salary_and_bonus 
                     ON user_data.id = salary_and_bonus.employee_id;";
-                    $result = $connect->query($sql);
+                    $resultSeclectInfo = $connect->query($sqlSeclectInfo);
                         echo '<tr>
                             <th>ID Employee</th>
                             <th>First Name</th>
@@ -289,15 +289,15 @@
                             <th>Bonus</th>
                             <th>Action</th>
                             </tr>';
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
+                            if ($resultSeclectInfo->num_rows > 0) {
+                                while ($rowSeclectInfo = $resultSeclectInfo->fetch_assoc()) {
                                     echo "<tr>".
-                                        "<td>".$row["id"]." </td>".
-                                        "<td>".$row["fisrt_name"]."</td>".
-                                        "<td>".$row["last_name"]."</td>".
-                                        "<td>".$row["salary"]." VND </td>".
-                                        "<td>".$row["bonus"]." VND </td>
-                                        <td><a class='edit-link' href='edit_salary.php?employee_id=" . $row["id"] . "'>Edit</a></td>
+                                        "<td>".$rowSeclectInfo["id"]." </td>".
+                                        "<td>".$rowSeclectInfo["fisrt_name"]."</td>".
+                                        "<td>".$rowSeclectInfo["last_name"]."</td>".
+                                        "<td>".$rowSeclectInfo["salary"]." VND </td>".
+                                        "<td>".$rowSeclectInfo["bonus"]." VND </td>
+                                        <td><a class='edit-link' href='edit_salary.php?employee_id=" . $rowSeclectInfo["id"] . "'>Edit</a></td>
                                     </tr>";
                                 }
                             }
@@ -331,34 +331,34 @@
         $salary = $_POST['salary'];
         $bonus = $_POST['bonus'];
 
-        $sql = "INSERT INTO salary_and_bonus (`employee_id`, `salary`, `bonus`) VALUES ('$employee_id' ,'$salary', '$bonus')";
+        $sqlInsertSalary = "INSERT INTO salary_and_bonus (`employee_id`, `salary`, `bonus`) VALUES ('$employee_id' ,'$salary', '$bonus')";
         
         
         if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
             $role = $_SESSION['role'];
             $name = $_SESSION['nameaccount'];
             $description = "Thêm lương nhân viên";
-            $string_sql = (string) $sql;
+            $string_sqlInsertSalary = (string) $sqlInsertSalary;
 
             // Escape single quotes in the SQL string
-            $string_sql = mysqli_real_escape_string($connect, $string_sql);
+            $string_sqlInsertSalary = mysqli_real_escape_string($connect, $string_sqlInsertSalary);
 
-            $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sql', '$description')";
+            $logInsertSalary = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name','$role','$string_sqlInsertSalary', '$description')";
 
             // Execute the log query and check for errors
-            if ($connect->query($log) === TRUE) {
-                echo "Log entry added successfully!<br>";
+            if ($connect->query($logInsertSalary) === TRUE) {
+                echo "Đã thêm vào check log!<br>";
             } else {
-                echo "Error adding log entry: " . $connect->error . "<br>";
+                echo "Lỗi: " . $connect->error . "<br>";
             }
         }
 
         // Execute the employee query and check for errors
-        if ($connect->query($sql) === TRUE) {
+        if ($connect->query($sqlInsertSalary) === TRUE) {
             echo "Thêm lương cho nhân viên thành công!";
         } else {
             echo "Thêm không thành công. Nhập lại!";
-            echo "Error: " . $connect->error . "<br>";
+            echo "Lỗi: " . $connect->error . "<br>";
         }
     }
     ?>

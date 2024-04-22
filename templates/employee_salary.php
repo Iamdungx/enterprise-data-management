@@ -65,7 +65,7 @@
     </style>
 </head>
 <body>
-    <a class="link_home" href='employee-information.php'>Trang chủ</a>
+    <a class="link_home" href='employee_information.php'>Trang chủ</a>
     <div class="form-data_manager-table">
         <table id="information-table">
             <?php

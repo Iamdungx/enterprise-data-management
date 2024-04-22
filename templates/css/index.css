@@ -450,8 +450,8 @@ tr:hover{
         opacity: 1;
     }
 }
-/*---------------------admin-dashboard.php---------------------*/
-.admin-dashboard-container {
+/*---------------------admin_dashboard.php---------------------*/
+.admin_dashboard-container {
     display: grid;
     grid-template-columns: 60% 40%;
     grid-column-gap: 24px;

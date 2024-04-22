@@ -9,7 +9,7 @@ if(isset($_POST['completed'])) {
         $checkedIds = $_POST['checkbox'];
         $checkedCount = count($_POST['checkbox']);
         
-        $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Chưa hoàn thành'";
+        $sqlAssignmentStatus = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Chưa hoàn thành'";
         $result = $connect->query($sql);
         $row = $result->fetch_assoc();
         $totalCount = $row['total'];
@@ -24,7 +24,7 @@ if(isset($_POST['completed'])) {
             if ($connect->query($performance_employeeAdd) === TRUE){
                 echo "Đã hoàn thành tất cả công việc!<br>";
             } else {
-                echo "Error adding Performance: " . $connect->error . "<br>";
+                echo "Lỗi: " . $connect->error . "<br>";
             }
         } 
         else{
@@ -36,10 +36,10 @@ if(isset($_POST['completed'])) {
         }
 
         $checkedIdsString = implode(',', $checkedIds);
-        $sql1 = "UPDATE `assignment` SET `status`='Hoàn thành' WHERE assignment_id IN ($checkedIdsString)";
-        if ($connect->query($sql1) === TRUE){
+        $sqlAssignmentStatusUpdate = "UPDATE `assignment` SET `status`='Hoàn thành' WHERE assignment_id IN ($checkedIdsString)";
+        if ($connect->query($sqlAssignmentStatusUpdate) === TRUE){
         } else {
-            echo "Error adding Performance: " . $connect->error . "<br>";
+            echo "Lỗi: " . $connect->error . "<br>";
         }
 
     } 
@@ -58,7 +58,7 @@ if (isset($_POST['submit_reason'])) {
         if ($connect->query($performance_employeeAdd) === TRUE) {
             echo "Đã gửi lý do thành công!<br>";
         } else {
-                echo "Error adding Performance: " . $connect->error . "<br>";
+                echo "Lỗi: " . $connect->error . "<br>";
         }
 }
 
@@ -196,7 +196,7 @@ if (isset($_POST['submit_reason'])) {
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                            <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -250,7 +250,7 @@ if (isset($_POST['submit_reason'])) {
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -298,7 +298,7 @@ if (isset($_POST['submit_reason'])) {
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href="employee-information.php">Trang chủ</a>
+        <a class="link_home" href="employee_information.php">Trang chủ</a>
         <div class="blue-box">
             <h1>Công việc</h1>
         </div>

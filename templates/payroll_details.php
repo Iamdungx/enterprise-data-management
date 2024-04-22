@@ -2,12 +2,12 @@
     require 'connect_database.php';
     mysqli_set_charset($connect, 'UTF8');
     $id = $_GET['id'];
-    $sql = "SELECT count(*) as tong_so_ngay_cong, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as so_ngay_thieu_gio, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id GROUP BY a.user_id;";
-    $result = $connect->query($sql);
-    $employee = $result->fetch_assoc();
+    $sqlSelectTotalWork = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id GROUP BY a.user_id;";
+    $resultSelectTotalWork = $connect->query($sqlSelectTotalWork);
+    $employee = $resultSelectTotalWork->fetch_assoc();
     $user_id = $employee['user_id'];
-    $sql = "SELECT * FROM `attendance` WHERE user_id = '$user_id';";
-    $result = $connect->query($sql);
+    $sqlSelectAttent = "SELECT * FROM `attendance` WHERE user_id = '$user_id';";
+    $resultSelectAttent = $connect->query($sqlSelectAttent);
 ?>
 <!DOCTYPE html>
 <html>
@@ -131,7 +131,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="employee-information.php">Quản lý nhân viên</a>
+                            <a href="employee_information.php">Quản lý nhân viên</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -171,7 +171,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                     <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
@@ -180,7 +180,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -230,7 +230,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Thông tin nhân viên chi tiết</h1>
         </div>
@@ -259,8 +259,8 @@
                     <td><?php echo $employee['department']; ?></td>
                     <td><?php echo $employee['salary']; ?></td>
                     <td><?php echo $employee['bonus']; ?></td>
-                    <td><?php echo $employee['tong_so_ngay_cong']; ?></td>
-                    <td><?php echo $employee['so_ngay_thieu_gio']; ?></td>
+                    <td><?php echo $employee['total_workDay']; ?></td>
+                    <td><?php echo $employee['total_dayLackingHours']; ?></td>
                 </tr>
             </table>
 
@@ -274,15 +274,15 @@
                 </tr>
                 <?php
                     $count = 0;
-                    while ($row = $result->fetch_assoc()) {
+                    while ($rowSelectAttend = $resultSelectAttent->fetch_assoc()) {
                         $count++;
                 ?>
                 <tr>
                     <td><?php echo $count; ?></td>
-                    <td><?php echo $row['date']; ?></td>
-                    <td><?php echo $row['check_in']; ?></td>
-                    <td><?php echo $row['check_out']; ?></td>
-                    <td><?php echo $row['total']; ?></td>
+                    <td><?php echo $rowSelectAttend['date']; ?></td>
+                    <td><?php echo $rowSelectAttend['check_in']; ?></td>
+                    <td><?php echo $rowSelectAttend['check_out']; ?></td>
+                    <td><?php echo $rowSelectAttend['total']; ?></td>
                 </tr>
                 <?php
                     }

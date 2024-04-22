@@ -1,8 +1,8 @@
 <?php
     require 'connect_database.php';
     mysqli_set_charset($connect, 'UTF8');
-    $sql = "SELECT count(*) as tong_so_ngay_cong, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as so_ngay_thieu_gio, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' GROUP BY a.user_id;";
-    $result = $connect->query($sql);
+    $sqlSelectTWD = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' GROUP BY a.user_id;";
+    $resultSelectTWD = $connect->query($sqlSelectTWD);
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HRM</title>
+    <title>Tất Toán</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -125,7 +125,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="employee-information.php">Quản lý nhân viên</a>
+                            <a href="employee_information.php">Quản lý nhân viên</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -165,7 +165,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                     <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
@@ -174,7 +174,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -224,7 +224,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Bảng lương nhân viên</h1>
         </div>
@@ -240,19 +240,19 @@
                 <th>Chi tiết</th>
             </tr>
             <?php
-                while ($row = $result->fetch_assoc()) {
-                    $cong_thuc_te = 30;
-                    $salary = $row['salary'];
-                    $total_salary = $salary * $row['tong_so_ngay_cong'] / $cong_thuc_te - ($row['so_ngay_thieu_gio'] * 100000) + $row['bonus'];
+                while ($rowSelectTWD = $resultSelectTWD->fetch_assoc()) {
+                    $actual_workingHours = 30;
+                    $salary = $rowSelectTWD['salary'];
+                    $total_salary = $salary * $rowSelectTWD['total_workDay'] / $actual_workingHours - ($rowSelectTWD['total_dayLackingHours'] * 100000) + $rowSelectTWD['bonus'];
             ?>
             <tr>
-                <td><?php echo $row['fisrt_name'] . " " . $row['last_name']; ?></td>
-                <td><?php echo number_format($row['salary']); ?></td>
-                <td><?php echo number_format($row['bonus']); ?></td>
-                <td><?php echo $row['tong_so_ngay_cong']. "/". $cong_thuc_te; ?></td>
-                <td><?php echo $row['so_ngay_thieu_gio']; ?></td>
+                <td><?php echo $rowSelectTWD['fisrt_name'] . " " . $rowSelectTWD['last_name']; ?></td>
+                <td><?php echo number_format($rowSelectTWD['salary']); ?></td>
+                <td><?php echo number_format($rowSelectTWD['bonus']); ?></td>
+                <td><?php echo $rowSelectTWD['total_workDay']. "/". $actual_workingHours; ?></td>
+                <td><?php echo $rowSelectTWD['total_dayLackingHours']; ?></td>
                 <td><?php echo number_format($total_salary); ?></td>
-                <td><a href='payroll_details.php?id=<?php echo $row["employee_id"]; ?>'><i class="fa-solid fa-bars"></i></a></td>
+                <td><a href='payroll_details.php?id=<?php echo $rowSelectTWD["employee_id"]; ?>'><i class="fa-solid fa-bars"></i></a></td>
             </tr>
             <?php
                 }

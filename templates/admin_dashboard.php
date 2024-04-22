@@ -81,14 +81,14 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
                         <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
                         <a>Quản lí nhân viên</a>
-                        <div class="function-icon_arrow_Manager">
+                        <div class="function-icon_arrow_Manager none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Manager none">
                             <li class="nav_bar-list-item">
-                                <a href="employee-information.php">Quản lý nhân viên</a>
+                                <a href="employee_information.php">Quản lý nhân viên</a>
                             </li>
                             <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                             <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -102,7 +102,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close">
                         <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
                         <a>Báo cáo chấm công</a>
-                        <div class="function-icon_arrow_Report">
+                        <div class="function-icon_arrow_Report none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close">
                         <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
                         <a>Đơn & giải trình</a>
-                        <div class="function-icon_arrow_Assignment">
+                        <div class="function-icon_arrow_Assignment none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ use function PHPSTORM_META\sql_injection_subst;
                             <?php
                                 if(isset($_SESSION['role'])){
                                     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                        echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                        echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                         <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                     }
                                 }
@@ -137,7 +137,7 @@ use function PHPSTORM_META\sql_injection_subst;
                             <?php
                                 if(isset($_SESSION['role'])){
                                     if($_SESSION['role'] == 'employee'){
-                                        echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                        echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                     }
                                 }
                             ?>
@@ -152,7 +152,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <div class="nav_bar-function-content close">
                                     <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
                                     <a>Admin Console</a>
-                                    <div class="function-icon_arrow_AdminConsole">
+                                    <div class="function-icon_arrow_AdminConsole none">
                                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                                     </div>
                                 </div>
@@ -168,7 +168,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <div class="nav_bar-function-content close">
                                     <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
                                     <a>Manager Console</a>
-                                    <div class="function-icon_arrow_AdminConsole">
+                                    <div class="function-icon_arrow_AdminConsole none">
                                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@ use function PHPSTORM_META\sql_injection_subst;
             <!-- 80%  -->
 
             <div class="dashboard-container">
-            <div class="admin-dashboard-container">
+            <div class="admin_dashboard-container">
                 <div class="flex-container">
                     <div class="total-employee">
                         <h4>TỔNG NHÂN VIÊN</h4>

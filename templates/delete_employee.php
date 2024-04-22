@@ -12,7 +12,7 @@
 
             if ($result) {
                 // Redirect back to employee information page
-                header("Location: employee-information.php");
+                header("Location: employee_information.php");
                 exit();
             } else {
                 echo "Error deleting employee: " . $connect->error;

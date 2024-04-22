@@ -20,7 +20,7 @@
         <header class="header">
             <div class="hrm-title">
                 <div class="title close">
-                    <a href="employee-information.php" style="text-decoration: none; font-weight: bold; color: black;">HRM Admin</a>
+                    <a href="employee_information.php" style="text-decoration: none; font-weight: bold; color: black;">HRM Admin</a>
                 </div>
                 <div class="icon-nav close">
                     <i class="fa-solid fa-bars"></i>
@@ -86,7 +86,7 @@
                             <div class="nav_bar-function_child">
                                 <ul class="nav_bar-function_child_Manager none">
                                     <li class="nav_bar-list-item">
-                                        <a href="admin-dashboard.php">Hiệu suất công việc</a>
+                                        <a href="admin_dashboard.php">Hiệu suất công việc</a>
                                     </li>
                                     <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                                     <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -147,7 +147,7 @@
                             <?php
                                 if(isset($_SESSION['role'])){
                                     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                        echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                        echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                         <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                     }
                                 }
@@ -156,7 +156,7 @@
                             <?php
                                 if(isset($_SESSION['role'])){
                                     if($_SESSION['role'] == 'employee'){
-                                        echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                        echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                     }
                                 }
                             ?>
@@ -179,7 +179,7 @@
                                     <ul class="nav_bar-function_child_AdminConsole none">
                                         <li class="nav_bar-list-item"><a href="dashboard.php">Thông tin chi tiết</a></li>
                                         <li class="nav_bar-list-item"><a href="check_log.php">Check Log</a></li>
-                                        <li class="nav_bar-list-item"><a href="add-employee.php">Add Employee Data</a></li>
+                                        <li class="nav_bar-list-item"><a href="add_employee.php">Add Employee Data</a></li>
                                     </ul>
                                 </div>
                             </div>';
@@ -303,7 +303,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    // echo'<a type="button" class="add-btn" href="add-employee.php">Add Employee Data</a>';
+                                    // echo'<a type="button" class="add-btn" href="add_employee.php">Add Employee Data</a>';
                                 }
                                 elseif ($_SESSION['role'] == 'employee'){
                                     echo '<a type="button" class="delete-btn" href="assignment.php">Công việc</a>';
@@ -359,10 +359,10 @@
                                                 "<td>" . $row["department"] . "</td>" .
                                                 "<td>" . $row["position"] . "</td>" .
                                                 "<td>
-                                                    <form action='delete-employee.php' method='post'>
+                                                    <form action='delete_employee.php' method='post'>
                                                         <button type='submit' name='delete' value='".$row['id']."'>Delete</button>
                                                     </form>
-                                                    <form action='update-employee.php' method='post'>
+                                                    <form action='update_employee.php' method='post'>
                                                         <button type='submit' name='update' value='".$row['id']."'>Update</button>
                                                     </form>
                                                 </td>
@@ -384,10 +384,10 @@
                                                 "<td>" . $row["department"] . "</td>" .
                                                 "<td>" . $row["position"] . "</td>" .
                                                 "<td>
-                                                    <form action='delete-employee.php' method='post'>
+                                                    <form action='delete_employee.php' method='post'>
                                                         <button type='submit' name='delete' value='".$row['id']."'>Delete</button>
                                                     </form>
-                                                    <form action='update-employee.php' method='post'>
+                                                    <form action='update_employee.php' method='post'>
                                                         <button type='submit' name='update' value='".$row['id']."'>Update</button>
                                                     </form>
                                                 </td>
@@ -409,10 +409,10 @@
                                                 "<td>" . $row["department"] . "</td>" .
                                                 "<td>" . $row["position"] . "</td>" .
                                                 "<td>
-                                                    <form action='delete-employee.php' method='post'>
+                                                    <form action='delete_employee.php' method='post'>
                                                         <button type='submit' name='delete' value='".$row['id']."'>Delete</button>
                                                     </form>
-                                                    <form action='update-employee.php' method='post'>
+                                                    <form action='update_employee.php' method='post'>
                                                         <button type='submit' name='update' value='".$row['id']."'>Update</button>
                                                     </form>
                                                 </td>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HRM</title>
+    <title>Hiệu Suất Nhân Viên</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -115,7 +115,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                            <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -155,7 +155,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                     <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
@@ -164,7 +164,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -214,7 +214,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Hiệu suất làm việc</h1>
         </div>
@@ -224,14 +224,14 @@
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
                 
-                $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
+                $sqlSelectInfo = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
                 performance_employee.date, performance_employee.result, performance_employee.fail_reason , assignment.assignment_type
                 FROM user_data 
                 INNER JOIN assignment 
                 ON user_data.user_id = assignment.user_id
                 INNER JOIN performance_employee 
                 ON user_data.user_id = performance_employee.user_id ";
-                $result = $connect->query($sql);
+                $resultSelectInfo = $connect->query($sqlSelectInfo);
                     echo '<tr>
                         <th>ID Employee</th>
                         <th>First Name</th>
@@ -242,17 +242,17 @@
                         <th>Reason fail</th>
                         <th>Date</th>
                         </tr>';
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        if ($resultSelectInfo->num_rows > 0) {
+                            while ($rowSelectInfo = $resultSelectInfo->fetch_assoc()) {
                                 echo "<tr>".
-                                    "<td>".$row["user_id"]." </td>".
-                                    "<td>".$row["fisrt_name"]."</td>".
-                                    "<td>".$row["last_name"]."</td>".
-                                    "<td>".$row["assignment_type"]."</td>".
-                                    "<td>".$row["result"]."</td>".
-                                    "<td>".$row["rating"]." </td>".
-                                    "<td>".$row["fail_reason"]." </td>".
-                                    "<td>".$row["date"]." </td>
+                                    "<td>".$rowSelectInfo["user_id"]." </td>".
+                                    "<td>".$rowSelectInfo["fisrt_name"]."</td>".
+                                    "<td>".$rowSelectInfo["last_name"]."</td>".
+                                    "<td>".$rowSelectInfo["assignment_type"]."</td>".
+                                    "<td>".$rowSelectInfo["result"]."</td>".
+                                    "<td>".$rowSelectInfo["rating"]." </td>".
+                                    "<td>".$rowSelectInfo["fail_reason"]." </td>".
+                                    "<td>".$rowSelectInfo["date"]." </td>
                                 </tr>";
                             }
                         }

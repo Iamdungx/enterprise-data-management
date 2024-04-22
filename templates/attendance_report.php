@@ -115,7 +115,7 @@
                 <div class="nav_bar-function_child">
                     <ul class="nav_bar-function_child_Manager none">
                         <li class="nav_bar-list-item">
-                            <a href="employee-information.php">Quản lý nhân viên</a>
+                            <a href="employee_information.php">Quản lý nhân viên</a>
                         </li>
                         <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
                         <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
@@ -155,7 +155,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="approve_form.php">Duyệt đơn</a></li>
+                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                     <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                 }
                             }
@@ -164,7 +164,7 @@
                         <?php
                             if(isset($_SESSION['role'])){
                                 if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_employee.php">Gửi đơn</a> </li>';
+                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
                                 }
                             }
                         ?>
@@ -214,7 +214,7 @@
             </div>
         </div>
     <div class="form-edit">
-        <a class="link_home" href='employee-information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Danh sách chấm công</h1>
         </div>
@@ -224,12 +224,12 @@
                     require 'connect_database.php';
                     mysqli_set_charset($connect, 'UTF8');
                     
-                    $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, attendance.user_id, 
+                    $sqlAttendance = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, attendance.user_id, 
                     attendance.date, attendance.check_in, attendance.check_out, attendance.total
                     FROM user_data 
                     INNER JOIN attendance 
                     ON user_data.user_id = attendance.user_id";
-                    $result = $connect->query($sql);
+                    $resultAttendance = $connect->query($sqlAttendance);
                         echo '<tr>
                             <th>ID Employee</th>
                             <th>First Name</th>
@@ -239,8 +239,8 @@
                             <th>Check out</th>
                             <th>Total</th>
                             </tr>';
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
+                            if ($resultAttendance->num_rows > 0) {
+                                while ($row = $resultAttendance->fetch_assoc()) {
                                     echo "<tr>".
                                         "<td>".$row["user_id"]." </td>".
                                         "<td>".$row["fisrt_name"]."</td>".

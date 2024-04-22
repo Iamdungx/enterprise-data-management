@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="base.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <title>Add Assingment</title>
+    <title>Bàn giao công việc</title>
     <script src="checkform.js"></script>
     <style>
         .link_home {
@@ -73,7 +73,7 @@
         session_start(); // Gọi session_start() trước khi sử dụng $_SESSION
     
     ?>
-    <a class="link_home" href="employee-information.php">Trang chủ</a>
+    <a class="link_home" href="employee_information.php">Trang chủ</a>
     <div class="blue-box">
         <h1>Bàn giao công việc</h1>
     </div>
@@ -107,29 +107,29 @@
         $deadline = $_POST['deadline'];
         $status = "Chưa hoàn thành";
 
-        $sql = "INSERT INTO assignment (`user_id`, `assignment_type`, `deadline`, `status`)  
+        $sqlAssignment = "INSERT INTO assignment (`user_id`, `assignment_type`, `deadline`, `status`)  
                 VALUES ('$user_id', '$assignment', '$deadline', '$status')";
 
         if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
             $role = $_SESSION['role'];
             $name = $_SESSION['nameaccount'];
             $description = "Thêm công việc";
-            $string_sql = mysqli_real_escape_string($connect, $sql); 
+            $string_sqlAssignment = mysqli_real_escape_string($connect, $sqlAssignment); 
             
-            $log = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sql', '$description')";
+            $logAssignment = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sql', '$description')";
 
-            if ($connect->query($log) === TRUE) {
-                echo "Log entry added successfully!<br>";
+            if ($connect->query($logAssignment) === TRUE) {
+                echo "Đã thêm vào check log.<br>";
             } else {
-                echo "Error adding log entry: " . $connect->error . "<br>";
+                echo "Lỗi: " . $connect->error . "<br>";
             }
         }
 
-        if ($connect->query($sql) === TRUE) {
+        if ($connect->query($sqlAssignment) === TRUE) {
             echo "Thêm công việc thành công!";
         } else {
             echo "Thêm không thành công. Nhập lại!";
-            echo "Error: " . $connect->error . "<br>";
+            echo "Lỗi: " . $connect->error . "<br>";
         }
     }
 ?>
