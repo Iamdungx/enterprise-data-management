@@ -459,8 +459,10 @@ tr:hover{
 }
 
 .flex-container {
-    /* display: flex-inline; */
-    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .total-employee,
@@ -473,20 +475,24 @@ tr:hover{
     border-radius: 5px;
     box-shadow: -5px 5px 20px 0px rgba(0, 0, 0, 0.5);
     margin: 0 10px;
+    width: 80%;
 }
 
 .total-employee {
     text-align: center;
     background: linear-gradient(to bottom, #d4f2f0, white);
+    width: 180px;
 }
 
 .total-report-monthly {
     text-align: center;
     background: linear-gradient(to bottom, #F6D5F7, white);
+    width: 200px;
 }
 .total-form {
     justify-content: space-between;
     background: linear-gradient(to bottom, #ccffcc, #ffcccc);
+    width: 190px;
 }
 /* ---------------------end-------------------- */
 
@@ -652,5 +658,8 @@ tr:hover{
 .dashboard-salary_content span, .dashboard-salary_content a {
     color: #fe9405;
 }
-
-
+.formSystem{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
