@@ -17,6 +17,7 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
+    height: 100vh;
 }
 
 .hrm-title{
@@ -461,7 +462,6 @@ tr:hover{
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -481,24 +481,24 @@ tr:hover{
 .total-employee {
     text-align: center;
     background: linear-gradient(to bottom, #d4f2f0, white);
-    width: 180px;
+    width: 230px;
 }
 
 .total-report-monthly {
     text-align: center;
     background: linear-gradient(to bottom, #F6D5F7, white);
-    width: 200px;
+    width: 250px;
 }
 .total-form {
     justify-content: space-between;
     background: linear-gradient(to bottom, #ccffcc, #ffcccc);
-    width: 190px;
+    width: 230px;
 }
 /* ---------------------end-------------------- */
 
 .dashboard-container{
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 69% 35%;
     grid-column-gap: 24px;
     margin: 16px;
 }

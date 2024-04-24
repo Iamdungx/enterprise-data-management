@@ -1,18 +1,8 @@
-<?php
-    require 'connect_database.php';
-    mysqli_set_charset($connect, 'UTF8');
-    $id = $_GET['id'];
-    $sqlSelectTotalWork = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id GROUP BY a.user_id;";
-    $resultSelectTotalWork = $connect->query($sqlSelectTotalWork);
-    $employee = $resultSelectTotalWork->fetch_assoc();
-    $user_id = $employee['user_id'];
-    $sqlSelectAttent = "SELECT * FROM `attendance` WHERE user_id = '$user_id';";
-    $resultSelectAttent = $connect->query($sqlSelectAttent);
-?>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8 vi">
+    
+<meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -65,6 +55,49 @@
     </style>
 </head>
 <body>
+<?php
+    session_start();
+    require 'connect_database.php';
+    mysqli_set_charset($connect, 'UTF8');
+    if (isset($_POST['search_month'])) {
+        $monthPost = $_POST['month'];
+        $month = date("m");
+        $id = $_GET['id'];
+        $sqlSelectTotalWork = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id and month(a.date) = '$monthPost' GROUP BY a.user_id;";
+        $sqlSelectTotalWorkCur = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id and month(a.date) = '$month' GROUP BY a.user_id;";
+        $resultSelectTotalWork = $connect->query($sqlSelectTotalWork);
+        $resultSelectTotalWorkCur = $connect->query($sqlSelectTotalWorkCur);
+
+        if($resultSelectTotalWork->num_rows > 0){
+            $employee = $resultSelectTotalWork->fetch_assoc();
+            $user_id = $employee['user_id'];
+            $sqlSelectAttent = "SELECT * FROM `attendance` WHERE user_id = '$user_id' and month(date) = '$monthPost'";
+            $resultSelectAttent = $connect->query($sqlSelectAttent);
+        }
+        else{
+            $employee = $resultSelectTotalWorkCur->fetch_assoc();
+            $user_id = $employee['user_id'];
+            $sqlSelectAttent = "SELECT * FROM `attendance` WHERE user_id = '$user_id' and month(date) = '$month'";
+            $resultSelectAttent = $connect->query($sqlSelectAttent);
+            ?>
+            <script>
+                alert('Không có dữ liệu');
+            </script>
+            <?php
+        }
+    }
+    else{
+        $id = $_GET['id'];
+        $month = date("m");
+        $sqlSelectTotalWork = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND u.id = $id and month(a.date) = '$month' GROUP BY a.user_id;";
+        $resultSelectTotalWork = $connect->query($sqlSelectTotalWork);
+        $employee = $resultSelectTotalWork->fetch_assoc();
+        $user_id = $employee['user_id'];
+        $sqlSelectAttent = "SELECT * FROM `attendance` WHERE user_id = '$user_id' and month(date) = '$month'";
+        $resultSelectAttent = $connect->query($sqlSelectAttent);
+    }
+
+?>
     <header class="header">
         <div class="hrm-title">
             <div class="title close">
@@ -120,115 +153,115 @@
     <div class="grid_system_column close container">
         <!-- 20% -->
         <div class="container-nav_bar">
-            <div class="nav_bar-function">
-                 <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
-                    <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
-                    <a>Quản lí nhân viên</a>
-                    <div class="function-icon_arrow_Manager">
-                        <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                    <div class="nav_bar-function">
+                        <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
+                            <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
+                            <a>Quản lí nhân viên</a>
+                            <div class="function-icon_arrow_Manager none">
+                                <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                            </div>
+                        </div>
+                        <div class="nav_bar-function_child">
+                            <ul class="nav_bar-function_child_Manager none">
+                                <li class="nav_bar-list-item">
+                                    <a href="employee_information.php">Quản lý nhân viên</a>
+                                </li>
+                                <li class="nav_bar-list-item"><a href="salary.php">Điều chỉnh lương</a></li>
+                                <li class="nav_bar-list-item"><a href="payroll.php">Bảng lương</a></li>
+                                <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
+                                <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
+                            </ul>
+                        </div>
+    
                     </div>
-                </div>
-                <div class="nav_bar-function_child">
-                    <ul class="nav_bar-function_child_Manager none">
-                        <li class="nav_bar-list-item">
-                            <a href="employee_information.php">Quản lý nhân viên</a>
-                        </li>
-                        <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
-                        <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
-                        <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="nav_bar-function">
-                <div class="nav_bar-function-content close">
-                    <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
-                    <a>Báo cáo chấm công</a>
-                    <div class="function-icon_arrow_Report">
-                        <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+    
+                    <div class="nav_bar-function">
+                        <div class="nav_bar-function-content close">
+                            <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
+                            <a>Báo cáo chấm công</a>
+                            <div class="function-icon_arrow_Report none">
+                                <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                            </div>
+                        </div>
+                        <div class="nav_bar-function_child">
+                            <ul class="nav_bar-function_child_Report none">
+                                <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
+                            </ul>
+    
+                        </div>
+    
                     </div>
-                </div>
-                <div class="nav_bar-function_child">
-                    <ul class="nav_bar-function_child_Report none">
-                        <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
-                    </ul>
-
-                </div>
-
-            </div>
-
-            <div class="nav_bar-function">
-                <div class="nav_bar-function-content close">
-                    <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
-                    <a>Đơn & giải trình</a>
-                    <div class="function-icon_arrow_Assignment">
-                        <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
-                    </div>
-                </div>
-                <div class="nav_bar-function_child">
-                    <ul class="nav_bar-function_child_Assignment none">
-                        <?php
-                            if(isset($_SESSION['role'])){
-                                if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
-                                    <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
-                                }
-                            }
-                        ?>
-
-                        <?php
-                            if(isset($_SESSION['role'])){
-                                if($_SESSION['role'] == 'employee'){
-                                    echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
-                                }
-                            }
-                        ?>
+    
+                    <div class="nav_bar-function">
+                        <div class="nav_bar-function-content close">
+                            <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
+                            <a>Đơn & giải trình</a>
+                            <div class="function-icon_arrow_Assignment none">
+                                <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                            </div>
+                        </div>
+                        <div class="nav_bar-function_child">
+                            <ul class="nav_bar-function_child_Assignment none">
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                            echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
+                                            <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
+                                        }
+                                    }
+                                ?>
+    
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'employee'){
+                                            echo '<li class="nav_bar-list-item"><a href="form_submit.php">Gửi đơn</a> </li>';
+                                        }
+                                    }
+                                ?>
+                                
+                            </ul>
+                        </div>
                         
-                    </ul>
+                        <?php
+                            if(isset($_SESSION['role'])){
+                                if($_SESSION['role'] == 'admin' ){
+                                    echo '<div class="nav_bar-function">
+                                    <div class="nav_bar-function-content close">
+                                        <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
+                                        <a>Admin Console</a>
+                                        <div class="function-icon_arrow_AdminConsole none">
+                                            <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="nav_bar-function_child">
+                                        <ul class="nav_bar-function_child_AdminConsole none">
+                                            <a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a>
+                                            <a class="nav_bar-list-item" href="check_log.php">Check Log</a>
+                                        </ul>
+                                    </div>
+                                </div>';
+                                }
+                                if($_SESSION['role'] == 'manager' ){
+                                    echo '<div class="nav_bar-function">
+                                    <div class="nav_bar-function-content close">
+                                        <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
+                                        <a>Manager Console</a>
+                                        <div class="function-icon_arrow_AdminConsole none">
+                                            <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="nav_bar-function_child">
+                                        <ul class="nav_bar-function_child_AdminConsole none">
+                                            <a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a>
+                                        </ul>
+                                    </div>
+                                </div>';
+                                }
+                            }
+                            
+                        ?>
+                    </div>
                 </div>
-                
-                <?php
-                    if(isset($_SESSION['role'])){
-                        if($_SESSION['role'] == 'admin' ){
-                            echo '<div class="nav_bar-function">
-                            <div class="nav_bar-function-content close">
-                                <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
-                                <a>Admin Console</a>
-                                <div class="function-icon_arrow_AdminConsole">
-                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
-                                </div>
-                            </div>
-                            <div class="nav_bar-function_child">
-                                <ul class="nav_bar-function_child_AdminConsole none">
-                                    <a class="nav_bar-list-item" href="create-accounts.php">Hiệu suất</a>
-                                </ul>
-                            </div>
-                        </div>';
-                        }
-                        if($_SESSION['role'] == 'manager' ){
-                            echo '<div class="nav_bar-function">
-                            <div class="nav_bar-function-content close">
-                                <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
-                                <a>Manager Console</a>
-                                <div class="function-icon_arrow_AdminConsole">
-                                    <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
-                                </div>
-                            </div>
-                            <div class="nav_bar-function_child">
-                                <ul class="nav_bar-function_child_AdminConsole none">
-                                    <a class="nav_bar-list-item" href="performance_detail.php">Bàn giao công việc</a>
-                                </ul>
-                            </div>
-                        </div>';
-                        }
-                    }
-                    
-                ?>
-
-
-            </div>
-        </div>
     <div class="form-edit">
         <a class="link_home" href='employee_information.php'>Trang chủ</a>
         <div class="blue-box">
@@ -263,6 +296,24 @@
                     <td><?php echo $employee['total_dayLackingHours']; ?></td>
                 </tr>
             </table>
+            
+            <form action="" method="post">
+                <select name="month" id="month">
+                    <option value="01">Tháng 1</option>
+                    <option value="02">Tháng 2</option>
+                    <option value="03">Tháng 3</option>
+                    <option value="04">Tháng 4</option>
+                    <option value="05">Tháng 5</option>
+                    <option value="06">Tháng 6</option>
+                    <option value="07">Tháng 7</option>
+                    <option value="08">Tháng 8</option>
+                    <option value="09">Tháng 9</option>
+                    <option value="10">Tháng 10</option>
+                    <option value="11">Tháng 11</option>
+                    <option value="12">Tháng 12</option>
+                </select>
+                    <input type="submit" value="Tìm kiếm" name="search_month">
+            </form>
 
             <table id="information-table">
                 <tr>
@@ -274,8 +325,11 @@
                 </tr>
                 <?php
                     $count = 0;
-                    while ($rowSelectAttend = $resultSelectAttent->fetch_assoc()) {
-                        $count++;
+                    if($resultSelectAttent->num_rows > 0){
+                        while ($rowSelectAttend = $resultSelectAttent->fetch_assoc()) {
+                            $count++;
+                    
+
                 ?>
                 <tr>
                     <td><?php echo $count; ?></td>
@@ -285,6 +339,10 @@
                     <td><?php echo $rowSelectAttend['total']; ?></td>
                 </tr>
                 <?php
+                        }
+                    }
+                    else{
+                        echo "Không có dữ liệu";
                     }
                 ?>
             </table>

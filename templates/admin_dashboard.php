@@ -92,7 +92,8 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <li class="nav_bar-list-item">
                                     <a href="employee_information.php">Quản lý nhân viên</a>
                                 </li>
-                                <li class="nav_bar-list-item"><a href="salary.php">Bảng lương</a></li>
+                                <li class="nav_bar-list-item"><a href="salary.php">Điều chỉnh lương</a></li>
+                                <li class="nav_bar-list-item"><a href="payroll.php">Bảng lương</a></li>
                                 <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                                 <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
                             </ul>
@@ -160,7 +161,8 @@ use function PHPSTORM_META\sql_injection_subst;
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="create-accounts.php">Hiệu suất</a>
+                                            <a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a>
+                                            <a class="nav_bar-list-item" href="check_log.php">Check Log</a>
                                         </ul>
                                     </div>
                                 </div>';
