@@ -88,7 +88,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Manager none">
                             <li class="nav_bar-list-item">
-                                <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
+                                <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
                             </li>
                             <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                             <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
@@ -361,27 +361,20 @@ use function PHPSTORM_META\sql_injection_subst;
                                         $date = date("m");
                                         $user_id =  $_SESSION['nameaccount'];
 
-                                        
-                                        $sql = "SELECT COUNT(*) AS dateWork FROM `attendance` WHERE date like '%$date%' AND user_id = '$user_id'";
-                                        $result = $connect->query($sql);
-                                        $row = $result->fetch_assoc();
-                                        $totalCountDateWork = $row['dateWork'];
-
-                                        $salaryEmployeeSql = "SELECT user_data.user_id, salary_and_bonus.salary, salary_and_bonus.bonus from attendance
-                                            INNER JOIN user_data ON user_data.user_id = attendance.user_id 
-                                            INNER JOIN salary_and_bonus ON user_data.id = salary_and_bonus.employee_id
-                                            WHERE user_data.user_id = '$user_id'
-                                            LIMIT 1;";
-                                        $resultSalaryEmployeeSql = $connect->query($salaryEmployeeSql);
-                                        if ($resultSalaryEmployeeSql->num_rows > 0) {
-                                            $row1 = $resultSalaryEmployeeSql->fetch_assoc();
-                                            $salary = $row1["salary"];
-                                            $bonus = $row1["bonus"];
-
-                                            $totalSalary = ($salary / 26) * $totalCountDateWork + $bonus;
-
-                                            echo'<p class="salary_employee">'  . floor($totalSalary) . ' VNĐ</p>';
+                                        $sqlSelectTWD = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* 
+                                        FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id 
+                                        WHERE a.total > '00:00:00' AND month(a.date) = '$date' AND u.user_id = '$user_id' GROUP BY a.user_id;";
+                                        $resultSelectTWD = $connect->query($sqlSelectTWD);
+                                    
+                                        if($resultSelectTWD->num_rows > 0){
+                                            while ($rowSelectTWD = $resultSelectTWD->fetch_assoc()) {
+                                                $actual_workingHours = 30;
+                                                $salary = $rowSelectTWD['salary'];
+                                                $total_salary = $salary * $rowSelectTWD['total_workDay'] / $actual_workingHours - ($rowSelectTWD['total_dayLackingHours'] * 100000) + $rowSelectTWD['bonus'];
+                                                echo'<p class="salary_employee">'  . number_format($total_salary) . ' VNĐ</p>';
+                                            }
                                         }
+                                        
                                         else{
                                             echo'<p class="salary_employee">0 VNĐ</p>';
 

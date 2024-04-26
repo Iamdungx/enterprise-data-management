@@ -498,7 +498,7 @@ tr:hover{
 
 .dashboard-container{
     display: grid;
-    grid-template-columns: 69% 35%;
+    grid-template-columns: 68% 33%;
     grid-column-gap: 24px;
     margin: 16px;
 }
@@ -511,7 +511,7 @@ tr:hover{
 
 
 .dashboard-information{
-    height: 400px;
+    height: 440px;
     background-color: #fff;
     box-shadow: 3px 5px 14px rgba(115, 115, 115, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -654,6 +654,9 @@ tr:hover{
     margin-bottom: 46px;
     opacity: .65;
     color: #fe9405;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .dashboard-salary_content span, .dashboard-salary_content a {
     color: #fe9405;

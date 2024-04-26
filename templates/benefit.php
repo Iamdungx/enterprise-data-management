@@ -233,7 +233,7 @@
                     $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, benefit.health_insurance, benefit.life_insurance , benefit.other
                     FROM user_data 
                     INNER JOIN benefit 
-                    ON user_data.id = benefit.user_id
+                    ON user_data.user_id = benefit.user_id
                     WHERE benefit.user_id = '$user_id'";
                     $result = $connect->query($sql);
                         echo '<tr>

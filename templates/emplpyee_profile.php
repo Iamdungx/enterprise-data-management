@@ -223,13 +223,15 @@
             <?php
                 require 'connect_database.php';
                 mysqli_set_charset($connect, 'UTF8');
+                $user_id = $_SESSION['nameaccount'];
                 
                 $sql = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, user_data.address, user_data.date_of_birth, user_data.phone, 
                 user_data.email, user_data.hire_date, user_data.department, user_data.position, user_data.role,
                 employee_profile.education, employee_profile.work_exp , employee_profile.certification
                 FROM user_data 
                 INNER JOIN employee_profile 
-                ON user_data.id = employee_profile.user_id;";
+                ON user_data.user_id = employee_profile.user_id
+                WHERE user_data.user_id = '$user_id';";
                 $result = $connect->query($sql);
                     echo '<tr>
                         <th>ID Employee</th>
