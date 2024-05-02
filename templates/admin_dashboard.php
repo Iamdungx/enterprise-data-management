@@ -52,7 +52,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 </div>
                 
                 <div class="dropdown-content">
-                    <form action="attendance.php" method="post">
+                    <form class="form_attendance" action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input name = "attendance_button" type = "submit" value="Chấm công">
                     </form>
@@ -161,8 +161,8 @@ use function PHPSTORM_META\sql_injection_subst;
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a>
-                                            <a class="nav_bar-list-item" href="check_log.php">Check Log</a>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a></li>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="check_log.php">Check Log</a></li>
                                         </ul>
                                     </div>
                                 </div>';
@@ -178,7 +178,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a></li>
                                         </ul>
                                     </div>
                                 </div>';

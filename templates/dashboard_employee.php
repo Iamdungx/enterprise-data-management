@@ -52,7 +52,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 </div>
                 
                 <div class="dropdown-content">
-                    <form action="attendance.php" method="post">
+                    <form class="form_attendance" action="attendance.php" method="post">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input name = "attendance_button" type = "submit" value="Chấm công">
                     </form>
@@ -81,7 +81,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
                         <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
                         <a>Thông tin chi tiết</a>
-                        <div class="function-icon_arrow_Manager">
+                        <div class="function-icon_arrow_Manager none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close">
                         <i class="nav_bar-function-icon fa-solid fa-calendar-days fa-lg"></i>
                         <a>Báo cáo chấm công</a>
-                        <div class="function-icon_arrow_Report">
+                        <div class="function-icon_arrow_Report none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
@@ -118,7 +118,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <div class="nav_bar-function-content close">
                         <i class="nav_bar-function-icon fa-solid fa-envelopes-bulk fa-lg"></i>
                         <a>Đơn & giải trình</a>
-                        <div class="function-icon_arrow_Assignment">
+                        <div class="function-icon_arrow_Assignment none">
                             <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <div class="nav_bar-function-content close">
                                     <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
                                     <a>Admin Console</a>
-                                    <div class="function-icon_arrow_AdminConsole">
+                                    <div class="function-icon_arrow_AdminConsole none">
                                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                 <div class="nav_bar-function-content close">
                                     <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>
                                     <a>Manager Console</a>
-                                    <div class="function-icon_arrow_AdminConsole">
+                                    <div class="function-icon_arrow_AdminConsole none">
                                         <i class="nav_bar-function-icon fa-solid fa-angle-up"></i>
                                     </div>
                                 </div>

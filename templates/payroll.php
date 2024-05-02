@@ -91,14 +91,14 @@
             </div>
             
             <div class="dropdown-content">
-                <a href="attendance.php">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    Chấm Công
-                </a>
-                <a href="javascript:void(0);" onclick="confirmLogout()">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Đăng xuất
-                </a>
+            <form class="form_attendance" action="attendance.php" method="post">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <input name = "attendance_button" type = "submit" value="Chấm công">
+                    </form>
+                    <a href="javascript:void(0);" onclick="confirmLogout()">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Đăng xuất
+                    </a>
                 
 
             </div>
@@ -198,8 +198,8 @@
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a>
-                                            <a class="nav_bar-list-item" href="check_log.php">Check Log</a>
+                                        <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a></li>
+                                        <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="check_log.php">Check Log</a></li>
                                         </ul>
                                     </div>
                                 </div>';

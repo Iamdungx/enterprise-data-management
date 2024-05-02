@@ -153,8 +153,8 @@
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a>
-                                            <a class="nav_bar-list-item" href="check_log.php">Check Log</a>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="add_employee.php">Thêm nhân viên</a></li>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="check_log.php">Check Log</a></li>
                                         </ul>
                                     </div>
                                 </div>';
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="nav_bar-function_child">
                                         <ul class="nav_bar-function_child_AdminConsole none">
-                                            <a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a>
+                                            <li class="nav_bar-list-item"><a class="nav_bar-list-item" href="add_assignment.php">Bàn giao công việc</a></li>
                                         </ul>
                                     </div>
                                 </div>';

@@ -44,11 +44,11 @@ const navBar = {
         iconHeaderNav.classList.toggle('close')
         listManagerNav.classList.add('none')
         listReportNav.classList.add('none')
-        listAssignmentNav.classList.add('none')
-        listAdminConsoleNav.classList.add('none')
         iconManager.classList.toggle('none')
         iconReport.classList.toggle('none')
         iconAssignment.classList.toggle('none')
+        listAssignmentNav.classList.add('none')
+        listAdminConsoleNav.classList.add('none')
         iconAdminConsole.classList.toggle('none')
 
       }
