@@ -83,7 +83,7 @@
                             header("location: admin_dashboard.php");
                         }
                         else{
-                            header("location: dashboard_employee.php");
+                            header("location: employee_dashboard.php");
                         }
                     }
                 }

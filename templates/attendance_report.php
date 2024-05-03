@@ -119,7 +119,7 @@
                     <div class="nav_bar-function_child">
                         <ul class="nav_bar-function_child_Manager none">
                             <li class="nav_bar-list-item">
-                                <a href="emplpyee_profile.php">Thông tin nhân viên chi tiết</a>
+                                <a href="employee_profile.php">Thông tin nhân viên chi tiết</a>
                             </li>
                             <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
                             <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>

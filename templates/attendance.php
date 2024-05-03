@@ -65,5 +65,5 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
-header("location: dashboard_employee.php");
+header("location: employee_dashboard.php");
 ?>
