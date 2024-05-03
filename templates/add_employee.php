@@ -260,9 +260,9 @@
             <h1>Thêm nhân viên</h1>
         </div>
         <div class="form-import">
-            <form action="" name="excel" require value="" enctype="multipart/form-data" method="POST">
-                <input type="file" name="import_file" class="form-control">
-                <button type="submit">Import Excel Data</button>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Upload File" name="submit">
             </form>
         </div>
         <form class="form-container" id="form" method="post">
