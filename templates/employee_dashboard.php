@@ -354,36 +354,43 @@ use function PHPSTORM_META\sql_injection_subst;
                         <div class="dashboard-salary">
                             <div class="dashboard-salary_content">
                                 <span>Lương</span>
-                                <div>
-                                    <?php
-                                        require 'connect_database.php';
-                                        mysqli_set_charset($connect, 'UTF8');   
-                                        $date = date("m");
-                                        $user_id =  $_SESSION['nameaccount'];
-
-                                        $sqlSelectTWD = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* 
-                                        FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id 
-                                        WHERE a.total > '00:00:00' AND month(a.date) = '$date' AND u.user_id = '$user_id' GROUP BY a.user_id;";
+                            
+                                <?php
+                                    require 'connect_database.php';
+                                    mysqli_set_charset($connect, 'UTF8');
+                                    $date = date("m");
+                                    $user_id = isset($_SESSION['nameaccount']) ? $_SESSION['nameaccount'] : null;
+                                    if ($user_id !== null) {
+                                        $sqlSelectTWD = "SELECT count(*) as total_workDay, 
+                                                                COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, 
+                                                                u.*, s.* 
+                                                        FROM `user_data` u 
+                                                        INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id 
+                                                        INNER JOIN `attendance` a ON u.user_id = a.user_id 
+                                                        WHERE a.total > '00:00:00' AND month(a.date) = '$date' AND u.user_id = '$user_id' 
+                                                         GROUP BY a.user_id;";
                                         $resultSelectTWD = $connect->query($sqlSelectTWD);
-                                    
-                                        if($resultSelectTWD->num_rows > 0){
-                                            while ($rowSelectTWD = $resultSelectTWD->fetch_assoc()) {
-                                                $actual_workingHours = 30;
-                                                $salary = $rowSelectTWD['salary'];
-                                                $total_salary = $salary * $rowSelectTWD['total_workDay'] / $actual_workingHours - ($rowSelectTWD['total_dayLackingHours'] * 100000) + $rowSelectTWD['bonus'];
-                                                echo'<p class="salary_employee">'  . number_format($total_salary) . ' VNĐ</p>';
+                                        if ($resultSelectTWD->num_rows > 0) {
+                                            $rowSelectTWD = $resultSelectTWD->fetch_assoc();
+                                            $actual_workingHours = 30;
+                                            $salary = $rowSelectTWD['salary'];
+                                            $total_salary = $salary * $rowSelectTWD['total_workDay'] / $actual_workingHours 
+                                                        - ($rowSelectTWD['total_dayLackingHours'] * 100000) 
+                                                        + $rowSelectTWD['bonus'];
+                                            echo '<p class="salary_employee">' . number_format($total_salary) . ' VNĐ</p>';
+
+                                            if (isset($rowSelectTWD['employee_id'])) {
+                                                $employee_id = intval($rowSelectTWD['employee_id']);
+                                                echo "<a href='employee_salary.php?id={$employee_id}'>Xem chi tiết</a>";
                                             }
+                                        } else {
+                                            echo '<p class="salary_employee">0 VNĐ</p>';
                                         }
-                                        
-                                        else{
-                                            echo'<p class="salary_employee">0 VNĐ</p>';
-
-                                        }
-
+                                    } else {
+                                        echo "Không tìm thấy người dùng đang đăng nhập.";
+                                    }
                                     ?>
-                                </div>
-                                <a href="employee_salary.php">Xem chi tiết</a>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
