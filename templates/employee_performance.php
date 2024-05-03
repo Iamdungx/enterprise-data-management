@@ -4,7 +4,7 @@
     <meta charset="UTF-8 vi">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HRM</title>
+    <title>Hiệu Suất Nhân Viên</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/base.css">
     <link href="./icons/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
         #information-table th,
         #information-table td {
             border: 1px solid #ddd; /* Đường viền của ô */
-            padding: 8px; /* Khoảng cách giữa nội dung và đường viền của ô */
+            padding: 20px; /* Khoảng cách giữa nội dung và đường viền của ô */
             text-align: left; /* Căn chỉnh văn bản sang trái */
         }
     </style>
@@ -94,20 +94,18 @@
                     
 
                 </div>
-                <script>
-                function confirmLogout() {
-                    if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
-                    window.location.href = "logout.php";
-                        }
+            <script>
+            function confirmLogout() {
+                if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+                window.location.href = "logout.php";
                     }
-                </script>
-            </div>
-
-        </header>
-
-        <div class="grid_system_column close container">
-            <!-- 20% -->
-            <div class="container-nav_bar">
+                }
+            </script>
+        </div>
+    </header>
+    <div class="grid_system_column close container">
+        <!-- 20% -->
+        <div class="container-nav_bar">
                 <div class="nav_bar-function">
                     <div class="nav_bar-function-content close"> <!-- Quản lí nhân viên -->
                         <i class="nav_bar-function-icon fa-solid fa-sitemap fa-lg"></i>
@@ -177,8 +175,8 @@
                                             echo '<li class="nav_bar-list-item"><a href="employee_attendance_report.php">Danh sách chấm công</a> </li>';
                                         }
                                     }
-                                ?>
-                        </ul>
+                                ?>                        
+                                </ul>
 
                     </div>
 
@@ -256,48 +254,53 @@
                 </div>
             </div>
     <div class="form-edit">
-        <a class="link_home" href='employee_information.php'>Trang chủ</a>
+        <a class="link_home" href='employee_dashboard.php'>Trang chủ</a>
         <div class="blue-box">
-            <h1>Danh sách chấm công</h1>
+            <h1>Hiệu suất làm việc</h1>
         </div>
-        <div class="form-data_manager-table">
-            <table id="information-table">
-                <?php
-                    require 'connect_database.php';
-                    mysqli_set_charset($connect, 'UTF8');
-                    
-                    $sqlAttendance = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, attendance.user_id, 
-                    attendance.date, attendance.check_in, attendance.check_out, attendance.total
-                    FROM user_data 
-                    INNER JOIN attendance 
-                    ON user_data.user_id = attendance.user_id";
-                    $resultAttendance = $connect->query($sqlAttendance);
-                        echo '<tr>
-                            <th>ID Employee</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Date</th>
-                            <th>Check in</th>
-                            <th>Check out</th>
-                            <th>Total</th>
-                            </tr>';
-                            if ($resultAttendance->num_rows > 0) {
-                                while ($row = $resultAttendance->fetch_assoc()) {
-                                    echo "<tr>".
-                                        "<td>".$row["user_id"]." </td>".
-                                        "<td>".$row["fisrt_name"]."</td>".
-                                        "<td>".$row["last_name"]."</td>".
-                                        "<td>".$row["date"]."</td>".
-                                        "<td>".$row["check_in"]."</td>".
-                                        "<td>".$row["check_out"]."</td>".
-                                        "<td>".$row["total"]." </td>
-                                    </tr>";
-                                }
+    <div class="form-data_manager-table">
+        <table id="information-table">
+            <?php
+                require 'connect_database.php';
+                mysqli_set_charset($connect, 'UTF8');
+                $user_id = $_SESSION['nameaccount'];
+                
+                $sqlSelectInfo = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, performance_employee.rating, 
+                performance_employee.date, performance_employee.result, performance_employee.fail_reason , assignment.assignment_type
+                FROM user_data 
+                INNER JOIN assignment 
+                ON user_data.user_id = assignment.user_id
+                INNER JOIN performance_employee 
+                ON user_data.user_id = performance_employee.user_id 
+                WHERE user_data.user_id = '$user_id'";
+                $resultSelectInfo = $connect->query($sqlSelectInfo);
+                    echo '<tr>
+                        <th>ID Employee</th> 
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Assignment Type</th>
+                        <th>Result</th>
+                        <th>Rating</th>
+                        <th>Reason fail</th>
+                        <th>Date</th>
+                        </tr>';
+                        if ($resultSelectInfo->num_rows > 0) {
+                            while ($rowSelectInfo = $resultSelectInfo->fetch_assoc()) {
+                                echo "<tr>".
+                                    "<td>".$rowSelectInfo["user_id"]." </td>".
+                                    "<td>".$rowSelectInfo["fisrt_name"]."</td>".
+                                    "<td>".$rowSelectInfo["last_name"]."</td>".
+                                    "<td>".$rowSelectInfo["assignment_type"]."</td>".
+                                    "<td>".$rowSelectInfo["result"]."</td>".
+                                    "<td>".$rowSelectInfo["rating"]." </td>".
+                                    "<td>".$rowSelectInfo["fail_reason"]." </td>".
+                                    "<td>".$rowSelectInfo["date"]." </td>
+                                </tr>";
                             }
-                    $connect->close();
-                ?>
-            </table>
-        </div>
+                        }
+                $connect->close();
+            ?>
+        </table>
     </div>
     <script src="./js/index.js"></script>
 </body>

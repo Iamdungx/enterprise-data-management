@@ -168,8 +168,34 @@
                                 </li>
                                 <li class="nav_bar-list-item"><a href="salary.php">Điều chỉnh lương</a></li>
                                 <li class="nav_bar-list-item"><a href="payroll.php">Bảng lương</a></li>
-                                <li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a></li>
-                                <li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                            echo '<li class="nav_bar-list-item"><a href="benefit_admin.php">Bảo hiểm, đãi ngộ</a></li>';
+                                        }
+                                    }
+                                ?>
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'employee'){
+                                            echo '<li class="nav_bar-list-item"><a href="benefit.php">Bảo hiểm, đãi ngộ</a> </li>';
+                                        }
+                                    }
+                                ?>
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                            echo '<li class="nav_bar-list-item"><a href="performance.php">Hiệu suất</a></li>';
+                                        }
+                                    }
+                                ?>
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'employee'){
+                                            echo '<li class="nav_bar-list-item"><a href="employee_performance.php">Hiệu suất</a> </li>';
+                                        }
+                                    }
+                                ?>
                             </ul>
                         </div>
     
@@ -185,7 +211,20 @@
                         </div>
                         <div class="nav_bar-function_child">
                             <ul class="nav_bar-function_child_Report none">
-                                <li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>
+                            <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                            echo '<li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>';
+                                        }
+                                    }
+                                ?>
+                                <?php
+                                    if(isset($_SESSION['role'])){
+                                        if($_SESSION['role'] == 'employee'){
+                                            echo '<li class="nav_bar-list-item"><a href="employee_attendance_report.php">Danh sách chấm công</a> </li>';
+                                        }
+                                    }
+                                ?>
                             </ul>
     
                         </div>

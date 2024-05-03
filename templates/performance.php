@@ -215,7 +215,7 @@
                 </div>
             </div>
     <div class="form-edit">
-        <a class="link_home" href='employee_dashboard.php'>Trang chủ</a>
+        <a class="link_home" href='admin_dashboard.php'>Trang chủ</a>
         <div class="blue-box">
             <h1>Hiệu suất làm việc</h1>
         </div>

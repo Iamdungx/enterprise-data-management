@@ -265,17 +265,13 @@
                 <?php
                     require 'connect_database.php';
                     mysqli_set_charset($connect, 'UTF8');
-                    
-                    $sqlAttendance = "SELECT user_data.user_id, user_data.fisrt_name, user_data.last_name, attendance.user_id, 
-                    attendance.date, attendance.check_in, attendance.check_out, attendance.total
-                    FROM user_data 
-                    INNER JOIN attendance 
-                    ON user_data.user_id = attendance.user_id";
+                    $user_id = $_SESSION['nameaccount'];
+
+                    $sqlAttendance = "SELECT date, check_in, check_out, total
+                    FROM attendance 
+                    WHERE user_id = '$user_id'";
                     $resultAttendance = $connect->query($sqlAttendance);
                         echo '<tr>
-                            <th>ID Employee</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
                             <th>Date</th>
                             <th>Check in</th>
                             <th>Check out</th>
@@ -284,9 +280,6 @@
                             if ($resultAttendance->num_rows > 0) {
                                 while ($row = $resultAttendance->fetch_assoc()) {
                                     echo "<tr>".
-                                        "<td>".$row["user_id"]." </td>".
-                                        "<td>".$row["fisrt_name"]."</td>".
-                                        "<td>".$row["last_name"]."</td>".
                                         "<td>".$row["date"]."</td>".
                                         "<td>".$row["check_in"]."</td>".
                                         "<td>".$row["check_out"]."</td>".
