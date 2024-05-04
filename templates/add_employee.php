@@ -298,12 +298,7 @@
         <div class="blue-box">
             <h1>Thêm nhân viên</h1>
         </div>
-        <div class="form-import">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <input type="file" name="fileToUpload" id="fileToUpload">
-                <input type="submit" value="Upload File" name="submit">
-            </form>
-        </div>
+
         <form class="form-container" id="form" method="post">
             <div class="form-group">
                 <label>Họ</label>
@@ -441,6 +436,55 @@
                 }
             }
         ?>
+    </div>
+   
+    <!-- IMPORT CSV -->
+    <div class="form-import">
+        <div id="wrap">
+            <div class="container">
+                <div class="row">
+
+                    <form class="form-horizontal" action="functions.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <legend>Form Name</legend>
+
+                            <!-- File Button -->
+                            <div class="form-group">
+                                <label for="filebutton">Select File</label>
+                                <div>
+                                    <input type="file" name="file" id="file" class="input-large">
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label for="singlebutton">Import data</label>
+                                <div>
+                                    <button type="submit" id="submit" name="Import" data-loading-text="Loading...">Import</button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                </div>
+                <?php
+                get_all_records();
+                ?>
+            </div>
+        </div>
+        <div>
+            <form class="form-horizontal" action="functions.php" method="post" name="upload_excel"   
+                        enctype="multipart/form-data">
+                    <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                <input type="submit" name="Export" value="export to excel"/>
+                            </div>
+                    </div>                    
+            </form>           
+        </div>
     </div>
 
     <script src="./js/index.js"></script>
