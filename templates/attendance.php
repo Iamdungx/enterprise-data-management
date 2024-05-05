@@ -15,20 +15,22 @@ if(isset($_POST["attendance_button"])) {
     $result = $checkInStmt->get_result();
 
     if ($result->num_rows > 0) {
-        // User has already clocked in, proceed to clock out
         $row = $result->fetch_assoc();
         $check_in_time = $row['check_in'];
 
-        // Calculate total time (you may need to adjust this based on your needs)
         $check_in_datetime = new DateTime($date . ' ' . $check_in_time);
         $current_datetime = new DateTime();
         $diff = $check_in_datetime->diff($current_datetime);
+        $total_time_seconds = $diff->format('%s');
+        $total_hours_worked = $total_time_seconds / 3600;
         $total_time = $diff->format('%H:%i:%s');
 
+        $percentage_of_8_hours = ($total_hours_worked / 8) * 100;
+
         // Update the check-out and total time in the database
-        $updateQuery = "UPDATE attendance SET check_out = ?, total = ? WHERE user_id = ? AND date = ?";
+        $updateQuery = "UPDATE attendance SET check_out = ?, total = ?, rate = ? WHERE user_id = ? AND date = ?";
         $updateStmt = $connect->prepare($updateQuery);
-        $updateStmt->bind_param("ssss", $check_in, $total_time, $user_id, $date);
+        $updateStmt->bind_param("ssdss", $check_in, $total_time, $percentage_of_8_hours, $user_id, $date);
 
         if ($updateStmt->execute()) {
             echo "Clock-out successful! Total time: $total_time";
