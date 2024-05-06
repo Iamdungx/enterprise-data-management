@@ -1,0 +1,26 @@
+id,user_id,health_insurance,life_insurance,other
+1,HUMG724596,Yes,Yes,Employee Assistance Program
+2,HUMG236580,Yes,Yes,Flexible Spending Account (FSA)
+3,HUMG846732,Yes,Yes,Remote Work Option
+4,HUMG420146,Yes,No,Professional Development Opportunities
+5,HUMG572138,Yes,Yes,Wellness Program
+6,HUMG491206,Yes,Yes,On-site Gym Access
+7,HUMG306840,Yes,No,401(k) Retirement Plan
+8,HUMG268938,Yes,Yes,Transportation Reimbursement
+9,HUMG879256,Yes,Yes,Stock Options
+10,HUMG974385,Yes,No,Childcare Assistance
+11,HUMG170349,Yes,Yes,Employee Stock Purchase Plan (ESPP)
+12,HUMG905832,Yes,No,Paid Time Off (PTO)
+13,HUMG239670,Yes,Yes,Education Assistance
+14,HUMG678943,Yes,No,Commuter Benefits
+15,HUMG736401,Yes,Yes,Remote Work Stipend
+16,HUMG730549,Yes,Yes,Wellness Allowance
+17,HUMG818245,Yes,No,Employee Discounts
+18,HUMG510367,Yes,Yes,Student Loan Repayment Program
+19,HUMG985274,Yes,Yes,Parental Leave
+20,HUMG589376,Yes,No,Tuition Reimbursement
+21,HUMG825496,Yes,Yes,Professional Memberships
+22,HUMG712594,Yes,No,Fitness Reimbursement
+23,HUMG594731,Yes,Yes,Flexible Work Schedule
+24,HUMG164283,Yes,Yes,Adoption Assistance
+25,HUMG715269,Yes,Yes,Employee Referral Program
