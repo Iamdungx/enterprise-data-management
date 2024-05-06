@@ -300,7 +300,7 @@
                         if(isset($_POST['checkbox'])){
                             $checkedIds = $_POST['checkbox'];
                             $checkedIdsString = implode(',', $checkedIds);
-                            $sql = "UPDATE `form` SET `status`='Đã duyệt' WHERE form_id IN ($checkedIdsString)";
+                            $sql = "UPDATE `form` SET `status`='Approved' WHERE form_id IN ($checkedIdsString)";
                             if ($connect->query($sql) === TRUE){
                             } 
                             else {
@@ -325,7 +325,7 @@
                         $sql = "SELECT form.user_id, form.form_type, form.date, form.content, user_data.fisrt_name, user_data.last_name, form.status, form.form_id
                         from user_data
                         inner join form on form.user_id = user_data.user_id
-                        where form.status = 'Chưa duyệt'";
+                        where form.status = 'Pending'";
                         $result = $connect->query($sql);
                             echo '<tr>
                                 <th>ID Employee</th>
@@ -344,7 +344,7 @@
                                         $sql1 = "SELECT form.user_id, form.form_type, form.date, form.content, user_data.fisrt_name, user_data.last_name, form.status, form.form_id
                                         from user_data
                                         inner join form on form.user_id = user_data.user_id
-                                        where form.status = 'Chưa duyệt' and form.form_type = '$form_type'";
+                                        where form.status = 'Pending' and form.form_type = '$form_type'";
                                         $result1  =$connect->query($sql1);
                                         if($result1->num_rows > 0){
                                             while ($row = $result1->fetch_assoc()) {

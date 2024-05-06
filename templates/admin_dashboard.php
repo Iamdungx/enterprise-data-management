@@ -239,8 +239,8 @@ use function PHPSTORM_META\sql_injection_subst;
                                     require "connect_database.php";
                                     mysqli_set_charset($connect, 'UTF8');
     
-                                    $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where rating ='Đạt'");
-                                    $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE rating != 'Đạt'");
+                                    $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where result ='Completed'");
+                                    $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE result != 'Completed'");
                                     $result_Dat = $connect->query($sql_Dat);
                                     $result_khongDat = $connect->query($sql_khongDat);
     
@@ -260,7 +260,7 @@ use function PHPSTORM_META\sql_injection_subst;
                                     }
                                 ?>
                         </div>
-                        <div class="total-employee">
+                        <div class="total-employee" onclick="window.location.href='employee_information.php'">
                             <h4>TỔNG NHÂN VIÊN</h4>
     
                             <?php
@@ -282,7 +282,7 @@ use function PHPSTORM_META\sql_injection_subst;
     
                         </div>  
                     
-                        <div class="total-form">
+                        <div class="total-form" onclick="window.location.href='form_approval.php'">
                             <h4>Thống kê số đơn yêu cầu</h4>
                             <div class="formSystem">
 
@@ -291,8 +291,8 @@ use function PHPSTORM_META\sql_injection_subst;
                                     mysqli_set_charset($connect, 'UTF8');
     
                                     $sql_totalForm = ("SELECT COUNT(*) AS tongSoDon FROM form");
-                                    $sql_duyet = ("SELECT COUNT(*) AS soLuongDuyet FROM form WHERE status ='Đã duyệt'");
-                                    $sql_chuaDuyet = ("SELECT COUNT(*) AS soLuongChoDuyet FROM form WHERE status != 'Đã Duyệt'");
+                                    $sql_duyet = ("SELECT COUNT(*) AS soLuongDuyet FROM form WHERE status ='Approved'");
+                                    $sql_chuaDuyet = ("SELECT COUNT(*) AS soLuongChoDuyet FROM form WHERE status != 'Approved'");
                                     $sql_choDuyet;
     
                                     $result_totalForm = $connect->query($sql_totalForm);
@@ -307,11 +307,11 @@ use function PHPSTORM_META\sql_injection_subst;
                                             echo "<div class='thongKeSoDon'>
                                                     <h1 style='padding: 10px'>" . $row_totalForm["tongSoDon"] . "</h1></div>";
                                             echo "<div class='trangThaiDuyetDon'>
-                                                        <p  style='font-size: 14px; line-height: 28px; font-weight: 400; background-color: rgb(203 255 200); border-radius: 6px; padding: 4px 0px; text-align: center; margin-top: 12px;'>"
+                                                        <p  style='font-size: 14px; line-height: 28px; font-weight: 400; background-color: rgb(14 255 0 / 77%); border-radius: 6px; padding: 4px 0px; text-align: center; margin-top: 12px;'>"
                                                             . $row_duyet['soLuongDuyet']. " duyệt
                                                         </p>
                                                         <br>
-                                                    <p style='font-size: 14px; line-height: 28px; font-weight: 400; background-color: rgb(255 215 215); border-radius: 6px; padding: 4px 8px; text-align: center; margin-bottom: 12px;'>" 
+                                                    <p style='font-size: 14px; line-height: 28px; font-weight: 400; background-color: rgb(255 252 0 / 66%); border-radius: 6px; padding: 4px 8px; text-align: center; margin-bottom: 12px;'>" 
                                                             . $row_chuaDuyet['soLuongChoDuyet'] . 
                                                 
                                                     " chờ duyệt</p>
@@ -446,8 +446,8 @@ use function PHPSTORM_META\sql_injection_subst;
                             require "connect_database.php";
                             mysqli_set_charset($connect, 'UTF8');
     
-                            $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where rating ='Đạt'");
-                            $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE rating != 'Đạt'");
+                            $sql_Dat = ("SELECT COUNT(*) AS soLuongDat FROM performance_employee where result ='Completed'");
+                            $sql_khongDat = ("SELECT COUNT(*) AS soLuongKhongDat FROM performance_employee WHERE result != 'Completed'");
                             $result_Dat = $connect->query($sql_Dat);
                             $result_khongDat = $connect->query($sql_khongDat);
     
