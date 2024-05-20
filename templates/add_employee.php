@@ -414,7 +414,7 @@
                     $role = $_SESSION['role'];
                     $name = $_SESSION['nameaccount'];
                     $description = "Thêm nhân viên";
-                    $string_sqlAddEmployee = mysqli_real_escape_string($connect, $sqlAddEmployee); // Escape single quotes in the SQL string
+                    $string_sql = mysqli_real_escape_string($connect, $sqlAddEmployee); // Escape single quotes in the SQL string
 
                     // Câu lệnh SQL để ghi log
                     $logAddEmployee = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sql', '$description')";
@@ -470,9 +470,6 @@
                     </form>
 
                 </div>
-                <?php
-                get_all_records();
-                ?>
             </div>
         </div>
         <div>

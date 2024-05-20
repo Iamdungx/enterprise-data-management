@@ -72,50 +72,50 @@
         }
 
         // Lấy tất cả records trong file csv
-        function get_all_records(){
-            require "connect_database.php";
+        // function get_all_records(){
+        //     require "connect_database.php";
         
-            $sql_seclect = "SELECT * FROM user_data";
-            $result_select = mysqli_query($connect, $sql_seclect);  
-        
-        
-            if (mysqli_num_rows($result_select) > 0) {
-            echo "<table>
-                    <thead><tr>
-                        <th>User ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Address</th>
-                        <th>Date Of Birth</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Hire Date</th>
-                        <th>Department</th>
-                        <th>Position</th>
-                    </tr></thead><tbody>";
+        //     $sql_seclect = "SELECT * FROM user_data";
+        //     $result_select = mysqli_query($connect, $sql_seclect);  
         
         
-            while($row = mysqli_fetch_assoc($result_select)) {
+        //     if (mysqli_num_rows($result_select) > 0) {
+        //     echo "<table>
+        //             <thead><tr>
+        //                 <th>User ID</th>
+        //                 <th>First Name</th>
+        //                 <th>Last Name</th>
+        //                 <th>Address</th>
+        //                 <th>Date Of Birth</th>
+        //                 <th>Phone</th>
+        //                 <th>Email</th>
+        //                 <th>Hire Date</th>
+        //                 <th>Department</th>
+        //                 <th>Position</th>
+        //             </tr></thead><tbody>";
         
-                echo "<tr>
-                <td>"  . $row["user_id"] . "</td>" .
-                    "<td>" . $row["fisrt_name"] . "</td>" .
-                    "<td>" . $row["last_name"] . "</td>" .
-                    "<td>" . $row["address"] . "</td>" .
-                    "<td>" . $row["date_of_birth"] . "</td>" .
-                    "<td>" . $row["phone"] . "</td>" .
-                    "<td>" . $row["email"] . "</td>" .
-                    "<td>" . $row["hire_date"] . "</td>" .
-                    "<td>" . $row["department"] . "</td>" .
-                    "<td>" . $row["position"] . "</td></tr>";        
-            }
+        
+        //     while($row = mysqli_fetch_assoc($result_select)) {
+        
+        //         echo "<tr>
+        //         <td>"  . $row["user_id"] . "</td>" .
+        //             "<td>" . $row["fisrt_name"] . "</td>" .
+        //             "<td>" . $row["last_name"] . "</td>" .
+        //             "<td>" . $row["address"] . "</td>" .
+        //             "<td>" . $row["date_of_birth"] . "</td>" .
+        //             "<td>" . $row["phone"] . "</td>" .
+        //             "<td>" . $row["email"] . "</td>" .
+        //             "<td>" . $row["hire_date"] . "</td>" .
+        //             "<td>" . $row["department"] . "</td>" .
+        //             "<td>" . $row["position"] . "</td></tr>";        
+        //     }
             
-            echo "</tbody></table>";
+        //     echo "</tbody></table>";
             
-            } else {
-                echo "you have no records";
-            }
-        }
+        //     } else {
+        //         echo "you have no records";
+        //     }
+        // }
 ?>
 </body>
 </html>
