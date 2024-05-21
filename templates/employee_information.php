@@ -131,7 +131,7 @@
                             <ul class="nav_bar-function_child_Report none">
                             <?php
                                     if(isset($_SESSION['role'])){
-                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'Vice President'){
                                             echo '<li class="nav_bar-list-item"><a href="attendance_report.php">Danh sách chấm công</a></li>';
                                         }
                                     }
@@ -161,7 +161,7 @@
                             <ul class="nav_bar-function_child_Assignment none">
                                 <?php
                                     if(isset($_SESSION['role'])){
-                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager'){
+                                        if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager' || $_SESSION['role'] == 'Vice President'){
                                             echo '<li class="nav_bar-list-item"><a href="form_approval.php">Duyệt đơn</a></li>
                                             <li class="nav_bar-list-item"><a href="unexcused.php">Nghỉ không phép</a></li>';
                                         }
@@ -198,7 +198,7 @@
                                     </div>
                                 </div>';
                                 }
-                                if($_SESSION['role'] == 'manager' ){
+                                if($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'Vice President'){
                                     echo '<div class="nav_bar-function">
                                     <div class="nav_bar-function-content close">
                                         <i class="nav_bar-function-icon fa-solid fa-code fa-lg"></i>

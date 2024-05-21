@@ -79,7 +79,7 @@
                         $_SESSION['nameaccount'] = $username_login;
                         $_SESSION['role'] = $role;
 
-                        if($role == 'admin' || $role == 'manager'){
+                        if($role == 'admin' || $role == 'manager' || $role == 'President' || $role == 'Vice President'){
                             header("location: admin_dashboard.php");
                         }
                         else{
