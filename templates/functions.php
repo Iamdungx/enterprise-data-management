@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-</head>
-
-<body>
 <?php
     require "connect_database.php";
 
@@ -117,5 +110,3 @@
         //     }
         // }
 ?>
-</body>
-</html>
