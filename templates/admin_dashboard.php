@@ -1,3 +1,6 @@
+<?php  
+    session_start();
+?>
 <!DOCTYPE html>
     <html>
     <head>
@@ -35,10 +38,6 @@
                 </div>
 
                 <?php
-
-use function PHPSTORM_META\sql_injection_subst;
-
-                    session_start();
                     if (isset($_SESSION['nameaccount']))
                     {
                         echo "<div class='account-title'>
