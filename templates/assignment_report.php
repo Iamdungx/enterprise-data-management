@@ -3,64 +3,7 @@
 session_start();
 require 'connect_database.php';
 
-if(isset($_POST['completed'])) {
-    if(isset($_POST['checkbox'])) {
-        $user_id =  $_SESSION['nameaccount'];
-        $checkedIds = $_POST['checkbox'];
-        $checkedCount = count($_POST['checkbox']);
-        
-        $sqlAssignmentStatus = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Incomplete'";
-        $result = $connect->query($sqlAssignmentStatus);
-        $row = $result->fetch_assoc();
-        $totalCount = $row['total'];
-        
-        if($checkedCount == $totalCount) {
-            $date = date("Y-m-d");
-            $result = "Completed";
-            $rating = "Đạt";
 
-           
-            $performance_employeeAdd = "INSERT INTO performance_employee (`user_id`, `date`, `result`, `rating`) VALUES ('$user_id', '$date', '$result', '$rating')";
-            if ($connect->query($performance_employeeAdd) === TRUE){
-                echo "Đã hoàn thành tất cả công việc!<br>";
-            } else {
-                echo "Lỗi: " . $connect->error . "<br>";
-            }
-        } 
-        else{
-            echo "Chưa hoàn thành hết công việc hôm nay. Vui lòng nhập lý do chưa hoàn thành công việc:";
-            echo '<form class="form-container" id="reasonForm" method="post">
-                    <input type="text" id="reason" name="reason"> 
-                    <input class="btn btn-primary" type="submit" value="Submit" name="submit_reason">
-                </form>';
-        }
-
-        $checkedIdsString = implode(',', $checkedIds);
-        $sqlAssignmentStatusUpdate = "UPDATE `assignment` SET `status`='Completed' WHERE id IN ($checkedIdsString)";
-        if ($connect->query($sqlAssignmentStatusUpdate) === TRUE){
-        } else {
-            echo "Lỗi: " . $connect->error . "<br>";
-        }
-
-    } 
-    else {
-        echo "Chưa chọn công việc nào để hoàn thành!";
-    }
-}
-if (isset($_POST['submit_reason'])) {
-    $user_id =  $_SESSION['nameaccount'];
-    $date = date("Y-m-d");
-    $result = "Incompleted";
-    $reason = $_POST['reason'];
-    $rating = "Không đạt";
-
-    $performance_employeeAdd = "INSERT INTO performance_employee (`user_id`, `date`, `result`, `fail_reason`, `rating`) VALUES ('$user_id', '$date', '$result', '$reason', '$rating')";
-        if ($connect->query($performance_employeeAdd) === TRUE) {
-            echo "Đã gửi lý do thành công!<br>";
-        } else {
-                echo "Lỗi: " . $connect->error . "<br>";
-        }
-}
 
 
 ?>
@@ -333,79 +276,143 @@ if (isset($_POST['submit_reason'])) {
                 </div>
             </div>
     <div class="form-edit">
-        <a class="link_home" href="employee_information.php">Trang chủ</a>
         <div class="blue-box">
-            <h1>Công việc</h1>
+            <h1>Tiến độ Công việc cấp dưới</h1>
         </div>
         <form action="" method="post">
             <?php
             require 'connect_database.php';
             $user_id =  $_SESSION['nameaccount'];
-            
-            $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-            assignment.status, assignment.id
-            FROM user_data 
-            INNER JOIN assignment 
-            ON user_data.user_id = assignment.user_id
-            WHERE assignment.user_id = '$user_id' and assignment.status = 'Incomplete'";
-            $result = $connect->query($sql);
-
-                if($result->num_rows > 0)
-                {
-                    echo "<table id='information-table'>
-                        <tr> 
-                        <th></th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>ID</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th>Assignment</th>
-                    </tr>";
-            
-                    while ($row = $result->fetch_assoc())
-                    {
-                        echo "<tr><td> <input type=checkbox name = 'checkbox[]' value='" .$row['id']."'>" . "</td>". 
-                            "<td>" . $row["fisrt_name"] . "</td>" .
-                            "<td>" . $row["last_name"] . "</td>" .
-                            "<td>" . $row["user_id"] . "</td>" .
-                            "<td>" . $row["deadline"] . "</td>" .
-                            "<td>" . $row["status"] . "</td>" .
-                            "<td>" . $row["assignment_type"] . "</td>"; 
+            if($_SESSION['role'] != 'President'){
+                $sqlLeader = "SELECT assingment_id FROM `assignment` WHERE user_id = '$user_id' and status = 'Incomplete';";
+                $resultSqlLeader = $connect->query($sqlLeader);
+                if($resultSqlLeader->num_rows > 0){
+                    while ($rowLeader = $resultSqlLeader->fetch_assoc()){
+                        $assignmentIDLeader = $rowLeader['assingment_id'];
+                        $assignmentIDLeaderString =  $assignmentIDLeader.='__';
+                        
+    
+                        $sqlCountAssignTotal = "SELECT  COUNT(*) as totalcount FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString';";
+                        $resultSqlCountAssignTotle = $connect->query($sqlCountAssignTotal);
+                        if($resultSqlCountAssignTotle->num_rows > 0){
+                            $rowTotal = $resultSqlCountAssignTotle->fetch_assoc();
+                            $countTotal = $rowTotal['totalcount']; 
+                            if($countTotal == 0){
+                                echo "Tổng Số lượng công việc: 0";
+                            }
+                            else{
+                                echo "Tổng Số lượng công việc: " . $countTotal;
+                            }
+                    
+                            $sqlCountAssign = "SELECT  COUNT(*) as count FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Completed';";
+                            $resultSqlCountAssign = $connect->query($sqlCountAssign);
+                            if($resultSqlCountAssign->num_rows > 0){
+                                $row = $resultSqlCountAssign->fetch_assoc();
+                                $count = $row['count']; 
+                                if($count != 0){
+                                    echo "Số lượng công việc đã hoàn thành: " . $count;
+                                    $percentCountTotal = $count / $countTotal * 100;
+                                    echo "Tỷ lệ hoàn thành: " . round($percentCountTotal, 2) . "%";
+                                }
+                                else{
+                                    echo "Số lượng công việc đã hoàn thành: 0" ;
+                                }
+  
+                            }
+    
+                            $sql = "SELECT * FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Incomplete';";
+                            $result = $connect->query($sql);
+    
+                                if($result->num_rows > 0)
+                                {
+                                    echo "<table id='information-table'>
+                                        <caption>Công việc chưa hoàn thành</caption>
+                                        <tr> 
+                                        <th>ID</th>
+                                        <th>assingment_id</th>
+                                        <th>user_id</th>
+                                        <th>Deadline</th>
+                                        <th>Assignment_type</th>
+                                        <th>Status</th>
+                                        <th>leader</th>
+                                    </tr>";
+                            
+                                    while ($row = $result->fetch_assoc())
+                                    {
+                                        echo "<tr>
+                                            <td>" . $row["id"] . "</td>" .
+                                            "<td>" . $row["assingment_id"] . "</td>" .
+                                            "<td>" . $row["user_id"] . "</td>" .
+                                            "<td>" . $row["deadline"] . "</td>" .
+                                            "<td>" . $row["assignment_type"] . "</td>" .
+                                            "<td>" . $row["status"] . "</td>" .
+                                            "<td>" . $row["leader"] . "</td>"; 
+                                    }
+                                }
+                        }
+                    
                     }
                 }
-            else {
-                    echo "Không có nhiệm vụ nào được giao";
             }
+            else{
+                $sqlLeader = "SELECT * FROM `assignment` WHERE leader = '$user_id' and status = 'Incomplete';";
+                $resultSqlLeader = $connect->query($sqlLeader);
+                if($resultSqlLeader->num_rows > 0){
+
+
+                        echo "<table id='information-table'>
+                            <caption>Công việc chưa hoàn thành đã giao</caption>
+                            <tr> 
+                            <th>ID</th>
+                            <th>assingment_id</th>
+                            <th>user_id</th>
+                            <th>Deadline</th>
+                            <th>Assignment_type</th>
+                            <th>Status</th>
+                            <th>leader</th>
+                        </tr>";
+                
+                        while ($row = $resultSqlLeader->fetch_assoc())
+                        {
+                            $assignmentIDLeader = $row['assingment_id'];
+                            $sql = "SELECT count(*) as count FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%'";
+                            $resultSql = $connect->query($sql);
+                            if($resultSql->num_rows > 0){
+                                $rowTotal = $resultSql->fetch_assoc();
+                                $countTotal = $rowTotal['count']; 
+                                echo "Tổng Số lượng công việc: " . $countTotal;
+
+                                $sqlCompleteAssign = "SELECT count(*) as countTotal FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%' and status = 'Completed';";
+                                $resultSqlCountAssign = $connect->query($sqlCompleteAssign);
+                                if($resultSqlCountAssign->num_rows > 0){
+                                    $rowTotal = $resultSqlCountAssign->fetch_assoc();
+                                    $count = $rowTotal['countTotal']; 
+                                    echo "Số lượng công việc đã hoàn thành: " . $count;
+                                    $percentCountTotal = $count / $countTotal * 100;
+                                    echo "Tỷ lệ hoàn thành: " . round($percentCountTotal, 2) . "%";
+                                }
+                            }
+
+
+                            echo "<tr>
+                                <td>" . $row["id"] . "</td>" .
+                                "<td>" . $row["assingment_id"] . "</td>" .
+                                "<td>" . $row["user_id"] . "</td>" .
+                                "<td>" . $row["deadline"] . "</td>" .
+                                "<td>" . $row["assignment_type"] . "</td>" .
+                                "<td>" . $row["status"] . "</td>" .
+                                "<td>" . $row["leader"] . "</td>"; 
+                            
+                            echo '<p></p>';
+                        }
+                    
+            
+        
+                }
+            }
+
             ?>
-            <input class="input_submit"  type="submit" name="completed" value="COMPLETED ASSIGNMENT" />
         </form>
-        <span>
-        <?php
-          require 'connect_database.php';
-          mysqli_set_charset($connect, 'UTF8');   
-          $user_id =  $_SESSION['nameaccount'];
-
-          $sql = "SELECT COUNT(*) AS total FROM assignment WHERE assignment.user_id = '$user_id' ";
-          $sqlCompleted = "SELECT COUNT(*) AS count FROM assignment WHERE assignment.user_id = '$user_id' and assignment.status = 'Completed'";
-
-          $resultSqlCompleted = $connect->query($sqlCompleted);
-          $rowSqlCompleted = $resultSqlCompleted->fetch_assoc();
-          $totalCountCompleted = $rowSqlCompleted['count'];
-
-          $result = $connect->query($sql);
-          $row = $result->fetch_assoc();
-          $totalCount = $row['total'];
-
-          echo "Tổng số công việc: $totalCount";
-          echo "Tổng số công việc đã hoàn thành: $totalCountCompleted";
-
-          $percentTotalCountCompleted = $totalCountCompleted / $totalCount * 100;
-          echo "Tỷ lệ công việc đã hoàn thành:". round($percentTotalCountCompleted, 2). "%";
-
-
-        ?>
-        </span>                                                                 
     </div>
     <script src="./js/index.js"></script>
 </body>

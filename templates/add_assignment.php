@@ -127,11 +127,17 @@
                 }
             ?>
         </div>
+        <div class="form-group">
+            <label>Mã Công việc</label>
+            <input type="text" class="form-control" id="assignment_id" name="assignment_id" required>
+        </div>
 
         <div class="form-group">
             <label>Công việc</label>
             <input type="text" class="form-control" id="assignment" name="assignment" required>
         </div>
+
+
 
         <div class="form-group">
             <label>Deadline</label>
@@ -148,7 +154,7 @@
             $user_id =  $_SESSION['nameaccount'];
             
             $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-            assignment.status, assignment.assignment_id
+            assignment.status, assignment.id
             FROM user_data 
             INNER JOIN assignment 
             ON user_data.user_id = assignment.user_id
@@ -170,7 +176,7 @@
             
                     while ($row = $result->fetch_assoc())
                     {
-                        echo "<tr><td> <input type=radio name='radio' id='radio' value='" .$row['assignment_id']. "' onclick='setAssignment(\"" . $row['assignment_type'] . "\", \"" . $row['deadline'] . "\")'>" . "</td>". 
+                        echo "<tr><td> <input type=radio name='radio' id='radio' value='" .$row['id']. "' onclick='setAssignment(\"" . $row['assignment_type'] . "\", \"" . $row['deadline'] . "\")'>" . "</td>". 
                             "<td>" . $row["fisrt_name"] . "</td>" .
                             "<td>" . $row["last_name"] . "</td>" .
                             "<td>" . $row["user_id"] . "</td>" .
@@ -199,14 +205,15 @@
         if (isset($_POST['add_assignment'])) {
             require 'connect_database.php'; 
 
-            if($_SESSION['role'] == 'President'){
                 $user_id = $_POST['user_id'];
                 $assignment = $_POST['assignment'];
+                $assignment_id = $_POST['assignment_id'];
                 $deadline = $_POST['deadline'];
                 $status = "Incomplete";
-    
-                $sqlAssignment = "INSERT INTO assignment (`user_id`, `assignment_type`, `deadline`, `status`)  
-                        VALUES ('$user_id', '$assignment', '$deadline', '$status')";
+                $leader = $_SESSION['nameaccount'];
+
+                $sqlAssignment = "INSERT INTO assignment (`assingment_id`, `user_id`, `assignment_type`, `deadline`, `status`, `leader`)  
+                        VALUES ('$assignment_id', '$user_id', '$assignment', '$deadline', '$status', '$leader')";
                 
                 
     
@@ -231,73 +238,8 @@
                     echo "Thêm không thành công. Nhập lại!";
                     echo "Lỗi: " . $connect->error . "<br>";
                 }
-            }
 
-            if($_SESSION['role'] == 'Vice President'){
-                if(isset($_POST['radio'])) {
-                    $user_id = $_POST['user_id'];
-                    $assignmentID = $_POST['radio'];
-        
-                    $sqlAssignment1 = "UPDATE `assignment` SET user_id = '$user_id'  WHERE assignment_id = '$assignmentID'";
-                    
-                    
-        
-                    if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
-                        $role = $_SESSION['role'];
-                        $name = $_SESSION['nameaccount'];
-                        $description = "Thêm công việc";
-                        $string_sqlAssignment1 = mysqli_real_escape_string($connect, $sqlAssignment1); 
-                        
-                        $logAssignment = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sqlAssignment1', '$description')";
-        
-                        if ($connect->query($logAssignment) === TRUE) {
-                            echo "Đã thêm vào check log.<br>";
-                        } else {
-                            echo "Lỗi: " . $connect->error . "<br>";
-                        }
-                    }
-        
-                    if ($connect->query($sqlAssignment1) === TRUE) {
-                        echo "Thêm công việc thành công!";
-                    } else {
-                        echo "Thêm không thành công. Nhập lại!";
-                        echo "Lỗi: " . $connect->error . "<br>";
-                    }
-                }
-            }
-
-            if($_SESSION['role'] == 'manager'){
-                if(isset($_POST['radio'])) {
-                    $user_id = $_POST['user_id'];
-                    $assignmentID = $_POST['radio'];
-        
-                    $sqlAssignment1 = "UPDATE `assignment` SET user_id = '$user_id'  WHERE assignment_id = '$assignmentID'";
-                    
-                    
-        
-                    if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
-                        $role = $_SESSION['role'];
-                        $name = $_SESSION['nameaccount'];
-                        $description = "Thêm công việc";
-                        $string_sqlAssignment1 = mysqli_real_escape_string($connect, $sqlAssignment1); 
-                        
-                        $logAssignment = "INSERT INTO modification (`name`, `role`, `text_log`, `description`) VALUES ('$name', '$role', '$string_sqlAssignment1', '$description')";
-        
-                        if ($connect->query($logAssignment) === TRUE) {
-                            echo "Đã thêm vào check log.<br>";
-                        } else {
-                            echo "Lỗi: " . $connect->error . "<br>";
-                        }
-                    }
-        
-                    if ($connect->query($sqlAssignment1) === TRUE) {
-                        echo "Thêm công việc thành công!";
-                    } else {
-                        echo "Thêm không thành công. Nhập lại!";
-                        echo "Lỗi: " . $connect->error . "<br>";
-                    }
-                }
-            }
+           
         }
     ?>
 </body>
