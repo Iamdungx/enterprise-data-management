@@ -1,8 +1,13 @@
 <?php
     require 'connect_database.php';
     mysqli_set_charset($connect, 'UTF8');
-    $date = date("m");
-    $sqlSelectTWD = "SELECT count(*) as total_workDay, COUNT(CASE WHEN a.total < '08:00:00' THEN 1 ELSE NULL END) as total_dayLackingHours, u.*, s.* FROM `user_data` u INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id INNER JOIN `attendance` a ON u.user_id = a.user_id WHERE a.total > '00:00:00' AND month(a.date) = '$date' GROUP BY a.user_id;";
+    $month = $_GET['month'] ?? date('m');
+    $year = $_GET['year'] ?? date('Y');
+    $sqlSelectTWD = "SELECT sum(a.total_time) as total_time, u.id, u.fisrt_name, u.last_name, s.salary FROM (SELECT *, TIME_TO_SEC(TIMEDIFF(check_out, check_in)) / 3600 - 1 as total_time FROM `attendance` WHERE MONTH(date) = $month AND YEAR(date) = $year ) a
+    INNER JOIN `user_data` u ON u.user_id = a.user_id
+    INNER JOIN `salary_and_bonus` s ON u.id = s.employee_id 
+    GROUP BY a.user_id;
+    ";
     $resultSelectTWD = $connect->query($sqlSelectTWD);
 ?>
 <!DOCTYPE html>
@@ -274,26 +279,31 @@
             <tr>
                 <th>Họ và tên</th>
                 <th>Lương cơ bản</th>
-                <th>Phụ cấp</th>
-                <th>Ngày công</th>
-                <th>Ngày làm thiếu giờ</th>
+                <th>Tổng số giờ</th>
+                <th>Tổng số giờ OT</th>
+                <th>Lương theo công chuẩn</th>
+                <th>Lương OT</th>
                 <th>Tổng lương</th>
                 <th>Chi tiết</th>
             </tr>
             <?php
                 while ($rowSelectTWD = $resultSelectTWD->fetch_assoc()) {
-                    $actual_workingHours = 30;
-                    $salary = $rowSelectTWD['salary'];
-                    $total_salary = $salary * $rowSelectTWD['total_workDay'] / $actual_workingHours - ($rowSelectTWD['total_dayLackingHours'] * 100000) + $rowSelectTWD['bonus'];
+                    $actual_workingHours = 26 * 8;
+                    $rowSelectTWD['total_time'] = round($rowSelectTWD['total_time'], 2);
+                    $otHour = $rowSelectTWD['total_time'] > $actual_workingHours ? round($rowSelectTWD['total_time'] - $actual_workingHours, 2) : 0;
+                    $salaryNormal = $otHour == 0 ? $rowSelectTWD['salary'] / $actual_workingHours * $rowSelectTWD['total_time'] : $rowSelectTWD['salary'];
+                    $salaryOT = $otHour == 0 ? 0 : $rowSelectTWD['salary'] / $actual_workingHours * $otHour * 1.5;
+                    $totalSalary = $salaryNormal + $salaryOT;
             ?>
             <tr>
                 <td><?php echo $rowSelectTWD['fisrt_name'] . " " . $rowSelectTWD['last_name']; ?></td>
                 <td><?php echo number_format($rowSelectTWD['salary']); ?></td>
-                <td><?php echo number_format($rowSelectTWD['bonus']); ?></td>
-                <td><?php echo $rowSelectTWD['total_workDay']. "/". $actual_workingHours; ?></td>
-                <td><?php echo $rowSelectTWD['total_dayLackingHours']; ?></td>
-                <td><?php echo number_format($total_salary); ?></td>
-                <td><a href='payroll_details.php?id=<?php echo $rowSelectTWD["employee_id"]; ?>'><i class="fa-solid fa-bars"></i></a></td>
+                <td><?php echo $rowSelectTWD['total_time']. "/". $actual_workingHours; ?></td>
+                <td><?php echo $otHour; ?></td>
+                <td><?php echo number_format($salaryNormal); ?></td>
+                <td><?php echo number_format($salaryOT); ?></td>
+                <td><?php echo number_format($totalSalary); ?></td>
+                <td><a href='payroll_details.php?id=<?php echo $rowSelectTWD["id"]; ?>'><i class="fa-solid fa-bars"></i></a></td>
             </tr>
             <?php
                 }
