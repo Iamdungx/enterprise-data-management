@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Table with Bootstrap 4</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#details1" aria-expanded="false" aria-controls="details1">
+                            Show Details
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="p-0">
+                        <div id="details1" class="collapse">
+                            <div class="p-3">
+                                John Doe's details: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#details2" aria-expanded="false" aria-controls="details2">
+                            Show Details
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="p-0">
+                        <div id="details2" class="collapse">
+                            <div class="p-3">
+                                Jane Smith's details: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

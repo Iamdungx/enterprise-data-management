@@ -1,0 +1,59 @@
+<div class='col-sm'>
+    <div class='card shadow mb-4'>
+        <div class='card-header py-3'>
+            <h6 class='m-0 font-weight-bold text-success'>Công việc chưa hoàn thành đã giao</h6>
+        </div>    
+        <caption>Công việc chưa hoàn thành đã giao</caption>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class='table table-bordered'>
+                    <thead>
+                        <tr> 
+                            <th>Mã công việc</th>
+                            <th>Mã nhân viên</th>
+                            <th>Deadline</th>
+                            <th>Mô tả công việc</th>
+                            <th>Trạng thái</th>
+                            <th>Người giao</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- PHP Code to fetch data from the database -->
+                        <?php
+                            while ($row = $resultSqlLeader->fetch_assoc()) {
+                                $assignmentIDLeader = $row['assingment_id'];
+                                $sql = "SELECT count(*) as count FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%'";
+                                $resultSql = $connect->query($sql);
+                                
+                                if($resultSql->num_rows > 0) {
+                                    $rowTotal = $resultSql->fetch_assoc();
+                                    $countTotal = $rowTotal['count']; 
+                                    echo "<tr><td colspan='6'>Tổng Số lượng công việc: " . $countTotal . "</td></tr>";
+
+                                    $sqlCompleteAssign = "SELECT count(*) as countTotal FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%' and status = 'Completed';";
+                                    $resultSqlCountAssign = $connect->query($sqlCompleteAssign);
+                                    if($resultSqlCountAssign->num_rows > 0) {
+                                        $rowTotal = $resultSqlCountAssign->fetch_assoc();
+                                        $count = $rowTotal['countTotal']; 
+                                        echo "<tr><td colspan='6'>Số lượng công việc đã hoàn thành: " . $count . "</td></tr>";
+                                        $percentCountTotal = $count / $countTotal * 100;
+                                        echo "<tr><td colspan='6'>Tỷ lệ hoàn thành: " . round($percentCountTotal, 2) . "%</td></tr>";
+                                    }
+                                }
+
+                                echo "<tr>
+                                        <td>" . $row["assingment_id"] . "</td>
+                                        <td>" . $row["user_id"] . "</td>
+                                        <td>" . $row["deadline"] . "</td>
+                                        <td>" . $row["assignment_type"] . "</td>
+                                        <td>" . $row["status"] . "</td>
+                                        <td>" . $row["leader"] . "</td>
+                                    </tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table> 
+            </div>
+        </div>    
+    </div>
+</div>
