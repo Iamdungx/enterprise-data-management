@@ -88,12 +88,12 @@ session_start();
                 <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseTwo'
                     aria-expanded='true' aria-controls='collapseTwo'>
                     <i class='fas fa-fw fa-cog'></i>
-                    <span>Quản lí nhân viên</span>
+                    <span>Quản lý nhân viên</span>
                 </a>
                 <div id='collapseTwo' class='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
                     <div class='bg-white py-2 collapse-inner rounded'>
                         <h6 class='collapse-header'>Các chức năng:</h6>
-                        <a class='collapse-item' href='employee_information.php'>Quản lí nhân viên</a>
+                        <a class='collapse-item' href='employee_information.php'>Quản lý nhân viên</a>
                         <a class='collapse-item' href='cards.html'>Cards</a>
                     </div>
                 </div>
@@ -117,21 +117,6 @@ session_start();
             ?>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -394,7 +379,7 @@ session_start();
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Đăng xuất
                                 </a>
                             </div>
                         </li>
@@ -458,7 +443,7 @@ session_start();
                                             <table class='table table-bordered' id='myAttendanceTable' width='100%' cellspacing='0'>
                                                 <thead>
                                                     <tr>
-                                                        <th>User ID</th>
+                                                        <th>Mã nhân viên</th>
                                                         <th>Tháng</th>
                                                         <th>Năm</th>
                                                         <th>Số ngày công</th>
@@ -502,7 +487,7 @@ session_start();
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; NCKH 2024</span>
                     </div>
                 </div>
             </footer>
@@ -525,7 +510,7 @@ session_start();
             <div class="modal-content">
                 <form action="import_attendance.php" name="upload_excel" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Import file <span style="color: #1cc88a;">Excel</span></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nhập file <span style="color: #1cc88a;">Excel</span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -533,23 +518,23 @@ session_start();
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">User ID</span>
+                                <span class="input-group-text" id="basic-addon3">Mã nhân viên</span>
                             </div>
                             <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="basic-addon3" required>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                <span class="input-group-text" id="inputGroupFileAddon01">Tải lên</span>
                             </div>
                             <div class="custom-file">
                                 <input type="file" name="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" required>
-                                <label class="custom-file-label" id="custom-file-label" for="inputGroupFile03">Choose file</label>
+                                <label class="custom-file-label" id="custom-file-label" for="inputGroupFile03">Chọn file</label>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-success" type="submit" id="submit" name="import" data-loading-text="Loading...">Import</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                        <button class="btn btn-success" type="submit" id="submit" name="import" data-loading-text="Loading...">Nhập file</button>
                     </div>
                 </form>
             </div>
@@ -568,15 +553,15 @@ session_start();
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Đã sẵn sàng để đăng xuất?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Nhấn đăng xuất để kết thúc phiên đăng nhập</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout.php">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <a class="btn btn-primary" href="logout.php">Đăng xuất</a>
                 </div>
             </div>
         </div>
