@@ -241,7 +241,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Số Task đã hoàn thành:</div>
+                                                Số công việc đã hoàn thành:</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 require "connect_database.php";
@@ -253,7 +253,7 @@ session_start();
                                                     $rowSelectAssignCompleted = $resultSelectAssignCompleted->fetch_assoc();
 
                                                     if ($rowSelectAssignCompleted['total_completed'] == 0) {
-                                                        echo "<div class='h6 mb-0 mr-3 font-weight-bold text-gray-800'>Chưa có tasks nào được hoàn thành</div>";
+                                                        echo "<div class='h6 mb-0 mr-3 font-weight-bold text-gray-800'>Chưa có công việc nào được hoàn thành</div>";
                                                     } else {
                                                         echo "<span>" . $rowSelectAssignCompleted['total_completed'] . "</span>";
                                                     }
@@ -278,7 +278,7 @@ session_start();
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Công Việc Chưa Làm:</div>
+                                                số Công Việc Chưa hoàn thành   :</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
                                                 require "connect_database.php";
@@ -311,15 +311,15 @@ session_start();
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Công việc
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">70%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,7 +424,7 @@ session_start();
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Thống kê trạng thái Tasks</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Thống kê trạng thái công việc</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">

@@ -361,7 +361,7 @@ session_start();
                                                     "<td>" . $row["salary"] . "</td>" .
                                                     "<td>" . $row["type"] . "</td>" .
                                                     "<td>";
-                                                if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President')) {
+                                                if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President'|| $_SESSION['role'] == 'Vice President')) {
                                                     echo "
                                                                 <button href='#' class='btn btn-danger' data-toggle='modal' data-target='#deleteContract" . $row['id'] . "'>
                                                                 <i class='fa-solid fa-trash'></i>
