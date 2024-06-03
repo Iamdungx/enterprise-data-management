@@ -354,16 +354,15 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Công việc</h1>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                            <h6 class="m-0 font-weight-bold text-primary">Thống kê công việc</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Công việc chưa hoàn thành</h6>
                         </div>
                         <form action="" method="post">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="myDataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered"width="100%" cellspacing="0">
                                         <?php
                                         require 'connect_database.php';
                                         $user_id =  $_SESSION['nameaccount'];
@@ -377,24 +376,19 @@
 
                                         if ($result->num_rows > 0) {
                                             echo "<thead>
-                                                <caption>Công việc chưa hoàn thành</caption>
                                                 <tr> 
                                                 <th>Action</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>ID</th>
+                                                <th>Mã nhân viên nhận</th>
                                                 <th>Deadline</th>
-                                                <th>Status</th>
-                                                <th>Assignment</th>
-                                                <th>Details</th>
+                                                <th>Trạng thái</th>
+                                                <th>Công việc nhận</th>
+                                                <th>Chi tiết</th>
                                             </tr>
                                             </thead>";
 
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tbody>
                                                     <tr><td> <input type=checkbox name = 'checkbox[]' value='" . $row['id'] . "'>" . "</td>" .
-                                                    "<td>" . $row["fisrt_name"] . "</td>" .
-                                                    "<td>" . $row["last_name"] . "</td>" .
                                                     "<td>" . $row["user_id"] . "</td>" .
                                                     "<td>" . $row["deadline"] . "</td>" .
                                                     "<td>" . $row["status"] . "</td>" .
@@ -406,53 +400,6 @@
                                             echo "<h3 class='text-center'>Không có nhiệm vụ nào được giao</h3>";
                                         }
                                         ?>
-
-
-                                    </table>
-
-                                    <table class="table table-bordered" id="myDataTable" width="100%" cellspacing="0">
-                                        <?php
-                                        require 'connect_database.php';
-                                        $user_id =  $_SESSION['nameaccount'];
-                                        $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                                assignment.status, assignment.id
-                                                FROM user_data 
-                                                INNER JOIN assignment 
-                                                ON user_data.user_id = assignment.user_id
-                                                WHERE assignment.user_id = '$user_id' and assignment.status = 'Completed'";
-                                        $result = $connect->query($sql);
-
-                                        if ($result->num_rows > 0) {
-                                            echo "<thead>
-                                                <caption>Công việc đã hoàn thành</caption>
-                                                <tr> 
-                                                <th>Action</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>ID</th>
-                                                <th>Deadline</th>
-                                                <th>Status</th>
-                                                <th>Assignment</th>
-                                                <th>Details</th>
-                                            </tr>
-                                            </thead>";
-
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tbody>
-                                                    <tr><td> <input type=checkbox name = 'checkbox[]' value='" . $row['id'] . "'>" . "</td>" .
-                                                    "<td>" . $row["fisrt_name"] . "</td>" .
-                                                    "<td>" . $row["last_name"] . "</td>" .
-                                                    "<td>" . $row["user_id"] . "</td>" .
-                                                    "<td>" . $row["deadline"] . "</td>" .
-                                                    "<td>" . $row["status"] . "</td>" .
-                                                    "<td>" . $row["assignment_type"] . "</td>" .
-                                                    "<td>" . $row["details"] . "</td>
-                                                    </tbody>";
-                                            }
-                                        }
-                                        ?>
-
-
                                     </table>
                                     <?php
                                     require 'connect_database.php';
@@ -550,6 +497,48 @@
                             </div>
                         </div>
                     </form>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                            <h6 class="m-0 font-weight-bold text-primary">Công việc đã hoàn thành</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <?php
+                                    require 'connect_database.php';
+                                    $user_id =  $_SESSION['nameaccount'];
+                                    $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
+                                            assignment.status, assignment.id
+                                            FROM user_data 
+                                            INNER JOIN assignment 
+                                            ON user_data.user_id = assignment.user_id
+                                            WHERE assignment.user_id = '$user_id' and assignment.status = 'Completed'";
+                                    $result = $connect->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        echo "<thead>
+                                            <tr> 
+                                            <th>ID</th>
+                                            <th>Nhiệm vụ</th>
+                                            <th>Deadline</th>
+                                            <th>Trạng thái</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                        </thead>";
+
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tbody>
+                                                <td>" . $row["user_id"] . "</td>" .
+                                                "<td>" . $row["assignment_type"] . "</td>" .
+                                                "<td>" . $row["deadline"] . "</td>" .
+                                                "<td>" . $row["status"] . "</td>" .
+                                                "<td>" . $row["details"] . "</td>
+                                                </tbody>";
+                                        }
+                                    }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
                 <!-- /.container-fluid -->

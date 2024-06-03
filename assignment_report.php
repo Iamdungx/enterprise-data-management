@@ -430,191 +430,24 @@
                     <h1 class="h3 mb-4 text-gray-800">Tiến độ công việc</h1>
                     <div>
                         <form action="" method="post">
-                            <?php
+                        <?php
                             require 'connect_database.php';
                             $user_id =  $_SESSION['nameaccount'];
-                            if($_SESSION['role'] != 'President'){
-                                $sqlLeader = "SELECT assingment_id FROM `assignment` WHERE user_id = '$user_id' and status = 'Incomplete';";
-                                $resultSqlLeader = $connect->query($sqlLeader);
-                                if($resultSqlLeader->num_rows > 0){
-                                    while ($rowLeader = $resultSqlLeader->fetch_assoc()){
-                                        $assignmentIDLeader = $rowLeader['assingment_id'];
-                                        $assignmentIDLeaderString =  $assignmentIDLeader.='__';
 
-                                        $sql = "SELECT * FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Incomplete';";
-                                        $result = $connect->query($sql);
-                
-                                            if($result->num_rows > 0)
-                                            {
-                                                echo "
-                                                <div class='col-sm'>
-                                                    <div class='card shadow mb-4'>
-                                                        <div class='card-header py-3'>
-                                                            <h6 class='m-0 font-weight-bold text-success'>Công việc chưa hoàn thành đã nhận</h6>
-                                                        </div>    
-                                                        <div class='card-body'>
-                                                            <div class='table-responsive'>
-                                                                <table class='table table-bordered'>    
-                                                                    <thead>
-                                                                        <tr> 
-                                                                            <th>Mã công việc</th>
-                                                                            <th>Mã nhân viên</th>
-                                                                            <th>Deadline</th>
-                                                                            <th>Tên công việc</th>
-                                                                            <th>Mô tả công việc</th>
-                                                                            <th>Trạng thái</th>
-                                                                            <th>Người giao</th>
-                                                                        </tr>
-                                                                    </thead>";
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                echo "<tbody>
-                                                                        <tr>
-                                                                            <td>" . $row["assingment_id"] . "</td>
-                                                                            <td>" . $row["user_id"] . "</td>
-                                                                            <td>" . $row["deadline"] . "</td>
-                                                                            <td>" . $row["assignment_type"] . "</td>
-                                                                            <td>" . $row["details"] . "</td>
-                                                                            <td>" . $row["status"] . "</td>
-                                                                            <td>" . $row["leader"] . "</td>
-                                                                        </tr>
-                                                                    </tbody>";
-                                                                }
-                                            echo                "</table>";
-                                            }
-                                        echo            "</div>
-                                                    </div>
-                                                    <div class='card-footer'>
-                                                        <div class='row'>
-                                                            <div class='col-sm-6'>";
-                    
-                                        $sqlCountAssignTotal = "SELECT  COUNT(*) as totalcount FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString';";
-                                        $resultSqlCountAssignTotle = $connect->query($sqlCountAssignTotal);
-                                        if($resultSqlCountAssignTotle->num_rows > 0){
-                                            $rowTotal = $resultSqlCountAssignTotle->fetch_assoc();
-                                            $countTotal = $rowTotal['totalcount']; 
-                                            if($countTotal == 0){
-                                                echo "<div>Tổng Số lượng công việc: 0<div>";
-                                            }
-                                            else{
-                                                echo "<div>Tổng Số lượng công việc: " . $countTotal . "</div>";
-                                            }
-                                            
-                                            echo            "</div>
-                                                            <div class='col-sm-6'>";
-
-                                            $sqlCountAssign = "SELECT  COUNT(*) as count FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Completed';";
-                                            $sqlCountAssignIncomplete = "SELECT  COUNT(*) as countIncomplete FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Incomplete';";
-                                            
-                                            $resultSqlCountAssignIncomplete  = $connect->query($sqlCountAssignIncomplete);
-                                            $resultSqlCountAssign = $connect->query($sqlCountAssign);
-                                            if($resultSqlCountAssign->num_rows > 0){
-                                                if($resultSqlCountAssignIncomplete->num_rows > 0){
-                                                    $rowIncomplete = $resultSqlCountAssignIncomplete->fetch_assoc();
-                                                    $row = $resultSqlCountAssign->fetch_assoc();
-                                                    $count = $row['count']; 
-                                                    $countIncomplete = $rowIncomplete['countIncomplete']; 
-                                                    if($count != 0){
-                                                        echo "<div>Số lượng công việc đã hoàn thành: " . $count . "</div>";
-                                                        $percentCountTotal = $count / $countTotal * 100;
-                                                        $percentCountTotalIncomplete = 100 - $percentCountTotal;
-                                                        echo "<div>Tỷ lệ hoàn thành: " . round($percentCountTotal, 2) . "%</div>";
-    
-                                                        echo '<div>
-                                                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-                                                            </div>
-    
-                                                        <script>
-                                                        var xValues = [
-                                                            `Công việc hoàn thành ('.round($percentCountTotal, 2).' %)`,
-                                                            `Công việc chưa hoàn thành ('.round($percentCountTotalIncomplete, 2).' %)`
-                                                          ];
-                                                          
-                                                        var yValues = [' . $count . ', ' . $countIncomplete . '];
-                                                        var barColors = [
-                                                          "#b91d47",
-                                                          "#00aba9",
-                                                        ];
-                                                        
-                                                        new Chart("myChart", {
-                                                          type: "pie",
-                                                          data: {
-                                                            labels: xValues,
-                                                            datasets: [{
-                                                              backgroundColor: barColors,
-                                                              data: yValues
-                                                            }]
-                                                          },
-                                                          options: {
-                                                            title: {
-                                                              display: true,
-                                                              text: "Tiến độ công việc"
-                                                            }
-                                                          }
-                                                        });
-                                                        </script></div>';
-                                                    }
-                                                    else{
-                                                        echo '<div>Công việc chưa hoàn thành: ' . $countIncomplete . "</div>";
-                                                        echo '<div>
-                                                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-                                                            </div>';
-                                                        echo '<script>
-                                                        document.addEventListener("DOMContentLoaded", function() {
-                                                            var xValues = [
-                                                                `Công việc hoàn thành (0%)`,
-                                                                `Công việc chưa hoàn thành (100%)`
-                                                              ];
-                                                            var yValues = [0, ' . $countIncomplete . '];
-                                                            var barColors = [
-                                                                "#00aba9",
-                                                                "#b91d47",
-                                                            ];
-                                                            
-                                                            new Chart("myChart", {
-                                                                type: "doughnut",
-                                                                data: {
-                                                                    labels: xValues,
-                                                                    datasets: [{
-                                                                        backgroundColor: barColors,
-                                                                        data: yValues
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    title: {
-                                                                        display: true,
-                                                                        text: "Tiến độ công việc"
-                                                                    }
-                                                                }
-                                                            });
-                                                        });
-                                                        </script></div>';
-                                                    }
-                                                }
-                
-                                            }
-
-                                        }
-                                    
-                                    }
-                                }
-                            }
-                            else {
-                                $sqlLeader = "SELECT * FROM `assignment` WHERE leader = '$user_id' and status = 'Incomplete';";
-                                $resultSqlLeader = $connect->query($sqlLeader);
-                                if($resultSqlLeader->num_rows > 0) {
-                                    echo "
-                                    <div class='col-sm'>
-                                        <div class='card shadow mb-4'>
-                                            <div class='card-header py-3'>
-                                                <h6 class='m-0 font-weight-bold text-success'>Công việc chưa hoàn thành đã giao</h6>
-                                            </div>    
-                                            <div class='card-body'>
-                                                <div class='table-responsive'>
-                                                    <table class='table table-bordered'>
+                            function displayTableHeader() {
+                                echo "
+                                <div class='col-sm'>
+                                    <div class='card shadow mb-4'>
+                                        <div class='card-header py-3'>
+                                            <h6 class='m-0 font-weight-bold text-success'>Công việc chưa hoàn thành</h6>
+                                        </div>    
+                                        <div class='card-body'>
+                                            <div class='table-responsive'>
+                                                <table class='table table-bordered'>
                                                     <thead>
                                                         <tr> 
                                                             <th>Mã công việc</th>
-                                                            <th>Mã nhân viên giao</th>
+                                                            <th>Mã nhân viên</th>
                                                             <th>Deadline</th>
                                                             <th>Tên công việc</th>
                                                             <th>Mô tả công việc</th>
@@ -623,19 +456,149 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>";
-                                    
+                            }
+
+                            function displayTableFooter($totalAssignments, $completedAssignments) {
+                                $completionRate = ($totalAssignments > 0) ? round(($completedAssignments / $totalAssignments) * 100, 2) : 0;
+                                echo "          </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class='card-footer' style='background-color: #ffffff; box-shadow: none;'>
+                                            <div class='row'>
+                                                <div class='col-sm-6'>
+                                                    <div class='text-center font-weight-bold text-primary'>Tổng Số lượng công việc: <span class='text-secondary'>$totalAssignments</span></div>
+                                                    <div class='text-center font-weight-bold text-success'>Số lượng công việc đã hoàn thành: <span class='text-secondary'>$completedAssignments</span></div>
+                                                </div>
+                                                <div class='col-sm-6'>
+                                                    <div class='font-weight-bold'>Tỷ lệ hoàn thành: <span class='float-right'>" . $completionRate . " %</span></div>
+                                                    <div class='progress'>
+                                                        <div class='progress-bar bg-warning' role='progressbar' style='width: " . $completionRate . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>";
+                            }
+
+                            if($_SESSION['role'] == 'Vice President' && $_SESSION['role'] == 'manager'){
+                                $sqlLeader = "SELECT assingment_id FROM `assignment` WHERE user_id = '$user_id' and status = 'Incomplete';";
+                                $resultSqlLeader = $connect->query($sqlLeader);
+                                if($resultSqlLeader->num_rows > 0){
                                     $totalAssignments = 0;
                                     $completedAssignments = 0;
+                                    displayTableHeader();
+                                    while ($rowLeader = $resultSqlLeader->fetch_assoc()){
+                                        $assignmentIDLeaderString = $rowLeader['assingment_id'];
+                                        // $assignmentIDLeaderString =  $assignmentIDLeader . '__';
+
+                                        $sql = "SELECT * FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Incomplete';";
+                                        $result = $connect->query($sql);
+                                        if($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>
+                                                        <td>" . $row["assingment_id"] . "</td>
+                                                        <td>" . $row["user_id"] . "</td>
+                                                        <td>" . $row["deadline"] . "</td>
+                                                        <td>" . $row["assignment_type"] . "</td>
+                                                        <td>" . $row["details"] . "</td>
+                                                        <td>" . $row["status"] . "</td>
+                                                        <td>" . $row["leader"] . "</td>
+                                                    </tr>";
+                                            }
+
+                                            $sqlCountAssignTotal = "SELECT  COUNT(*) as totalcount FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString';";
+                                            $resultSqlCountAssignTotal = $connect->query($sqlCountAssignTotal);
+                                            if($resultSqlCountAssignTotal->num_rows > 0){
+                                                $rowTotal = $resultSqlCountAssignTotal->fetch_assoc();
+                                                $countTotal = $rowTotal['totalcount']; 
+                                                $totalAssignments += $countTotal;
+
+                                                $sqlCountAssign = "SELECT  COUNT(*) as count FROM `assignment` WHERE assingment_id like '$assignmentIDLeaderString' and status = 'Completed';";
+                                                $resultSqlCountAssign = $connect->query($sqlCountAssign);
+                                                if($resultSqlCountAssign->num_rows > 0){
+                                                    $row = $resultSqlCountAssign->fetch_assoc();
+                                                    $count = $row['count']; 
+                                                    $completedAssignments += $count;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    displayTableFooter($totalAssignments, $completedAssignments);
+                                }
+                            }
+                            if($_SESSION['role'] == 'employee'){
+                                $sqlLeader = "SELECT assingment_id FROM `assignment` WHERE user_id = '$user_id' and status = 'Incomplete';";
+                                $resultSqlLeader = $connect->query($sqlLeader);
+                                if($resultSqlLeader->num_rows > 0){
+                                    $totalAssignments = 0;
+                                    $completedAssignments = 0;
+                                    displayTableHeader();
+                                    while ($rowLeader = $resultSqlLeader->fetch_assoc()){
+                                        $assignmentIDLeader = $rowLeader['assingment_id'];
+
+                                        $sql = "SELECT * FROM `assignment` WHERE assingment_id = '$assignmentIDLeader' and status = 'Incomplete';";
+                                        $result = $connect->query($sql);
+                                        if($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>
+                                                        <td>" . $row["assingment_id"] . "</td>
+                                                        <td>" . $row["user_id"] . "</td>
+                                                        <td>" . $row["deadline"] . "</td>
+                                                        <td>" . $row["assignment_type"] . "</td>
+                                                        <td>" . $row["details"] . "</td>
+                                                        <td>" . $row["status"] . "</td>
+                                                        <td>" . $row["leader"] . "</td>
+                                                    </tr>";
+                                            }
+
+                                        }
+                                    }
+                                    $sqlCountAssignTotal = "SELECT  COUNT(*) as totalcount FROM `assignment` WHERE user_id = '$user_id';";
+                                    $resultSqlCountAssignTotal = $connect->query($sqlCountAssignTotal);
+                                    if($resultSqlCountAssignTotal->num_rows > 0){
+                                        $rowTotal = $resultSqlCountAssignTotal->fetch_assoc();
+                                        $countTotal = $rowTotal['totalcount']; 
+                                        $totalAssignments += $countTotal;
+
+                                        $sqlCountAssign = "SELECT  COUNT(*) as count FROM `assignment` WHERE status = 'Completed' and user_id = '$user_id';";
+                                        $resultSqlCountAssign = $connect->query($sqlCountAssign);
+                                        if($resultSqlCountAssign->num_rows > 0){
+                                            $row = $resultSqlCountAssign->fetch_assoc();
+                                            $count = $row['count']; 
+                                            $completedAssignments += $count;
+                                        }
+                                    }
+                                    displayTableFooter($totalAssignments, $completedAssignments);
+                                }
+                            }
+                            else {
+                                $sqlLeader = "SELECT * FROM `assignment` WHERE leader = '$user_id' and status = 'Incomplete';";
+                                $resultSqlLeader = $connect->query($sqlLeader);
+                                if($resultSqlLeader->num_rows > 0) {
+                                    $totalAssignments = 0;
+                                    $completedAssignments = 0;
+                                    displayTableHeader();
                                     while ($row = $resultSqlLeader->fetch_assoc()) {
+                                        echo "<tr>
+                                                <td>" . $row["assingment_id"] . "</td>
+                                                <td>" . $row["user_id"] . "</td>
+                                                <td>" . $row["deadline"] . "</td>
+                                                <td>" . $row["assignment_type"] . "</td>
+                                                <td>" . $row["details"] . "</td>
+                                                <td>" . $row["status"] . "</td>
+                                                <td>" . $row["leader"] . "</td>
+                                            </tr>";
+
                                         $assignmentIDLeader = $row['assingment_id'];
                                         $sql = "SELECT count(*) as count FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%'";
                                         $resultSql = $connect->query($sql);
-                                        
                                         if($resultSql->num_rows > 0) {
                                             $rowTotal = $resultSql->fetch_assoc();
                                             $countTotal = $rowTotal['count'];
                                             $totalAssignments += $countTotal;
-                            
+
                                             $sqlCompleteAssign = "SELECT count(*) as countTotal FROM `assignment` WHERE assingment_id like '%$assignmentIDLeader%' and status = 'Completed';";
                                             $resultSqlCountAssign = $connect->query($sqlCompleteAssign);
                                             if($resultSqlCountAssign->num_rows > 0) {
@@ -644,42 +607,11 @@
                                                 $completedAssignments += $count;
                                             }
                                         }
-                            
-                                        echo "<tr>
-                                                <td>" . $row["assingment_id"] . "</td>
-                                                <td>" . $row["user_id"] . "</td>
-                                                <td>" . $row["deadline"] . "</td>
-                                                <td>" . $row["assignment_type"] . "</td>
-                                                <td>" . $row["status"] . "</td>
-                                                <td>" . $row["leader"] . "</td>
-                                              </tr>";
                                     }
-                            
-                                    $completionRate = ($totalAssignments > 0) ? round(($completedAssignments / $totalAssignments) * 100, 2) : 0;
-                            
-                                    echo "          </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class='card-footer' style='background-color: #ffffff; box-shadow: none;'>
-                                                <div class='row'>
-                                                    <div class='col-sm-6'>
-                                                        <div class='text-center font-weight-bold text-primary'>Tổng Số lượng công việc: <span class='text-secondary'>$totalAssignments</span></div>
-                                                        <div class='text-center font-weight-bold text-success'>Số lượng công việc đã hoàn thành: <span class='text-secondary'>$completedAssignments</span></div>
-                                                    </div>
-                                                    <div class='col-sm-6'>
-                                                        <div class='font-weight-bold'>Tỷ lệ hoàn thành: <span class='float-right'>" . $completionRate . " %</span></div>
-                                                        <div class='progress'>
-                                                            <div class='progress-bar bg-warning' role='progressbar' style='width: " . $completionRate . "%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>";
+                                    displayTableFooter($totalAssignments, $completedAssignments);
                                 }
                             }
-                            ?>
+                        ?>
                         </form>
                     </div>
 
