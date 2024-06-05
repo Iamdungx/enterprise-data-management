@@ -343,7 +343,7 @@ session_start();
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tổng chi phí lao động theo tháng (Chưa tính lương thưởng)</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Tổng chi phí lao động năm 2023 theo tháng (Chưa tính lương thưởng)</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -364,8 +364,7 @@ session_start();
                             try {
                                 $sqlAllSalaryPerMonth = "SELECT a.month, a.year, a.total, a.ot, c.salary
                                                         FROM attendance a
-                                                        JOIN contract c ON a.user_id = c.user_id
-                                                        WHERE c.type = 'Vô thời hạn'";
+                                                        JOIN contract c ON a.user_id = c.user_id";
 
                                 $resultAllSalaryPerMonth = $connect->query($sqlAllSalaryPerMonth);
 

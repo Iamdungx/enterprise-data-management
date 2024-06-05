@@ -45,7 +45,7 @@ require 'connect_database.php';
                 <div class="sidebar-brand-text mx-3">HR Manager</div>
             </a>';
             } else {
-                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="employee_dashboard.php">
+                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -126,31 +126,18 @@ require 'connect_database.php';
                 </div>
             </li>";
             } else {
-                echo "<li class='nav-item'>
-                <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseTwo'
-                    aria-expanded='true' aria-controls='collapseTwo'>
-                    <i class='fas fa-fw fa-cog'></i>
-                    <span>Quản lý nhân viên</span>
-                </a>
-                <div id='collapseTwo' class='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
-                    <div class='bg-white py-2 collapse-inner rounded'>
-                        <h6 class='collapse-header'>Các chức năng:</h6>
-                        <a class='collapse-item' href='employee_information.php'>Quản lý nhân viên</a>
-                        <a class='collapse-item' href='cards.html'>Cards</a>
-                    </div>
-                </div>
-            </li>
-
+                echo "
             <li class='nav-item'>
                 <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseFour'
                     aria-expanded='true' aria-controls='collapseFour'>
                     <i class='fas fa-fw fa-cog'></i>
-                    <span>Phân Công</span>
+                    <span>Công Việc</span>
                 </a>
                 <div id='collapseFour' class='collapse' aria-labelledby='headingFour' data-parent='#accordionSidebar'>
                     <div class='bg-white py-2 collapse-inner rounded'>
                         <h6 class='collapse-header'>Phân công:</h6>
                         <a class='collapse-item' href='assignment.php'>Công việc</a>
+                        <a class='collapse-item' href='assignment_report.php'>Báo cáo nhiệm vụ</a>
                     </div>
                 </div>
             </li>
@@ -162,8 +149,7 @@ require 'connect_database.php';
                 <div id='collapseThree' class='collapse' aria-labelledby='headingThree' data-parent='#accordionSidebar'>
                     <div class='bg-white py-2 collapse-inner rounded'>
                         <h6 class='collapse-header'>Các chức năng:</h6>
-                        <a class='collapse-item' href='payroll.php'>Quản lý lương</a>
-                        <a class='collapse-item' href='cards.html'>Cards</a>
+                        <a class='collapse-item' href='payroll.php'>Thông tin lương</a>
                     </div>
                 </div>
             </li>";
@@ -313,7 +299,8 @@ require 'connect_database.php';
                                                         <tr> 
                                                             <th>Mã công việc</th>
                                                             <th>Mã nhân viên</th>
-                                                            <th>Deadline</th>
+                                                            <th>Ngày giao</th>
+                                                            <th>Hạn</th>
                                                             <th>Tên công việc</th>
                                                             <th>Mô tả công việc</th>
                                                             <th>Trạng thái</th>
@@ -365,6 +352,7 @@ require 'connect_database.php';
                                                 echo "<tr>
                                                         <td>" . $row["assingment_id"] . "</td>
                                                         <td>" . $row["user_id"] . "</td>
+                                                        <td>" . $row["create_date"] . "</td>
                                                         <td>" . $row["deadline"] . "</td>
                                                         <td>" . $row["assignment_type"] . "</td>
                                                         <td>" . $row["details"] . "</td>

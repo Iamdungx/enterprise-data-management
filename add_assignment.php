@@ -287,9 +287,10 @@ require 'connect_database.php';
                                     $deadline = $_POST['deadline'];
                                     $status = "Incomplete";
                                     $leader = $_SESSION['nameaccount'];
+                                    $date = date("Y-m-d");
                                     
-                                    $sqlAssignment = "INSERT INTO assignment (`assingment_id`, `user_id`, `deadline`, `assignment_type`, `details`, `status`, `leader`)  
-                                                    VALUES ('$assignment_id', '$user_id', '$deadline','$assignment', '$assignment_detail', '$status', '$leader')";
+                                    $sqlAssignment = "INSERT INTO assignment (`assingment_id`, `user_id`, `create_date`, `deadline`, `assignment_type`, `details`, `status`, `leader`)  
+                                                    VALUES ('$assignment_id', '$user_id', '$date', '$deadline', '$assignment', '$assignment_detail', '$status', '$leader')";
 
                                     if ($connect->query($sqlAssignment) === TRUE) {
                                         echo "Thêm công việc thành công!";
@@ -330,7 +331,7 @@ require 'connect_database.php';
                                             $user_id = $_SESSION['nameaccount'];
 
                                             $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.leader, assignment.deadline, assignment.assignment_type, 
-                                                        assignment.status, assignment.id
+                                                        assignment.status, assignment.id, assignment.create_date
                                                         FROM user_data 
                                                         INNER JOIN assignment 
                                                         ON user_data.user_id = assignment.user_id
@@ -343,7 +344,8 @@ require 'connect_database.php';
                                                                 <tr> 
                                                                     <th>Tên</th>
                                                                     <th>Người giao</th>
-                                                                    <th>Deadline</th>
+                                                                    <th>Ngày giao</th>
+                                                                    <th>Hạn</th>
                                                                     <th>Trạng thái</th>
                                                                     <th>Công việc</th>
                                                                     <th>Mô tả</th>
@@ -354,6 +356,7 @@ require 'connect_database.php';
                                                     echo "<tr>
                                                                 <td>" . $row["last_name"] . "</td>
                                                                 <td>" . $row["leader"] . "</td>
+                                                                <td>" . $row["create_date"] . "</td>
                                                                 <td>" . $row["deadline"] . "</td>
                                                                 <td>" . $row["status"] . "</td>
                                                                 <td>" . $row["assignment_type"] . "</td>
@@ -382,7 +385,7 @@ require 'connect_database.php';
                                             $user_id = $_SESSION['nameaccount'];
 
                                             $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                                    assignment.status, assignment.details, assignment.id
+                                                    assignment.status, assignment.details, assignment.id, assignment.create_date
                                                     FROM user_data 
                                                     INNER JOIN assignment 
                                                     ON user_data.user_id = assignment.user_id
@@ -395,7 +398,8 @@ require 'connect_database.php';
                                                             <tr> 
                                                                 <th>Tên</th>
                                                                 <th>Mã người nhận</th>
-                                                                <th>Deadline</th>
+                                                                <th>Ngày giao</th>
+                                                                <th>Hạn</th>
                                                                 <th>Trạng thái</th>
                                                                 <th>Công việc</th>
                                                                 <th>Mô tả</th>
@@ -406,6 +410,7 @@ require 'connect_database.php';
                                                     echo "<tr>
                                                             <td>" . $row["last_name"] . "</td>
                                                             <td>" . $row["user_id"] . "</td>
+                                                            <td>" . $row["create_date"] . "</td>
                                                             <td>" . $row["deadline"] . "</td>
                                                             <td>" . $row["status"] . "</td>
                                                             <td>" . $row["assignment_type"] . "</td>

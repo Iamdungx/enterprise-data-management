@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    session_start();
+session_start();
 ?>
+
 <head>
 
     <meta charset="utf-8">
@@ -60,9 +61,10 @@
             <!-- Nav Item - Pages Collapse Menu -->
 
             <!--Quản lý nhân viên-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+            <?php
+            if (isset($_SESSION['role']) && $_SESSION['role'] != 'employee') {
+                echo '<li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-users-gear"></i>
                     <span>Quản lý nhân viên</span>
                 </a>
@@ -72,21 +74,38 @@
                         <a class="collapse-item" href="employee_information.php">Quản lý nhân viên</a>
                     </div>
                 </div>
-            </li>
-            
+            </li>';
+            } 
+
+            ?>
+
+
             <!--Assignment-->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseFour">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                     <i class="fa-solid fa-file-signature"></i>
-                    <span>Phân Công</span>
+                    <?php
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                        echo "<span>Công Việc</span>";
+                    } else {
+                        echo '<span>Phân Công</span>';
+                    }
+                    ?>
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Các chức năng:</h6>
-                        <a class="collapse-item" href="assignment.php">Quản lí nhiệm vụ</a>
-                        <a class="collapse-item" href="add_assignment.php">Phân công nhiệm vụ</a>
-                        <a class="collapse-item" href="assignment_report.php">Báo cáo nhiệm vụ</a>
+                        <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='assignment.php'>Công việc</a>
+                            <a class='collapse-item' href='assignment_report.php'>Báo cáo nhiệm vụ</a>
+                        ";
+                        } else {
+                            echo ' <h6 class="collapse-header">Các chức năng:</h6>
+                            <a class="collapse-item" href="assignment.php">Quản lí nhiệm vụ</a>
+                            <a class="collapse-item" href="add_assignment.php">Phân công nhiệm vụ</a>
+                            <a class="collapse-item" href="assignment_report.php">Báo cáo nhiệm vụ</a>';
+                        }
+                        ?>
                     </div>
                 </div>
             </li>
@@ -98,8 +117,15 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Các chức năng:</h6>
-                        <a class="collapse-item" href="payroll.php">Quản lý lương</a>
+                    <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='payroll.php'>Thông tin lương</a>";
+                        } else {
+                            echo '<h6 class="collapse-header">Các chức năng:</h6>
+                            <a class="collapse-item" href="payroll.php">Quản lý lương</a>';
+                        }
+                        ?>
+
                     </div>
                 </div>
             </li>
@@ -157,33 +183,29 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                <?php
-                                        if (isset($_SESSION['nameaccount'])) {
-                                            echo "<div>Chào: <span class='text-success'>" . $_SESSION['nameaccount'] . "</span></div>";
-                                        } else {
-                                            echo "<div class='text-danger'>Bạn chưa đăng nhập</div>";
-                                        }
+                                    <?php
+                                    if (isset($_SESSION['nameaccount'])) {
+                                        echo "<div>Chào: <span class='text-success'>" . $_SESSION['nameaccount'] . "</span></div>";
+                                    } else {
+                                        echo "<div class='text-danger'>Bạn chưa đăng nhập</div>";
+                                    }
 
-                                        if (isset($_SESSION['error'])) {
-                                            echo 'Lỗi khi thiết lập session: ' . $_SESSION['error'];
-                                        }
+                                    if (isset($_SESSION['error'])) {
+                                        echo 'Lỗi khi thiết lập session: ' . $_SESSION['error'];
+                                    }
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin cá nhân
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Chấm công
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -192,7 +214,7 @@
                                 </a>
                             </div>
                         </li>
-                        
+
 
                     </ul>
 
@@ -212,12 +234,12 @@
                         <form action="" method="post">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered"width="100%" cellspacing="0">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
                                         <?php
                                         require 'connect_database.php';
                                         $user_id =  $_SESSION['nameaccount'];
                                         $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                                assignment.status, assignment.id
+                                                assignment.status, assignment.id, assignment.create_date
                                                 FROM user_data 
                                                 INNER JOIN assignment 
                                                 ON user_data.user_id = assignment.user_id
@@ -229,7 +251,8 @@
                                                 <tr> 
                                                 <th>Chọn</th>
                                                 <th>Mã nhân viên nhận</th>
-                                                <th>Deadline</th>
+                                                <th>Ngày giao</th>
+                                                <th>Hạn</th>
                                                 <th>Trạng thái</th>
                                                 <th>Công việc nhận</th>
                                                 <th>Chi tiết</th>
@@ -240,6 +263,7 @@
                                                 echo "<tbody>
                                                     <tr><td> <input type=checkbox name = 'checkbox[]' value='" . $row['id'] . "'>" . "</td>" .
                                                     "<td>" . $row["user_id"] . "</td>" .
+                                                    "<td>" . $row["create_date"] . "</td>" .
                                                     "<td>" . $row["deadline"] . "</td>" .
                                                     "<td>" . $row["status"] . "</td>" .
                                                     "<td>" . $row["assignment_type"] . "</td>" .
@@ -276,7 +300,7 @@
                                                 } else {
                                                     echo "Lỗi: " . $connect->error . "<br>";
                                                 }
-                                            } 
+                                            }
                                             $checkedIdsString = implode(',', $checkedIds);
                                             $sqlAssignmentStatusUpdate = "UPDATE `assignment` SET `status`='Completed' WHERE id IN ($checkedIdsString)";
                                             if ($connect->query($sqlAssignmentStatusUpdate) === TRUE) {
@@ -345,7 +369,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    </div>
                     </form>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -354,37 +378,39 @@
                         <div class="card-body">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <?php
-                                    require 'connect_database.php';
-                                    $user_id =  $_SESSION['nameaccount'];
-                                    $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                            assignment.status, assignment.id
+                                require 'connect_database.php';
+                                $user_id =  $_SESSION['nameaccount'];
+                                $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
+                                            assignment.status, assignment.id, assignment.create_date
                                             FROM user_data 
                                             INNER JOIN assignment 
                                             ON user_data.user_id = assignment.user_id
                                             WHERE assignment.user_id = '$user_id' and assignment.status = 'Completed'";
-                                    $result = $connect->query($sql);
+                                $result = $connect->query($sql);
 
-                                    if ($result->num_rows > 0) {
-                                        echo "<thead>
+                                if ($result->num_rows > 0) {
+                                    echo "<thead>
                                             <tr> 
-                                            <th>ID</th>
+                                            <th>Mã nhân viên</th>
                                             <th>Nhiệm vụ</th>
-                                            <th>Deadline</th>
+                                            <th>Ngày giao</th>
+                                            <th>Hạn</th>
                                             <th>Trạng thái</th>
                                             <th>Chi tiết</th>
                                         </tr>
                                         </thead>";
 
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tbody>
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tbody>
                                                 <td>" . $row["user_id"] . "</td>" .
-                                                "<td>" . $row["assignment_type"] . "</td>" .
-                                                "<td>" . $row["deadline"] . "</td>" .
-                                                "<td>" . $row["status"] . "</td>" .
-                                                "<td>" . $row["details"] . "</td>
+                                            "<td>" . $row["assignment_type"] . "</td>" .
+                                            "<td>" . $row["create_date"] . "</td>" .
+                                            "<td>" . $row["deadline"] . "</td>" .
+                                            "<td>" . $row["status"] . "</td>" .
+                                            "<td>" . $row["details"] . "</td>
                                                 </tbody>";
-                                        }
                                     }
+                                }
                                 ?>
                             </table>
                         </div>

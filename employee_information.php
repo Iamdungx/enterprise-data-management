@@ -192,9 +192,9 @@ session_start();
                                 <?php
                                 if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
                                     echo '<a class="dropdown-item" href="#">
-                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
-            </a>';
+                                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Activity Log
+                                        </a>';
                                 }
                                 ?>
                                 <div class="dropdown-divider"></div>
@@ -221,19 +221,62 @@ session_start();
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">Bảng thông tin sơ bộ nhân viên</h6>
                             <div>
-                                <a href="#" class="btn btn-success btn-icon-split">
+                                <?php
+                                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'Vice President') {
+                                        echo '<a href="#" class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="text" data-toggle="modal" data-target="#importExcel">Nhập file Excel</span>
+                                    </a>';
+                                    }
+                                ?>
+
+                                <a href="#" class="btn btn-warning btn-icon-split" id="exportExcelBtn">
                                     <span class="icon text-white-50">
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fas fa-download"></i>
                                     </span>
-                                    <span class="text" data-toggle="modal" data-target="#importExcel">Nhập file Excel</span>
+                                    <span class="text" data-toggle="modal">Xuất Excel</span>
                                     <!-- <button class="btn btn-success" data-toggle='modal' data-target='#importExcel'>Nhập file excel</button> -->
                                 </a>
-                                <a href="#" class="btn btn-info btn-icon-split" data-toggle='modal' data-target='#addUser'>
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-user-plus"></i>
-                                    </span>
-                                    <span class="text">Thêm Nhân Viên</span>
-                                </a>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+                                <script>
+                                    document.getElementById('exportExcelBtn').addEventListener('click', function () {
+                                        // Lấy bảng HTML
+                                        var table = document.getElementById('myDataTable');
+                                        
+                                        // Tạo một bảng tạm thời để loại bỏ các cột không mong muốn
+                                        var tempTable = table.cloneNode(true);
+                                        var rows = tempTable.rows;
+
+                                        // Chỉ định các chỉ số của cột cần loại bỏ (bắt đầu từ 0)
+                                        var colsToExclude = [6]; // Ví dụ: Loại bỏ cột "Ghi chú"
+
+                                        // Loại bỏ các cột không mong muốn
+                                        for (var i = 0; i < rows.length; i++) {
+                                            for (var j = colsToExclude.length - 1; j >= 0; j--) {
+                                                rows[i].deleteCell(colsToExclude[j]);
+                                            }
+                                        }
+
+                                        // Chuyển bảng tạm thời thành workbook và xuất file Excel
+                                        var wb = XLSX.utils.table_to_book(tempTable, {sheet: "Sheet1"});
+                                        XLSX.writeFile(wb, 'ds_nhanvien.xlsx');
+                                    });
+                                </script>
+
+                                <?php
+                                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'Vice President') {
+                                        echo '<a href="#" class="btn btn-info btn-icon-split" data-toggle="modal" data-target="#addUser">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-user-plus"></i>
+                                        </span>
+                                        <span class="text">Thêm Nhân Viên</span>
+                                    </a>';                                   
+                                    }
+                                
+                                ?>
+
                             </div>
                         </div>
                         <div class='modal fade' id='addUser' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -397,8 +440,8 @@ session_start();
                                     if (isset($_SESSION['department'])) {
                                         $department = $_SESSION['department'];
 
-                                        if ($department == 'admin') {
-                                            $sql = "SELECT * FROM user_data WHERE role!='admin'";
+                                        if ($department == 'admin' || $department == 'President' || $department == 'Vice President') {
+                                            $sql = "SELECT * FROM user_data WHERE role!='admin' and role!='President' and role!='Vice President'";
                                         } else {
                                             $sql = "SELECT * FROM user_data WHERE department='$department'";
                                         }
@@ -555,7 +598,7 @@ session_start();
                                                                 </div>
                                                             </div>";
                                             }
-                                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'manager') {
+                                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'manager' || $_SESSION['role'] == 'Vice President') {
                                                 echo "<div class='modal fade' id='updateUser" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                                 <div class='modal-dialog' role='document'>
                                                                     <div class='modal-content'>
@@ -572,49 +615,49 @@ session_start();
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Họ</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='first_name' name='first_name' aria-describedby='basic-addon3' value='" . $row["fisrt_name"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='first_name' name='first_name' aria-describedby='basic-addon3' value='" . $row["fisrt_name"] . "' f/><br>
                                                                                 </div>                                                                          
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Tên</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='last_name' name='last_name' aria-describedby='basic-addon3' value='" . $row["last_name"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='last_name' name='last_name' aria-describedby='basic-addon3' value='" . $row["last_name"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Giới tính</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='gender' name='gender' aria-describedby='basic-addon3' value='" . $row["gender"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='gender' name='gender' aria-describedby='basic-addon3' value='" . $row["gender"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Địa chỉ</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='address' name='address' aria-describedby='basic-addon3' value='" . $row["address"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='address' name='address' aria-describedby='basic-addon3' value='" . $row["address"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Ngày sinh</span>
                                                                                     </div>
-                                                                                    <input type='date' class='form-control' id='date_of birth' name='date_of_birth' aria-describedby='basic-addon3' value='" . $row["date_of_birth"] . "' disabled/><br>
+                                                                                    <input type='date' class='form-control' id='date_of birth' name='date_of_birth' aria-describedby='basic-addon3' value='" . $row["date_of_birth"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Số điện thoại</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='phone' name='phone' aria-describedby='basic-addon3' value='" . $row["phone"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='phone' name='phone' aria-describedby='basic-addon3' value='" . $row["phone"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Email</span>
                                                                                     </div>
-                                                                                    <input type='email' class='form-control' id='email' name='email' aria-describedby='basic-addon3' value='" . $row["email"] . "' disabled/><br>
+                                                                                    <input type='email' class='form-control' id='email' name='email' aria-describedby='basic-addon3' value='" . $row["email"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Ngày bắt đầu</span>
                                                                                     </div>
-                                                                                    <input type='date' class='form-control' id='hire_date' name='hire_date' aria-describedby='basic-addon3' value='" . $row["hire_date"] . "' disabled/><br>
+                                                                                    <input type='date' class='form-control' id='hire_date' name='hire_date' aria-describedby='basic-addon3' value='" . $row["hire_date"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='input-group mb-3'>
                                                                                     <div class='input-group-prepend'>
@@ -626,7 +669,7 @@ session_start();
                                                                                     <div class='input-group-prepend'>
                                                                                         <span class='input-group-text' id='basic-addon3'>Vị trí</span>
                                                                                     </div>
-                                                                                    <input type='text' class='form-control' id='postion' name='position' aria-describedby='basic-addon3' value='" . $row["position"] . "' disabled/><br>
+                                                                                    <input type='text' class='form-control' id='postion' name='position' aria-describedby='basic-addon3' value='" . $row["position"] . "' /><br>
                                                                                 </div>
                                                                                 <div class='modal-footer'>
                                                                                     <button class='btn btn-secondary' type='button' data-dismiss='modal'>Không</button>

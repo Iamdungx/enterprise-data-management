@@ -14,15 +14,13 @@ session_start();
 
     <title>Tables</title>
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -43,9 +41,8 @@ session_start();
                 </div>
                 <div class="sidebar-brand-text mx-3">HR Manager</div>
             </a>';
-            }
-            else {
-                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="employee_dashboard.php">
+            } else {
+                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -55,36 +52,34 @@ session_start();
             ?>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-            <?php
-            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
-                echo '<a class="nav-link" href="dashboard.php">
+                <?php
+                if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
+                    echo '<a class="nav-link" href="dashboard.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span></a>';
-            }
-            else {
-                echo '<a class="nav-link" href="employee_dashboard.php">
+                } else {
+                    echo '<a class="nav-link" href="dashboard.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span></a>';
-            }
-            ?>
+                }
+                ?>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Chức năng
-            </div>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Chức năng
+                </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Pages Collapse Menu -->
 
-            <?php
-            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
-                echo "<li class='nav-item'>
+                <?php
+                if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
+                    echo "<li class='nav-item'>
                 <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseTwo'
                     aria-expanded='true' aria-controls='collapseTwo'>
                     <i class='fas fa-fw fa-cog'></i>
@@ -113,51 +108,82 @@ session_start();
                     </div>
                 </div>
             </li>";
-            }
-            ?>
+                }
+                ?>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+                <!-- Nav Item - Utilities Collapse Menu -->
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <!--Quản lý nhân viên-->
+                <?php
+                if (isset($_SESSION['role']) && $_SESSION['role'] != 'employee') {
+                    echo '<li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-users-gear"></i>
+                    <span>Quản lý nhân viên</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <h6 class="collapse-header">Các chức năng:</h6>
+                        <a class="collapse-item" href="employee_information.php">Quản lý nhân viên</a>
+                    </div>
+                </div>
+            </li>';
+                }
+
+                ?>
+
+
+                <!--Assignment-->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fa-solid fa-file-signature"></i>
+                    <?php
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                        echo "<span>Công Việc</span>";
+                    } else {
+                        echo '<span>Phân Công</span>';
+                    }
+                    ?>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='assignment.php'>Công việc</a>
+                            <a class='collapse-item' href='assignment_report.php'>Báo cáo nhiệm vụ</a>
+                        ";
+                        } else {
+                            echo ' <h6 class="collapse-header">Các chức năng:</h6>
+                            <a class="collapse-item" href="assignment.php">Quản lí nhiệm vụ</a>
+                            <a class="collapse-item" href="add_assignment.php">Phân công nhiệm vụ</a>
+                            <a class="collapse-item" href="assignment_report.php">Báo cáo nhiệm vụ</a>';
+                        }
+                        ?>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <span>Lương</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='payroll.php'>Thông tin lương</a>";
+                        } else {
+                            echo '<h6 class="collapse-header">Các chức năng:</h6>
+                            <a class="collapse-item" href="payroll.php">Quản lý lương</a>';
+                        }
+                        ?>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -386,7 +412,7 @@ session_start();
 
                     </ul>
 
-                </nav>  
+                </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -400,8 +426,8 @@ session_start();
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <h6 class="m-0 font-weight-bold text-primary">Bảng thông tin chấm công nhân viên</h6>
                             <?php
-                            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
-                            echo '<div>
+                            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'Vice President')) {
+                                echo '<div>
                                 <a href="#" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-upload"></i>
@@ -409,9 +435,24 @@ session_start();
                                     <span class="text" data-toggle="modal" data-target="#importExcel">Nhập file Excel</span>
                                     <!-- <button class="btn btn-success" data-toggle="modal" data-target="#importExcel">Nhập file excel</button> -->
                                 </a>
+                                <a href="#" class="btn btn-warning btn-icon-split" id="exportExcelBtn">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                    <span class="text" data-toggle="modal">Xuất Excel</span>
+                                </a>
                             </div>';
                             }
                             ?>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+                            <script>
+                                document.getElementById('exportExcelBtn').addEventListener('click', function() {
+                                    var wb = XLSX.utils.table_to_book(document.getElementById('myAttendanceTable'), {
+                                        sheet: "ChamCong"
+                                    });
+                                    XLSX.writeFile(wb, 'ds_chamcong.xlsx');
+                                });
+                            </script>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -420,11 +461,12 @@ session_start();
                                     require 'connect_database.php';
                                     mysqli_set_charset($connect, 'UTF8');
                                     $user_id = $_SESSION['nameaccount'];
-                                    
-                                    if (isset($_SESSION['department'])) {
-                                        $department = $_SESSION['department'];
-                                        
-                                        if ($department == 'admin') {
+                                    $department = $_SESSION['department'];
+
+                                    if (isset($_SESSION['role'])) {
+                                        $role = $_SESSION['role'];
+
+                                        if ($role == 'admin' || $role = 'President') {
                                             $sql = "SELECT * FROM attendance";
                                         }
                                         if (isset($_SESSION['role']) && ($_SESSION['role'] == 'manager')) {
@@ -437,9 +479,9 @@ session_start();
                                         if (isset($_SESSION['role']) && ($_SESSION['role'] == 'employee')) {
                                             $sql = "SELECT * FROM attendance WHERE user_id = '$user_id';";
                                         }
-                                    $result = $connect->query($sql);
-                                    if ($result->num_rows > 0) {
-                                        echo "
+                                        $result = $connect->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            echo "
                                             <table class='table table-bordered' id='myAttendanceTable' width='100%' cellspacing='0'>
                                                 <thead>
                                                     <tr>
@@ -451,27 +493,27 @@ session_start();
                                                     </tr>
                                                 </thead>
                                                 <tbody>";
-                        
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>" .
-                                                "<td>" . $row["user_id"] . "</td>" .
-                                                "<td>" . $row["month"] . "</td>" .
-                                                "<td>" . $row["year"] . "</td>" .
-                                                "<td>" . $row["total"] . "</td>" .
-                                                "<td>" . $row["ot"] . "</td>
+
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>" .
+                                                    "<td>" . $row["user_id"] . "</td>" .
+                                                    "<td>" . $row["month"] . "</td>" .
+                                                    "<td>" . $row["year"] . "</td>" .
+                                                    "<td>" . $row["total"] . "</td>" .
+                                                    "<td>" . $row["ot"] . "</td>
                                             </tr>";
+                                            }
+
+                                            echo "</tbody></table>";
+                                        } else {
+                                            echo "<p>No data</p>";
                                         }
-                        
-                                        echo "</tbody></table>";
                                     } else {
                                         echo "<p>No data</p>";
                                     }
-                                } else {
-                                    echo "<p>No data</p>";
-                                }
-                        
-                                $connect->close();
-                                ?>
+
+                                    $connect->close();
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -520,7 +562,22 @@ session_start();
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">Mã nhân viên</span>
                             </div>
-                            <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="basic-addon3" required>
+                            <!-- <input type="text" class="form-control" id="user_id" name="user_id" aria-describedby="basic-addon3" required> -->
+                            <select name="user_id" id="user_id">
+                                <?php
+                                require 'connect_database.php';
+                                mysqli_set_charset($connect, 'UTF8');
+
+
+                                $sqlSelectUserID = "SELECT user_id, department, fisrt_name, last_name FROM `user_data` WHERE department != 'admin';";
+                                $result = $connect->query($sqlSelectUserID);
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['user_id'] . '">' . $row["user_id"] . ' - '.  $row["fisrt_name"] .' ' . $row["last_name"] . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

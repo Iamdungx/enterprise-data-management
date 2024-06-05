@@ -44,7 +44,7 @@
             </a>';
             }
             else {
-                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="employee_dashboard.php">
+                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -137,6 +137,7 @@
                 <div id='collapseFour' class='collapse' aria-labelledby='headingFour' data-parent='#accordionSidebar'>
                     <div class='bg-white py-2 collapse-inner rounded'>
                         <a class='collapse-item' href='assignment.php'>Công việc</a>
+                        <a class='collapse-item' href='assignment_report.php'>Báo Cáo Nhiệm Vụ</a>
                     </div>
                 </div>
             </li>
@@ -314,7 +315,7 @@
                                         </div>
                                         <div class='input-group mb-3'>
                                             <div class='input-group-prepend'>
-                                                <span class='input-group-text' id='basic-addon2'>Ngày sinh</span>
+                                                <span class='input-group-text' id='basic-addon2'>Ngày vào công ty</span>
                                             </div>  
                                             <input type='date' class='border-left-danger form-control' value='" . $rowSelectFromID['hire_date']. "' disabled>
                                         </div>

@@ -48,7 +48,7 @@ session_start();
                 <div class="sidebar-brand-text mx-3">HR Manager</div>
             </a>';
             } else {
-                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="employee_dashboard.php">
+                echo '<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -68,7 +68,7 @@ session_start();
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span></a>';
                 } else {
-                    echo '<a class="nav-link" href="employee_dashboard.php">
+                    echo '<a class="nav-link" href="dashboard.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Bảng điều khiển</span></a>';
                 }
@@ -81,48 +81,74 @@ session_start();
                     Chức năng
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Quản lý nhân viên</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Các chức năng:</h6>
-                            <a class="collapse-item" href="employee_information.php">Quản lý nhân viên</a>
-                            <a class="collapse-item" href="contract.php">Quản lý hợp đồng</a>
-                        </div>
+            <!--Quản lý nhân viên-->
+            <?php
+            if (isset($_SESSION['role']) && $_SESSION['role'] != 'employee') {
+                echo '<li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-users-gear"></i>
+                    <span>Quản lý nhân viên</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Các chức năng:</h6>
+                        <a class="collapse-item" href="employee_information.php">Quản lý nhân viên</a>
                     </div>
-                </li>
-                <!--Assignment-->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Phân Công</span>
-                    </a>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Phân công:</h6>
+                </div>
+            </li>';
+            } 
+            ?>
+
+
+            <!--Assignment-->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fa-solid fa-file-signature"></i>
+                    <?php
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                        echo "<span>Công Việc</span>";
+                    } else {
+                        echo '<span>Phân Công</span>';
+                    }
+                    ?>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='assignment.php'>Công việc</a>
+                            <a class='collapse-item' href='assignment_report.php'>Báo cáo nhiệm vụ</a>
+                        ";
+                        } else {
+                            echo ' <h6 class="collapse-header">Các chức năng:</h6>
                             <a class="collapse-item" href="assignment.php">Quản lí nhiệm vụ</a>
                             <a class="collapse-item" href="add_assignment.php">Phân công nhiệm vụ</a>
-                            <a class='collapse-item' href='assignment_report.php'>Thống kê công việc</a>
-                        </div>
+                            <a class="collapse-item" href="assignment_report.php">Báo cáo nhiệm vụ</a>';
+                        }
+                        ?>
                     </div>
-                </li>
-                <!--Pay roll-->
-                <li class='nav-item'>
-                    <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseThree' aria-expanded='true' aria-controls='collapseThree'>
-                        <i class='fas fa-fw fa-cog'></i>
-                        <span>Quản lí lương</span>
-                    </a>
-                    <div id='collapseThree' class='collapse' aria-labelledby='headingThree' data-parent='#accordionSidebar'>
-                        <div class='bg-white py-2 collapse-inner rounded'>
-                            <h6 class='collapse-header'>Các chức năng:</h6>
-                            <a class='collapse-item' href='payroll.php'>Quản lý lương</a>
-                        </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    <span>Lương</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <?php
+                        if (isset($_SESSION['role']) && $_SESSION['role'] == 'employee') {
+                            echo "<a class='collapse-item' href='payroll.php'>Thông tin lương</a>";
+                        } else {
+                            echo '<h6 class="collapse-header">Các chức năng:</h6>
+                            <a class="collapse-item" href="payroll.php">Quản lý lương</a>';
+                        }
+                        ?>
+
                     </div>
-                </li>
+                </div>
+            </li>
             
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -149,18 +175,6 @@ session_start();
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -185,114 +199,7 @@ session_start();
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -380,8 +287,17 @@ session_start();
                                 $social_insurance_rate = 0.08;   // 8%
                                 $unemployment_insurance_rate = 0.01;  // 1%
 
-                                echo "<div class='card-header py-3'>
+                                echo "<div class='card-header py-3 d-flex justify-content-between align-items-center'>
                                         <h6 class='m-0 font-weight-bold text-primary'>Thông tin lương theo tháng</h6>
+                                        <div>
+                                            <a class='btn btn-warning btn-icon-split' id='exportExcelBtn'>
+                                                <span class='icon text-white-50'>
+                                                    <i class='fas fa-download'></i>
+                                                </span>
+                                                <span class='text' data-toggle='modal'>Xuất Excel</span>
+                                                <!-- <button class='btn btn-success' data-toggle='modal' data-target='#importExcel'>Nhập file excel</button> -->
+                                            </a>
+                                        </div>    
                                     </div>
                                     <div class='card-body'>
                                         <div class='table-responsive'>
@@ -397,7 +313,7 @@ session_start();
                                                 <th>Tổng lương tháng</th>
                                                 <th>Loại hợp đồng</th>
                                                 <th>Các loại bảo hiểm</th>
-                                                <th>Chi phí khấu trừ bảo hiểm</th>
+                                                <th>Chi phí khấu trừ bảo hiểm (40%)</th>
                                             </tr>
                                         </thead>
                                         <tbody>';
@@ -419,7 +335,7 @@ session_start();
                                         $unemployment_insurance = $rowInfoInsurance['unemployment_insurance'] === 'Yes' ? $totalSalary * $unemployment_insurance_rate : 0;
 
                                         // Tổng khấu trừ bảo hiểm
-                                        $totalInsurance = $health_insurance + $social_insurance + $unemployment_insurance;
+                                        $totalInsurance = ($health_insurance + $social_insurance + $unemployment_insurance) * 0.4;
 
                                         // Tổng lương sau khi trừ bảo hiểm
                                         $totalSalaryAfterInsurance = $totalSalary - $totalInsurance;
@@ -447,6 +363,31 @@ session_start();
                                 </div>
                             </div>";
                         ?>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+                        <script>
+                            document.getElementById('exportExcelBtn').addEventListener('click', function () {
+                                // Lấy bảng HTML
+                                var table = document.getElementById('myDataTable');
+                                
+                                // Tạo một bảng tạm thời để loại bỏ các cột không mong muốn
+                                var tempTable = table.cloneNode(true);
+                                var rows = tempTable.rows;
+
+                                // Chỉ định các chỉ số của cột cần loại bỏ (bắt đầu từ 0)
+                                var colsToExclude = [6]; // Ví dụ: Loại bỏ cột "Ghi chú"
+
+                                // Loại bỏ các cột không mong muốn
+                                for (var i = 0; i < rows.length; i++) {
+                                    for (var j = colsToExclude.length - 1; j >= 0; j--) {
+                                        rows[i].deleteCell(colsToExclude[j]);
+                                    }
+                                }
+
+                                // Chuyển bảng tạm thời thành workbook và xuất file Excel
+                                var wb = XLSX.utils.table_to_book(tempTable, {sheet: "Sheet1"});
+                                XLSX.writeFile(wb, 'Luong_<?php echo $_SESSION["nameaccount"]?>.xlsx');
+                            });
+                        </script>
                         </div>
                     </div>
                 <!-- </div>

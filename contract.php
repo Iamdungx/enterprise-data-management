@@ -219,12 +219,17 @@ session_start();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div>
-                                <a href="#" class="btn btn-info btn-icon-split" data-toggle='modal' data-target='#addContract'>
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-user-plus"></i>
-                                    </span>
-                                    <span class="text">Thêm hợp đồng</span>
-                                </a>
+                                <?php
+                                    if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Vice President' || $_SESSION['role'] == 'President' || $_SESSION['role'] == 'admin')){
+                                        echo '<a href="#" class="btn btn-info btn-icon-split" data-toggle="modal" data-target="#addContract">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-user-plus"></i>
+                                        </span>
+                                        <span class="text">Thêm hợp đồng</span>
+                                    </a>';
+                                    }
+                                ?>
+
                             </div>
                         </div>
                         <div class='modal fade' id='addContract' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -277,12 +282,28 @@ session_start();
 
                         if (isset($_POST['add_contract'])) {
                             $user_id = $_POST['user_id'];
+
                             $contract_date = $_POST['contract_date'];
                             $salary = $_POST['salary'];
                             $type = 'Vô thời hạn';
 
-                            $sqlAddEmployee = "INSERT INTO `contract` (`user_id`, `contract_date`, `salary`, `type`) 
-                            VALUES ('$user_id', '$contract_date', '$salary', '$type')";
+                            function generateContractID()
+                            {
+                                $prefix = "HD";
+                                $random_number = sprintf('%05d', mt_rand(10001, 99999)); // Sinh số ngẫu nhiên từ 000000 đến 99999
+                                return $prefix . $random_number;
+                            }
+
+                            do {
+                                $contract_id = generateContractID();
+                                $check_query = "SELECT COUNT(*) as count FROM contract WHERE contract_id = '$contract_id'";
+                                $resultContract = $connect->query($check_query);
+                                $rowContract = $resultContract->fetch_assoc();
+                                $contract_id_exists = $rowContract['count'] > 0;
+                            } while ($contract_id_exists);
+
+                            $sqlAddEmployee = "INSERT INTO `contract` (`user_id`, `contract_id`, `contract_date`, `salary`, `type`) 
+                            VALUES ('$user_id', '$contract_id','$contract_date', '$salary', '$type')";
 
                             if (isset($_SESSION['nameaccount']) && isset($_SESSION['role'])) {
                                 $role = $_SESSION['role'];
@@ -319,14 +340,15 @@ session_start();
                                     require 'connect_database.php';
                                     mysqli_set_charset($connect, 'UTF8');
                                     $user_id = $_SESSION['nameaccount'];
+                                    $department = $_SESSION['department'];
 
                                     if (isset($_SESSION['role'])) {
                                         $role = $_SESSION['role'];
 
-                                        if ($role == 'admin' || $role == 'President') {
+                                        if ($role == 'admin' || $role == 'President' || $role == 'Vice President') {
                                             $sql = "SELECT * FROM `contract`";
                                         } elseif (isset($_SESSION['role']) && ($_SESSION['role'] == 'Vice President' || $_SESSION['role'] == 'manager')) {
-                                            $sql = "SELECT contract.contract_date, contract.salary, contract.user_id, contract.type
+                                            $sql = "SELECT contract.contract_date, contract.salary, contract.user_id, contract.type, contract.contract_id
                                             FROM `contract` 
                                             INNER JOIN user_data 
                                             ON contract.user_id = user_data.user_id 
@@ -338,7 +360,7 @@ session_start();
                                         $result = $connect->query($sql);
                                         if ($result->num_rows > 0) {
                                             echo "
-                                            <table class='table table-bordered' id='myAttendanceTable' width='100%' cellspacing='0'>
+                                            <table class='table table-bordered' id='ContractTable' width='100%' cellspacing='0'>
                                                 <thead>
                                                     <tr>
                                                         <th>Mã hợp đồng</th>
@@ -355,16 +377,18 @@ session_start();
 
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>" .
-                                                    "<td>" . $row["id"] . "</td>" .
+                                                    "<td>" . $row["contract_id"] . "</td>" .
                                                     "<td>" . $row["user_id"] . "</td>" .
                                                     "<td>" . $row["contract_date"] . "</td>" .
                                                     "<td>" . $row["salary"] . "</td>" .
-                                                    "<td>" . $row["type"] . "</td>" .
-                                                    "<td>";
+                                                    "<td>" . $row["type"] . "</td>";
                                                 if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President'|| $_SESSION['role'] == 'Vice President')) {
-                                                    echo "
+                                                    echo " <td>
                                                                 <button href='#' class='btn btn-danger' data-toggle='modal' data-target='#deleteContract" . $row['id'] . "'>
                                                                 <i class='fa-solid fa-trash'></i>
+                                                                </button> 
+                                                                <button href='#' class='btn btn-primary' data-toggle='modal' data-target='#updateContract" . $row["id"] . "'>
+                                                                    <i class='fa-solid fa-pen-to-square'></i>
                                                                 </button>";
                                                 }
 
@@ -388,9 +412,7 @@ session_start();
                                                                 </div>
                                                             </div>
                                                                 
-                                                                <button href='#' class='btn btn-primary' data-toggle='modal' data-target='#updateContract" . $row["id"] . "'>
-                                                                    <i class='fa-solid fa-pen-to-square'></i>
-                                                                </button>";
+                                                            ";
                                                 if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President')) {
                                                     echo "<div class='modal fade' id='updateContract" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                                                     <div class='modal-dialog' role='document'>
@@ -408,14 +430,8 @@ session_start();
                                                                                                         <div class='input-group-prepend'>
                                                                                                             <span class='input-group-text' id='basic-addon3'>User ID</span>
                                                                                                         </div>
-                                                                                                        <input type='text' class='form-control' id='user_id' name='user_id' aria-describedby='basic-addon3' value='" . $row["user_id"] . "' /><br>
+                                                                                                        <input type='text' class='form-control' id='user_id' name='user_id' aria-describedby='basic-addon3' value='" . $row["user_id"] . "'/><br>
                                                                                                     </div>                                                                          
-                                                                                                    <div class='input-group mb-3'>
-                                                                                                        <div class='input-group-prepend'>
-                                                                                                            <span class='input-group-text' id='basic-addon3'>Ngày bắt đầu</span>
-                                                                                                        </div>
-                                                                                                        <input type='date' class='form-control' id='contract_date' name='contract_date' aria-describedby='basic-addon3' value='" . $row["contract_date"] . "' /><br>
-                                                                                                    </div>
                                                                                                     <div class='input-group mb-3'>
                                                                                                         <div class='input-group-prepend'>
                                                                                                             <span class='input-group-text' id='basic-addon3'>Lương</span>
@@ -519,8 +535,16 @@ session_start();
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
+    <script>
+        $(document).ready(function() {
+            $('#ContractTable').DataTable({
+                "lengthMenu": [
+                    [1, 3, 5, 7, -1],
+                    [1, 3, 5, 7, "All"]
+                ],
+            });
+        });
+    </script>
 </body>
 
 </html>
