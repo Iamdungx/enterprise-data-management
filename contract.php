@@ -182,20 +182,20 @@ session_start();
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin cá nhân
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="attendance.php">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Chấm công
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="activity_log.php">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Đăng xuất
                                 </a>
@@ -247,7 +247,24 @@ session_start();
                                                 <div class='input-group-prepend'>
                                                     <span class='input-group-text' id='basic-addon3'>Mã nhân viên</span>
                                                 </div>
-                                                <input type='text' class='form-control' id='user_id' name='user_id' aria-describedby='basic-addon3' required /><br>
+                                                <select name="user_id" id="user_id">
+                                                <?php
+                                                require 'connect_database.php';
+                                                mysqli_set_charset($connect, 'UTF8');
+
+
+                                                $sqlSelectUserID = "SELECT u.user_id, u.department, u.fisrt_name, u.last_name 
+                                                                    FROM user_data u
+                                                                    LEFT JOIN contract c ON u.user_id = c.user_id
+                                                                    WHERE u.department != 'admin' AND c.user_id IS NULL;";
+                                                $result = $connect->query($sqlSelectUserID);
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        echo '<option value="' . $row['user_id'] . '">' . $row["user_id"] . ' - '.  $row["fisrt_name"] .' ' . $row["last_name"] . '</option>';
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                             </div>
                                             <div class='input-group mb-3'>
                                                 <div class='input-group-prepend'>
@@ -265,7 +282,7 @@ session_start();
                                                 <div class='input-group-prepend'>
                                                     <span class='input-group-text' id='basic-addon3'>Loại hợp đồng</span>
                                                 </div>
-                                                <input type='text' class='form-control' id='type' name='type' aria-describedby='basic-addon3' value='Vô thời hạn' disabled /><br>
+                                                <input type='text' class='form-control' id='type' name='type' aria-describedby='basic-addon3' required /><br>
                                             </div>
                                             <div class='modal-footer'>
                                                 <button class='btn btn-secondary' type='button' data-dismiss='modal'>Không</button>
@@ -285,7 +302,7 @@ session_start();
 
                             $contract_date = $_POST['contract_date'];
                             $salary = $_POST['salary'];
-                            $type = 'Vô thời hạn';
+                            $type = $_POST['type'];
 
                             function generateContractID()
                             {
@@ -322,9 +339,9 @@ session_start();
 
                             if ($connect->query($sqlAddEmployee) === TRUE) {
                                 echo "Thêm hợp đồng thành công!";
+                                header('Location: contract.php');
                             } else {
                                 echo "Thêm không thành công. Nhập lại!";
-                                echo "Lỗi: " . $connect->error . "<br>";
                             }
                         } else {
                             echo "<h3 class='text-center text-primary'></h3>";

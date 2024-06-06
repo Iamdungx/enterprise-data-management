@@ -432,8 +432,7 @@ session_start();
                                     <span class="icon text-white-50">
                                         <i class="fas fa-upload"></i>
                                     </span>
-                                    <span class="text" data-toggle="modal" data-target="#importExcel">Nhập file Excel</span>
-                                    <!-- <button class="btn btn-success" data-toggle="modal" data-target="#importExcel">Nhập file excel</button> -->
+                                    <span class="text" data-toggle="modal" data-target="#importExcel">Nhập file</span>
                                 </a>
                                 <a href="#" class="btn btn-warning btn-icon-split" id="exportExcelBtn">
                                     <span class="icon text-white-50">
@@ -552,7 +551,7 @@ session_start();
             <div class="modal-content">
                 <form action="import_attendance.php" name="upload_excel" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nhập file <span style="color: #1cc88a;">Excel</span></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nhập file <span style="color: #1cc88a;">Data</span></h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -569,7 +568,10 @@ session_start();
                                 mysqli_set_charset($connect, 'UTF8');
 
 
-                                $sqlSelectUserID = "SELECT user_id, department, fisrt_name, last_name FROM `user_data` WHERE department != 'admin';";
+                                $sqlSelectUserID = "SELECT u.user_id, u.department, u.fisrt_name, u.last_name 
+                                                    FROM user_data u
+                                                    LEFT JOIN attendance a ON u.user_id = a.user_id
+                                                    WHERE u.department != 'admin' AND a.user_id IS NULL;";
                                 $result = $connect->query($sqlSelectUserID);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {

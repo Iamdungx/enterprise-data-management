@@ -391,6 +391,7 @@ require 'connect_database.php';
                                                 <td>" . $row["assingment_id"] . "</td>
                                                 <td>" . $row["user_id"] . "</td>
                                                 <td>" . $row["deadline"] . "</td>
+                                                <td>" . $row["create_date"] . "</td>
                                                 <td>" . $row["assignment_type"] . "</td>
                                                 <td>" . $row["details"] . "</td>
                                                 <td>" . $row["status"] . "</td>

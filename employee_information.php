@@ -439,7 +439,7 @@ session_start();
 
                                     if (isset($_SESSION['department'])) {
                                         $department = $_SESSION['department'];
-
+                                        $role = $_SESSION['role'];
                                         if ($department == 'admin' || $department == 'President' || $department == 'Vice President') {
                                             $sql = "SELECT * FROM user_data WHERE role!='admin' and role!='President' and role!='Vice President'";
                                         } else {
@@ -472,7 +472,7 @@ session_start();
                                                 "<td>" . $row["department"] . "</td>" .
                                                 "<td>" . $row["position"] . "</td>" .
                                                 "<td>";
-                                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $role == 'President' || $role == 'Vice President')) {
                                                 echo "
                                                             <button href='#' class='btn btn-danger' data-toggle='modal' data-target='#deleteUser" . $row['id'] . "'>
                                                                 <i class='fas fa-user-times'></i>
@@ -503,7 +503,7 @@ session_start();
                                                                 <i class='fas fa-user-edit'></i>
                                                             </button>";
 
-                                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                                            if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $role == 'President' || $role == 'Vice President')) {
                                                 echo "<div class='modal fade' id='updateUser" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                                 <div class='modal-dialog' role='document'>
                                                                     <div class='modal-content'>

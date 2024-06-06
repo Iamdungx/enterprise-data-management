@@ -203,12 +203,12 @@ session_start();
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin cá nhân
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="attendance.php">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Chấm công
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Đăng xuất
                                 </a>
@@ -239,7 +239,7 @@ session_start();
                                         require 'connect_database.php';
                                         $user_id =  $_SESSION['nameaccount'];
                                         $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                                assignment.status, assignment.id, assignment.create_date
+                                                assignment.status, assignment.id, assignment.create_date, assignment.details
                                                 FROM user_data 
                                                 INNER JOIN assignment 
                                                 ON user_data.user_id = assignment.user_id
@@ -381,7 +381,7 @@ session_start();
                                 require 'connect_database.php';
                                 $user_id =  $_SESSION['nameaccount'];
                                 $sql = "SELECT user_data.fisrt_name, user_data.last_name, assignment.user_id, assignment.deadline, assignment.assignment_type, 
-                                            assignment.status, assignment.id, assignment.create_date
+                                            assignment.status, assignment.id, assignment.create_date, assignment.details
                                             FROM user_data 
                                             INNER JOIN assignment 
                                             ON user_data.user_id = assignment.user_id
@@ -410,6 +410,9 @@ session_start();
                                             "<td>" . $row["details"] . "</td>
                                                 </tbody>";
                                     }
+                                }
+                                else {
+                                    echo "Chưa có công việc nào";
                                 }
                                 ?>
                             </table>
