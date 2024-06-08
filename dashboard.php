@@ -167,7 +167,7 @@ session_start();
                                     Chấm công
                                 </a>
                                 <?php
-                                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin' || $_SESSION['role'] == 'President') {
                                     echo '<a class="dropdown-item" href="activity_log.php">
                                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Activity Log

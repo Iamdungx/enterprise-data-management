@@ -43,7 +43,7 @@ if (isset($_POST["Import"])) {
                 $user_id_exists = $row['count'] > 0;
             } while ($user_id_exists);
 
-            $sqlAddEmployee = "INSERT INTO user_data (`first_name`, `last_name`, `gender`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
+            $sqlAddEmployee = "INSERT INTO user_data (`fisrt_name`, `last_name`, `gender`, `address`, `date_of_birth`, `phone`, `email`, `hire_date`, `department`, `position`, `user_id`, `password`, `role`) 
             VALUES ('$first_name', '$last_name', '$gender', '$address', '$date_of_birth', '$phone', '$email', '$hire_date', '$department', '$position', '$user_id', '$password', '$role')";
 
             $resultAddEmployee = mysqli_query($connect, $sqlAddEmployee);

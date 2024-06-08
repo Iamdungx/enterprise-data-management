@@ -77,44 +77,9 @@ session_start();
 
                 <!-- Nav Item - Pages Collapse Menu -->
 
-                <?php
-                if (isset($_SESSION['role']) && ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager')) {
-                    echo "<li class='nav-item'>
-                <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseTwo'
-                    aria-expanded='true' aria-controls='collapseTwo'>
-                    <i class='fas fa-fw fa-cog'></i>
-                    <span>Quản lý nhân viên</span>
-                </a>
-                <div id='collapseTwo' class='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
-                    <div class='bg-white py-2 collapse-inner rounded'>
-                        <h6 class='collapse-header'>Các chức năng:</h6>
-                        <a class='collapse-item' href='employee_information.php'>Quản lý nhân viên</a>
-                        <a class='collapse-item' href='cards.html'>Cards</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class='nav-item'>
-                <a class='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseFour'
-                    aria-expanded='true' aria-controls='collapseFour'>
-                    <i class='fas fa-fw fa-cog'></i>
-                    <span>Phân Công</span>
-                </a>
-                <div id='collapseFour' class='collapse' aria-labelledby='headingFour' data-parent='#accordionSidebar'>
-                    <div class='bg-white py-2 collapse-inner rounded'>
-                        <h6 class='collapse-header'>Phân công:</h6>
-                        <a class='collapse-item' href='assignment.php'>Quản lí nhiệm vụ</a>
-                        <a class='collapse-item' href='add_assignment.php'>Phân công nhiệm vụ</a>
-                    </div>
-                </div>
-            </li>";
-                }
-                ?>
 
                 <!-- Nav Item - Utilities Collapse Menu -->
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
 
                 <!--Quản lý nhân viên-->
                 <?php
