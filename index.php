@@ -77,8 +77,8 @@
                                             else
                                             {
                                                 while ($row = $result->fetch_assoc()){
-                                                    $role = $row["role"];
-                                                    $department = $row["department"] ;
+                                                    $role = $row['role'];
+                                                    $department = $row['department'] ;
                                                 }
                                                 
                                                 session_regenerate_id(true); //Tái tạo id session để sử dụng phiên
